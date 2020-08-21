@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Coolpad - Add User</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
+    <script data-require="moment.js@2.10.2" data-semver="2.10.2"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            color: #566787;
+            background: #060818;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+
+        .table-responsive {
+            margin: 30px 0;
+        }
+
+        .table-wrapper {
+            min-width: 1000px;
+            background: #1A1C2D;
+            padding: 20px 25px;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .table-title {
+            padding-bottom: 15px;
+            background: #1A1C2D;
+            color: #fff;
+            padding: 16px 30px;
+            margin: -20px -25px 0px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+
+        .table-title .btn {
+            color: #566787;
+            float: right;
+            font-size: 13px;
+            background: #fff;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+
+        .table-title .btn:hover,
+        .table-title .btn:focus {
+            color: #566787;
+            background: #6e6e6e;
+        }
+
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+
+        table.table tr th,
+        table.table tr td {
+            /* border-color: #e9e9e9; */
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        /*table.table tr th:first-child {
+    width: 60px;
+}*/
+        table.table tr th:last-child {
+            width: 100px;
+        }
+
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #1A1C2D;
+            text-transform: capitalize;
+            /* color:#fff; */
+
+        }
+
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .coolpad-table tr {
+            color: white;
+            text-transform: capitalize;
+
+        }
+
+        table.table td:last-child i {
+            opacity: 0.9;
+            font-size: 15px;
+            margin: 0 10px;
+        }
+
+        table.table td a {
+            /*font-weight: bold;*/
+            color: #fff !important;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        /*table.table td a:hover {
+    color: #2196F3;
+}*/
+        table.table td a.settings {
+            color: #2196F3;
+        }
+
+        /*table.table td a.delete {
+    color: #F44336;
+}*/
+        table.table td i {
+            font-size: 19px;
+        }
+
+        table.table .avatar {
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .status {
+            font-size: 30px;
+            margin: 2px 2px 0 0;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 10px;
+        }
+
+        .text-success {
+            color: #10c469;
+        }
+
+        .text-info {
+            color: #62c9e8;
+        }
+
+        .text-warning {
+            color: #FFC107;
+        }
+
+        .text-danger {
+            color: #ff5b5b;
+        }
+
+        .pagination {
+            float: right;
+            margin: 0 0 5px;
+        }
+
+        .pagination li a {
+            border: none;
+            font-size: 13px;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 2px !important;
+            text-align: center;
+            padding: 0 6px;
+        }
+
+        .pagination li a:hover {
+            color: #666;
+        }
+
+        .pagination li.active a,
+        .pagination li.active a.page-link {
+            background: #03A9F4;
+        }
+
+        .pagination li.active a:hover {
+            background: #0397d6;
+        }
+
+        .pagination li.disabled i {
+            color: #ccc;
+        }
+
+        .pagination li i {
+            font-size: 16px;
+            padding-top: 6px
+        }
+
+        .hint-text {
+            float: left;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .coolpad-table td {
+            border: none;
+        }
+
+        .coolpad-table .btn {
+            padding: 0px;
+            margin-right: 10px;
+        }
+
+        .coolpad-table .action-icons {
+            display: flex;
+        }
+
+        .coolpad-table .action-icons .btn-outline-primary.focus,
+        .btn-outline-primary:focus {
+            box-shadow: none;
+        }
+
+        .top-search-box .form-control:focus {
+            box-shadow: none;
+        }
+
+        .edit-modal-form .form-control:focus {
+            box-shadow: none;
+        }
+
+        .edit-modal-form .btn-success:focus,
+        .btn-danger:focus {
+            box-shadow: none;
+        }
+
+        #team-value {
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="specific">
+
+        <div class="header-container fixed-top">
+            <header class="header navbar navbar-expand-sm">
+                <ul class="navbar-item theme-brand flex-row  text-center">
+                    <!-- <li class="nav-item theme-logo">
+                        <a href="index.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </li> -->
+                    <li class="nav-item theme-text">
+                        <a class="nav-link top-logo">
+                            <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-item flex-row ml-md-auto">
+                    <li class="main-logo">
+                        <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+                    </li>
+                    <li class="user-logout">
+                        <span class="logout-icon" onclick="logout()"><i class="fas fa-sign-out-alt" title="sign-out"
+                                aria-hidden="true"></i></span>
+                    </li>
+                </ul>
+            </header>
+        </div>
+
+        <div class="sub-header-container">
+            <header class="header navbar navbar-expand-sm">
+                <!-- <a href="#" class="sidebarCollapse" data-placement="bottom">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a> -->
+
+                <ul class="navbar-nav flex-row">
+                    <li>
+                        <div class="page-header">
+                            <nav class="breadcrumb-one" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page"><span>Dashboard </span></li>
+
+                                </ol>
+                            </nav>
+                        </div>
+                    </li>
+                </ul>
+
+            </header>
+        </div>
+
+        <div class="main-container" id="container">
+            <div class="overlay"></div>
+            <div class="sidebar-wrapper sidebar-theme">
+                <nav id="sidebar">
+                    <div class="shadow-bottom"></div>
+                    <ul class="list-unstyled menu-categories ps" id="accordionExample">
+                        <!--<li class="menu">
+                            <div class="dropdownss">
+                                <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
+                                    <span class="dropbtnss">Report</span>
+                                    <div class="dropdown-contentss">
+                                        <a href="#"><span class="report-icon"><i class="fa fa-file-pdf-o"
+                                                    aria-hidden="true"></i></span>PDF</a>
+                                        <a href="#"><span class="report-icon"><i class="fa fa-file-excel-o"
+                                                    aria-hidden="true"></i></span>XSL</a>
+                                        <a href="#"><span class="report-icon"><i
+                                                    class="fas fa-file-csv"></i></span>CSV</a>
+                                    </div>
+                            </div>
+                        </li> -->
+                        <li class="menu">
+                            <a href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart"
+                                        aria-hidden="true"></i>
+                                </span>Dashboard</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent"
+                                        aria-hidden="true"></i>
+                                </span>History Dashboard</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book"
+                                        aria-hidden="true"></i>
+                                </span>Contact Tracing</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt"
+                                        aria-hidden="true"></i>
+                                </span>Share</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>Email</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../adduser" class="actives"><span class="side-menu-icon"><i class="fa fa-user-plus"
+                                        aria-hidden="true"></i>
+                                </span>Add User</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
+                                        aria-hidden="true"></i>
+                                </span>Notes</a>
+                        </li>
+                        <!-- <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-camera"
+                                        aria-hidden="true"></i></span>
+                                <button type="button" class="btn btn-default">Screen Grab</button>
+                            </a>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="content" class="main-content">
+
+                <div class="layout-px-spacing">
+                    <div class="tab">
+                        <button class="tablinks active" onclick="opentab1(event, 'daily')"><b>Add User</b></button>
+                        <button class="tablinks " onclick="opentab1(event, 'weekly')"><b>Edit User</b></button>
+                    </div>
+                    <div id="daily" class="tabcontent" style="display: block;">
+                    <div class="container add-user mt-5">
+                        <div class="row mb-4">
+                            <h3>Add User Details</h3>
+                        </div>
+                        <div class="form-group">
+                            <label for="text">Employee name</label>
+                            <input type="text" class="form-control" placeholder="Employee name" id="emp_name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="text">Employee Id</label>
+                            <input type="number" class="form-control" placeholder="Employee Id" id="emp_id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="text">Device Id</label>
+                            <input type="number" class="form-control" placeholder="Device Id" id="device_id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="text">Location</label>
+                            <input type="text" class="form-control" placeholder="Location" id="location">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="text">Zone</label>
+                            <input type="text" class="form-control" placeholder="Zone" id="zone">
+                        </div>
+
+                        <div class="form-group team-drop-value">
+                            <label for="role">Team</label>
+                            <select class="form-control" id="team1">
+                                <option>select</option>
+                                <option>Team A</option>
+                                <option>Team B</option>
+                                <option>Team C</option>
+                                <option>Team D</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="text">Company</label>
+                            <input type="text" class="form-control" placeholder="Company" id="company">
+                        </div>
+
+                        <div class="mt-5 mb-5">
+                            <button  class="btn btn-outline-primary user-submit"
+                                onclick="submit()">Submit</button>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="weekly" class="tabcontent" style="display: none;">
+                        <div class="container-xl">
+                            <div class="table-responsive">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <!-- <div class="col-sm-5">
+                                            <h2>User <b>Management</b></h2>
+                                        </div> -->
+                                            <div class="col-sm-4 top-search-box">
+                                                <div class="input-group mb-2">
+                                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped coolpad-table table-hover">
+                                        <thead align="center">
+                                            <tr>
+                                                <th>Emp name</th>
+                                                <th>Emp ID</th>
+                                                <th>Device ID</th>
+                                                <th>Zone </th>
+                                                <th>Location</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="user_list" align="left">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                    
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Form Details</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                    
+                                    <!-- Modal body -->
+                                    <div class="modal-body edit-modal-form">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="chkPassport">
+                                                        <input type="checkbox" id="chkPassport" />
+                                                        Device ID
+                                                    </label>
+                                                </div>
+                    
+                                                <div class="col-6">
+                                                    <label for="team">
+                                                        <input type="checkbox" id="team" />
+                                                        Team
+                                                    </label>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                    
+                    
+                                        <hr />
+                                        <div id="dvPassport" style="display: none">
+                                            <div class="form-group">
+                                                <label>Device ID</label>
+                                                <input type="text" class="form-control" placeholder="Device ID" id="modal_did">
+                                            </div>
+                                        </div>
+                    
+                                        <div id="team-cnt" style="display: none">
+                                            <label>Team</label>
+                                            <div class="form-group">
+                                                <select id="team-value">
+                                                    <option id="def_select">Select</option>
+                                                    <option value="Team A">Team A</option>
+                                                    <option value="Team B">Team B</option>
+                                                    <option value="Team C">Team C</option>
+                                                    <option value="Team D">Team D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                    
+                                    </div>
+                    
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="save()">Save</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!--    <script src="../../static/main.js"></script>-->
+    <script>
+        
+        // Add User Submit
+
+        function submit() {
+            console.log("dsds", document.getElementById("team").value);
+            document.getElementById("emp_name").value
+            document.getElementById("emp_id").value
+            document.getElementById("device_id").value
+            document.getElementById("location").value
+            document.getElementById("zone").value
+            document.getElementById("team1").value
+            document.getElementById("company").value
+
+
+            var obj =
+            {
+                "user": document.getElementById("emp_name").value,
+                "user_id": document.getElementById("emp_id").value,
+                "device_id": document.getElementById("device_id").value,
+                "locations": document.getElementById("location").value,
+                "company": document.getElementById("company").value,
+                "zone": document.getElementById("zone").value,
+                "team": document.getElementById("team1").value,
+                "group": "default"
+            }
+            console.log(obj)
+
+            $.ajax({
+                          type: "POST",
+                          url: "http://takvaviya.in:8001/coolpad/user/create/",
+                          dataType: 'json',
+                          data: obj,
+                          success: function (res){
+                          console.log('Success:', res);
+                            alert("User created successfully")
+                          }
+                          });
+
+
+}
+   </script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+    <script src='https://superal.github.io/canvas2image/canvas2image.js'></script> -->
+    <script>
+$(function () {
+    $("#chkPassport").click(function () {
+        if ($(this).is(":checked")) {
+            $("#dvPassport").show();
+        } else {
+            $("#dvPassport").hide();
+        }
+    });
+});
+
+$(function () {
+    $("#team").click(function () {
+        if ($(this).is(":checked")) {
+            $("#team-cnt").show();
+        } else {
+            $("#team-cnt").hide();
+        }
+    });
+});
+
+
+
+        $(document).ready(function () {
+            $('ul li a').click(function () {
+                $('li a').removeClass("actives");
+                $(this).addClass("actives");
+            });
+        });
+        function opentab1(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+    </script>
+        <script src="../../static/common.js"></script>
+
+</body>
+</html>

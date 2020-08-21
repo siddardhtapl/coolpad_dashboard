@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <title>Coolpad</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
+  <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+  <script src="../../static/common.js"></script>
+
+
+
+</head>
+
+<body>
+  <div class="specific">
+
+    <div class="header-container fixed-top">
+      <header class="header navbar navbar-expand-sm">
+        <ul class="navbar-item theme-brand flex-row  text-center">
+          <!--  <li class="nav-item theme-logo">
+                        <a href="index.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </li>-->
+          <li class="nav-item theme-text">
+            <a class="nav-link top-logo">
+              <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+          </li>
+        </ul>
+        <ul class="navbar-item flex-row ml-md-auto">
+          <li class="main-logo">
+            <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+          </li>
+          <li class="user-logout" onclick="logout()">
+            <span class="logout-icon"><i class="fas fa-sign-out-alt" title="sign-out" aria-hidden="true"></i></span>
+          </li>
+        </ul>
+      </header>
+    </div>
+
+    <div class="sub-header-container">
+      <header class="header navbar navbar-expand-sm">
+        <!-- <a href="#" class="sidebarCollapse" data-placement="bottom">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a> -->
+
+        <ul class="navbar-nav flex-row">
+          <li>
+            <div class="page-header">
+              <nav class="breadcrumb-one" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page"><span>History Dashboard </span></li>
+
+                </ol>
+              </nav>
+            </div>
+          </li>
+        </ul>
+
+      </header>
+    </div>
+
+    <div class="main-container" id="container">
+      <div class="overlay"></div>
+      <div class="sidebar-wrapper sidebar-theme">
+        <nav id="sidebar">
+          <div class="shadow-bottom"></div>
+          <ul class="list-unstyled menu-categories ps" id="accordionExample">
+
+            <!-- <li class="menu">
+                            <div class="dropdownss">
+                                <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
+                                <span class="dropbtnss">Report</span>
+                                  <div class="dropdown-contentss">
+                                    <a href="#"><span class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>PDF</a>
+                                    <a href="#"><span class="report-icon"><i class="fa fa-file-excel-o" aria-hidden="true"></i></span>XSL</a>
+                                    <a href="#"><span class="report-icon"><i class="fas fa-file-csv"></i></span>CSV</a>
+                                  </div>
+                            </div>
+                        </li> -->
+            <li class="menu">
+              <a href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
+                </span>Dashboard</a>
+            </li>
+            <li class="menu">
+              <a href="../history_dashboard" class="actives"><span class="side-menu-icon"><i class="fa fa-dedent"
+                    aria-hidden="true"></i>
+                </span>History Dashboard</a>
+            </li>
+            <li class="menu">
+              <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
+                </span>Contact Tracing</a>
+            </li>
+            <li class="menu">
+              <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt"
+                    aria-hidden="true"></i>
+                </span>Share</a>
+            </li>
+            <li class="menu">
+              <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>Email</a>
+            </li>
+            <li class="menu">
+              <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                </span>Add User</a>
+            </li>
+            <li class="menu">
+              <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt" aria-hidden="true"></i>
+                </span>Notes</a>
+            </li>
+            <!-- <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-camera" aria-hidden="true"></i></span>
+                                <button type="button" class="btn btn-default">Screen Grab</button>
+                            </a>
+                        </li> -->
+          </ul>
+        </nav>
+      </div>
+
+      <div id="content" class="main-content">
+
+        <div class="layout-px-spacing">
+          <div class="tab">
+            <button class="tablinks active" onclick="opentab_history(event, 'user_history'); loadUserHistoy()"><b>User
+                History</b></button>
+            <button class="tablinks " onclick="opentab_history(event, 'team_history'); loadTeamHistory()"><b>Team
+                History</b></button>
+          </div>
+
+          <div id="user_history" class="tabcontent" style="display: block;">
+            <section class="service-categories text-xs-center">
+              <div class="container-fluid">
+
+                <div style="display: flex; flex-direction: row;">
+                  <div style="flex:6">
+                    <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="user_history_select"
+                      onchange="getSelectValueUserHistory()">
+                      <option>select</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-top: 20px; margin-bottom: 20px;">
+                    <div class="dropdownss">
+                      <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i></span>
+                      <span class="dropbtnss">Report</span>
+                      <div class="dropdown-contentss">
+                        <div style="padding:1rem; cursor: pointer;" onclick="dwnldusrpdf();"><span
+                            class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>PDF</div>
+                        <div style="padding:1rem;  cursor: pointer;" onclick="dwnldusrxlsx();"><span
+                            class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>XLSX</div>
+                        <div style="padding:1rem;  cursor: pointer;" onclick="dwnldusrcsv();"><span
+                            class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>CSV</div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Current Device ID</h4>
+                          <div id="cdid"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">No of Users in Contact Today</h4>
+                          <div id="nouinc"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">No of Users in Contact this week</h4>
+                          <div id="nouinw"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse" style="height: 107px;">
+                        <div class="card-block">
+                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Highest Contact Duration this day with User</h4>
+                          <div id="hcdd"></div>
+                        </div>
+                      </div>
+                    </a>
+
+                    <a href="#">
+                      <div class="card service-card card-inverse mt-4" style="height: 107px;">
+                        <div class="card-block">
+                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Highest Contact Duration this week with User</h4>
+                          <div id="hcdw"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-8">
+                    <div class="widget widget-chart-one-userhistory">
+                      <div style="display:flex;flex-direction: row;">
+                        <p style="flex:5; color:white;" >Hour Tracker </p>
+                        <!-- <div>
+                          <label class="switch">
+                            <input type="checkbox" id="togBtn">
+                            <div class="slider round">
+                              <span class="on">12</span>
+                              <span class="off">24 </span>
+                            </div>
+                          </label>
+                        </div> -->
+                      </div>
+                      <div id="chart20"> </div>
+
+                      <!-- <div id="chart10"></div>
+
+                      <div id="chart12" style="visibility: hidden;"></div> -->
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-md-4">
+                                  <a href="#">
+                                    <div class="card service-card card-inverse">
+                                      <div class="card-block">
+                                        <span class="fa fa-address-card user-his-cnt fa-3x" aria-hidden="true"></span>
+                                        <h4 class="card-title">Contact History this Week</h4>
+                                        <p class="count-id">123</p>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>  -->
+                </div>
+
+
+
+                <!--End Row-->
+                <div class="row layout-top-spacing">
+                  <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one">
+                      <!-- <p>No of user on</p> -->
+                      <p>Contact History (Day)</p>
+                      <div>
+                        <div class="contact_history_container">
+                          <div class="contact_history_header row_user_status">
+                            <div style="flex:1"><b>S.No</b></div>
+                            <div style="flex:1"><b>User</b></div>
+                            <div style="flex:1"><b>Count</b></div>
+                            <div style="flex:1"><b>Max Duration</b></div>
+                          </div>
+                          <div class="table_body_his" id="contact_history_day">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one">
+                      <p>Contact History (Week)</p>
+                      <div>
+                        <div class="contact_history_container">
+                          <div class="contact_history_header row_user_status">
+                            <div style="flex:1"><b>S.No</b></div>
+                            <div style="flex:1"><b>User</b></div>
+                            <div style="flex:1"><b>Count</b></div>
+                            <div style="flex:1"><b>Max Duration</b></div>
+                          </div>
+                          <div class="table_body_his" id="contact_history_week">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--row layout-top-spacing-->
+              </div>
+              <!--container-fluid-->
+            </section>
+
+          </div>
+
+
+          <div id="team_history" class="tabcontent" style="display: none;">
+            <section class="service-categories text-xs-center">
+
+              <div class="container-fluid">
+
+                <!-- <select style="margin-top: 20px; margin-bottom: 20px;" id="team_history_select" onchange="getSelectValueTeamHistory()">
+                                <option>select</option>
+                                </select> -->
+
+                <div style="display: flex; flex-direction: row;">
+                  <div style="flex:6">
+                    <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="team_history_select"
+                      onchange="getSelectValueTeamHistory()">
+                      <option>select</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-top: 20px; margin-bottom: 20px;">
+                    <div class="dropdownss">
+                      <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
+                        <span class="dropbtnss">Report</span>
+                        <div class="dropdown-contentss">
+                          <div style="padding:1rem; cursor: pointer;" onclick="dwnldtmpdf();"><span
+                              class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>PDF</div>
+                          <div style="padding:1rem;  cursor: pointer;" onclick="dwnldtmxlsx();"><span
+                              class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>XLSX</div>
+                          <div style="padding:1rem;  cursor: pointer;" onclick="dwnldtmcsv();"><span
+                              class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>CSV</div>
+
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Users in Contact</h4>
+                          <div id="tuic"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Contacts in a Day</h4>
+                          <div id="tcid"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Contacts in a Week</h4>
+                          <div id="tciw"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse" style="height: 107px;">
+                        <div class="card-block">
+                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Most contact user pair Day</h4>
+                          <div id="tmcup"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#">
+                      <div class="card service-card card-inverse">
+                        <div class="card-block">
+                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <h4 class="card-title">Most contact user pair Week</h4>
+                          <div id="tmcupw"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <!-- <div class="col-md-4">
+                                  <a href="#">
+                                    <div class="card service-card card-inverse">
+                                      <div class="card-block">
+                                        <span class="fa fa-address-card user-his-cnt fa-3x" aria-hidden="true"></span>
+                                        <h4 class="card-title">Contact History this Week</h4>
+                                        <p class="count-id">123</p>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>  -->
+                </div>
+                <!--End Row-->
+                <div class="row layout-top-spacing">
+                  <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one-team">
+                      <!-- <p>No of user on</p> -->
+                      <p>Top 5 users in contact (Day)</p>
+                      <div>
+                        <div>
+                          <div class="contact_history_container">
+                            <div class="contact_history_header">
+                              <div style="flex:1"><b>S.No</b></div>
+                              <div style="flex:2;position: absolute;left: 35%;"><b>User</b></div>
+                              <div style="flex:1;padding-left:70px;"><b>Number of Contacts</b></div>
+                            </div>
+                            <div class="table_body_his" id="contact_history_tday">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one-team">
+                      <p>Top 5 users in contact (Week)</p>
+                      <div>
+                        <div class="contact_history_container">
+                          <div class="contact_history_header">
+                            <div style="flex:1"><b>S.No</b></div>
+                            <div style="flex:2;position: absolute;left: 35%;"><b>User</b></div>
+                            <div style="flex:1padding-left:70px;"><b>Number of Contacts</b></div>
+                          </div>
+                          <div class="table_body_his" id="contact_history_tweek">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--row layout-top-spacing-->
+              </div>
+              <!--container-fluid-->
+            </section>
+          </div>
+
+
+
+          <div class="row">
+
+          </div>
+        </div>
+
+
+        <div class="footer-wrapper">
+          <div class="footer-section f-section-1">
+            <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $('ul li a').click(function () {
+          $('li a').removeClass("actives");
+          $(this).addClass("actives");
+        });
+      });
+    </script>
+
+
+    <script src="../../static/index_one.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+    <script src='https://superal.github.io/canvas2image/canvas2image.js'></script>
+
+
+</body>
+
+</html>

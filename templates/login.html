@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Coolpad Login </title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/assets/css/authentication/form-1.css" rel="stylesheet" type="text/css" />
+        <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" type="text/css" href="../../static/assets/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="../../static/assets/css/forms/switches.css">
+        <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+
+
+    #username , #password{
+    background: #060818 !important;
+    border-bottom : 1px solid white;
+    }
+        input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#5264AE;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+    </style>
+
+</head>
+
+<body class="form">
+    
+
+    <div class="form-container">
+        <div class="form-form">
+            <div class="form-form-wrap">
+                <div class="form-container">
+                    <div class="form-content">
+                        <h1 class="mb-5 text-center" >Log In </h1>
+                        <div class="login-logo">
+                            <a href="index.html" class="nav-link">
+                            <img src="../../static/assets/img/coolpad-logo.png" alt="login-logo"></a>
+                        </div>
+<!--                        <form class="text-left">-->
+                            <div class="">
+                                <div id="username-field" class="field-wrapper input">
+                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <br>
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+                                </div>
+                                <div class="d-sm-flex justify-content-center">
+                                    <div class="field-wrapper"><br>
+                                        <button class="btn btn-primary login-bttn" onclick="login()" >Log In</button>
+                                    </div>
+                                </div>
+                            </div>
+<!--                        </form>                        -->
+                        <!-- <p class="terms-conditions">© 2020 All Rights Reserved.</p> -->
+
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="form-image">
+            <div class="l-image">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function login(){
+            var data = {"username":$("#username").val(),"password":$("#password").val()}
+            $.ajax({
+                          type: "POST",
+                          url: "http://takvaviya.in:8001/coolpad/auth/login/",
+                          dataType: 'json',
+                          data: data,
+                          success: function (res){
+                            var resp = res;
+                            console.log("success",res);
+                            if(resp["status"]=="success")
+                            {
+                                localStorage.setItem("session","1")
+                               window.location.href="../dashboard";
+                            }
+                            else
+                            {
+                              alert("Provide valid User Credentials");
+                            }
+
+                          },
+                        });
+
+        }
+
+        
+    </script>
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<!--    <script src="../../static/assets/js/libs/jquery-3.1.1.min.js"></script>-->
+<!--    <script src="../../static/bootstrap/js/popper.min.js"></script>-->
+<!--    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>-->
+    
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+</body>
+
+</html>

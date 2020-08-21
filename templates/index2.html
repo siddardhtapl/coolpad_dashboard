@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Coolpad</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
+        <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+    <script src="../../static/common.js"></script>
+
+
+<style>
+    Css code
+---------
+/*3rd screen css code start Arul 07.08.2020*/
+.date-value {
+    padding-left: 20px;
+}
+.date-value select {
+    background: none;
+    border-radius: 3px;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #303131;
+}
+.date-value select option {
+    background: #191e3a;
+}
+.data-card-cnt{
+    background: #0e1726;
+}
+.data-card-cnt .table {
+    margin-bottom: 0;
+}
+.data-card-cnt .table th {
+    color: #fff;
+}
+.data-card-cnt .btn-tle {
+    margin-left: 60px;
+    background: none;
+    border: 1px solid #303131;
+}
+.data-cnt-tbl th {
+    color: #fff;
+}
+.data-cnt-tbl .table-bordered th{
+    border: 1px solid #252525 !important;
+}
+.data-cnt-tbl .table-bordered td{
+    border: 1px solid #252525 !important;
+}
+.data-cnt-tbl tr {
+    color: #fff;
+}
+.data-card-cnt .table-bordered th{
+    border: 1px solid #303131 !important;
+}
+.data-card-cnt .table-bordered td{
+    border: 1px solid #303131 !important;
+    color:white;
+}
+.date-show .form-control {
+    background: none;
+    color: #fff;
+    border: 1px solid #303131;
+}
+.date-show input[type="date"] {
+  position: relative;
+  padding: 10px;
+}
+.date-show input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+.date-show input[type="date"]:before {
+  color: transparent;
+  background: none;
+  display: block;
+  font-family: 'FontAwesome';
+  content: '\f073';
+  /* This is the calendar icon in FontAwesome */
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  color: #fff;
+}
+.all_third_pair{
+display:block;
+float : left;
+margin-top:5px;
+}
+.children_tracing{
+margin-top:20px;
+}
+.children_tracing .in-card{
+    float: left;
+    width: 100px !important;
+    border-radius: 5px;
+}
+.children_tracing .in-table{
+    float: left;
+    width: 600px;
+    border-radius: 5px;
+}
+.in-table{
+    margin-left:50px;
+}
+.in-card{
+    background-color: #0e1726;
+    padding: 12px 23px 0px 23px;
+}
+.in-table table{
+     background-color: #0e1726;
+    padding: 16px 19px 6px 21px;
+        margin-top: 9px;
+}
+.in-table table th{
+padding-left: 20px;
+    border: 1px solid #303f4c;
+    padding-right: 20px;
+}
+.in-table table td{
+padding-left: 20px;
+    border: 1px solid #303f4c;
+     padding-right: 20px;
+}
+.third_head{
+}
+.sub{
+padding:9px;
+border:none;
+border-radius:5px;
+background-color:#527581;
+color:white;
+}
+.capi-text{
+text-transform:capitalize;
+}
+.all_third_pair table {
+    width: 755px;
+}
+/*3rd screen css code end Arul 07.08.2020*/
+</style>
+</head>
+
+    <body onload='timerTick()'>
+        <div class="specific">
+
+        <div class="header-container fixed-top">
+            <header class="header navbar navbar-expand-sm">
+                <ul class="navbar-item theme-brand flex-row  text-center">
+                  <!--  <li class="nav-item theme-logo">
+                        <a href="index.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </li>-->
+                    <li class="nav-item theme-text">
+                        <a  class="nav-link top-logo">
+                        <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+                    </li>
+                </ul>
+                <ul class="navbar-item flex-row ml-md-auto">
+                    <li class="main-logo">
+                        <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+                    </li>
+                    <li class="user-logout" onclick="logout()">
+                        <span class="logout-icon"><i class="fas fa-sign-out-alt" title="sign-out" aria-hidden="true"></i></span>
+                    </li>
+                </ul>
+            </header>
+        </div>
+
+        <div class="sub-header-container">
+            <header class="header navbar navbar-expand-sm">
+
+
+                <ul class="navbar-nav flex-row">
+                    <li>
+                        <div class="page-header">
+                            <nav class="breadcrumb-one" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page"><span>Contact Tracing </span></li>
+
+                                </ol>
+                            </nav>
+                        </div>
+                    </li>
+                </ul>
+              
+            </header>
+        </div>
+
+        <div class="main-container" id="container">
+            <div class="overlay"></div>
+            <div class="sidebar-wrapper sidebar-theme">
+                <nav id="sidebar">
+                    <div class="shadow-bottom"></div>
+                    <ul class="list-unstyled menu-categories ps" id="accordionExample">
+                      
+
+                                            <li class="menu">
+                            <a href="../dashboard" ><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
+                                </span>Dashboard</a>
+                        </li>
+                         <li class="menu">
+                            <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent" aria-hidden="true"></i>
+                                </span>History Dashboard</a>
+                        </li>
+                         <li class="menu">
+                            <a href="../contact" class="actives"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
+                                </span>Contact Tracing</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
+                                </span>Share</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>Email</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                                </span>Add User</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
+                                        aria-hidden="true"></i>
+                                </span>Notes</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="content" class="main-content">
+
+                <div class="layout-px-spacing">
+                    <div class="row mt-5">
+                        <div class="col-xl-2 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="date-value">
+                                <label>Report Contacted Person</label>
+                                <select id="render_emp_list" onchange="trigger_emp(this)">
+                                    <option  \>Select</option>
+                                    <script>
+                                    var i;
+                                    var append_op;
+                                    var sample_data;
+                                    for(i=1 ; i<=20; i++){
+                                    append_op ="";
+                                    append_op +='<option  value="emp '+i+'">Emp '+i+'</option>';
+                                    $("#render_emp_list").append(append_op);
+                                    }
+                                    </script>
+<!--                                    <option selected>Select</option>//onchange="trigger_contact(this)"
+                                    <option>This is another Option</option>-->
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="date-show">
+                                <div class="form-group">
+                                    <label >Start Date</label>
+                                    <input type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="date-show">
+                                <div class="form-group">
+                                    <label >End Date</label>
+                                    <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="date-show">
+                                <div class="form-group">
+                                    <label >Report Here</label><br>
+                                    <button class="sub" onclick="trigger_contact()">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="card component-card_2 data-card-cnt">
+                                <div class="card-body">
+                                    <p style="text-align:center">Contacted Employee</p>
+                                    <h5 class="card-title text-center capi-text" id="emp_name">User</h5>
+                                </div>
+                            </div>          
+                        </div>
+
+                        <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="card component-card_2 data-card-cnt">
+                                <div class="card-body" id="first_trace">
+                                </div>
+                            </div>
+                            <div class="all_third_pair" id="all_third_pair">
+
+                    </div>
+                        </div>
+                    </div>
+
+
+
+<!--
+                    <div class="row mt-5">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                            <div class="data-cnt-tbl">
+                                <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center">Content 1</th>
+                                    <th class="text-center">Content 2</th>
+                                    <th class="text-center">Content 3</th>
+                                    <th class="text-center">Content 4</th>
+                                    <th class="text-center">Content 5</th>
+                                    <th class="text-center">Content 6</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>Content 1</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Content 2</td>
+                                    <td>Moe</td>
+                                    <td>mary@example.com</td>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Content 3</td>
+                                    <td>Dooley</td>
+                                    <td>july@example.com</td>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Content 4</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Content 5</td>
+                                    <td>Moe</td>
+                                    <td>mary@example.com</td>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                  </tr>
+                                </tbody>
+                              </table> 
+                            </div>
+                        </div>
+                    </div>
+-->
+                </div>
+        
+                <div class="footer-wrapper">
+                    <div class="footer-section f-section-1">
+                        <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+        
+        <script>
+            function opentab_history(evt, tabName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+            }
+        </script>
+<!--
+        <script src="/static/main.js"></script>
+-->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+        <script src='https://superal.github.io/canvas2image/canvas2image.js'></script>
+
+            <script>
+           //http://takvaviya.in:8001/coolpad/user/contact_trace/emp%201/2020-08-03/2020-08-07
+            var e;
+            function trigger_emp(elm){
+            e = elm.value;
+            }
+
+           function trigger_contact(){
+
+           console.log(e,'kkkk');
+           $.ajax({
+           type: "GET",
+           url : "http://takvaviya.in:8001/coolpad/user/contact_trace/"+e+"/2020-08-03/2020-08-07",
+           dataType: 'json',
+           success: function (response){
+           console.log(response[0][e]);
+           res=response;
+
+           document.getElementById("emp_name").innerHTML=e
+            var append_data;
+            append_data ="";
+            $("#first_trace").empty();
+            $('#all_third_pair').empty();
+            append_data +='<table class="table table-bordered"><thead><tr><th colspan="10" style="text-align: center">Persons in Direct Contact</th></tr><tr>';
+            for(var i in response[0][e]){
+            console.log(i);
+            append_data +="<th class='capi-text' colspan = '2' style='text-align:center'>"+i+"</th>";
+            }
+            append_data +='</tr><tr>'
+            for(var i in response[0][e]){
+            console.log(i);
+            append_data +="<td style='color:white'><i class='fa fa-users' style='opacity:0.6'></i> : "+response[0][e][i]['count']+"</td><td><i class='fa fa-hourglass-half' style='opacity:0.6'></i> : "+response[0][e][i]['max_duration']+"</td>";
+
+            }
+
+            append_data+='</tr></thead></table>';
+            $("#first_trace").append(append_data);
+             console.log(response[1]);
+             var append_third;
+            for(var k in response[1])
+            {
+            var dir_emp = Object.keys(response[1][k]);
+            var dir_pair = response[1][k][dir_emp];
+            append_third='';
+            append_third +='<div class="children_tracing">';
+            append_third +='<div class="in-card"><i class="fa fa-user" style="font-size: 35px;padding-left: 10px;"></i><p class="capi-text">'+dir_emp+'</p></div>';
+            append_third+='<div class="in-table"><table><tr>';
+
+                for(var t in dir_pair)
+                {console.log(t, dir_pair[t]);
+                 append_third+='<th class="text-center capi-text" colspan="2" style="text-align:center;">'+t+'</th>';
+                }
+                append_third +='</tr><tr>';
+                for(var t in dir_pair)
+                {console.log(t, dir_pair[t]);
+                 append_third+='<td><i class="fa fa-users" style="opacity:0.6"></i> '+dir_pair[t]['count']+'</td><td><i class="fa fa-hourglass-half" style="opacity:0.6"></i> '+dir_pair[t]['max_duration']+'</td>';
+                }
+
+            append_third+='</tr></table></div></div><br><br><br><br>';
+            $('#all_third_pair').append(append_third);
+            }
+           }
+           });
+           }
+        </script>
+            <script>
+        $(document).ready(function(){
+$('ul li a').click(function(){
+$('li a').removeClass("actives");
+$(this).addClass("actives");
+});
+});
+    </script>
+
+        </div>
+    </body>
+</html>

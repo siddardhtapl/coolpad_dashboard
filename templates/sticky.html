@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Coolpad - Sticky</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
+    <script data-require="moment.js@2.10.2" data-semver="2.10.2"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="../../static/common.js"></script>
+        <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+
+</head>
+
+
+<body>
+    <div class="specific">
+        <div class="header-container fixed-top">
+            <header class="header navbar navbar-expand-sm">
+                <ul class="navbar-item theme-brand flex-row  text-center">
+                    <!-- <li class="nav-item theme-logo">
+                        <a href="index.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </li> -->
+                    <li class="nav-item theme-text">
+                        <a  class="nav-link top-logo">
+                        <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+                    </li>
+                </ul>
+                <ul class="navbar-item flex-row ml-md-auto">
+                    <li class="main-logo">
+                        <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+                    </li>
+                    <li class="user-logout" >
+                        <span class="logout-icon" onclick="logout()"><i class="fas fa-sign-out-alt" title="sign-out"
+                                aria-hidden="true"></i></span>
+                    </li>
+                </ul>
+            </header>
+        </div>
+
+
+        <dialog  id="my-modal" >
+            <h3>Enter Note </h3>
+            <p><textarea style="height: 300px; width:300px; font-size: 15px;" id="note_textt"></textarea></p>
+            <div class="actions">
+              <button onclick="Submit()" class='ph-button ph-btn-green'>Submit</button>
+              <button  id="close-modal-btn"  class='ph-button ph-btn-red'>Close</button>
+            </div>
+          </dialog>
+        <div class="main-container" id="container">
+            <div class="overlay"></div>
+            <div class="sidebar-wrapper sidebar-theme">
+                <nav id="sidebar">
+                    <div class="shadow-bottom"></div>
+                    <ul class="list-unstyled menu-categories ps" id="accordionExample">
+
+                                            <li class="menu">
+                            <a href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
+                                </span>Dashboard</a>
+                        </li>
+                         <li class="menu">
+                            <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent" aria-hidden="true"></i>
+                                </span>History Dashboard</a>
+                        </li>
+                         <li class="menu">
+                            <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
+                                </span>Contact Tracing</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
+                                </span>Share</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>Email</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                                </span>Add User</a>
+                        </li>
+                        <li class="menu">
+                            <a href="../stickynotes" class="actives"><span class="side-menu-icon"><i class="far fa-file-alt"
+                                        aria-hidden="true"></i>
+                                </span>Notes</a>
+                        </li>
+                        <!-- <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-camera"
+                                        aria-hidden="true"></i></span>
+                                <button type="button" class="btn btn-default">Screen Grab</button>
+                            </a>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="content" class="main-content">
+               
+      
+             
+                <div class="layout-px-spacing" style=" display: flex;  margin-left:100px; flex-direction: column;">
+                  
+                    <button id="open-modal-btn" style="width: 100px;margin-left: 1rem;"  class='ph-button ph-btn-blue'> Add Note</button>
+                    <div class="scontainer" id="load_notes">
+
+                         <div class="note_card">
+                            <div class="ndate"><b>12-08-2020</b></div>
+                            <div class="nnote" id="nnote"><p style="padding-right: 40px;"></p></div>
+                            <!-- <button>delete</button> -->
+                        </div> 
+                        
+                    </div>
+
+                   
+
+                </div>
+            </div>
+
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/sticky.js"></script>
+<script>
+        $(document).ready(function(){
+$('ul li a').click(function(){
+$('li a').removeClass("actives");
+$(this).addClass("actives");
+});
+});
+    </script>
+
+</body>
+
+</html>

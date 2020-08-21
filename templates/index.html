@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Coolpad</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
+    <script data-require="moment.js@2.10.2" data-semver="2.10.2"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+
+</head>
+
+<body >
+    <div class="specific">
+
+        <div class="header-container fixed-top">
+            <header class="header navbar navbar-expand-sm">
+                <ul class="navbar-item theme-brand flex-row  text-center">
+                    <li class="nav-item theme-logo">
+                        <a href="index.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item theme-text">
+                        <a href="index.html" class="nav-link"> Coolpad </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-item flex-row ml-md-auto">
+                    <li class="main-logo">
+                        <img src="assets/img/takvaviya-main-logo.png" alt="main-logo">
+                    </li>
+                    <li class="user-logout">
+                        <span class="logout-icon"><i class="fas fa-sign-out-alt" title="sign-out"
+                                aria-hidden="true"></i></span>
+                    </li>
+                </ul>
+            </header>
+        </div>
+
+        <div class="sub-header-container">
+            <header class="header navbar navbar-expand-sm">
+                <!-- <a href="#" class="sidebarCollapse" data-placement="bottom">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a> -->
+
+                <ul class="navbar-nav flex-row">
+                    <li>
+                        <div class="page-header">
+                            <nav class="breadcrumb-one" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page"><span>Dashboard </span></li>
+
+                                </ol>
+                            </nav>
+                        </div>
+                    </li>
+                </ul>
+
+            </header>
+        </div>
+
+        <div class="main-container" id="container">
+            <div class="overlay"></div>
+            <div class="sidebar-wrapper sidebar-theme">
+                <nav id="sidebar">
+                    <div class="shadow-bottom"></div>
+                    <ul class="list-unstyled menu-categories ps" id="accordionExample">
+                        <!--<li class="menu">
+                            <div class="dropdownss">
+                                <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
+                                    <span class="dropbtnss">Report</span>
+                                    <div class="dropdown-contentss">
+                                        <a href="#"><span class="report-icon"><i class="fa fa-file-pdf-o"
+                                                    aria-hidden="true"></i></span>PDF</a>
+                                        <a href="#"><span class="report-icon"><i class="fa fa-file-excel-o"
+                                                    aria-hidden="true"></i></span>XSL</a>
+                                        <a href="#"><span class="report-icon"><i
+                                                    class="fas fa-file-csv"></i></span>CSV</a>
+                                    </div>
+                            </div>
+                        </li> -->
+                        <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
+                                </span>Share</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>Email</a>
+                        </li>
+                        <!-- <li class="menu">
+                            <a href="#"><span class="side-menu-icon"><i class="fa fa-camera"
+                                        aria-hidden="true"></i></span>
+                                <button type="button" class="btn btn-default">Screen Grab</button>
+                            </a>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="content" class="main-content">
+
+                <div class="layout-px-spacing">
+                    <div class="tab">
+                        <button class="tablinks active" onclick="opentab(event, 'daily')"><b>Daily Tracker</b></button>
+                        <button class="tablinks " onclick="opentab(event, 'weekly')"><b>Weekly Tracker</b></button>
+                    </div>
+
+                    <!--Daily-->
+                    <div id="daily" class="tabcontent" style="display: block;">
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="daily-tab">
+
+                                <div class="row layout-top-spacing">
+                                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-one">
+                                            <p>Total no of contact</p>
+                                            <div id="chart3"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-one">
+                                            <p>Top Contact History </p>
+                                            <div id="chart2"></div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- <p>C L O C K</p> -->
+                                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-one">
+                                            <p> Clock</p>
+
+                                            <div class="clk">
+
+                                                <ul class="circle">
+                                                    <li>
+                                                        <div class="text" id="clk0" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk1" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk2" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk3" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk4" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk5" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk6" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk7" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk8" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk9" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk10" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text" id="clk11" style="color: white;"></div>
+                                                    </li>
+                                                </ul>
+
+                                                <div class="dot1">
+                                                    <table id='cont'>
+                                                        <tr>
+                                                            <td>
+                                                                <svg id='clock' viewBox='0 0 100 100' width='250'
+                                                                    height='250'>
+                                                                    <circle id='surface' cx='50' cy='50' r='45' />
+                                                                    <g id='pointers'>
+                                                                        <line id='h_pointer' x1='50' y1='50' x2='50'
+                                                                            y2='27' />
+                                                                        <line id='m_pointer' x1='50' y1='50' x2='50'
+                                                                            y2='17' />
+                                                                        <line id='s_pointer' x1='50' y1='50' x2='50'
+                                                                            y2='13' />
+                                                                    </g>
+                                                                    <g id='numbers'>
+                                                                        <text x='43' y='18'>12</text>
+                                                                        <text x='85' y='54'>3</text>
+                                                                        <text x='47' y='91'>6</text>
+                                                                        <text x='9' y='54'>9</text>
+                                                                    </g>
+                                                                </svg>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="clk2">
+                                                <ul class="circle1">
+                                                    <li>
+                                                        <div class="text1" id="clk12" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk13" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk14" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk15" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk16" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk17" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk18" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk19" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk20" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk21" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk22" style="color: white;"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text1" id="clk23" style="color: white;"></div>
+                                                    </li>
+                                                </ul>
+                                                <!-- <div class="dot"></div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-two">
+                                            <p>Contact Frequency</p>
+                                            <select name="Teams" id="team_select_weekly"
+                                                onchange="getSelectValueweekly()"></select>
+                                            <table style="width:100%;" id="contact_frequency_weekly"></table>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-one">
+                                            <!-- <p>No of user on</p> -->
+                                            <p>User Status</p>
+                                            <div class="table_container_user_status">
+                                                <div class="row_user_status">
+                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>S.No</b>
+                                                    </div>
+                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>User</b>
+                                                    </div>
+                                                    <div style="flex:3;color: #dedede;font-size: 14px;"><b>Device Id</b>
+                                                    </div>
+                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>Status</b>
+                                                    </div>
+                                                </div>
+                                                <div class="table_body" id="user_status">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing;">
+                                        <div class="widget widget-chart-one">
+                                            <p>Users in contact (Live)</p>
+                                            <div class="table_container_user_status">
+                                                <div class="row_user_status">
+                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>S.No</b>
+                                                    </div>
+                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Local</b>
+                                                    </div>
+                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Remote</b>
+                                                    </div>
+                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Duration</b>
+                                                    </div>
+                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Avergae
+                                                            Distance</b></div>
+                                                </div>
+                                                <div class="table_body" id="live_contact">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-one">
+                                            <p>Contact History</p>
+                                            <div class="contact_history_container">
+                                                <div class="contact_history_header">
+                                                    <div style="flex:1"><b>S.No</b></div>
+                                                    <div style="flex:1"><b>User-Pair</b></div>
+                                                    <div style="flex:1"><b>Number of Contacts</b></div>
+                                                </div>
+                                                <div class="table_body" id="contact_history">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly -->
+
+                    <div id="weekly" class="tabcontent" style="display: none;">
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="daily-tab">
+                                <div class="row layout-top-spacing">
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing;"
+                                        style="margin-bottom: 25px;">
+                                        <div class="widget widget-chart-one">
+                                            <p>Users in contact (Live)</p>
+                                            <div id="chart7"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                    <div class="widget widget-chart-one">
+                                        <p>Top Contact History </p>
+                                        <div id="chart5"></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                    <div class="widget widget-chart-one">
+                                        <p>Total no of contact</p>
+                                        <div id="chart6"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                    <div class="widget widget-chart-one">
+                                        <p>Contact History All</p>
+                                        <div class="contact_history_container">
+                                            <div class="contact_history_header">
+                                                <div style="flex:1"><b>S.No</b></div>
+                                                <div style="flex:2"><b>User-Pair</b></div>
+                                                <div style="flex:1"><b>Number of Contacts</b></div>
+                                            </div>
+                                            <div class="table_body" id="contact_history_weekly">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                    <div class="widget widget-chart-two">
+                                        <p>Contact Frequency</p>
+                                        <select name="Teams" id="team_select_weekly" onchange="getSelectValueweekly()">
+                                            <option value="team A">team A</option>
+                                            <option value="team B">team B</option>
+                                            <option value="team C">team C</option>
+                                            <option value="team D">team D</option>
+                                        </select>
+                                        <table style="  width:100%;" id="contact_frequency_weekly">
+                                            <tr style="height: 50px;">
+                                                <td><b>User</b></td>
+                                                <td><b>emp 1</b></td>
+                                                <td><b>emp 2</b></td>
+                                                <td><b>emp 3</b></td>
+                                                <td><b>emp 4</b></td>
+                                                <td><b>emp 5</b></td>
+                                            </tr>
+                                            <tr style="height: 50px;">
+                                                <td><b>emp 1</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>1</b></td>
+                                                <td><b>1</b></td>
+                                            </tr>
+                                            <tr style="height: 50px;">
+                                                <td><b>emp 2</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>2</b></td>
+                                                <td><b>1</b></td>
+                                                <td><b>2</b></td>
+                                            </tr>
+                                            <tr style="height: 50px;">
+                                                <td><b>emp 3</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>2</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                            </tr>
+                                            <tr style="height: 50px;">
+                                                <td><b>emp 4</b></td>
+                                                <td><b>1</b></td>
+                                                <td><b>1</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>1</b></td>
+                                            </tr>
+                                            <tr style="height: 50px;">
+                                                <td><b>emp 5</b></td>
+                                                <td><b>1</b></td>
+                                                <td><b>2</b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>1</b></td>
+                                                <td><b>0</b></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="weekly-tab">
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+
+                </div>
+            </div>
+
+
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <script src="../../static/main.js"></script>
+
+    <script src="main.js"></script>
+<!--    <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>-->
+<!--    <script src='https://superal.github.io/canvas2image/canvas2image.js'></script>-->
+
+
+</body>
+
+</html>
