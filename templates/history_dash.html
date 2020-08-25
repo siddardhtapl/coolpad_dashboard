@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body class="body">
   <div class="specific">
 
     <div class="header-container fixed-top">
@@ -35,12 +35,12 @@
                     </li>-->
           <li class="nav-item theme-text">
             <a class="nav-link top-logo">
-              <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+              <img id="img" src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
           </li>
         </ul>
         <ul class="navbar-item flex-row ml-md-auto">
           <li class="main-logo">
-            <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+            <img id="img1" src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
           </li>
           <li class="user-logout" onclick="logout()">
             <span class="logout-icon"><i class="fas fa-sign-out-alt" title="sign-out" aria-hidden="true"></i></span>
@@ -90,33 +90,37 @@
                             </div>
                         </li> -->
             <li class="menu">
-              <a href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
+              <a class="menuu" href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart"
+                    aria-hidden="true"></i>
                 </span>Dashboard</a>
             </li>
             <li class="menu">
-              <a href="../history_dashboard" class="actives"><span class="side-menu-icon"><i class="fa fa-dedent"
-                    aria-hidden="true"></i>
+              <a href="../history_dashboard" class="actives" class="menuu"><span class="side-menu-icon"><i
+                    class="fa fa-dedent" aria-hidden="true"></i>
                 </span>History Dashboard</a>
             </li>
             <li class="menu">
-              <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
+              <a class="menuu" href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book"
+                    aria-hidden="true"></i>
                 </span>Contact Tracing</a>
             </li>
             <li class="menu">
-              <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt"
+              <a class="menuu" href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt"
                     aria-hidden="true"></i>
                 </span>Share</a>
             </li>
             <li class="menu">
-              <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+              <a class="menuu" href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
                 </span>Email</a>
             </li>
             <li class="menu">
-              <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
+              <a class="menuu" href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus"
+                    aria-hidden="true"></i>
                 </span>Add User</a>
             </li>
             <li class="menu">
-              <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt" aria-hidden="true"></i>
+              <a class="menuu" href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
+                    aria-hidden="true"></i>
                 </span>Notes</a>
             </li>
             <!-- <li class="menu">
@@ -136,6 +140,11 @@
                 History</b></button>
             <button class="tablinks " onclick="opentab_history(event, 'team_history'); loadTeamHistory()"><b>Team
                 History</b></button>
+
+            <label class="switch1">
+              <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
+              <span class="slider1 round1"></span>
+            </label>
           </div>
 
           <div id="user_history" class="tabcontent" style="display: block;">
@@ -145,7 +154,7 @@
                 <div style="display: flex; flex-direction: row;">
                   <div style="flex:6">
                     <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="user_history_select"
-                      onchange="getSelectValueUserHistory()">
+                      onchange="getSelectValueUserHistory();load_notes_user()">
                       <option>select</option>
                     </select>
                   </div>
@@ -167,13 +176,25 @@
                   </div>
                 </div>
 
+                <!-- dialog************************ -->
+                <dialog id="my-modal">
+                  <h3>Enter Note </h3>
+                  <p><textarea style="height: 300px; width:300px; font-size: 15px;" id="note_textt"></textarea></p>
+                  <div class="actions">
+                    <button onclick="Submit1()" class='ph-button ph-btn-green'>Submit</button>
+                    <button id="close-modal-btn" class='ph-button ph-btn-red'>Close</button>
+                  </div>
+                </dialog>
+                <!-- end ************************ -->
 
                 <div class="row">
+
                   <div class="col-md-4">
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Current Device ID</h4>
                           <div id="cdid"></div>
                         </div>
@@ -184,7 +205,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">No of Users in Contact Today</h4>
                           <div id="nouinc"></div>
                         </div>
@@ -195,7 +217,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">No of Users in Contact this week</h4>
                           <div id="nouinw"></div>
                         </div>
@@ -209,7 +232,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse" style="height: 107px;">
                         <div class="card-block">
-                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Highest Contact Duration this day with User</h4>
                           <div id="hcdd"></div>
                         </div>
@@ -219,7 +243,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse mt-4" style="height: 107px;">
                         <div class="card-block">
-                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Highest Contact Duration this week with User</h4>
                           <div id="hcdw"></div>
                         </div>
@@ -230,22 +255,22 @@
                   <div class="col-md-8">
                     <div class="widget widget-chart-one-userhistory">
                       <div style="display:flex;flex-direction: row;">
-                        <p style="flex:5; color:white;" >Hour Tracker </p>
-                        <!-- <div>
+                        <p class="para" style="flex:5; color:#718093;font-weight: bold;font-size: 18px;">Hour Tracker
+                        </p>
+                        <div>
                           <label class="switch">
-                            <input type="checkbox" id="togBtn">
+                            <input type="checkbox" id="togBtn_history">
                             <div class="slider round">
                               <span class="on">12</span>
                               <span class="off">24 </span>
                             </div>
                           </label>
-                        </div> -->
+                        </div>
                       </div>
-                      <div id="chart20"> </div>
+                      <div id="chart21"> </div>
 
-                      <!-- <div id="chart10"></div>
 
-                      <div id="chart12" style="visibility: hidden;"></div> -->
+                      <div id="chart20" style="visibility: hidden;"></div>
                     </div>
                   </div>
 
@@ -269,14 +294,14 @@
                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one">
                       <!-- <p>No of user on</p> -->
-                      <p>Contact History (Day)</p>
+                      <p class="para">Contact History (Day)</p>
                       <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header row_user_status">
-                            <div style="flex:1"><b>S.No</b></div>
-                            <div style="flex:1"><b>User</b></div>
-                            <div style="flex:1"><b>Count</b></div>
-                            <div style="flex:1"><b>Max Duration</b></div>
+                            <div style="flex:1;color: #718093;"><b>S.No</b></div>
+                            <div style="flex:1;color: #718093;"><b>User</b></div>
+                            <div style="flex:1;color: #718093;"><b>Count</b></div>
+                            <div style="flex:1;color: #718093;"><b>Max Duration</b></div>
                           </div>
                           <div class="table_body_his" id="contact_history_day">
                           </div>
@@ -286,20 +311,60 @@
                   </div>
                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one">
-                      <p>Contact History (Week)</p>
+                      <p class="para">Contact History (Week)</p>
                       <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header row_user_status">
-                            <div style="flex:1"><b>S.No</b></div>
-                            <div style="flex:1"><b>User</b></div>
-                            <div style="flex:1"><b>Count</b></div>
-                            <div style="flex:1"><b>Max Duration</b></div>
+                            <div style="flex:1;color: #718093;"><b>S.No</b></div>
+                            <div style="flex:1;color: #718093;"><b>User</b></div>
+                            <div style="flex:1;color: #718093;"><b>Count</b></div>
+                            <div style="flex:1;color: #718093;"><b>Max Duration</b></div>
                           </div>
                           <div class="table_body_his" id="contact_history_week">
                           </div>
                         </div>
                       </div>
 
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div style="width: 100%;height: 315px; background-color:#1A1C2D;margin-bottom: 20px;">
+
+                      <div style="display: flex; flex-direction: row; justify-content: flex-end; ">
+
+                        <a class="his_notes" style="margin:1rem" id="open-modal-btn">Add Note</a>
+                        <a href="#notess" button style="margin:1rem" onclick="notess()">All Notes</a></button><br>
+
+                      </div>
+
+                      <div id="load_notes1" style="margin-top: -25px;">
+                        <div class="note_card1">
+                          <div class="ndate1"><b>12-08-2020</b></div>
+                          <div class="nnote1" id="nnote1">
+                            <p style="padding-right: 40px;"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing " style="display: none;"
+                  id="notess">
+                  <div class="widget widget-chart-one-notes">
+                    <P class="para"> All notes</P>
+                    <span class="fa fa-times" style="float: right; margin-top:-39px; cursor: pointer;"
+                      onclick="notes()"></span>
+                    <div id="load_notes"
+                      style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
+                      <div class="note_card">
+                        <div class="ndate"><b>12-08-2020</b></div>
+                        <div class="nnote" id="nnote">
+                          <p style="padding-right: 40px;"></p>
+                        </div>
+                        <!-- <button>delete</button> -->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -323,7 +388,7 @@
                 <div style="display: flex; flex-direction: row;">
                   <div style="flex:6">
                     <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="team_history_select"
-                      onchange="getSelectValueTeamHistory()">
+                      onchange="getSelectValueTeamHistory();load_notes_team()">
                       <option>select</option>
                     </select>
                   </div>
@@ -344,6 +409,15 @@
                     </div>
                   </div>
                 </div>
+                <!-- Teamstickynotes -->
+                <dialog id="my-modal1">
+                  <h3>Enter Note </h3>
+                  <p><textarea style="height: 300px; width:300px; font-size: 15px;" id="note_textt1"></textarea></p>
+                  <div class="actions">
+                    <button onclick="Submit2()" class='ph-button ph-btn-green'>Submit</button>
+                    <button id="close-modal-btn1" class='ph-button ph-btn-red'>Close</button>
+                  </div>
+                </dialog>
 
 
                 <div class="row">
@@ -351,7 +425,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Users in Contact</h4>
                           <div id="tuic"></div>
                         </div>
@@ -362,7 +437,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Contacts in a Day</h4>
                           <div id="tcid"></div>
                         </div>
@@ -373,7 +449,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Contacts in a Week</h4>
                           <div id="tciw"></div>
                         </div>
@@ -387,7 +464,8 @@
                     <a href="#">
                       <div class="card service-card card-inverse" style="height: 107px;">
                         <div class="card-block">
-                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Most contact user pair Day</h4>
                           <div id="tmcup"></div>
                         </div>
@@ -398,13 +476,15 @@
                     <a href="#">
                       <div class="card service-card card-inverse">
                         <div class="card-block">
-                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"></span>
+                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"
+                            style="color: #888ea8;"></span>
                           <h4 class="card-title">Most contact user pair Week</h4>
                           <div id="tmcupw"></div>
                         </div>
                       </div>
                     </a>
                   </div>
+
                   <!-- <div class="col-md-4">
                                   <a href="#">
                                     <div class="card service-card card-inverse">
@@ -422,14 +502,14 @@
                   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one-team">
                       <!-- <p>No of user on</p> -->
-                      <p>Top 5 users in contact (Day)</p>
+                      <p class="para">Top 5 users in contact (Day)</p>
                       <div>
                         <div>
                           <div class="contact_history_container">
                             <div class="contact_history_header">
-                              <div style="flex:1"><b>S.No</b></div>
-                              <div style="flex:2;position: absolute;left: 35%;"><b>User</b></div>
-                              <div style="flex:1;padding-left:70px;"><b>Number of Contacts</b></div>
+                              <div style="flex:1;color: #718093;"><b>S.No</b></div>
+                              <div style="flex:2;position: absolute;left: 35%;color: #718093;"><b>User</b></div>
+                              <div style="flex:1;padding-left:70px;color: #718093;"><b>Number of Contacts</b></div>
                             </div>
                             <div class="table_body_his" id="contact_history_tday">
                             </div>
@@ -440,13 +520,13 @@
                   </div>
                   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one-team">
-                      <p>Top 5 users in contact (Week)</p>
+                      <p class="para">Top 5 users in contact (Week)</p>
                       <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header">
-                            <div style="flex:1"><b>S.No</b></div>
-                            <div style="flex:2;position: absolute;left: 35%;"><b>User</b></div>
-                            <div style="flex:1padding-left:70px;"><b>Number of Contacts</b></div>
+                            <div style="flex:1;color: #718093;"><b>S.No</b></div>
+                            <div style="flex:2;position: absolute;left: 35%;color: #718093;"><b>User</b></div>
+                            <div style="flex:1; padding-left:70px;color: #718093;"><b>Number of Contacts</b></div>
                           </div>
                           <div class="table_body_his" id="contact_history_tweek">
                           </div>
@@ -454,12 +534,58 @@
                       </div>
                     </div>
                   </div>
+                  <!-- *********************************************************************************************** -->
+                  <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one-team-notes">
+                    <p class="para"> Notes</p>
+                      <div style="width: 100%;height: 300px; background-color:#1A1C2D;margin-bottom: 20px;">
+                        <div style="display: flex; flex-direction: row; justify-content: flex-end; ">
+                          <a class="his_notes" style="margin:1rem" id="open-modal-btn1">Add Note</a>
+                          <a href="#notess1" button style="margin:1rem" onclick="notess1()">All Notes</a></button><br>
+                        </div>
+                        <div id="load_notes2" style="margin-top: -15px;">
+                          <div class="note_card2">
+                            <div class="ndate2"><b>12-08-2020</b></div>
+                            <div class="nnote2" id="nnote2">
+                              <p style="padding-right: 40px;"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <!--row layout-top-spacing-->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" style="display: none;" id="notess1">
+                  <div class="widget widget-chart-one-notes">
+                    <P class="para"> All notes</P>
+                    <span class="fa fa-times" style="float: right; margin-top:-39px; cursor: pointer;"
+                      onclick="notes1()"></span>
+                    <div id="load_notes_team"
+                      style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
+                      <div class="note_card">
+                        <div class="ndate"><b>12-08-2020</b></div>
+                        <div class="nnote" id="nnote">
+                          <p style="padding-right: 40px;"></p>
+                        </div>
+                        <!-- <button>delete</button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--  -->
+                <!-- <div id="load_notes_team" style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
+                  <div class="note_card">
+                    <div class="ndate"><b>12-08-2020</b></div>
+                    <div class="nnote" id="nnote"><p style="padding-right: 40px;"></p></div>
+                </div> 
+              </div> -->
               </div>
               <!--container-fluid-->
             </section>
           </div>
+
+
 
 
 
@@ -471,7 +597,7 @@
 
         <div class="footer-wrapper">
           <div class="footer-section f-section-1">
-            <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+            <p class="para">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
           </div>
         </div>
       </div>
@@ -484,10 +610,53 @@
           $(this).addClass("actives");
         });
       });
+
+      var input = document.getElementById('togBtn_history');
+
+      input.addEventListener('change', function () {
+
+        if (this.checked) {
+          console.log("true 24")
+
+          document.getElementById("chart21").style.display = 'none';
+          document.getElementById("chart20").style.visibility = 'visible';
+
+
+
+
+
+        }
+        else {
+          console.log("flaseee")
+          document.getElementById("chart21").style.display = 'block';
+
+          document.getElementById("chart20").style.visibility = 'hidden';
+
+
+        }
+
+
+      });
+      function notes1() {
+        document.getElementById("notess1").style.display = 'none'
+      }
+      function notess1() {
+        document.getElementById("notess1").style.display = 'block'
+
+      }
+      function notes() {
+        document.getElementById("notess").style.display = 'none'
+      }
+      function notess() {
+        document.getElementById("notess").style.display = 'block'
+
+      }
     </script>
 
 
     <script src="../../static/index_one.js"></script>
+    <script src="../../static/main.js"></script>
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
     <script src='https://superal.github.io/canvas2image/canvas2image.js'></script>
 

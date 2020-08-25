@@ -1,6 +1,6 @@
 var user_name = "demo"
 function load_notes() {
-    fetch('http://takvaviya.in:8001/coolpad/notes/getallnotes/' + user_name)
+    fetch('https://takvaviya.in/coolpad_backend/notes/getallnotes/' + user_name)
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);
@@ -36,7 +36,7 @@ function Submit() {
     console.log("logged", document.getElementById("note_textt").value)
     var note = document.getElementById("note_textt").value
     const data = { "date_time": "2020-08-01", "notes": note }
-    fetch('http://takvaviya.in:8001/coolpad/notes/save/' + user_name, {
+    fetch('https://takvaviya.in/coolpad_backend/notes/save/' + user_name, {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function Note_delete(id) {
     function reqListener() {
         console.log("res", this.responseText);
     }
-    fetch('http://takvaviya.in:8001/coolpad/notes/delete/' + id + '/', {
+    fetch('https://takvaviya.in/coolpad_backend/notes/delete/' + id + '/', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',

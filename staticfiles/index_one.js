@@ -2,7 +2,8 @@
 
 var current_user;
 
-var clk_d;
+var clk_d; 
+
 
 
 
@@ -40,7 +41,7 @@ function opentab_history(evt, tabName) {
 
 function UserHistoy(option) {
 
-    fetch('http://takvaviya.in:8001/coolpad/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
@@ -50,6 +51,7 @@ function UserHistoy(option) {
             // document.getElementById("abc").innerHTML = innerdiv0
             console.log(clk_d);
             history_clk(clk_d);
+            history_clk_12hr(clk_d);
 
 
             const innerdiv = `   <p class="count-id">${dataa["Current Device ID"]}</p>`
@@ -136,7 +138,7 @@ function history_clk(clk_d){
       },
       legend: {
         labels: {
-            colors: '#fff'
+            colors: '#888ea8'
         },
     },
       dataLabels: {
@@ -151,7 +153,7 @@ function history_clk(clk_d){
         labels: {
             show: true,
             style: {
-                colors: 'white',
+                colors: '#888ea8',
                 fontSize: '14px',
             }
         },
@@ -159,7 +161,7 @@ function history_clk(clk_d){
     yaxis:{
         labels:{
             style:{
-                colors:'white',
+                colors:'#888ea8',
             }
         }
     },
@@ -173,9 +175,68 @@ function history_clk(clk_d){
       var chart = new ApexCharts(document.querySelector("#chart20"), options);
       chart.render();
 }
+function history_clk_12hr(clk_d){
+    $("#chart21").empty()
+    var options = {
+        series: [{
+        name: 'AM',
+        data: clk_d.slice(0,12)
+      }, {
+        name: 'PM',
+        data: clk_d.slice(12,24)
+      }],
+        grid:{
+            show:false
+      },
+      
+        chart: {
+         
+        height: 170,
+        type: 'area'
+      },
+      legend: {
+        labels: {
+            colors: '#888ea8'
+        },
+    },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      xaxis: {
+        type: 'string',
+        categories: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
+        labels: {
+            show: true,
+            style: {
+                colors: '#888ea8',
+                fontSize: '14px',
+            }
+        },
+    },
+    yaxis:{
+        labels:{
+            style:{
+                colors:'#888ea8',
+            }
+        }
+    },
+      tooltip: {
+        x: {
+          format:'string'
+            },
+      },
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart21"), options);
+      chart.render();
+}
+
 
 function loadUserHistoy() {
-    fetch('http://takvaviya.in:8001/coolpad/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log("ft", Object.keys(data));
@@ -208,7 +269,7 @@ function getSelectValueUserHistory() {
 
 function TeamHistoy(option) {
 
-    fetch('http://takvaviya.in:8001/coolpad/user/team_history/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
@@ -275,7 +336,7 @@ function loadTeamHistory() {
 
     // window.location.href = "http://106.51.3.224:6661/coolpad_report/team A-Team History.csv"
     // console.log("click");
-    fetch('http://takvaviya.in:8001/coolpad/user/team_history/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log("ft", Object.keys(data));
@@ -306,7 +367,7 @@ function dwnldusrpdf() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('http://takvaviya.in:8001/coolpad/user/pdf_gen/'+ user_instance +'/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/'+ user_instance +'/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -319,7 +380,7 @@ function dwnldusrpdf() {
 function dwnldusrcsv() {
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('http://takvaviya.in:8001/coolpad/user/report/'+ user_instance +'/csv/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/report/'+ user_instance +'/csv/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".csv");
@@ -333,7 +394,7 @@ function dwnldusrcsv() {
 
      // console.log("lll", localStorage.getItem('current_user'));
      var user_instance = localStorage.getItem('current_user');
-     fetch('http://takvaviya.in:8001/coolpad/user/report/'+ user_instance +'/xl/2020-08-03/2020-08-07/2020-08-04')
+     fetch('https://takvaviya.in/coolpad_backend/user/report/'+ user_instance +'/xl/2020-08-03/2020-08-07/2020-08-04')
          .then(response => response.json())
          .then(data => {
             //  console.log(data.path+".xlsx");
@@ -350,7 +411,7 @@ function dwnldtmpdf() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('http://takvaviya.in:8001/coolpad/user/pdf_gen_team/'+ user_instance +'/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/'+ user_instance +'/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -364,7 +425,7 @@ function dwnldtmcsv() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('http://takvaviya.in:8001/coolpad/user/team_report/'+ user_instance +'/csv/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/'+ user_instance +'/csv/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".csv");
@@ -378,7 +439,7 @@ function dwnldtmxlsx() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('http://takvaviya.in:8001/coolpad/user/team_report/'+ user_instance +'/xl/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/'+ user_instance +'/xl/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".xlsx");
@@ -386,3 +447,243 @@ function dwnldtmxlsx() {
         });
     }
 
+// user wise sticky notes
+
+const trigger = document.getElementById("open-modal-btn")
+const closeBtn = document.getElementById("close-modal-btn")
+const modal = document.getElementById("my-modal")
+trigger.addEventListener('click', () => {
+    modal.showModal();
+    console.log("clicked");
+});
+closeBtn.addEventListener('click', () => {
+    modal.close();
+    document.getElementById("note_textt").value = '';
+});
+function Submit1() {
+    console.log("clcikes", localStorage.getItem("current_user"));
+    console.log("logged", document.getElementById("note_textt").value)
+    var note = document.getElementById("note_textt").value
+    //TODO dynamci location 
+    const data = {
+        "user": localStorage.getItem("current_user"),
+        "date_time": "dd",
+        "zone": "a",
+        "team": "team a",
+        "location": "delhi",
+        "notes": note
+    }
+     fetch('https://takvaviya.in/coolpad_backend/user/saveEmpnote/', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            load_notes_user();
+            modal.close();
+            document.getElementById("note_textt").value = '';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            modal.close();
+        });
+}
+function load_notes_user() {
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/'+localStorage.getItem("current_user")+'/delhi')
+        .then(response => response.json())
+        .then(data => {
+            console.log("xx", data);
+            Object.keys(data).map(item => {
+                console.log("item", Object.keys(data[item]));
+                const innerdiv = Object.keys(data[item]).map(nitem => {
+                    console.log("nn", data[item][nitem].date_time)
+                    return `
+                    <div class="note_card">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div class="ndate" style='flex:5'><b>${ data[item][nitem].date_time}</b></div>
+                    <div onclick="Note_delete(${nitem})" style="color: rgb(187, 66, 66); font-size:10px;cursor: pointer;margin-right: 1rem;"><b>REMOVE</b></div>
+                    </div>
+                    <div class="nnote" id="nnote"><p style="padding-right: 40px;">${ data[item][nitem].notes}</p></div>
+                    </div>`
+                }).join(" ");
+                document.getElementById("load_notes").innerHTML = innerdiv
+                // **************************************
+                var stick_data=[];
+                var da;
+
+                console.log("thies",Object.keys(data[item]).length)
+                 Object.keys(data[item]).map(nitem => {
+                    stick_data.push(data[item][nitem].notes)
+                    da=data[item][nitem].date_time
+                         }).join(" ");
+                    // return `
+                    // <div class="note_card1">
+                    // <div style="display: flex; flex-direction: row; align-items: center;">
+                    // <div class="ndate1" style='flex:5'><b>${ data[item][nitem].date_time}</b></div>
+                    // </div>
+                    // <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
+                    // </div>`
+                    const innerdiv1 =  `
+                    <div class="note_card1">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div class="ndate1" style='flex:5'><b>${da}</b></div>
+                    </div>
+                    <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
+                    </div>`
+                                document.getElementById("load_notes1").innerHTML = innerdiv1
+
+                console.log("0000000000000000",stick_data.slice(-1)[0])
+
+            })
+        });
+}
+ load_notes_user();
+ function Note_delete(id) {
+    console.log("delete", id);
+    // fetch()
+    //     .then(response => response.json())
+    //     .then(data => console.log(data));
+    function reqListener() {
+        console.log("res", this.responseText);
+    }
+    fetch('https://takvaviya.in/coolpad_backend/user/deleteEmpnote/' + id + '/', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            load_notes_user();
+            modal.close();
+            document.getElementById("note_textt").value = '';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            modal.close();
+        });
+        load_notes_user();
+}
+// end user sticky notes
+
+
+
+
+// Team Sticky notes
+// USer  Modal
+const trigger1 = document.getElementById("open-modal-btn1")
+const closeBtn1 = document.getElementById("close-modal-btn1")
+const modal1 = document.getElementById("my-modal1")
+trigger1.addEventListener('click', () => {
+    modal1.showModal();
+    console.log("clicked");
+});
+closeBtn1.addEventListener('click', () => {
+    modal1.close();
+    document.getElementById("note_textt1").value = '';
+});
+function Submit2() {
+    console.log("clcikes", localStorage.getItem("current_team"));
+    console.log("logged", document.getElementById("note_textt1").value)
+    var note = document.getElementById("note_textt1").value
+    //TODO dynamci location 
+    const data = {
+        "team" :localStorage.getItem("current_team").toLowerCase(),
+        "date_time" :"dd",
+        "zone" :"a",
+        "location" :"ch",
+        "notes" : note
+    }
+     fetch('https://takvaviya.in/coolpad_backend/user/saveTeamnote/', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            load_notes_team();
+            modal1.close();
+            document.getElementById("note_textt1").value = '';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            modal1.close();
+        });
+}
+function load_notes_team() {
+    var a = String( localStorage.getItem("current_team").toLowerCase())
+console.log('https://takvaviya.in/coolpad_backend/user/teamallnotes/'+ a +'/ch');
+    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/'+ a +'/ch')
+        .then(response => response.json())
+        .then(data => {
+            console.log("xx", data);
+            Object.keys(data).map(item => {
+                console.log("item", Object.keys(data[item]));
+                const innerdiv = Object.keys(data[item]).map(nitem => {
+                    console.log("nn", data[item][nitem].date_time)
+                    return `
+                    <div class="note_card">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div class="ndate" style='flex:5'><b>${data[item][nitem].date_time}</b></div>
+                    <div onclick="Note_delete_team(${nitem})" style="color: rgb(187, 66, 66); font-size:10px;cursor: pointer;margin-right: 1rem;"><b>REMOVE</b></div>
+                    </div>
+                    <div class="nnote" id="nnote"><p style="padding-right: 40px;">${ data[item][nitem].notes}</p></div>
+                    </div>`
+                }).join(" ");
+                document.getElementById("load_notes_team").innerHTML = innerdiv
+                var stick_data=[];
+                var da;
+
+                console.log("thies",Object.keys(data[item]).length)
+                 Object.keys(data[item]).map(nitem => {
+                    stick_data.push(data[item][nitem].notes)
+                    da=data[item][nitem].date_time
+                         }).join(" ");
+                 
+                    const innerdiv1 =  `
+                    <div class="note_card1">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div class="ndate1" style='flex:5'><b>${da}</b></div>
+                    </div>
+                    <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
+                    </div>`
+                                document.getElementById("load_notes2").innerHTML = innerdiv1
+            })
+        });
+}
+ load_notes_team();
+ function Note_delete_team(id) {
+    console.log("delete", id);
+    // fetch()
+    //     .then(response => response.json())
+    //     .then(data => console.log(data));
+    function reqListener() {
+        console.log("res", this.responseText);
+    }
+    fetch('https://takvaviya.in/coolpad_backend/user/deleteTeamnote/' + id + '/', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            load_notes_team();
+            modal.close();
+            document.getElementById("note_textt").value = '';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            modal.close();
+        });
+        load_notes_team();
+}

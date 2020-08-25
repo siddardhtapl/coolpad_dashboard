@@ -155,7 +155,7 @@ input:focus ~ .highlight {
             var data = {"username":$("#username").val(),"password":$("#password").val()}
             $.ajax({
                           type: "POST",
-                          url: "http://takvaviya.in:8001/coolpad/auth/login/",
+                          url: "https://takvaviya.in/coolpad_backend/auth/login/",
                           dataType: 'json',
                           data: data,
                           success: function (res){
@@ -175,7 +175,6 @@ input:focus ~ .highlight {
                         });
 
         }
-
         
     </script>
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->

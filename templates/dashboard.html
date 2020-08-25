@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Coolpad</title>
+    <title>Coolpad</title>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,9 +18,16 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
         <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
 <script src="../../static/common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </head>
 
-<body onload='timerTick()'>
+<body class="body" onload='timerTick()'>
     <div class="specific">
 
         <div class="header-container fixed-top">
@@ -33,13 +40,13 @@
                     </li>-->
                     <li class="nav-item theme-text">
                         <a  class="nav-link top-logo">
-                        <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+                        <img id="img" src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
                     </li>
                 </ul>
 
                 <ul class="navbar-item flex-row ml-md-auto">
                     <li class="main-logo">
-                        <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+                        <img id="img1" src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
                     </li>
                     <li class="user-logout"  onclick="logout()">
                         <span class="logout-icon"><i class="fas fa-sign-out-alt" title="sign-out"
@@ -92,31 +99,31 @@
                             </div>
                         </li> -->
                     <li class="menu">
-                            <a href="../dashboard" class="actives"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
+                            <a href="../dashboard" class="actives" class="menuu"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
                                 </span>Dashboard</a>
                         </li>
                          <li class="menu">
-                            <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent" aria-hidden="true"></i>
+                            <a class="menuu" href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent" aria-hidden="true"></i>
                                 </span>History Dashboard</a>
                         </li>
                          <li class="menu">
-                            <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
+                            <a class="menuu" href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
                                 </span>Contact Tracing</a>
                         </li>
                         <li class="menu">
-                            <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
+                            <a class="menuu" href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
                                 </span>Share</a>
                         </li>
                         <li class="menu">
-                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                            <a class="menuu" href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
                                 </span>Email</a>
                         </li>
                         <li class="menu">
-                            <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                            <a class="menuu" href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
                                 </span>Add User</a>
                         </li>
                         <li class="menu">
-                            <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
+                            <a class="menuu" href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
                                         aria-hidden="true"></i>
                                 </span>Notes</a>
                         </li>
@@ -136,6 +143,11 @@
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab(event, 'daily')"><b>Daily Tracker</b></button>
                         <button class="tablinks " onclick="opentab(event, 'weekly')"><b>Weekly Tracker</b></button>
+                            <label class="switch1">
+                                <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
+                                <span class="slider1 round1"></span>
+                              </label>
+                        
                     </div>
 
                     <!--Daily-->
@@ -148,18 +160,18 @@
                                     <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one-contact">
                                             <span class="fa fa-users user-his-cnt fa-3x "style="font-size:80px;padding-right:20px" aria-hidden="true"></span>
-                                            <p>Total no of contact </p>
+                                            <p class="para">Total no of contact </p>
                                             <div id="totalnocontact"></div>
                                         </div>
                                         <div class="widget widget-chart-one-history mt-4">
-                                            <p>Top Contact History (Top 5)</p>
+                                            <p class="para">Top Contact History (Top 5)</p>
                                             <div id="chart9"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one">
-                                            <div style="display:flex;flex-direction: row;"><p style="flex:5;">Hour Tracker (No of Contacts)</p>
+                                            <div style="display:flex;flex-direction: row;color: #888ea8;"><p style="flex:5;" class="para">Hour Tracker (No of Contacts)</p>
                                                 <div >
                                                 <label class="switch">
                                                     <input type="checkbox" id="togBtn">
@@ -301,27 +313,40 @@
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-two">
-                                            <p>Contact Frequency</p>
+                                            <p class="para">Contact Frequency</p>
                                             <select name="Teams" id="team_select" onchange="getSelectValue()"></select>
-                                            <table style="  width:100%;" id="contact_frequency"></table>
+                                            <table style="  width:100%; color: #888ea8;" id="contact_frequency"></table>
                                             <!--            <table style="width:100%;" id="contact_frequency_weekly"></table>-->
                                         </div>
                                     </div>
+                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                        <div class="widget widget-chart-two">
+                                            <p class="para">Contact Frequency</p>
+                                            <div class="dropdown">
+                                                <button id="teamDropDownButton" class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown"> Team A
+                                                  <span class="caret"></span></button>
+                                                <ul id="teamDropDown" class="dropdown-menu">
+                                                </ul>
+                                              </div>
+                                              <div id="chart"></div>
 
+                                            
+                                        </div>
+                                    </div>
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one">
                                             <!-- <p>No of user on</p> -->
-                                            <p>User Status</p>
+                                            <p class="para">User Status</p>
                                             <div class="table_container_user_status">
                                                 <div class="row_user_status">
-                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>S.No</b>
+                                                    <div style="flex:1;color: #718093;font-size: 14px;"><b>S.No</b>
                                                     </div>
-                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>User</b>
+                                                    <div style="flex:1;color: #718093;font-size: 14px;"><b>User</b>
                                                     </div>
-                                                    <div style="flex:3;color: #dedede;font-size: 14px;"><b>Device Id</b>
+                                                    <div style="flex:3;color: #718093;font-size: 14px;"><b>Device Id</b>
                                                     </div>
-                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>Status</b>
+                                                    <div style="flex:1;color: #718093;font-size: 14px;"><b>Status</b>
                                                     </div>
                                                 </div>
                                                 <div class="table_body" id="user_status">
@@ -332,19 +357,19 @@
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing;">
                                         <div class="widget widget-chart-one">
-                                            <p>Users in contact (Live)</p>
+                                            <p class="para">Users in contact (Live)</p>
 
                                             <div class="table_container_user_status">
                                                 <div class="row_user_status">
-                                                    <div style="flex:1;color: #dedede;font-size: 14px;"><b>S.No</b>
+                                                    <div style="flex:1;color: #718093;font-size: 14px;"><b>S.No</b>
                                                     </div>
-                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Local</b>
+                                                    <div style="flex:2;color: #718093;font-size: 14px;"><b>Local</b>
                                                     </div>
-                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Remote</b>
+                                                    <div style="flex:2;color: #718093;font-size: 14px;"><b>Remote</b>
                                                     </div>
-                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Duration</b>
+                                                    <div style="flex:2;color: #718093;font-size: 14px;"><b>Duration</b>
                                                     </div>
-                                                    <div style="flex:2;color: #dedede;font-size: 14px;"><b>Average
+                                                    <div style="flex:2;color: #718093;font-size: 14px;"><b>Average
                                                             Distance</b></div>
                                                 </div>
                                                 <div class="table_body" id="live_contact">
@@ -355,12 +380,12 @@
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one">
-                                            <p>Contact History</p>
+                                            <p class="para">Contact History</p>
                                             <div class="contact_history_container">
                                                 <div class="contact_history_header">
-                                                    <div style="flex:1"><b>S.No</b></div>
-                                                    <div style="flex:1;margin-right:145px;"><b>User-Pair</b></div>
-                                                    <div style="flex:1"><b>Number of Contacts</b></div>
+                                                    <div style="flex:1;color: #718093;"><b>S.No</b></div>
+                                                    <div style="flex:1;margin-right:145px;color: #718093;"><b>User-Pair</b></div>
+                                                    <div style="flex:1;color: #718093;"><b>Number of Contacts</b></div>
                                                 </div>
                                                 <div class="table_body" id="contact_history">
                                                 </div>
@@ -383,7 +408,7 @@
                                     <div class="widget widget-chart-one-contact">
                                         <span class="fa fa-users user-his-cnt fa-3x "
                                             style="font-size:80px;padding-right:20px" aria-hidden="true"></span>
-                                        <p>Total no of contact </p>
+                                        <p class="para">Total no of contact </p>
                                         <div id="totalnocontact_weekly"></div>
                                     </div>
                                 </div>
@@ -391,13 +416,13 @@
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing"
                                         style="margin-bottom: 10px;">
                                         <div class="widget widget-chart-one">
-                                            <p>Weekly Team Tracker</p>
+                                            <p class="para">Weekly Team Tracker</p>
                                             <div id="chart7"></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-twoo">
-                                            <p>Contact Frequency</p>
+                                            <p class="para">Contact Frequency</p>
                                             <select name="Teams" id="team_select_weekly"
                                                 onchange="getSelectValueweekly()"></select>
                                             <table style="width:100%;" id="contact_frequency_weekly"></table>
@@ -406,20 +431,35 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                    <div class="widget widget-chart-twoo">
+                                        <p class="para">Contact Frequency</p>
+                                        <div class="dropdown">
+                                            <button id="teamDropDownButton1" class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown"> Team A
+                                              <span class="caret"></span></button>
+                                            <ul id="teamDropDown1" class="dropdown-menu">
+                                            </ul>
+                                          </div>
+                                          <div id="chart1"></div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                     <div class="widget widget-chart-one">
-                                        <p>Top Contact History (Top 5) </p>
+                                        <p class="para">Top Contact History (Top 5) </p>
                                         <div id="chart5"></div>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                     <div class="widget widget-chart-one">
-                                        <p>Contact History All</p>
+                                        <p class="para">Contact History All</p>
                                         <div class="contact_history_container">
                                             <div class="contact_history_header">
-                                                <div style="flex:1"><b>S.No</b></div>
-                                                <div style="flex:2"><b>User-Pair</b></div>
-                                                <div style="flex:1"><b>Number of Contacts</b></div>
+                                                <div style="flex:1;color: #718093;"><b>S.No</b></div>
+                                                <div style="flex:2;color: #718093;"><b>User-Pair</b></div>
+                                                <div style="flex:1;color: #718093;"><b>Number of Contacts</b></div>
                                             </div>
                                             <div class="table_body" id="contact_history_weekly">
                                             </div>
@@ -428,13 +468,12 @@
                                 </div>
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                     <div class="widget widget-chart-one">
-                                        <p>Weekly clock </p>
+                                        <p class="para">Weekly clock </p>
                                         <div id="chart11"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                            </div>
+                            
                             <div class="row">
                             </div>
                         </div>
@@ -453,7 +492,7 @@
 
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
-                    <p class="">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
+                    <p class="para">Copyright © 2020 <a target="_blank" href="#">Takvaviya</a>, All rights reserved.</p>
                 </div>
             </div>
         </div>

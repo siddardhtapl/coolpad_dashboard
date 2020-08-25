@@ -152,28 +152,6 @@ text-transform:capitalize;
 .all_third_pair table {
     width: 755px;
 }
-
-.tooltip1 {
-position:relative;
-  border-bottom: 1px dotted black;
-}
-.tooltip1 .tooltiptext1 {
-  visibility: hidden;
-  width: 180px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: -80%;
-  left: 40%;
-  margin-left: -60px;
-}
-.tooltip1:hover .tooltiptext1 {
-  visibility: visible;
-}
 /*3rd screen css code end Arul 07.08.2020*/
 </style>
 </head>
@@ -362,7 +340,7 @@ position:relative;
                                     <td>Doe</td>
                                     <td>john@example.com</td>
                                     <td>John</td>
-                                    <td>Doe</td
+                                    <td>Doe</td>
                                     <td>john@example.com</td>
                                   </tr>
                                   <tr>
@@ -415,10 +393,6 @@ position:relative;
         
         
         <script>
-
-           $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
             function opentab_history(evt, tabName) {
             // Declare all variables
             var i, tabcontent, tablinks;
@@ -471,8 +445,8 @@ position:relative;
             $('#all_third_pair').empty();
             append_data +='<table class="table table-bordered"><thead><tr><th colspan="10" style="text-align: center">Persons in Direct Contact</th></tr><tr>';
             for(var i in response[0][e]){
-            var c_date = response[0][e][i]['Date'].split("T");
-            append_data +="<th class='capi-text tooltip1' colspan = '2' style='text-align:center'>"+i+"<span class='tooltiptext1'>"+c_date[0]+" / "+c_date[1]+"</span></th>";
+            console.log(i);
+            append_data +="<th class='capi-text' colspan = '2' style='text-align:center'>"+i+"</th>";
             }
             append_data +='</tr><tr>'
             for(var i in response[0][e]){
@@ -495,10 +469,8 @@ position:relative;
             append_third+='<div class="in-table"><table><tr>';
 
                 for(var t in dir_pair)
-                {
-                console.log(t, dir_pair[t]);
-                var c_date = dir_pair[t]['Date'].split("T");
-                append_third+='<th class="text-center capi-text tooltip1" colspan="2" style="text-align:center;">'+t+'<span class="tooltiptext1">'+c_date[0]+' / '+c_date[1]+'</span></th>';
+                {console.log(t, dir_pair[t]);
+                 append_third+='<th class="text-center capi-text" colspan="2" style="text-align:center;">'+t+'</th>';
                 }
                 append_third +='</tr><tr>';
                 for(var t in dir_pair)

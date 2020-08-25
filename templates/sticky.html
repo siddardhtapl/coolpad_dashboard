@@ -17,12 +17,13 @@
     <script data-require="moment.js@2.10.2" data-semver="2.10.2"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="../../static/common.js"></script>
-        <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
 
+        <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+ 
 </head>
 
 
-<body>
+<body class="body">
     <div class="specific">
         <div class="header-container fixed-top">
             <header class="header navbar navbar-expand-sm">
@@ -34,12 +35,12 @@
                     </li> -->
                     <li class="nav-item theme-text">
                         <a  class="nav-link top-logo">
-                        <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+                        <img id="img" src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
                     </li>
                 </ul>
                 <ul class="navbar-item flex-row ml-md-auto">
                     <li class="main-logo">
-                        <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+                        <img id="img1" src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
                     </li>
                     <li class="user-logout" >
                         <span class="logout-icon" onclick="logout()"><i class="fas fa-sign-out-alt" title="sign-out"
@@ -66,31 +67,31 @@
                     <ul class="list-unstyled menu-categories ps" id="accordionExample">
 
                                             <li class="menu">
-                            <a href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
+                            <a href="../dashboard" class="menuu"><span class="side-menu-icon"><i class="fa fa-line-chart" aria-hidden="true"></i>
                                 </span>Dashboard</a>
                         </li>
                          <li class="menu">
-                            <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent" aria-hidden="true"></i>
+                            <a href="../history_dashboard" class="menuu"><span class="side-menu-icon"><i class="fa fa-dedent" aria-hidden="true"></i>
                                 </span>History Dashboard</a>
                         </li>
                          <li class="menu">
-                            <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
+                            <a href="../contact" class="menuu"><span class="side-menu-icon"><i class="fa fa-address-book" aria-hidden="true"></i>
                                 </span>Contact Tracing</a>
                         </li>
                         <li class="menu">
-                            <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
+                            <a href="#" onclick="share()" class="menuu"><span class="side-menu-icon"><i class="fa fa-share-alt" aria-hidden="true"></i>
                                 </span>Share</a>
                         </li>
                         <li class="menu">
-                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                            <a href="#" class="menuu"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
                                 </span>Email</a>
                         </li>
                         <li class="menu">
-                            <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                            <a href="../adduser" class="menuu"><span class="side-menu-icon"><i class="fa fa-user-plus" aria-hidden="true"></i>
                                 </span>Add User</a>
                         </li>
                         <li class="menu">
-                            <a href="../stickynotes" class="actives"><span class="side-menu-icon"><i class="far fa-file-alt"
+                            <a href="../stickynotes" class="actives" class="menuu"><span class="side-menu-icon"><i class="far fa-file-alt"
                                         aria-hidden="true"></i>
                                 </span>Notes</a>
                         </li>
@@ -105,19 +106,21 @@
             </div>
 
             <div id="content" class="main-content">
-               
+                <label class="switch1">
+                    <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
+                    <span class="slider1 round1"></span>
+                  </label>
       
              
                 <div class="layout-px-spacing" style=" display: flex;  margin-left:100px; flex-direction: column;">
                   
-                    <button id="open-modal-btn" style="width: 100px;margin-left: 1rem;"  class='ph-button ph-btn-blue'> Add Note</button>
+                    <button id="open-modal-btn" style="width: 100px;margin-left: 1rem;"  class='ph-button ph-btn-blue mt-5'> Add Note</button>
                     <div class="scontainer" id="load_notes">
 
-                         <div class="note_card">
+                         <!-- <div class="note_card">
                             <div class="ndate"><b>12-08-2020</b></div>
                             <div class="nnote" id="nnote"><p style="padding-right: 40px;"></p></div>
-                            <!-- <button>delete</button> -->
-                        </div> 
+                        </div>  -->
                         
                     </div>
 
@@ -134,7 +137,6 @@
         </div>
     </div>
 
-    <script src="../../static/sticky.js"></script>
 <script>
         $(document).ready(function(){
 $('ul li a').click(function(){
@@ -143,6 +145,8 @@ $(this).addClass("actives");
 });
 });
     </script>
+        <script src="../../static/sticky.js"></script>
+
 
 </body>
 

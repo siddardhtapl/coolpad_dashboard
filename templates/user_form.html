@@ -19,7 +19,9 @@
     <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="../../static/common.js"></script>
 
+ 
     <style>
         body {
             color: #566787;
@@ -43,7 +45,8 @@
         .table-title {
             padding-bottom: 15px;
             background: #1A1C2D;
-            color: #fff;
+           /* color: #fff; */
+            color : #718093;
             padding: 16px 30px;
             margin: -20px -25px 0px;
             border-radius: 3px 3px 0 0;
@@ -116,7 +119,8 @@
         }
 
         .coolpad-table tr {
-            color: white;
+            /* color: #fff; */
+            color : #718093;
             text-transform: capitalize;
 
         }
@@ -129,7 +133,8 @@
 
         table.table td a {
             /*font-weight: bold;*/
-            color: #fff !important;
+           /* color: #fff; */
+           color : #718093;
             display: inline-block;
             text-decoration: none;
         }
@@ -263,7 +268,7 @@
 
 </head>
 
-<body>
+<body class="body">
     <div class="specific">
 
         <div class="header-container fixed-top">
@@ -276,13 +281,13 @@
                     </li> -->
                     <li class="nav-item theme-text">
                         <a class="nav-link top-logo">
-                            <img src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+                            <img id="img" src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
                     </li>
                 </ul>
 
                 <ul class="navbar-item flex-row ml-md-auto">
                     <li class="main-logo">
-                        <img src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+                        <img id="img1" src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
                     </li>
                     <li class="user-logout">
                         <span class="logout-icon" onclick="logout()"><i class="fas fa-sign-out-alt" title="sign-out"
@@ -335,36 +340,36 @@
                             </div>
                         </li> -->
                         <li class="menu">
-                            <a href="../dashboard"><span class="side-menu-icon"><i class="fa fa-line-chart"
+                            <a href="../dashboard" class="menuu"><span class="side-menu-icon"><i class="fa fa-line-chart"
                                         aria-hidden="true"></i>
                                 </span>Dashboard</a>
                         </li>
                         <li class="menu">
-                            <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent"
+                            <a href="../history_dashboard" class="menuu"><span class="side-menu-icon"><i class="fa fa-dedent"
                                         aria-hidden="true"></i>
                                 </span>History Dashboard</a>
                         </li>
                         <li class="menu">
-                            <a href="../contact"><span class="side-menu-icon"><i class="fa fa-address-book"
+                            <a href="../contact" class="menuu"><span class="side-menu-icon"><i class="fa fa-address-book"
                                         aria-hidden="true"></i>
                                 </span>Contact Tracing</a>
                         </li>
-                        <li class="menu">
-                            <a href="#" onclick="share()"><span class="side-menu-icon"><i class="fa fa-share-alt"
+                        <li class="menu" >
+                            <a href="#" onclick="share()" class="menuu"><span class="side-menu-icon"><i class="fa fa-share-alt"
                                         aria-hidden="true"></i>
                                 </span>Share</a>
                         </li>
                         <li class="menu">
-                            <a href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                            <a href="#" class="menuu"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
                                 </span>Email</a>
                         </li>
                         <li class="menu">
-                            <a href="../adduser" class="actives"><span class="side-menu-icon"><i class="fa fa-user-plus"
+                            <a href="../adduser" class="actives" class="menuu"><span class="side-menu-icon"><i class="fa fa-user-plus"
                                         aria-hidden="true"></i>
                                 </span>Add User</a>
                         </li>
                         <li class="menu">
-                            <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
+                            <a href="../stickynotes" class="menuu"><span class="side-menu-icon"><i class="far fa-file-alt"
                                         aria-hidden="true"></i>
                                 </span>Notes</a>
                         </li>
@@ -379,63 +384,68 @@
             </div>
 
             <div id="content" class="main-content">
-
+                <label class="switch1">
+                    <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
+                    <span class="slider1 round1"></span>
+                  </label>
                 <div class="layout-px-spacing">
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab1(event, 'daily')"><b>Add User</b></button>
                         <button class="tablinks " onclick="opentab1(event, 'weekly')"><b>Edit User</b></button>
+                        <button class="tablinks " onclick="opentab1(event, 'oultliers')"><b>Outliers</b></button>
+
                     </div>
                     <div id="daily" class="tabcontent" style="display: block;">
-                    <div class="container add-user mt-5">
-                        <div class="row mb-4">
-                            <h3>Add User Details</h3>
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Employee name</label>
-                            <input type="text" class="form-control" placeholder="Employee name" id="emp_name">
-                        </div>
+                        <div class="container add-user mt-5">
+                            <div class="row mb-4">
+                                <h3 style="font-weight: 600;">Add User Details</h3>
+                            </div>
+                            <div class="form-group">
+                                <label for="text" class="text_style">Employee name</label>
+                                <input type="text" class="form-control" placeholder="Employee name" id="emp_name">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="text">Employee Id</label>
-                            <input type="number" class="form-control" placeholder="Employee Id" id="emp_id">
-                        </div>
+                            <div class="form-group">
+                                <label for="text" class="text_style">Employee Id</label>
+                                <input type="number" class="form-control" placeholder="Employee Id" id="emp_id">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="text">Device Id</label>
-                            <input type="number" class="form-control" placeholder="Device Id" id="device_id">
-                        </div>
+                            <div class="form-group">
+                                <label for="text" class="text_style">Device Id</label>
+                                <input type="number" class="form-control" placeholder="Device Id" id="device_id">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="text">Location</label>
-                            <input type="text" class="form-control" placeholder="Location" id="location">
-                        </div>
+                            <div class="form-group">
+                                <label for="text" class="text_style">Location</label>
+                                <input type="text" class="form-control" placeholder="Location" id="location">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="text">Zone</label>
-                            <input type="text" class="form-control" placeholder="Zone" id="zone">
-                        </div>
+                            <div class="form-group">
+                                <label for="text" class="text_style">Zone</label>
+                                <input type="text" class="form-control" placeholder="Zone" id="zone">
+                            </div>
 
-                        <div class="form-group team-drop-value">
-                            <label for="role">Team</label>
-                            <select class="form-control" id="team1">
-                                <option>select</option>
-                                <option>Team A</option>
-                                <option>Team B</option>
-                                <option>Team C</option>
-                                <option>Team D</option>
-                            </select>
-                        </div>
+                            <div class="form-group team-drop-value">
+                                <label for="role" class="text_style">Team</label>
+                                <select class="form-control" id="team">
+                                    <option>select</option>
+                                    <option>Team A</option>
+                                    <option>Team B</option>
+                                    <option>Team C</option>
+                                    <option>Team D</option>
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="text">Company</label>
-                            <input type="text" class="form-control" placeholder="Company" id="company">
-                        </div>
+                            <div class="form-group">
+                                <label for="text" class="text_style">Company</label>
+                                <input type="text" class="form-control" placeholder="Company" id="company">
+                            </div>
 
-                        <div class="mt-5 mb-5">
-                            <button  class="btn btn-outline-primary user-submit"
-                                onclick="submit()">Submit</button>
+                            <div class="mt-5 mb-5">
+                                <button type="submit" class="btn btn-outline-primary user-submit"
+                                    onclick="submit()">Submit</button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div id="weekly" class="tabcontent" style="display: none;">
                         <div class="container-xl">
@@ -448,16 +458,18 @@
                                         </div> -->
                                             <div class="col-sm-4 top-search-box">
                                                 <div class="input-group mb-2">
-                                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="">
+                                                    <input type="text" class="form-control" placeholder="Search ..."
+                                                        aria-label="">
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                                        <span class="input-group-text"><i
+                                                                class="fa fa-search"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <table class="table table-striped coolpad-table table-hover">
-                                        <thead align="center">
+                                        <thead>
                                             <tr>
                                                 <th>Emp name</th>
                                                 <th>Emp ID</th>
@@ -467,7 +479,7 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="user_list" align="left">
+                                        <tbody id="user_list">
                                         </tbody>
                                     </table>
                                 </div>
@@ -476,13 +488,13 @@
                         <div class="modal" id="myModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                    
+
                                     <!-- Modal Header -->
                                     <div class="modal-header">
                                         <h4 class="modal-title">Edit Form Details</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
-                    
+
                                     <!-- Modal body -->
                                     <div class="modal-body edit-modal-form">
                                         <div class="col-12">
@@ -493,26 +505,27 @@
                                                         Device ID
                                                     </label>
                                                 </div>
-                    
+
                                                 <div class="col-6">
                                                     <label for="team">
                                                         <input type="checkbox" id="team" />
                                                         Team
                                                     </label>
                                                 </div>
-                    
+
                                             </div>
                                         </div>
-                    
-                    
+
+
                                         <hr />
                                         <div id="dvPassport" style="display: none">
                                             <div class="form-group">
                                                 <label>Device ID</label>
-                                                <input type="text" class="form-control" placeholder="Device ID" id="modal_did">
+                                                <input type="text" class="form-control" placeholder="Device ID"
+                                                    id="modal_did">
                                             </div>
                                         </div>
-                    
+
                                         <div id="team-cnt" style="display: none">
                                             <label>Team</label>
                                             <div class="form-group">
@@ -525,20 +538,50 @@
                                                 </select>
                                             </div>
                                         </div>
-                    
+
                                     </div>
-                    
+
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="save()">Save</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            onclick="save()">Save</button>
+                                        <button type="button" class="btn btn-danger"
+                                            data-dismiss="modal">Cancel</button>
                                     </div>
-                    
+
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
+                    <div id="oultliers" class="tabcontent" style="display: none;">
+                        <div id="out" class="gri mt-5"></div>  
+
+                            <!-- <div class="center">
+
+                                <div class="profile">
+                                    <div class="image">
+                                        <div class="circle-1"></div>
+                                        <div class="circle-2"></div>
+                                        <img src="https://static.thenounproject.com/png/19085-200.png" width="100"
+                                            height="100" alt="Jessica Potter">
+                                    </div>
+
+                                </div>
+
+                                <div class="stats">
+                                    <div class="box">
+                                        <span class="value">523</span>
+                                        <span class="parameter">NAME</span>
+                                    </div>
+                                    <div class="box">
+                                        <span class="value">1387</span>
+                                        <span class="parameter">COUNT</span>
+                                    </div>
+
+                                </div>
+                            </div> -->
+                        </div>
                 </div>
 
             </div>
@@ -554,9 +597,9 @@
 
 
 
-<!--    <script src="../../static/main.js"></script>-->
+    <script src="main.js"></script>
     <script>
-        
+
         // Add User Submit
 
         function submit() {
@@ -566,7 +609,7 @@
             document.getElementById("device_id").value
             document.getElementById("location").value
             document.getElementById("zone").value
-            document.getElementById("team1").value
+            document.getElementById("team").value
             document.getElementById("company").value
 
 
@@ -578,47 +621,49 @@
                 "locations": document.getElementById("location").value,
                 "company": document.getElementById("company").value,
                 "zone": document.getElementById("zone").value,
-                "team": document.getElementById("team1").value,
+                "team": document.getElementById("team").value,
                 "group": "default"
             }
-            console.log(obj)
 
-            $.ajax({
-                          type: "POST",
-                          url: "http://takvaviya.in:8001/coolpad/user/create/",
-                          dataType: 'json',
-                          data: obj,
-                          success: function (res){
-                          console.log('Success:', res);
-                            alert("User created successfully")
-                          }
-                          });
-
-
-}
-   </script>
+            fetch('https://takvaviya.in/coolpad_backend/user/create/', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(obj),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert("User created successfully")
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
     <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
     <script src='https://superal.github.io/canvas2image/canvas2image.js'></script> -->
     <script>
-$(function () {
-    $("#chkPassport").click(function () {
-        if ($(this).is(":checked")) {
-            $("#dvPassport").show();
-        } else {
-            $("#dvPassport").hide();
-        }
-    });
-});
+        $(function () {
+            $("#chkPassport").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#dvPassport").show();
+                } else {
+                    $("#dvPassport").hide();
+                }
+            });
+        });
 
-$(function () {
-    $("#team").click(function () {
-        if ($(this).is(":checked")) {
-            $("#team-cnt").show();
-        } else {
-            $("#team-cnt").hide();
-        }
-    });
-});
+        $(function () {
+            $("#team").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#team-cnt").show();
+                } else {
+                    $("#team-cnt").hide();
+                }
+            });
+        });
 
 
 
@@ -629,27 +674,27 @@ $(function () {
             });
         });
         function opentab1(evt, tabName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
+            // Declare all variables
+            var i, tabcontent, tablinks;
 
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
 
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
 
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
     </script>
-        <script src="../../static/common.js"></script>
 
 </body>
+
 </html>
