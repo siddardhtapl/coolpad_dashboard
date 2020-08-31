@@ -1,15 +1,19 @@
+
+// heat
+
+
+
 //Global Declartions
 
 var current_user;
 
-var clk_d; 
+var clk_d;
 
 
 
 
-if(!localStorage.getItem("session"))
-{
-window.location.href="../login";
+if (!localStorage.getItem("session")) {
+    window.location.href = "../login";
 }
 //tab controls
 
@@ -44,10 +48,24 @@ function UserHistoy(option) {
     fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
+            // $("#contact_trace_day").fnDestroy();
+            // $("#contact_trace_wee").fnDestroy();
+
             dataa = data[option];
-            
+            dataa_w = data[option];
+            keys = []
+            values = []
+            duration = []
+            obj = {}
+            m=1
+            keys_w = []
+            values_w = []
+            duration_w = []
+            obj_w = {}
+            m_w=1
+
             clk_d = dataa["24_hr_clock"]
-            const innerdiv0 = `   <p class="count-id">${clk_d}</p>`            
+            const innerdiv0 = `   <p class="count-id">${clk_d}</p>`
             // document.getElementById("abc").innerHTML = innerdiv0
             console.log(clk_d);
             history_clk(clk_d);
@@ -68,170 +86,219 @@ function UserHistoy(option) {
 
             const innerdiv4 = `   <p class="count-id">${dataa["Max Contact Duration Week"]}</p>`
             document.getElementById("hcdw").innerHTML = innerdiv4
-           
-            var d = 0;
-            const innerdiv5 = Object.keys(dataa["Contact History Day"]).map(item => {
-
-                d = d + 1;
-                // console.log(dataa["24_hr_clock"])
-
-                // console.log("ssd", item);
-                return `<div class="row_user_status">
-                    <div style="flex:1"><b>${d}</b></div>
-                    <div style="flex:1"><b class="capi-text">${item}</b></div>
-                    <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
-                    <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
-                  </div>`
-
-            }).join(" ");
-            document.getElementById("contact_history_day").innerHTML = innerdiv5
-
-            // const innerdiv15 = Object.keys(dataa["24_hr_clock"]).map(item => {
-            //     console.log(dataa["24_hr_clock"])
-            //     // console.log("ssd", item);
-                
-            // }).join(" ");
 
 
+            Object.keys(dataa["Contact History Day"]).map(item => { keys.push(item) })
+            //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
+            Object.keys(dataa["Contact History Day"]).map(item => {
+                values.push(dataa["Contact History Day"][item]["count"]);
+            })
+            Object.keys(dataa["Contact History Day"]).map(item => {
+                duration.push(dataa["Contact History Day"][item]["max_duration"]);
+            })
+            console.log("i", keys)
+            console.log("ii", duration)
+            for (var i = 0; i < keys.length; i++) {
+                obj[i] = { "sno":i+1,"pair": keys[i], "count": values[i], "duration": duration[i] };
+                console.log(i)
+            }
+            console.log("obj", Object.values(obj))
+            dataa = Object.values(obj)
+            $('#contact_trace_day').DataTable({
+                "searching": false,
+              "info": false,
+              "bLengthChange": false,
+              "bDestroy": true,
+                data: dataa, "columns": [{"data":"sno"},{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+                   
+            });
+            
 
-            var c = 0;
-            const innerdiv6 = Object.keys(dataa["Contact History Day"]).map(item => {
-                c = c + 1;
-                // console.log("ssd", item);
-                return `<div class="row_user_status">
-                    <div style="flex:1"><b>${c}</b></div>
-                    <div style="flex:1"><b class="capi-text">${item}</b></div>
-                    <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
-                    <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
-                  </div>`
 
-            }).join(" ");
+            Object.keys(dataa_w["Contact History Day"]).map(item => { keys_w.push(item) })
+            //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
+            Object.keys(dataa_w["Contact History Day"]).map(item => {
+                values_w.push(dataa_w["Contact History Day"][item]["count"]);
+            })
+            Object.keys(dataa_w["Contact History Day"]).map(item => {
+                duration_w.push(dataa_w["Contact History Day"][item]["max_duration"]);
+            })
+            console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+            console.log("ii", duration_w)
+            for (var i = 0; i < keys_w.length; i++) {
+                obj[i] = {"sno":i+1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
+                console.log(i)
+            }
+            console.log("obj", Object.values(obj))
+            dataa = Object.values(obj)
+            $('#contact_trace_wee').DataTable({
+                "searching": false,
+              "info": false,
+              "bLengthChange": false,
+              "bDestroy": true,
+                data: dataa, "columns": [{"data":"sno"},{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+            });
+            
+    // var d = 0;
+    // const innerdiv5 = Object.keys(dataa["Contact History Day"]).map(item => {
 
-         
+    //     d = d + 1;
+    //     // console.log(dataa["24_hr_clock"])
 
-            document.getElementById("contact_history_week").innerHTML = innerdiv6
+    //     // console.log("ssd", item);
+    //     return `<div class="row_user_status">
+    //         <div style="flex:1"><b>${d}</b></div>
+    //         <div style="flex:1"><b class="capi-text">${item}</b></div>
+    //         <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
+    //         <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
+    //       </div>`
+
+    // }).join(" ");
+    // document.getElementById("contact_history_day").innerHTML = innerdiv5
+
+    // const innerdiv15 = Object.keys(dataa["24_hr_clock"]).map(item => {
+    //     console.log(dataa["24_hr_clock"])
+    //     // console.log("ssd", item);
+
+    // }).join(" ");
+
+
+
+    // var c = 0;
+    // const innerdiv6 = Object.keys(dataa["Contact History Day"]).map(item => {
+    //     c = c + 1;
+    //     // console.log("ssd", item);
+    //     return `<div class="row_user_status">
+    //                 <div style="flex:1"><b>${c}</b></div>
+    //                 <div style="flex:1"><b class="capi-text">${item}</b></div>
+    //                 <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
+    //                 <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
+    //               </div>`
+
+    // }).join(" ");
+
+
+
+    // document.getElementById("contact_history_week").innerHTML = innerdiv6
 
 
 
 
-        })
+})
 
 }
-function history_clk(clk_d){
+function history_clk(clk_d) {
     $("#chart20").empty()
     var options = {
         series: [{
-        name: 'AM',
-        data: clk_d
-      }, {
-        // name: 'PM',
-        // data: clk_d.slice(12,24)
-      }],
-        grid:{
-            show:false
-      },
-      
-        chart: {
-         
-        height: 180,
-        type: 'area'
-      },
-      legend: {
-        labels: {
-            colors: '#888ea8'
+            name: 'Data',
+            data: clk_d
+        }],
+        grid: {
+            show: false
         },
-    },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      xaxis: {
-        type: 'string',
-        categories: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
-        labels: {
-            show: true,
-            style: {
-                colors: '#888ea8',
-                fontSize: '14px',
-            }
-        },
-    },
-    yaxis:{
-        labels:{
-            style:{
-                colors:'#888ea8',
-            }
-        }
-    },
-      tooltip: {
-        x: {
-          format:'string'
-            },
-      },
-      };
 
-      var chart = new ApexCharts(document.querySelector("#chart20"), options);
-      chart.render();
+        chart: {
+
+            height: 180,
+            type: 'area'
+        },
+        legend: {
+            labels: {
+                colors: '#888ea8'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'string',
+            categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+            labels: {
+                show: true,
+                style: {
+                    colors: '#888ea8',
+                    fontSize: '14px',
+                }
+            },
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: '#888ea8',
+                }
+            }
+        },
+        tooltip: {
+            x: {
+                format: 'string'
+            },
+        },
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart20"), options);
+    chart.render();
 }
-function history_clk_12hr(clk_d){
+function history_clk_12hr(clk_d) {
     $("#chart21").empty()
     var options = {
         series: [{
-        name: 'AM',
-        data: clk_d.slice(0,12)
-      }, {
-        name: 'PM',
-        data: clk_d.slice(12,24)
-      }],
-        grid:{
-            show:false
-      },
-      
-        chart: {
-         
-        height: 170,
-        type: 'area'
-      },
-      legend: {
-        labels: {
-            colors: '#888ea8'
+            name: 'AM',
+            data: clk_d.slice(0, 12)
+        }, {
+            name: 'PM',
+            data: clk_d.slice(12, 24)
+        }],
+        grid: {
+            show: false
         },
-    },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      xaxis: {
-        type: 'string',
-        categories: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
-        labels: {
-            show: true,
-            style: {
-                colors: '#888ea8',
-                fontSize: '14px',
-            }
-        },
-    },
-    yaxis:{
-        labels:{
-            style:{
-                colors:'#888ea8',
-            }
-        }
-    },
-      tooltip: {
-        x: {
-          format:'string'
-            },
-      },
-      };
 
-      var chart = new ApexCharts(document.querySelector("#chart21"), options);
-      chart.render();
+        chart: {
+
+            height: 170,
+            type: 'area'
+        },
+        legend: {
+            labels: {
+                colors: '#888ea8'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'string',
+            categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+            labels: {
+                show: true,
+                style: {
+                    colors: '#888ea8',
+                    fontSize: '14px',
+                }
+            },
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: '#888ea8',
+                }
+            }
+        },
+        tooltip: {
+            x: {
+                format: 'string'
+            },
+        },
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart21"), options);
+    chart.render();
 }
 
 
@@ -268,11 +335,22 @@ function getSelectValueUserHistory() {
 // Team history
 
 function TeamHistoy(option) {
+    keys = []
+      values = []
+      duration = []
+      obj = {}
+
+      keys_w = []
+      values_w = []
+      duration_w = []
+      obj_w = {}
 
     fetch('https://takvaviya.in/coolpad_backend/user/team_history/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
+            dataa_ww = data[option];
+
             // console.log("k", dataa["Users in Contact"]);
 
             const innerdiv = `   <p class="count-id">${dataa["Users in Contact"]}</p>`
@@ -290,37 +368,68 @@ function TeamHistoy(option) {
             const innerdiv3 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Week"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Week"])}</p>`
             document.getElementById("tmcupw").innerHTML = innerdiv3
 
-           
-            var c = 0;
-            const innerdiv5 = Object.keys(dataa["top 5 users in contact Day"]).map(item => {
 
-                c = c + 1;
-                // console.log("ssd", item);
-                return `<div class="row_user_status">
-                <div style="flex:1"><b>${c}</b></div>
-                <div style="flex:1"><b class="capi-text">${item}</b></div>
-                <div style="flex:1"><b>${dataa["top 5 users in contact Day"][item]}</b></div>
-              </div>`
-
-            }).join(" ");
-
-
-            document.getElementById("contact_history_tday").innerHTML = innerdiv5
-
-            var d = 0;
-            const innerdiv6 = Object.keys(dataa["top 5 users in contact Week"]).map(item => {
-                d = d + 1;
-                // console.log("ssd", item);
-                return `<div class="row_user_status">
-                <div style="flex:1"><b>${d}</b></div>
-                <div style="flex:1"><b class="capi-text">${item}</b></div>
-                <div style="flex:1"><b>${dataa["top 5 users in contact Week"][item]}</b></div>
-              </div>`
-
-            }).join(" ");
+           Object.keys( dataa["top 5 users in contact Day"]).map(item => { keys.push(item) })
+           Object.values( dataa["top 5 users in contact Day"]).map(item => { values.push(item) })
+           for(var i = 0; i < keys.length; i++)
+            {
+            obj[i] = {"sno":i+1,"pair":keys[i],"contact":values[i]};
+           }
+          //  console.log("obj", Object.values(obj))
+           dataa = Object.values(obj)
+            $('#user_contact').DataTable({
+                "searching": false,
+              "info": false,
+              "bLengthChange": false,
+              "bDestroy": true,
+            data: dataa, "columns": [{"data":"sno"},{ "data": "pair" },{ "data": "contact" }]});
 
 
-            document.getElementById("contact_history_tweek").innerHTML = innerdiv6
+            Object.keys( dataa_ww["top 5 users in contact Day"]).map(item => { keys_w.push(item) })
+           Object.values( dataa_ww["top 5 users in contact Day"]).map(item => { values_w.push(item) })
+           for(var i = 0; i < keys_w.length; i++)
+            {
+            obj[i] = {"sno":i+1,"pair":keys_w[i],"contact":values_w[i]};
+           }
+          //  console.log("obj", Object.values(obj))
+           dataa = Object.values(obj)
+            $('#user_contact_weekss').DataTable({
+                "searching": false,
+              "info": false,
+              "bLengthChange": false,
+              "bDestroy": true,
+            data: dataa, "columns": [{"data":"sno"},{ "data": "pair" },{ "data": "contact" }]});
+
+            // var c = 0;
+            // const innerdiv5 = Object.keys(dataa["top 5 users in contact Day"]).map(item => {
+
+            //     c = c + 1;
+            //     // console.log("ssd", item);
+            //     return `<div class="row_user_status">
+            //     <div style="flex:1"><b>${c}</b></div>
+            //     <div style="flex:1"><b class="capi-text">${item}</b></div>
+            //     <div style="flex:1"><b>${dataa["top 5 users in contact Day"][item]}</b></div>
+            //   </div>`
+
+            // }).join(" ");
+
+
+            // document.getElementById("contact_history_tday").innerHTML = innerdiv5
+
+            // var d = 0;
+            // const innerdiv6 = Object.keys(dataa["top 5 users in contact Week"]).map(item => {
+            //     d = d + 1;
+            //     // console.log("ssd", item);
+            //     return `<div class="row_user_status">
+            //     <div style="flex:1"><b>${d}</b></div>
+            //     <div style="flex:1"><b class="capi-text">${item}</b></div>
+            //     <div style="flex:1"><b>${dataa["top 5 users in contact Week"][item]}</b></div>
+            //   </div>`
+
+            // }).join(" ");
+
+
+            // document.getElementById("contact_history_tweek").innerHTML = innerdiv6
 
 
 
@@ -357,7 +466,7 @@ function getSelectValueTeamHistory() {
     var sel = document.getElementById('team_history_select').value;
     // console.log("hello", sel);
     this.TeamHistoy(sel);
-     localStorage.setItem('current_team', sel)
+    localStorage.setItem('current_team', sel)
 }
 
 
@@ -367,11 +476,11 @@ function dwnldusrpdf() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/'+ user_instance +'/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
-        window.location.href = data.path + ".pdf"
+            window.location.href = data.path + ".pdf"
         });
 }
 
@@ -380,27 +489,27 @@ function dwnldusrpdf() {
 function dwnldusrcsv() {
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/'+ user_instance +'/csv/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".csv");
-             window.location.href = data.path + ".csv"
+            window.location.href = data.path + ".csv"
         });
-    }
+}
 
 // Download Report xlsx
 
- function dwnldusrxlsx() {
+function dwnldusrxlsx() {
 
-     // console.log("lll", localStorage.getItem('current_user'));
-     var user_instance = localStorage.getItem('current_user');
-     fetch('https://takvaviya.in/coolpad_backend/user/report/'+ user_instance +'/xl/2020-08-03/2020-08-07/2020-08-04')
-         .then(response => response.json())
-         .then(data => {
+    // console.log("lll", localStorage.getItem('current_user'));
+    var user_instance = localStorage.getItem('current_user');
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/2020-08-03/2020-08-07/2020-08-04')
+        .then(response => response.json())
+        .then(data => {
             //  console.log(data.path+".xlsx");
-              window.location.href = data.path + ".xlsx"
-         });
-     }
+            window.location.href = data.path + ".xlsx"
+        });
+}
 
 
 // Team download
@@ -411,7 +520,7 @@ function dwnldtmpdf() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/'+ user_instance +'/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -425,13 +534,13 @@ function dwnldtmcsv() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/'+ user_instance +'/csv/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".csv");
-             window.location.href = data.path + ".csv"
+            window.location.href = data.path + ".csv"
         });
-    }
+}
 
 // Download Report xlsx
 
@@ -439,13 +548,13 @@ function dwnldtmxlsx() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/'+ user_instance +'/xl/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/2020-08-03/2020-08-07/2020-08-04')
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".xlsx");
-             window.location.href = data.path + ".xlsx"
+            window.location.href = data.path + ".xlsx"
         });
-    }
+}
 
 // user wise sticky notes
 
@@ -461,19 +570,24 @@ closeBtn.addEventListener('click', () => {
     document.getElementById("note_textt").value = '';
 });
 function Submit1() {
+    var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+newdate = year + "-" + month + "-" + day;
     console.log("clcikes", localStorage.getItem("current_user"));
     console.log("logged", document.getElementById("note_textt").value)
     var note = document.getElementById("note_textt").value
     //TODO dynamci location 
     const data = {
         "user": localStorage.getItem("current_user"),
-        "date_time": "dd",
+        "date_time": String(newdate),
         "zone": "a",
         "team": "team a",
         "location": "delhi",
         "notes": note
     }
-     fetch('https://takvaviya.in/coolpad_backend/user/saveEmpnote/', {
+    fetch('https://takvaviya.in/coolpad_backend/user/saveEmpnote/', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
@@ -493,7 +607,7 @@ function Submit1() {
         });
 }
 function load_notes_user() {
-    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/'+localStorage.getItem("current_user")+'/delhi')
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/delhi')
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);
@@ -512,37 +626,38 @@ function load_notes_user() {
                 }).join(" ");
                 document.getElementById("load_notes").innerHTML = innerdiv
                 // **************************************
-                var stick_data=[];
+                var stick_data = [];
                 var da;
 
-                console.log("thies",Object.keys(data[item]).length)
-                 Object.keys(data[item]).map(nitem => {
+                console.log("thies", Object.keys(data[item]).length)
+                Object.keys(data[item]).map(nitem => {
                     stick_data.push(data[item][nitem].notes)
-                    da=data[item][nitem].date_time
-                         }).join(" ");
-                    // return `
-                    // <div class="note_card1">
-                    // <div style="display: flex; flex-direction: row; align-items: center;">
-                    // <div class="ndate1" style='flex:5'><b>${ data[item][nitem].date_time}</b></div>
-                    // </div>
-                    // <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
-                    // </div>`
-                    const innerdiv1 =  `
+                    da = data[item][nitem].date_time
+
+                }).join(" ");
+                // return `
+                // <div class="note_card1">
+                // <div style="display: flex; flex-direction: row; align-items: center;">
+                // <div class="ndate1" style='flex:5'><b>${ data[item][nitem].date_time}</b></div>
+                // </div>
+                // <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
+                // </div>`
+                const innerdiv1 = `
                     <div class="note_card1">
                     <div style="display: flex; flex-direction: row; align-items: center;">
                     <div class="ndate1" style='flex:5'><b>${da}</b></div>
                     </div>
                     <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
                     </div>`
-                                document.getElementById("load_notes1").innerHTML = innerdiv1
+                document.getElementById("load_notes1").innerHTML = innerdiv1
 
-                console.log("0000000000000000",stick_data.slice(-1)[0])
+                console.log("0000000000000000", stick_data.slice(-1)[0])
 
             })
         });
 }
- load_notes_user();
- function Note_delete(id) {
+load_notes_user();
+function Note_delete(id) {
     console.log("delete", id);
     // fetch()
     //     .then(response => response.json())
@@ -567,7 +682,7 @@ function load_notes_user() {
             console.error('Error:', error);
             modal.close();
         });
-        load_notes_user();
+    load_notes_user();
 }
 // end user sticky notes
 
@@ -588,18 +703,23 @@ closeBtn1.addEventListener('click', () => {
     document.getElementById("note_textt1").value = '';
 });
 function Submit2() {
+    var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+newdate = year + "-" + month + "-" + day;
     console.log("clcikes", localStorage.getItem("current_team"));
     console.log("logged", document.getElementById("note_textt1").value)
     var note = document.getElementById("note_textt1").value
     //TODO dynamci location 
     const data = {
-        "team" :localStorage.getItem("current_team").toLowerCase(),
-        "date_time" :"dd",
-        "zone" :"a",
-        "location" :"ch",
-        "notes" : note
+        "team": localStorage.getItem("current_team").toLowerCase(),
+        "date_time": String(newdate),
+        "zone": "a",
+        "location": "ch",
+        "notes": note
     }
-     fetch('https://takvaviya.in/coolpad_backend/user/saveTeamnote/', {
+    fetch('https://takvaviya.in/coolpad_backend/user/saveTeamnote/', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
@@ -619,9 +739,8 @@ function Submit2() {
         });
 }
 function load_notes_team() {
-    var a = String( localStorage.getItem("current_team").toLowerCase())
-console.log('https://takvaviya.in/coolpad_backend/user/teamallnotes/'+ a +'/ch');
-    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/'+ a +'/ch')
+    var a = String(localStorage.getItem("current_team").toLowerCase())
+    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/ch')
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);
@@ -639,28 +758,28 @@ console.log('https://takvaviya.in/coolpad_backend/user/teamallnotes/'+ a +'/ch')
                     </div>`
                 }).join(" ");
                 document.getElementById("load_notes_team").innerHTML = innerdiv
-                var stick_data=[];
+                var stick_data = [];
                 var da;
 
-                console.log("thies",Object.keys(data[item]).length)
-                 Object.keys(data[item]).map(nitem => {
+                console.log("thies", Object.keys(data[item]).length)
+                Object.keys(data[item]).map(nitem => {
                     stick_data.push(data[item][nitem].notes)
-                    da=data[item][nitem].date_time
-                         }).join(" ");
-                 
-                    const innerdiv1 =  `
+                    da = data[item][nitem].date_time
+                }).join(" ");
+
+                const innerdiv1 = `
                     <div class="note_card1">
                     <div style="display: flex; flex-direction: row; align-items: center;">
                     <div class="ndate1" style='flex:5'><b>${da}</b></div>
                     </div>
                     <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
                     </div>`
-                                document.getElementById("load_notes2").innerHTML = innerdiv1
+                document.getElementById("load_notes2").innerHTML = innerdiv1
             })
         });
 }
- load_notes_team();
- function Note_delete_team(id) {
+load_notes_team();
+function Note_delete_team(id) {
     console.log("delete", id);
     // fetch()
     //     .then(response => response.json())
@@ -685,5 +804,5 @@ console.log('https://takvaviya.in/coolpad_backend/user/teamallnotes/'+ a +'/ch')
             console.error('Error:', error);
             modal.close();
         });
-        load_notes_team();
+    load_notes_team();
 }

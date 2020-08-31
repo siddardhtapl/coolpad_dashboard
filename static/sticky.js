@@ -33,9 +33,16 @@ closeBtn.addEventListener('click', () => {
     document.getElementById("note_textt").value = '';
 });
 function Submit() {
+    var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+newdate = year + "-" + month + "-" + day;
+console.log("dsfodshfpsjfjfpodsjfjsjfswfjeao",newdate)
     console.log("logged", document.getElementById("note_textt").value)
     var note = document.getElementById("note_textt").value
-    const data = { "date_time": "2020-08-01", "notes": note }
+
+    const data = { "date_time": newdate, "notes": note }
     fetch('https://takvaviya.in/coolpad_backend/notes/save/' + user_name, {
         method: 'POST', // or 'PUT'
         headers: {

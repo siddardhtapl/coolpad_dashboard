@@ -1,10 +1,612 @@
+#network{
+    height: 90%;
+    width: 100%;
+}
+/*  CT css*/
+
+.date-value select option {
+    background: #191e3a;
+}
+
+.data-card-cnt {
+    background: #0e1726;
+}
+
+.data-card-cnt .table {
+    margin-bottom: 0;
+}
+
+/* .data-card-cnt .table th {
+    color: #fff;
+} */
+
+.data-card-cnt .btn-tle {
+    margin-left: 60px;
+    background: none;
+    border: 1px solid #303131;
+}
+
+/* .data-cnt-tbl th {
+    color: #fff;
+} */
+
+.data-cnt-tbl .table-bordered th {
+    border: 1px solid #252525 !important;
+}
+
+.data-cnt-tbl .table-bordered td {
+    border: 1px solid #252525 !important;
+}
+
+/* .data-cnt-tbl tr {
+    color: #fff;
+} */
+
+.data-card-cnt .table-bordered th {
+    border: 1px solid #303131 !important;
+}
+
+.data-card-cnt .table-bordered td {
+    border: 1px solid #303131 !important;
+    color: white;
+}
+
+.date-show .form-control {
+    background: none;
+    color: #fff;
+    border: 1px solid #303131;
+}
+
+.date-show input[type="date"] {
+    position: relative;
+    padding: 10px;
+}
+
+.date-show input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+}
+
+.date-show input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    color: #fff;
+}
+
+.all_third_pair {
+    display: block;
+    float: left;
+    margin-top: 5px;
+}
+
+.children_tracing {
+    margin-top: 20px;
+}
+
+.children_tracing .in-card {
+    float: left;
+    width: 100px !important;
+    border-radius: 5px;
+}
+
+.children_tracing .in-table {
+    float: left;
+    width: 600px;
+    border-radius: 5px;
+}
+
+.in-table {
+    margin-left: 50px;
+}
+
+.in-card {
+    background-color: #0e1726;
+    padding: 12px 23px 0px 23px;
+}
+
+.in-table table {
+    background-color: #0e1726;
+    padding: 16px 19px 6px 21px;
+    margin-top: 9px;
+}
+
+.in-table table th {
+    padding-left: 20px;
+    border: 1px solid #303f4c;
+    padding-right: 20px;
+}
+
+.in-table table td {
+    padding-left: 20px;
+    border: 1px solid #303f4c;
+    padding-right: 20px;
+}
+
+
+.sub {
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    background-color: #527581;
+    color: white;
+}
+
+.capi-text {
+    text-transform: capitalize;
+}
+
+.all_third_pair table {
+    width: 755px;
+}
+
+.tooltip1 {
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip1 .tooltiptext1 {
+    visibility: hidden;
+    width: 180px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -80%;
+    left: 40%;
+    margin-left: -60px;
+}
+
+.tooltip1:hover .tooltiptext1 {
+    visibility: visible;
+}
+
+
+
+.main_emp_div {
+    border-left: 1px solid;
+    padding-left: 57px;
+}
+
+.date_n_emp .main_emp_div {
+    float: left;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.date_n_emp .select_emp_div {
+    float: left;
+}
+
+.aff_hd {
+    font-size: 24px;
+
+}
+
+.aff_card {
+    margin-top: 15%;
+}
+
+.aff_card .aff_icon {
+    float: left;
+}
+
+.aff_card .aff_detail {
+    float: left;
+    padding-left: 72px;
+    padding-top: 15px;
+}
+
+.aff_icon i {
+    font-size: 180px;
+
+}
+
+.add_date {
+    padding-top: 25px;
+}
+
+.add_date div {
+    float: left;
+
+}
+
+.aff_detail p {
+    opacity: 0.7;
+}
+
+.layout-px-spacing {
+    height: auto !important;
+}
+
+.layout-p-spacing {
+    padding-left: 20px;
+}
+
+.direct_contact_emp {
+    /* position: fixed;
+    top: 465px; */
+    padding-left: 20px;
+}
+
+.direct_contact_emp_toggle {
+    position: absolute;
+    top: 375px;
+    padding-left: 20px;
+    height:100%;
+    width:100%;
+}
+
+.dir_title {
+    margin-left: 16px;
+    padding-bottom: 20px;
+}
+
+.direct_contact_emp h4 {
+    cursor: pointer;
+}
+
+.layer1_card {
+    background-color: #1a1c2d;
+    float: left;
+    width: 250px;
+    padding: 15px 50px 15px 15px;
+    /* border: 1px solid #3f4858; */
+    color: antiquewhite;
+    border-radius: 5px;
+    margin-left: 16px;
+    margin-top: 15px;
+}
+
+.layer1_card:hover {
+    background-color: #527581;
+
+}
+
+.layer1_card p {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.common {
+    /* position: fixed; */
+    display: grid;
+}
+
+.indirect_emps {
+    /* position: fixed; */
+    top: 30%;
+    margin-top: 21px;
+    margin-left: 35px;
+    width: 600px;
+    border: 0.1px solid gray;
+    background: #1a1c2d;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+    display: none;
+}
+
+.indirect_emps table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5%;
+    border: 1px solid gray;
+    background: white;
+}
+
+.indirect_emps td,
+th {
+    /* border: 1px solid #dddddd; */
+    text-align: left;
+    padding: 18px;
+    /* background: white; */
+}
+
+.in_header h5 {
+    float: left;
+}
+
+.in_header p {
+    float: right;
+    margin-right: 10px;
+    color: red;
+    border-radius: 4px;
+    padding: 3px;
+    border: 1px solid red;
+}
+
+.date-show {
+    margin-left: 20px;
+}
+
+#emp_name,
+#cd_title {
+    text-transform: capitalize;
+}
+
+.sub {
+    margin-right: 10px;
+}
+
+table#layer3_append td {
+    background: #1a1c2d;
+    border: none !important;
+    color: #fff;
+}
+table#layer3_append tr {
+    border-bottom: 1px solid gray;
+}
+
+table#layer3_append th {
+    border: none !important;
+    background: #1a1c2d;
+    color: #fff;
+}
+#contact-graph {
+margin:auto;
+height: 100%;
+width: 100%;
+background:#060818
+}
+
+#contact-label {
+background:#2c2929; 
+color: white;
+border: 2px solid white;
+border-radius: 5px;
+font-size: 150%;
+}
+
+/*  CT css end*/
+.date-value {
+    padding-left: 20px;
+}
+.date-value select {
+    background: none;
+    border-radius: 3px;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #303131;
+}
+.date-value select option {
+    background: #191e3a;
+}
+.data-card-cnt{
+    background: #0e1726;
+}
+.data-card-cnt .table {
+    margin-bottom: 0;
+}
+.data-card-cnt .table th {
+    color: #fff;
+}
+.data-card-cnt .btn-tle {
+    margin-left: 60px;
+    background: none;
+    border: 1px solid #303131;
+}
+.data-cnt-tbl th {
+    color: #fff;
+}
+th{
+text-align:center;
+}
+.data-cnt-tbl .table-bordered th{
+    border: 1px solid #252525 !important;
+}
+.data-cnt-tbl .table-bordered td{
+    border: 1px solid #252525 !important;
+}
+.data-cnt-tbl tr {
+    color: #fff;
+}
+.data-card-cnt .table-bordered th{
+    border: 1px solid #303131 !important;
+}
+.data-card-cnt .table-bordered td{
+    border: 1px solid #303131 !important;
+    color:white;
+}
+.date-show .form-control {
+    background: none;
+    color: #fff;
+    border: 1px solid #303131;
+}
+.date-show input[type="date"] {
+  position: relative;
+  padding: 10px;
+}
+.date-show input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+.date-show input[type="date"]:before {
+  color: transparent;
+  background: none;
+  display: block;
+  font-family: 'FontAwesome';
+  content: '\f073';
+  /* This is the calendar icon in FontAwesome */
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  color: #fff;
+}
+.all_third_pair{
+display:block;
+float : left;
+margin-top:5px;
+}
+.children_tracing{
+margin-top:20px;
+}
+.children_tracing .in-card{
+    float: left;
+    width: 100px !important;
+    border-radius: 5px;
+}
+.children_tracing .in-table{
+    float: left;
+    width: 600px;
+    border-radius: 5px;
+}
+.in-table{
+    margin-left:50px;
+}
+.in-card{
+    background-color: #0e1726;
+    padding: 12px 23px 0px 23px;
+}
+.in-table table{
+     background-color: #0e1726;
+    padding: 16px 19px 6px 21px;
+        margin-top: 9px;
+}
+.in-table table th{
+padding-left: 20px;
+    border: 1px solid #303f4c;
+    padding-right: 20px;
+}
+.in-table table td{
+padding-left: 20px;
+    border: 1px solid #303f4c;
+     padding-right: 20px;
+}
+
+.sub{
+padding:9px;
+border:none;
+border-radius:5px;
+background-color:#527581;
+color:white;
+}
+.capi-text{
+text-transform:capitalize;
+}
+.all_third_pair table {
+    width: 755px;
+}
+
+.tooltip1 {
+position:relative;
+  border-bottom: 1px dotted black;
+}
+.tooltip1 .tooltiptext1 {
+  visibility: hidden;
+  width: 180px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -80%;
+  left: 40%;
+  margin-left: -60px;
+}
+.tooltip1:hover .tooltiptext1 {
+  visibility: visible;
+}
+
+
+
+/* **************************** */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background: none !important;
+    border-radius: 50px !important;
+
+
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:active{
+    background: none !important;
+    color: white !important;
+
+}
+
+a.paginate_button.current {
+    background: none !important;
+    color: white !important;
+    border-radius: 50px !important;
+}
+
+
+#open-modal-btn1 {
+    background: none;
+    color: #fff;
+    border-width: 0 !important;
+}
+
+.all-notes-plus-icon {
+    padding-right: 5px;
+}
+#open-modal-btn {
+    background: none;    
+    color: #fff;
+    border-width: 0 !important;
+}
+.para {
+    display: inline-block;
+    padding: 10px;
+    margin-left: 10px;
+    /* font-weight: 500; */
+}
+.TFtable{
+    width:100%; 
+    border-collapse:collapse; 
+}
+.TFtable tr{ 
+    padding:7px; border:#4e95f4 solid 0px;
+}
+/* provide some minimal visual accomodation for IE8 and below */
+/* .TFtable td{
+    background: #b8d1f3;
+} */
+/*  Define the background color for all the ODD background rows  */
+.TFtable td:nth-child(odd){ 
+    background: #5a6472;
+}
+/*  Define the background color for all the EVEN background rows  */
+.TFtable td:nth-child(even){
+    background: #42454967;
+}
+.outliers-img i {
+    color: #fff;
+    font-size: 70px;
+    margin-top: 10px;
+}
+td{
+
+    background-color: rgb(26, 28, 45);
+}
+
+
 .center {
     top: 130px;
     left: 40px;
     height: 199px;
     width: 320px;
-    background: rgb(26, 28, 45); 
-   
+    background: rgb(26, 28, 45);
+
     border-radius: 3px;
     overflow: hidden;
     box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
@@ -134,7 +736,7 @@
     content: "";
     height: 26px;
     width: 26px;
-    left: 4px;
+    left: 0px;
     bottom: -5px;
     background-color: white;
     -webkit-transition: .4s;
@@ -273,23 +875,15 @@ input:checked + .slider .off
  }
  /* note 1 */
 
- .note_card1 {
-    /* border: 0.5px solid; */
-    height: 248px;
-    background-color: #2c2f4b;
-    margin: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-.his_notes{
+ .note_card1
+ {
+    border: 0.5px solid;
 
-background: none;
-    margin: 1rem;
-    color: #96f1ff !important;
-
-}
-.title_hisNotes{
-
-}
+     height: 248px;
+     /* background-color: #2c2f4b; */
+     margin: 1rem;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ }
  /* .note_card1:hover
  {
     background-color: #686f8db9;
@@ -472,7 +1066,7 @@ text-transform:capitalize;
 .add-user .form-control{
     background: none;
     border: 1px solid #47505e;
-    width: 50%;
+    width: 100%;
 }
 .add-user .form-control:focus{
     border: 1px solid #0E1726;
@@ -527,6 +1121,7 @@ text-transform:capitalize;
     padding-top: 0.5em;
     font-size: 15px;
     color: #888ea8;
+    font-weight:bold;
     
 }
 .service-categories a:hover {
@@ -863,6 +1458,7 @@ text-transform:capitalize;
 .tabcontent {
     /* display: block; */
     padding: 6px 12px;
+    
     border-top: none;
 }
 
@@ -1351,8 +1947,8 @@ body {
 #sidebar ul.menu-categories.ps {
     height: calc(100vh - 107px)!important;
     margin-right: 0;
-    /* padding-right: 22px; 
-    border-right: 1px solid #0e1726;*/
+    /* padding-right: 22px; */
+    border-right: 2px solid #0e1727; 
 }
 #sidebar ul.menu-categories {
     position: relative;
@@ -1432,11 +2028,11 @@ height:301px;
     }
 
 .widget-chart-one{
-height:470px;
+height:490px;
 }
 
 .widget-chart-two {
-    height: 100%;
+    height: 98%;
 }
 .emp_dp option {
 text-transform:capitalize
@@ -1579,6 +2175,34 @@ text-transform:capitalize
     color: #718093;
     font-weight: bolder;
 }
+#teamDropDownButton {
+    background: none;
+    padding: 10px;
+    border-radius: 3px;
+   color: #fff;
+    /* color: #718093; */
+    font-weight: bolder;
+}
+#teamDropDownButton option {
+    background: #191e3a;
+    /*color: #fff; */
+    color: #718093;
+    font-weight: bolder;
+}
+.teamDropDownButton {
+    background: none;
+    padding: 10px;
+    border-radius: 3px;
+   color: #fff;
+    /* color: #718093; */
+    font-weight: bolder;
+}
+.teamDropDownButton option {
+    background: #191e3a;
+    /*color: #fff; */
+    color: #718093;
+    font-weight: bolder;
+}
 #user_status b {
     padding-left: 4px;
 }
@@ -1714,3 +2338,55 @@ text-transform:capitalize
     font-weight: bold;
     font-size: 16px;
 }
+table{
+width:100% !important;
+}
+.table-wrapper {
+    min-width: 1000px;
+    background: #1A1C2D;
+    padding: 20px 25px;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.table-title {
+    padding-bottom: 15px;
+    background: #1A1C2D;
+   /* color: #fff; */
+    color : #718093;
+    padding: 16px 30px;
+    margin: -20px -25px 0px;
+    border-radius: 3px 3px 0 0;
+    }
+
+.para{
+color: #888ea8;
+font-weight:bold;
+}
+.emp_notes{
+ width: 100%;
+ height: 315px;
+ background-color:#1A1C2D;
+ margin-bottom: 20px;
+ border-radius: 8px;
+ box-shadow:0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
+}
+.align_total_contacts{
+padding-left:20px;
+}
+
+.teamm_notess{
+    width: 100%;
+    height: 300px;
+    background-color: #1A1C2D;
+    margin-bottom: 20px;
+}
+#user_status_table_previous {
+    color: #fff !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff !important;
+}
+.paginate_button {
+    color: #fff !important;
+}
+

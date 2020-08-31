@@ -30,7 +30,7 @@ function load_user_list() {
       const innerdiv = Object.keys(data).map(item => {
         return `<tr>
                 <td>${data[item]["user"]}</td>
-                <td><a href="#">${data[item]["user_id"]}</a></td>
+                <td>${data[item]["user_id"]}</td>
                 <td>${data[item]["device_id"]}</td>                        
                 <td>${data[item]["zone"]}</td>
                 <td><span class="status text-success"></span> ${data[item]["locations"]}</td>
@@ -119,192 +119,18 @@ function save() {
 function toggleCheck() {
   if (document.getElementById("myCheckbox").checked === true) {
     localStorage.setItem("theme", "light");
-    var body = document.getElementsByClassName('body');
-
-
-
-
-    for (var i = 0; i < body.length; i++) {
-      body[i].style.backgroundColor = "#F8F8F8";
-    }
+console.log("clickeket jtheme")
     document.getElementById("img").src = "../../static/assets/img/coolpad-logo-black.png";
     document.getElementById("img1").src = "../../static/assets/img/logo-final-black.png";
-    //document.body.style.backgroundColor = "#F8F8F8";
-
-    // 
-    var card = document.getElementsByClassName('center');
-    for (var n = 0; n < card.length; n++) {
-      card[n].style.backgroundColor = "#7c7c7c5e";
-    }
-
-    var widget = document.getElementsByClassName('widget');
-    for (var i = 0; i < widget.length; i++) {
-      widget[i].style.backgroundColor = "#fff";
-    }
-    var para = document.getElementsByClassName('para');
-    for (var i = 0; i < para.length; i++) {
-      para[i].style.color = "#2F3640";
-    }
-    var side = document.getElementsByClassName('sidebar-wrapper');
-    for (var i = 0; i < side.length; i++) {
-      side[i].style.width = "195px";
-      side[i].style.top = "54px";
-      //side[i].style.left = "0px";
-    }
-    var menu = document.getElementsByClassName('menuu');
-    for (var i = 0; i < menu.length; i++) {
-      menu[i].style.color = "#2F3640";
-      menu[i].style.fontWeight = "bold";
-    }
-    var actives = document.getElementsByClassName('actives');
-    for (var i = 0; i < actives.length; i++) {
-      actives[i].style.backgroundColor = "#b7bec5";
-      actives[i].style.color = "#2F3640";
-      actives[i].style.fontWeight = "bold";
-    }
-    var tab = document.getElementsByClassName('tab');
-    for (var i = 0; i < tab.length; i++) {
-      tab[i].style.border = "1px solid #F8F8F8";
-      tab[i].style.backgroundColor = "#F8F8F8";
-    }
-    var navbar = document.getElementsByClassName('navbar');
-    for (var i = 0; i < navbar.length; i++) {
-      navbar[i].style.backgroundColor = "#fff";
-    }
-    var header = document.getElementsByClassName('header-container fixed-top');
-    for (var i = 0; i < header.length; i++) {
-      header[i].style.borderBottom = "1px solid #fff";
-    }
-    var service = document.getElementsByClassName('card service-card card-inverse');
-    for (var i = 0; i < service.length; i++) {
-      service[i].style.backgroundColor = "#fff";
-      service[i].style.boxShadow = "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)";
-    }
-    var card = document.getElementsByClassName('card-title');
-    for (var i = 0; i < card.length; i++) {
-      card[i].style.color = "#2F3640";
-      card[i].style.fontWeight = "bold";
-    }
-    var list = document.getElementsByClassName('#sidebar list-unstyled menu-categories ps');
-    for (var i = 0; i < list.length; i++) {
-      list[i].style.borderRight = "1px solid #F8F8F8";
-    }
-    var drop = document.getElementsByClassName('dropbtnss');
-    for (var i = 0; i < drop.length; i++) {
-      drop[i].style.color = "#2F3640";
-      drop[i].style.fontWeight = "bold";
-    }
-    var sidemenu = document.getElementsByClassName('side-menu-icon');
-    for (var i = 0; i < sidemenu.length; i++) {
-      sidemenu[i].style.color = "#2F3640";
-    }
-    var drop = document.getElementsByClassName('dropdown-contentss');
-    for (var i = 0; i < drop.length; i++) {
-      drop[i].style.color = "#2F3640";
-      drop[i].style.backgroundColor = "white";
-      drop[i].style.boxShadow = "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)";
-    }
-    var note = document.getElementsByClassName('note_card');
-    for(var i = 0; i < note.length; i++){
-    note[i].style.backgroundColor = "#fff";    
-      }
-
-    document.getElementById("team_select").style.color = "#2F3640";
-    document.getElementById("team_select").style.backgroundColor = "white";
-    document.getElementById("team_select").style.fontWeight = "bold";
-    document.getElementById("team_select_weekly").style.color = "#2F3640";
-    document.getElementById("team_select_weekly").style.backgroundColor = "white";
-    document.getElementById("team_select_weekly").style.fontWeight = "bold";
+    document.getElementById('theme').href="../../static/assets/css/style_light.css";
   }
   else {
     localStorage.setItem("theme", "dark");
-    var body = document.getElementsByClassName('body');
-    for (var i = 0; i < body.length; i++) {
-      body[i].style.backgroundColor = "#060818";
-    }
     document.getElementById("img").src = "../../static/assets/img/coolpad-logo.png";
     document.getElementById("img1").src = "../../static/assets/img/takvaviya-main-logo.png";
-    //document.body.style.backgroundColor = "#060818";
-    var card = document.getElementsByClassName('center');
-    for (var n = 0; n < card.length; n++) {
-      card[n].style.backgroundColor = "#7c7c7c5e";
-    }
-    var widget = document.getElementsByClassName('note_card');
-    for (var i = 0; i < widget.length; i++) {
-      widget[i].style.backgroundColor = "rgb(26, 28, 45)";
-    }
-    var widget = document.getElementsByClassName('widget');
-    for (var i = 0; i < widget.length; i++) {
-      widget[i].style.backgroundColor = "rgb(26, 28, 45)";
-    }
-    var para = document.getElementsByClassName('para');
-    for (var i = 0; i < para.length; i++) {
-      para[i].style.color = "#fff";
-    }
-    var side = document.getElementsByClassName('sidebar-wrapper');
-    for (var i = 0; i < side.length; i++) {
-      side[i].style.width = "194px";
-      side[i].style.top = "60px";
-      side[i].style.left = "16px";
-    }
-    var menu = document.getElementsByClassName('menuu');
-    for (var i = 0; i < menu.length; i++) {
-      menu[i].style.color = "#fff";
-      menu[i].style.fontWeight = "normal";
-    }
-    var actives = document.getElementsByClassName('actives');
-    for (var i = 0; i < actives.length; i++) {
-      actives[i].style.backgroundColor = "#2F3640";
-      actives[i].style.color = "#fff";
-      actives[i].style.fontWeight = "normal";
-    }
-    var tab = document.getElementsByClassName('tab');
-    for (var i = 0; i < tab.length; i++) {
-      tab[i].style.border = "1px solid #060818";
-      tab[i].style.backgroundColor = "#060818";
-    }
-    var navbar = document.getElementsByClassName('navbar');
-    for (var i = 0; i < navbar.length; i++) {
-      navbar[i].style.backgroundColor = "#060818";
-    }
-    var header = document.getElementsByClassName('header-container fixed-top');
-    for (var i = 0; i < header.length; i++) {
-      header[i].style.borderBottom = "1px solid #060818";
-    }
-    var service = document.getElementsByClassName('card service-card card-inverse');
-    for (var i = 0; i < service.length; i++) {
-      service[i].style.backgroundColor = "rgb(26, 28, 45)";
-      service[i].style.boxShadow = "none";
-    }
-    var card = document.getElementsByClassName('card-title');
-    for (var i = 0; i < card.length; i++) {
-      card[i].style.color = "#fff";
-      card[i].style.fontWeight = "normal";
-    }
-    var list = document.getElementsByClassName('#sidebar list-unstyled menu-categories ps');
-    for (var i = 0; i < list.length; i++) {
-      list[i].style.borderRight = "1px solid #0e1726";
-    }
-    var drop = document.getElementsByClassName('dropbtnss');
-    for (var i = 0; i < drop.length; i++) {
-      drop[i].style.color = "white";
-      drop[i].style.fontWeight = "normal";
-    }
-    var sidemenu = document.getElementsByClassName('side-menu-icon');
-    for (var i = 0; i < sidemenu.length; i++) {
-      sidemenu[i].style.color = "white";
-    }
-    var drop = document.getElementsByClassName('dropdown-contentss');
-    for (var i = 0; i < drop.length; i++) {
-      drop[i].style.color = "white";
-      drop[i].style.backgroundColor = "#191e3a";
-      drop[i].style.boxShadow = "none";
-    }
-    document.getElementById("team_select").style.color = "#fff";
-    document.getElementById("team_select").style.backgroundColor = "rgb(26, 28, 45)";
-    document.getElementById("team_select_weekly").style.color = "#fff";
-    document.getElementById("team_select_weekly").style.backgroundColor = "rgb(26, 28, 45)";
-  }
+    document.getElementById('theme').href="../../static/assets/css/style.css";
+
+}
 }
 function checkTheme() {
   if (localStorage.getItem("theme") == "light") {
@@ -323,6 +149,7 @@ function checkTheme() {
 $(document).ready(function () {
 
   checkTheme();
+  //document.getElementById('theme').href="../../static/assets/css/style_light.css";
 });
 
 function outlier() {
@@ -330,7 +157,7 @@ function outlier() {
     return responsive.json();
   }).then(data => {
 
-    console.log(data)
+    console.log("aslkf'lsakfa;d'k;",data)
     const innerdiv = Object.keys(data).map(item => {
 
 
@@ -340,8 +167,7 @@ function outlier() {
       <div class="image">
           <div class="circle-1"></div>
           <div class="circle-2"></div>
-          <img src="https://static.thenounproject.com/png/19085-200.png" width="100"
-              height="100" alt="Jessica Potter">
+          <span class="outliers-img"><i class="fa fa-user" aria-hidden="true"></i></span>
       </div>
 
   </div>
@@ -363,3 +189,24 @@ function outlier() {
   })
 }
 outlier();
+
+function opentab_cf(evt, tabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}

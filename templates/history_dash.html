@@ -12,10 +12,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" id="theme" />
+<!--  <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />-->
+
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
   <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+<!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">-->
+  <link href="../../static/assets/css/paginate.css" rel="stylesheet" type="text/css"  />
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
   <script src="../../static/common.js"></script>
 
 
@@ -267,10 +275,10 @@
                           </label>
                         </div>
                       </div>
-                      <div id="chart21"> </div>
+                      <div id="chart21" style="margin-top: -22px;"> </div>
 
 
-                      <div id="chart20" style="visibility: hidden;"></div>
+                      <div id="chart20" style="visibility: hidden; margin-top: -22px;"></div>
                     </div>
                   </div>
 
@@ -295,7 +303,18 @@
                     <div class="widget widget-chart-one">
                       <!-- <p>No of user on</p> -->
                       <p class="para">Contact History (Day)</p>
-                      <div>
+                      <table id="contact_trace_day" class=" " data-page-length='8'>
+                        <thead align="center">
+                          <tr>
+                            <th>S.No</th>
+                            <th>User</th>
+                            <th>Count</th>
+                            <th>Max Duration</th>
+                          </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                      </table>
+                      <!-- <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header row_user_status">
                             <div style="flex:1;color: #718093;"><b>S.No</b></div>
@@ -306,13 +325,24 @@
                           <div class="table_body_his" id="contact_history_day">
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one">
                       <p class="para">Contact History (Week)</p>
-                      <div>
+                      <table id="contact_trace_wee" class=" " data-page-length='8'>
+                        <thead align="center">
+                          <tr>
+                            <th>S.No</th>
+                            <th>User</th>
+                            <th>Count</th>
+                            <th>Max Duration</th>
+                          </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                      </table>
+                      <!-- <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header row_user_status">
                             <div style="flex:1;color: #718093;"><b>S.No</b></div>
@@ -323,24 +353,26 @@
                           <div class="table_body_his" id="contact_history_week">
                           </div>
                         </div>
-                      </div>
+                      </div> -->
 
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-4">
-                    <div style="width: 100%;height: 315px; background-color:#1A1C2D;margin-bottom: 20px;">
+                  <div class="col-md-6">
 
-                      <div style="display: flex; flex-direction: row; justify-content: flex-end; ">
+                    <div class="emp_notes">
+                      <p class="para">Notes</p>
 
-                        <a class="his_notes" style="margin:1rem" id="open-modal-btn">Add Note</a>
-                        <a href="#notess" button style="margin:1rem" onclick="notess()">All Notes</a></button><br>
+                      <div style="display: flex; flex-direction: row; justify-content: flex-end; float:right;display: inline-block;">
+
+                        <button style="margin:1rem" id="open-modal-btn"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
+                        <a href="#notess" button style="margin:1rem;color:#b7bec5" onclick="notess()">All Notes</a></button><br>
 
                       </div>
 
                       <div id="load_notes1" style="margin-top: -25px;">
-                        <div class="note_card1">
+                        <div class="note_card2">
                           <div class="ndate1"><b>12-08-2020</b></div>
                           <div class="nnote1" id="nnote1">
                             <p style="padding-right: 40px;"></p>
@@ -356,8 +388,7 @@
                     <P class="para"> All notes</P>
                     <span class="fa fa-times" style="float: right; margin-top:-39px; cursor: pointer;"
                       onclick="notes()"></span>
-                    <div id="load_notes"
-                      style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
+                    <div id="load_notes"style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
                       <div class="note_card">
                         <div class="ndate"><b>12-08-2020</b></div>
                         <div class="nnote" id="nnote">
@@ -503,7 +534,18 @@
                     <div class="widget widget-chart-one-team">
                       <!-- <p>No of user on</p> -->
                       <p class="para">Top 5 users in contact (Day)</p>
-                      <div>
+
+                      <table id="user_contact" class=" " data-page-length='3'>
+                        <thead align="left">
+                          <tr>
+                            <th>S.No</th>
+                            <th>User</th>
+                            <th>Number of contacts</th>
+                          </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                      </table>
+                      <!-- <div>
                         <div>
                           <div class="contact_history_container">
                             <div class="contact_history_header">
@@ -515,13 +557,23 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one-team">
                       <p class="para">Top 5 users in contact (Week)</p>
-                      <div>
+                      <table id="user_contact_weekss" class=" " data-page-length='3'>
+                        <thead align="left">
+                          <tr>
+                            <th>S.No</th>
+                            <th>User</th>
+                            <th>Number of contacts</th>
+                          </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                      </table>
+                      <!-- <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header">
                             <div style="flex:1;color: #718093;"><b>S.No</b></div>
@@ -531,18 +583,21 @@
                           <div class="table_body_his" id="contact_history_tweek">
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <!-- *********************************************************************************************** -->
                   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one-team-notes">
-                    <p class="para"> Notes</p>
-                      <div style="width: 100%;height: 300px; background-color:#1A1C2D;margin-bottom: 20px;">
-                        <div style="display: flex; flex-direction: row; justify-content: flex-end; ">
-                          <a class="his_notes" style="margin:1rem" id="open-modal-btn1">Add Note</a>
-                          <a href="#notess1" button style="margin:1rem" onclick="notess1()">All Notes</a></button><br>
-                        </div>
+                      <p class="para" style="color: rgb(255, 255, 255);">Notes</p>
+                      <div style="float:right; ">
+
+                        <button style="margin:1rem" id="open-modal-btn1"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                          Add </button>
+                        <a href="#notess1" button="" style="margin:1rem ;color:#b7bec5" onclick="notess1()">All Notes</a><br>
+                      </div>
+                      <div class="teamm_notess">
+                        
                         <div id="load_notes2" style="margin-top: -15px;">
                           <div class="note_card2">
                             <div class="ndate2"><b>12-08-2020</b></div>
