@@ -9,7 +9,7 @@ function logout() {
 }
 
 function share() {
-  var msgbody = "https://takvaviya.in/coolpad_backend_ui/project/login/";
+  var msgbody = "http://takvaviya.in:8001/coolpad_ui/project/login/";
   var url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Coolpad Dashboard&body=link here: ' + msgbody + '&ui=2&tf=1&pli=1';
   window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
 }
@@ -119,16 +119,43 @@ function save() {
 function toggleCheck() {
   if (document.getElementById("myCheckbox").checked === true) {
     localStorage.setItem("theme", "light");
-console.log("clickeket jtheme")
     document.getElementById("img").src = "../../static/assets/img/coolpad-logo-black.png";
     document.getElementById("img1").src = "../../static/assets/img/logo-final-black.png";
     document.getElementById('theme').href="../../static/assets/css/style_light.css";
+    try{
+        changeNetworkmodelTheme('light');
+
+    }
+    catch(e){console.log(e)}
+
+    try{
+
+        clk_chart();
+    }
+    catch(e){console.log(e)}
+
+
+
   }
   else {
     localStorage.setItem("theme", "dark");
     document.getElementById("img").src = "../../static/assets/img/coolpad-logo.png";
     document.getElementById("img1").src = "../../static/assets/img/takvaviya-main-logo.png";
     document.getElementById('theme').href="../../static/assets/css/style.css";
+    try{
+        changeNetworkmodelTheme('dark');
+
+    }
+    catch(e){console.log(e)}
+
+    try{
+
+        clk_chart();
+    }
+    catch(e){console.log(e)}
+
+
+
 
 }
 }
@@ -136,9 +163,11 @@ function checkTheme() {
   if (localStorage.getItem("theme") == "light") {
     document.getElementById("myCheckbox").checked = true;
 
+
   }
   else if (localStorage.getItem("theme") == "dark") {
     document.getElementById("myCheckbox").checked = false;
+
   }
   toggleCheck();
 }

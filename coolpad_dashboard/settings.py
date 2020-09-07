@@ -26,7 +26,7 @@ SECRET_KEY = 'k)ed5s#!)lkxose%bksw9c93i8(!+wa5#7=wo5ze)dmo^m3_9s'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-UTILS_BASE='/home/tapl/Documents/coolpad_dashboard/'
+UTILS_BASE='/home/prime/Documents/coolpad_dashboard/'
 
 
 # Application definition

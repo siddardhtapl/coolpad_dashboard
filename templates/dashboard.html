@@ -24,7 +24,7 @@
 
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" id="theme" />
+    <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />
 
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
     <!-- Latest compiled JavaScript -->
@@ -113,7 +113,7 @@
                         <li class="menu">
                             <a class="menuu" href="../history_dashboard"><span class="side-menu-icon"><i
                                         class="fa fa-dedent" aria-hidden="true"></i>
-                                </span>History Dashboard</a>
+                                </span>User Dashboard</a>
                         </li>
                         <li class="menu">
                             <a class="menuu" href="../contact"><span class="side-menu-icon"><i
@@ -131,7 +131,7 @@
                                 </span>Email</a>
                         </li>
                         <li class="menu">
-                            <a class="menuu" href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus"
+                            <a class="menuu" href="../adduser"><span class="side-menu-icon"><i class="fa fa-user"
                                         aria-hidden="true"></i>
                                 </span>Add User</a>
                         </li>
@@ -173,12 +173,12 @@
                                     <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one-contact">
                                             <span class="fa fa-users user-his-cnt fa-3x "
-                                                style="font-size:80px;padding-right:20px" aria-hidden="true"></span>
-                                            <p class="para">Total no of contact </p>
+                                                style="font-size:80px;padding-right:20px;margin-top:60px;" aria-hidden="true"></span>
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;display: block;">Total no of contacts </p>
                                             <div class="align_total_contacts" id="totalnocontact"></div>
                                         </div>
                                         <div class="widget widget-chart-one-history mt-4">
-                                            <p class="para">Top Contact History (Top 5)</p>
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Top Contact History (Top 5)</p>
                                             <div id="chart9"></div>
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                     <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one">
                                             <div style="display:flex;flex-direction: row;color: #888ea8;">
-                                                <p style="flex:5;" class="para">Hour Tracker (No of Contacts)</p>
+                                                <p  class="para" style="flex:5;border-bottom: 1px solid #ccc;width: 100%;">Hour Tracker (No of Contacts)</p>
                                                 <div>
                                                     <label class="switch">
                                                         <input type="checkbox" id="togBtn">
@@ -329,7 +329,7 @@
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-two">
                                             <div style="display:flex;flex-direction: row;color: #888EA8;">
-                                                <p style="flex:5;" class="para">Contact Frequency</p>
+                                                <p  class="para" style="flex:5;border-bottom: 1px solid #ccc;width: 100%;">Contact Frequency</p>
                                                 <label class="switch">
                                                     <input type="checkbox" id="togBtn1">
                                                     <div class="slider round">
@@ -357,14 +357,14 @@
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one">
                                             <!-- <p>No of user on</p> -->
-                                            <p class="para">User Status</p>
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">User Status</p>
                                             <table id="user_status_table" class="" data-page-length='8'>
                                                 <thead align="center">
                                                     <tr style="background-color:none ;">
                                                         <th>S.No</th>
                                                         <th>User</th>
                                                         <th>Device Id</th>
-                                                        <th>Stauts</th>
+                                                        <th>Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot></tfoot>
@@ -389,7 +389,7 @@
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing;">
                                         <div class="widget widget-chart-one">
-                                            <p class="para">Users in contact (Live)</p>
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Users in contact (Live)</p>
                                             <table id="usertable" class=" ">
                                                 <thead align="center" style="border-bottom:1px solid white;">
                                                     <tr style="background: none;">
@@ -424,7 +424,7 @@
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-one">
-                                            <p class="para">Contact History</p>
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Contact History</p>
                                             <div>
                                                 <table id="contact_his" class=" " data-page-length='8'>
                                                   <thead align="center">
@@ -464,8 +464,8 @@
                                     style="padding-left:0px">
                                     <div class="widget widget-chart-one-contact">
                                         <span class="fa fa-users user-his-cnt fa-3x "
-                                            style="font-size:80px;padding-right:20px" aria-hidden="true"></span>
-                                        <p class="para">Total no of contact </p>
+                                            style="font-size:80px;padding-right:20px;margin-top:60px;" aria-hidden="true"></span>
+                                        <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;display: block;">Total no of contacts </p>
                                         <div class="align_total_contacts" id="totalnocontact_weekly"></div>
                                     </div>
                                 </div>
@@ -473,13 +473,13 @@
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing"
                                         style="margin-bottom: 10px;">
                                         <div class="widget widget-chart-one">
-                                            <p class="para">Weekly Team Tracker</p>
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Weekly Team Tracker</p>
                                             <div id="chart7"></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                         <div class="widget widget-chart-two">
-                                            <div style="display:flex;flex-direction: row;color: #888EA8;"><p style="flex:5;" class="para">Contact Frequency</p>
+                                            <div style="display:flex;flex-direction: row;color: #888EA8;"><p style="flex:5;border-bottom: 1px solid #ccc;width: 100%;" class="para">Contact Frequency</p>
                                                 <label class="switch">
                                                     <input type="checkbox" id="togBtn2">
                                                     <div class="slider round">
@@ -520,13 +520,13 @@
                             <div class="row">
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                     <div class="widget widget-chart-one">
-                                        <p class="para">Top Contact History (Top 5) </p>
+                                        <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Top Contact History (Top 5) </p>
                                         <div id="chart5"></div>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                     <div class="widget widget-chart-one">
-                                        <p class="para">Contact History All</p>
+                                        <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Contact History All</p>
                                         <div>
                                             <table id="contact_his_week" data-page-length='8'>
                                               <thead align="center">
@@ -552,7 +552,7 @@
                                 </div>
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                                     <div class="widget widget-chart-one">
-                                        <p class="para">Weekly clock </p>
+                                        <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Weekly clock </p>
                                         <div id="chart11"></div>
                                     </div>
                                 </div>

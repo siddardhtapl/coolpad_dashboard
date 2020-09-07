@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css" id="theme" />
+    <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script data-require="moment.js@2.10.2" data-semver="2.10.2"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
@@ -102,7 +102,7 @@
                         <li class="menu">
                             <a href="../history_dashboard"><span class="side-menu-icon"><i class="fa fa-dedent"
                                         aria-hidden="true"></i>
-                                </span>History Dashboard</a>
+                                </span>User Dashboard</a>
                         </li>
                         <li class="menu">
                             <a href="../contact" class="actives"><span class="side-menu-icon"><i
@@ -119,7 +119,7 @@
                                 </span>Email</a>
                         </li>
                         <li class="menu">
-                            <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user-plus"
+                            <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user"
                                         aria-hidden="true"></i>
                                 </span>Add User</a>
                         </li>
@@ -192,7 +192,7 @@
 
 
                         <div class="main_emp_div">
-                            <div class="aff_hd">Affected Person</div>
+                            <div class="aff_hd">Contacted Person</div>
                             <div class="aff_card">
                                 <div class="aff_icon"><i class="fa fa-user"></i></div>
                                 <div class="aff_detail">
@@ -219,7 +219,7 @@
                 <div class="direct_contact_emp_toggle">
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab_cf(event, 'table')"><b>Table Model</b></button>
-                        <button class="tablinks " onclick="opentab_cf(event, 'network');  trigger_contact()"><b>Network Model</b></button>
+                        <button class="tablinks " onclick="opentab_cf(event, 'network');  netWorkGraphSwitch('netWorkSwitch')"><b>Network Model</b></button>
                         <!-- <button class="tablinks " onclick="opentab_cf(event, 'network'); trigger_contact()"><b>Network Model</b></button> -->
                     </div>
                     <div id="table" class="tabcontent" style="display: block;">
@@ -232,7 +232,7 @@
 
                             <div class="indirect_emps" id="indirect_emps">
                                 <div class="in_header">
-                                    <h5>Indirect contacts of Affected Person</h5>
+                                    <h5>Indirect contacts of Contacted Person</h5>
                                     <p style="cursor:pointer" onclick="close_indirect()">Close</p>
                                 </div>
                                 <table id="layer3_append">
@@ -243,11 +243,33 @@
                     </div>
 
 
+                    <!--Network Graph Start-->
                     <div id="network" class="tabcontent" style="display: none;">
-                        <div id="contact-graph">
+                        <div class="contact-graph-container">
+                            <div class="contact-graph-legend">
+                                <span style="font-size:2.5em;">&#8594;</span>Direct Contacts
+                                <span style="color: #20c997;font-size:2.5em;">&#8594;</span>Indirect Contacts
+                                <hr>
+                                <span  style="font-size:24px; cursor: context-menu;">Direct Contacts of:</span>
+                                <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;" id="label-currentEmp"></p>
+                                <div id="label-onclick">
+                                </div>
+                            </div>
+                            <div id="contact-graph">
+                            </div>
+                            <div style="display: none;" id="contact-graph-zoomControl">
+                                <button class="zoomButtons" id="zoomInButton" onclick="zoomContactGraph('in')">+</button>
+                                <button class="zoomButtons" id="zoomOutButton" onclick="zoomContactGraph('out')">-</button>
+                            </div>
                         </div>
-
                     </div>
+                       <!--Network Graph End-->
+
+
+
+
+
+
                 </div>
 
 
@@ -304,14 +326,32 @@
             e = elm.value;
 
         }
-
+        function zoomContactGraph(zoomAction) {
+            console.log(zoomAction);
+            if(zoomAction === 'in') {
+                renderZoomContactGraph(0.5);
+            }
+            else {
+                renderZoomContactGraph(2);
+            }
+        }
+        function netWorkGraphSwitch() {
+            var s_date = "2020-08-03"
+            var e_date = "2020-08-07"
+            //console.log(contactTracingData);
+            if(!contactTracingData){
+                getContactTracingData(e, s_date, e_date)
+            }
+        }
 
 
         function trigger_contact() {
             var s_date = "2020-08-03"
             var e_date = "2020-08-07"
             console.log(e, 'kkkk');
-            getContactTracingData(e, s_date, e_date)
+            if(document.getElementById('network').style.display === 'block') {
+             getContactTracingData(e, s_date, e_date);
+            }
         $.ajax({
                 type: "GET",
                 url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date,
@@ -328,13 +368,13 @@
 
                     $("#first_trace").empty();
                     $('#all_third_pair').empty();
-                    append_data += '<h4 class="dir_title mt-4">Direct Contacts of Affected Person</h4>'
+                    append_data += '<h4 class="dir_title mt-4">Direct Contacts of Contacted Person</h4>'
                     for (var i in response[0][e]) {
                         var c_date = response[0][e][i]['Date'].split("T");
 
-                        append_data += '<div class="layer1_card act">';
+                        append_data += '<div class="layer1_card act" onclick="open_indirect(this)" id="cd_title" value = "' + i + '" style="cursor:pointer">';
                         append_data += '<p><i class="fa fa-calendar-o"></i> ' + c_date[0] + '</p>';
-                        append_data += '<h4 onclick="open_indirect(this)" id="cd_title" value = "' + i + '">' + i + '</h4><br>';
+                        append_data += '<h4 >' + i + '</h4><br>';
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[0][e][i]['count'] + '</span></div>'
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Duration ' + response[0][e][i]['max_duration'] + '</span></div>'
                         append_data += '</div>';
@@ -346,7 +386,35 @@
 
         }
 
+         var $links = $('.layer1_card');
+            $links.click(function(){
+               $links.removeClass('selected');
+               $(this).addClass('selected');
+            });
+
         function open_indirect(elm) {
+
+            //var bg = document.getElementsByClassName('layer1_card');
+
+
+            //for(var i = 0 ; i < bg.length ; i++){
+            //    bg[i].style.backgroundColor = "#1a1c2d";
+            //}
+            //elm.style.backgroundColor = "#527581";
+
+
+            if($(elm).hasClass( "selected" ))
+            {
+                $(elm).removeClass("selected");
+            }
+            else
+            {
+                $(".layer1_card").removeClass("selected");
+                $(elm).addClass("selected");
+            }
+
+
+
             var layer_ind;
             layer_ind = '';
             console.log(elm.getAttribute('value'));

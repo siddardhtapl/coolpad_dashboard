@@ -129,7 +129,7 @@ input:focus ~ .highlight {
                                 </div>
                                 <br>
                                 <div id="password-field" class="field-wrapper input mb-2">
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+                                    <input id="password" name="password" type="password" class="form-control" onkeypress="submitEnter(event)" placeholder="Password">
                                 </div>
                                 <div class="d-sm-flex justify-content-center">
                                     <div class="field-wrapper"><br>
@@ -151,6 +151,15 @@ input:focus ~ .highlight {
     </div>
 
     <script>
+
+        function submitEnter(e){
+          if(e.keyCode === 13){
+              e.preventDefault();
+              login();
+          }
+      }
+
+
         function login(){
             var data = {"username":$("#username").val(),"password":$("#password").val()}
             $.ajax({

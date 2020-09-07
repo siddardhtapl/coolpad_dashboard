@@ -373,7 +373,7 @@ function daily_tracker_top_contacts() {
                     show: true,
                     style: {
                         colors: ' #888ea8',
-                        fontSize: '8px',
+                        fontSize: '11px',
                     }
                 },
                 axisBorder: {
@@ -464,23 +464,23 @@ function loadFreq(option) {
             console.log("fsahflk", Object.keys(dataa).length)
             $("#contact_frequency").empty();
             const outerdiv = ` <tr style="height: 50px;">
-              <td style="color:#888ea8"><b>User</b></td> ` +
+              <td class="demo-txt"><b>User</b></td> ` +
                 Object.keys(dataa).map(item => {
                     i = i + 1
                     if (rowLen === i) {
                         // console.log("enter")
-                        return `<td style="color:#888ea8"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
-                            `<td style="color:#888ea8"><b>Others</b></td>`
+                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
+                            `<td class="demo-txt"><b>Others</b></td>`
                     }
                     else {
-                        return `<td style="color:#888ea8"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
+                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
                     }
                 }).join(" ") + `</tr>`
             // return `<td style="color:white"><b>${item.toUpperCase()}</b></td>`;
             const innerdiv = Object.keys(dataa).map(item => {
                 return `
              <tr style="height: 50px;">
-             <td style="color:#888ea8"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
+             <td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
                     Object.keys(dataa[item]).map(items => {
                         // console.log("iii", data[item][items])
                         if (dataa[item][items] > 0) {
@@ -681,23 +681,23 @@ function loadFreqWeekly(option) {
             console.log("dataq", dataa);
             const outerdiv =
                 ` <tr style="height: 50px;">
-              <td style="color:#888ea8"><b>User</b></td> ` +
+              <td class="demo-txt"><b>User</b></td> ` +
                 Object.keys(dataa).map(item => {
                     n = n + 1
                     if (rowlen1 === n) {
                         // console.log("enter")
-                        return `<td style="color:#888ea8"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
-                            `<td style="color:#888ea8"><b>Others</b></td>`
+                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
+                            `<td class="demo-txt"><b>Others</b></td>`
                     }
                     else {
-                        return `<td style="color:#888ea8"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
+                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
                     }
                     //  return `<td style="color:white"><b>${item.toUpperCase()}</b></td>`
                 }).join(" ") + `</tr>`
             const innerdiv = Object.keys(dataa).map(item => {
                 return `
              <tr style="height: 50px;">
-             <td style="color:#888ea8"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
+             <td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
                     Object.keys(dataa[item]).map(items => {
                         // console.log("iii", dataa[item][items])
                         if (dataa[item][items] > 0) {
@@ -891,12 +891,16 @@ clk_chart();
 function clk_chart() {
     // var am_data=[]
     // var pm_data=[]
+    var co;
+    if(localStorage.getItem("theme") == "dark"){ co ='white'}
+    else{co ='black'}
+
     fetch('https://takvaviya.in/coolpad_backend/user/clock/').then(responsive => {
         return responsive.json();
     }).then(data => {
         // am_data=data.slice(0,12)
         // pm_data=data.slice(12,24)
-        // console.log(am_data)
+        console.log(co,"deiiiiiiiiiii")
         $("#chart10").empty();
         var options = {
             series: [{
@@ -932,7 +936,7 @@ function clk_chart() {
                 labels: {
                     show: true,
                     style: {
-                        colors: '#888ea8',
+                        colors: co,
                         fontSize: '14px',
                     }
                 },
@@ -940,7 +944,7 @@ function clk_chart() {
             yaxis: {
                 labels: {
                     style: {
-                        colors: '#888ea8',
+                        colors: co,
                         // fontSize: '14px',
                     }
 
@@ -978,7 +982,7 @@ function weekly_clk() {
             }],
             chart: {
                 height: 350,
-                type: 'line',
+                type: 'bar',
                 zoom: {
                     enabled: false
                 }
@@ -1174,6 +1178,7 @@ function renderChart() {
 function switchHeatMap(team) {
     renderHeatMap(team);
 }
+
 // *********************************************************************************************
 //Heat map weekly
 var heatMapDataWeekly;
