@@ -121,7 +121,7 @@
                         <li class="menu">
                             <a href="../adduser"><span class="side-menu-icon"><i class="fa fa-user"
                                         aria-hidden="true"></i>
-                                </span>Add User</a>
+                                </span>User Profile</a>
                         </li>
                         <li class="menu">
                             <a href="../stickynotes"><span class="side-menu-icon"><i class="far fa-file-alt"
@@ -243,27 +243,33 @@
                     </div>
 
 
-                    <!--Network Graph Start-->
-                    <div id="network" class="tabcontent" style="display: none;">
-                        <div class="contact-graph-container">
-                            <div class="contact-graph-legend">
-                                <span style="font-size:2.5em;">&#8594;</span>Direct Contacts
-                                <span style="color: #20c997;font-size:2.5em;">&#8594;</span>Indirect Contacts
-                                <hr>
-                                <span  style="font-size:24px; cursor: context-menu;">Direct Contacts of:</span>
-                                <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;" id="label-currentEmp"></p>
-                                <div id="label-onclick">
-                                </div>
+                  <!--Network Graph Start-->
+                <div id="network" class="tabcontent" style="display: none;">
+                    <div class="contact-graph-container">
+                        <div class="contact-graph-legend">
+                            <span>
+                                <span style="font-size:2.5em;">&#8594;</span><span style="padding-left: 15px;">Direct Contacts</span>
+                            </span>
+                            <span>
+                                <span style="color: #20c997;font-size:2.5em;">&#8594;</span><span style="padding-left: 15px;">Indirect
+                                    Contacts</span>
+                            </span>
+                            <div id="teamIcons">
                             </div>
-                            <div id="contact-graph">
-                            </div>
-                            <div style="display: none;" id="contact-graph-zoomControl">
-                                <button class="zoomButtons" id="zoomInButton" onclick="zoomContactGraph('in')">+</button>
-                                <button class="zoomButtons" id="zoomOutButton" onclick="zoomContactGraph('out')">-</button>
+                            <span style="font-size:24px; cursor: context-menu;">Direct Contacts of:</span>
+                            <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;" id="label-currentEmp"></p>
+                            <div id="label-onclick">
                             </div>
                         </div>
+                        <div id="contact-graph">
+                        </div>
+                        <div style="display: none;" id="contact-graph-zoomControl">
+                            <button class="zoomButtons" id="zoomInButton" onclick="zoomContactGraph('in')">+</button>
+                            <button class="zoomButtons" id="zoomOutButton" onclick="zoomContactGraph('out')">-</button>
+                        </div>
                     </div>
-                       <!--Network Graph End-->
+                </div>
+                <!--Network Graph End-->
 
 
 
@@ -369,14 +375,14 @@
                     $("#first_trace").empty();
                     $('#all_third_pair').empty();
                     append_data += '<h4 class="dir_title mt-4">Direct Contacts of Contacted Person</h4>'
-                    for (var i in response[0][e]) {
-                        var c_date = response[0][e][i]['Date'].split("T");
+                    for (var i in response[1][e]) {
+                        var c_date = response[1][e][i]['Date'].split("T");
 
                         append_data += '<div class="layer1_card act" onclick="open_indirect(this)" id="cd_title" value = "' + i + '" style="cursor:pointer">';
                         append_data += '<p><i class="fa fa-calendar-o"></i> ' + c_date[0] + '</p>';
                         append_data += '<h4 >' + i + '</h4><br>';
-                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[0][e][i]['count'] + '</span></div>'
-                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Duration ' + response[0][e][i]['max_duration'] + '</span></div>'
+                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[1][e][i]['count'] + '</span></div>'
+                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Duration ' + response[1][e][i]['max_duration'] + '</span></div>'
                         append_data += '</div>';
 
                     }
@@ -427,9 +433,9 @@
             layer_ind += '<th>Date</th>'
             layer_ind += ' </tr>';
             var third_layer;
-            for (var k in res[1]) {
-                console.log(res[1][k][elm.getAttribute('value')]);
-                third_layer = res[1][k][elm.getAttribute('value')];
+            for (var k in res[2]) {
+                console.log(res[2][k][elm.getAttribute('value')]);
+                third_layer = res[2][k][elm.getAttribute('value')];
                 for (var i in third_layer) {
                     var c_date = third_layer[i]["Date"].split("T");
                     layer_ind += '<tr>'

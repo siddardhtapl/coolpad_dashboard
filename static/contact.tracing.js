@@ -35,7 +35,7 @@ function getContactTracingData(e, s_date, e_date) {
             behavior: 'smooth'
           });
         contactTracingData = responseJson;
-        getGraphData(contactTracingData[0]);
+        getGraphData(contactTracingData[1]);
       });
   }
 }
@@ -142,9 +142,18 @@ sigma.canvas.nodes.image = (function () {
 })();
 
 var imageUrls = [
+  '../../static/assets/img/icon1.png',
+  '../../static/assets/img/icon2.png',
   '../../static/assets/img/icon3.png',
+  '../../static/assets/img/icon4.png',
+  '../../static/assets/img/icon5.png',
+  '../../static/assets/img/icon6.png',
+  '../../static/assets/img/icon7.png',
+  '../../static/assets/img/icon8.png',
+  '../../static/assets/img/icon9.png',
+  '../../static/assets/img/icon10.png',
 ]
-
+var teamIconMap = {};
 // Create a graph object
 var graph = {
   nodes: [
@@ -158,28 +167,30 @@ var graph = {
 function getGraphData(currentEmp) {
   graph.nodes = [];
   graph.edges = [];
+  teamIconMap = {};
   currentEmpLabel = Object.keys(currentEmp)[0];
-  immediateContacts = currentEmp[Object.keys(currentEmp)[0]];
+  immediateContacts = currentEmp[currentEmpLabel];
   numContacts = Object.keys(immediateContacts).length;
   nodeSize = 30 / numContacts;
-  graph.nodes.push({ id: `${currentEmpLabel}`, label: `${currentEmpLabel}`, x: 0, y: 0, type: 'image', url: imageUrls[Math.floor(Math.random() * imageUrls.length)], size: nodeSize },)
-  let i = 1, j = 1;
+  let searched_emp_team = contactTracingData[0]["searched_emp_team"]
+  teamIconMap[searched_emp_team] = 0;
+  graph.nodes.push({ id: `${currentEmpLabel}`, label: `${currentEmpLabel}`, x: 0, y: 0, type: 'image', url: imageUrls[0], size: nodeSize },);
+  let teamLegendDiv = `<div><img src="${imageUrls[0]}" alt="teamicon" width="50" height="60">   ${searched_emp_team} </div>`;
+  let i = 1, j = 1, teamCount = 1;
+
   for (const contact in immediateContacts) {
-    let count = immediateContacts[contact].count;
     let circular_x = Math.cos((Math.PI * 2 * i++) / (numContacts - Math.PI * 2));
     let circular_y = Math.sin((Math.PI * 2 * j++) / (numContacts - Math.PI * 2));
-    let contactTime = getMinutes(immediateContacts[contact].max_duration);
 
-    graph.nodes.push({ id: `${contact}`, label: `${contact}`, x: circular_x, y: circular_y, size: nodeSize, type: 'image', url: imageUrls[Math.floor(Math.random() * imageUrls.length)] });
+    if(!teamIconMap.hasOwnProperty(immediateContacts[contact].team))
+    {
+      teamIconMap[immediateContacts[contact].team] = teamCount;
+      teamLegendDiv+=`<div><img src="${imageUrls[teamCount]}" alt="teamicon" width="50" height="60">   ${immediateContacts[contact].team} </div>`
+      teamCount++;
+    }
+    graph.nodes.push({ id: `${contact}`, label: `${contact}`, x: circular_x, y: circular_y, size: nodeSize, type: 'image', url: imageUrls[teamIconMap[immediateContacts[contact].team]] });
 
     graph.edges.push({ id: `${contact}`, source: `${currentEmpLabel}`, target: `${contact}`, type: 'arrow', size: 5 })
-
-  }
-
-  function getMinutes(time) {
-    let timeArray = time.split(':');
-    let minutes = (+timeArray[0]) * 60 + (+timeArray[1]);
-    return minutes;
   }
 
   if (imagesLoaded === imageUrls.length) {
@@ -198,6 +209,11 @@ function getGraphData(currentEmp) {
       );
     })
   };
+
+  if(teamLegendDiv!=='')
+  {
+    document.getElementById('teamIcons').innerHTML = teamLegendDiv;
+  }
 }
 
 function initSigma() {
@@ -252,8 +268,8 @@ function initSigma() {
   });
 
   // To enable node dragging
-  var dragListener = sigma.plugins.dragNodes(contactGraph, contactGraph.renderers[0]);
-  
+  //var dragListener = sigma.plugins.dragNodes(contactGraph, contactGraph.renderers[0]);
+
   changeNetworkmodelTheme(localStorage.getItem('theme'));
 }
 function changeNetworkmodelTheme(theme) {
@@ -265,7 +281,7 @@ function changeNetworkmodelTheme(theme) {
         defaultLabelColor: '#000'}
         )
       contactGraph.refresh();
-   
+
      }
      else {
        contactGraph.settings(
@@ -313,7 +329,7 @@ function renderLabel(node) {
 //Second Level Contacts
 function getSubContacts(node) {
   let nodeLabel = node.id;
-  let subContactsArray = contactTracingData[1];
+  let subContactsArray = contactTracingData[2];
   let clickedEmp;
   for (const emp in subContactsArray) {
     if (subContactsArray[emp].hasOwnProperty(nodeLabel)) {
@@ -333,25 +349,42 @@ function renderSubContacts(clickedEmp, nodeLabel, node) {
   let i = 1;
   let j = 1;
   let numContacts = Object.keys(contacts).length;
+  let teamIconDiv = document.getElementById('teamIcons');
+  let teamCount = teamIconDiv.childNodes.length;
+  let l1Teams = [...document.getElementById('teamIcons').childNodes]
+  l1Teams = l1Teams.map(team => team.textContent.trim());
+  let teamIconDivL2 = document.createElement('div');
+  teamIconDivL2.id="l2_teamIcons";
+  teamIconDivL2.innerHTML = '';
   for (const contact in contacts) {
     if (contact !== currentEmpLabel) {
       if (existingNodes.includes(contact)) {
         contactGraph.graph.addEdge({ id: `${nodeLabel}to${contact}`, source: `${nodeLabel}`, target: `${contact}`, color: subContactEdgeColor, type: 'arrow', size: 10 })
       }
       else {
-        let parentDiv = document.getElementById('contact-graph')
         let circular_x = -3 * Math.cos(Math.PI * i++ / (numContacts - Math.PI * 2));
         let circular_y = -3 * Math.sin(Math.PI * j++ / (numContacts - Math.PI * 2));
-        let parentHeight = parentDiv.clientHeight;
-        let parentWidth = parentDiv.clientWidth;
-        contactGraph.graph.addNode({ id: `${nodeLabel}to${contact}`, label: `${contact}`, x: (circular_x + ClickedNode_X), y: (circular_y + ClickedNode_Y), size: nodeSize, type: 'image', url: imageUrls[Math.floor(Math.random() * imageUrls.length)] })
-        contactGraph.graph.addEdge({ id: `${nodeLabel}to${contact}`, source: `${nodeLabel}`, target: `${nodeLabel}to${contact}`, color: subContactEdgeColor, type: 'arrow', size: 10 })
+        let teamName = contacts[contact].team;
+
+        if(!teamIconMap.hasOwnProperty(teamName))
+        {
+          teamCount++;
+          teamIconMap[teamName] = teamCount;
+        }
+        contactGraph.graph.addNode({ id: `${nodeLabel}to${contact}`, label: `${contact}`, x: (circular_x + ClickedNode_X), y: (circular_y + ClickedNode_Y), size: nodeSize, type: 'image', url: imageUrls[teamIconMap[teamName]] });
+        contactGraph.graph.addEdge({ id: `${nodeLabel}to${contact}`, source: `${nodeLabel}`, target: `${nodeLabel}to${contact}`, color: subContactEdgeColor, type: 'arrow', size: 10 });
+        if(!l1Teams.includes(teamName))
+        {
+          teamIconDivL2.innerHTML+=`<div><img src="${imageUrls[teamIconMap[teamName]]}" alt="teamicon" width="50" height="60">  ${teamName}</div>`;
+          l1Teams.push(teamName);
+        }
       }
     }
   }
 
   forceAtlasGraph();
   centerOnClickedNode(node);
+  teamIconDiv.appendChild(teamIconDivL2);
 }
 
 function centerOnClickedNode(node) {
@@ -360,7 +393,7 @@ function centerOnClickedNode(node) {
   let zoomRatio = 1.4;
   let angle = 10;
 
-  //if clicked on searced emp center on it and zoom in 
+  //if clicked on searced emp center on it and zoom in
   if (node.id === currentEmpLabel) {
     moveX = 0;
     moveY = 0;
@@ -384,6 +417,7 @@ function removeSubContacts() {
   let existingSubEdges = contactGraph.graph.edges().filter(edge => edge.id.indexOf('to') > 0);
   existingSubEdges.map(edge => contactGraph.graph.dropEdge(edge.id));
   contactGraph.refresh();
+  removeL2Icons();
 }
 
 function removeContactLabel() {
@@ -391,11 +425,12 @@ function removeContactLabel() {
   if (labelDiv) {
     labelDiv.innerHTML = '';
   }
+  removeL2Icons();
 }
 
-
-
-
-
-
-
+function removeL2Icons() {
+  let l2Icons = document.getElementById('l2_teamIcons');
+  if(l2Icons) {
+    l2Icons.parentNode.removeChild(l2Icons);
+  }
+}

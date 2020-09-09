@@ -37,6 +37,9 @@ function load_user_list() {
                 <td class="action-icons">
                     <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${data[item]["user"]}', '${data[item]["team"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a href="#" class="delete btn btn-outline-danger" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true" onclick="delete_user('${data[item]["user"]}')"></i></a>
+                    <a href="#" class="delete btn btn-outline-danger" title="clone" data-toggle="tooltip">
+	                    <i class="fa fa-clone" aria-hidden="true"></i>
+                    </a>
                 </td>
                 </tr>`
       }).join(" ");

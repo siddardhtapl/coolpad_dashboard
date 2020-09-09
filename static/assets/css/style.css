@@ -407,7 +407,7 @@ font-size: 150%;
 
 /* Network Graph Start */
 #network{
-    height: 80%;
+    height: 100%;
     width: 100%;
 }
 .contact-graph-container{
@@ -425,7 +425,24 @@ overflow-y: auto;
 border:2px solid #0e1727;
 border-radius:5px;
 }
-
+.contact-graph-legend {
+    display:flex;
+    flex-direction: column;
+    min-width: 20%;
+    background: #1A1C2D;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    color:white;
+}
+#teamIcons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 30%;
+    overflow: auto;
+    text-transform: capitalize;
+}
 #contact-graph-label {
 margin:0;
 width:100%;
@@ -461,6 +478,22 @@ cursor: context-menu;
 }
 #zoomOutButton {
  border-radius: 0 0 10px 10px;
+}
+@media only screen and (max-width: 900px) {
+    .contact-graph-container{
+        flex-direction: column;
+        /* background: pink; */
+    }
+    #contact-graph {
+        width: 100%;
+    }
+    .contact-graph-legend {
+            display:flex;
+            min-width: 100%;
+    }
+    #teamIcons {
+        flex-direction: row;
+    }
 }
 /* Network Graph Ends */
 

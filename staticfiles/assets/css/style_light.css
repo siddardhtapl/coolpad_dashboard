@@ -2408,7 +2408,7 @@ border-bottom: 1px solid #ccc;
 }
 /* Network Graph Start */
 #network{
-    height: 80%;
+    height: 100%;
     width: 100%;
 }
 .contact-graph-container{
@@ -2425,6 +2425,25 @@ background:#f8f8f8;
 overflow-y: auto;
 border-radius:5px;
 box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
+}
+.contact-graph-legend {
+    display:flex;
+    flex-direction: column;
+    min-width: 20%;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
+    color:black;
+}
+#teamIcons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 30%;
+    overflow: auto;
+    text-transform: capitalize;
 }
 #contact-graph-label {
 margin:0;
@@ -2464,6 +2483,22 @@ box-shadow:none !important;
 #zoomOutButton {
  border-radius: 0 0 10px 10px;
 }
+@media only screen and (max-width: 900px) {
+    .contact-graph-container{
+        flex-direction: column;
+        /* background: pink; */
+    }
+    #contact-graph {
+        width: 100%;
+    }
+    .contact-graph-legend {
+            display:flex;
+            min-width: 100%;
+    }
+    #teamIcons {
+        flex-direction: row;
+    }
+}
 /* Network Graph Ends */
 #user_list td {
     color: #000;
@@ -2495,3 +2530,22 @@ color: #000;
     color:black;
     }
 
+
+
+
+
+  table.dataTable thead .sorting {
+    background-image: url("../../assets/img/sort_both.png") !important;
+  }
+  table.dataTable thead .sorting_asc {
+    background-image: url("../../assets/img/sort_asc.png") !important;
+  }
+  table.dataTable thead .sorting_desc {
+    background-image: url("../images/sort_desc.png") !important;
+  }
+  table.dataTable thead .sorting_asc_disabled {
+    background-image: url("../images/sort_asc_disabled.png") !important;
+  }
+  table.dataTable thead .sorting_desc_disabled {
+    background-image: url("../images/sort_desc_disabled.png") !important;
+  }
