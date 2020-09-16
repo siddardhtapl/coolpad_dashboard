@@ -497,6 +497,51 @@ cursor: context-menu;
 }
 /* Network Graph Ends */
 
+
+
+
+
+/*LOST DEVICES START */
+#missing-devices {
+    border: 1px solid #414750;
+}
+#missing-devices-list {
+    display: flex;
+    flex-wrap:wrap;
+    overflow: auto;
+    padding-bottom: 15px;
+}
+.missingDeviceCard {
+    background-color: #1a1c2d;
+    display: flex;
+    flex-direction:column;
+    padding: 15px 50px 15px 15px;
+    color: antiquewhite;
+    border-radius: 5px;
+    margin-left: 16px;
+    margin-top: 15px;
+    min-height: 200px;
+    justify-content: space-around;
+}
+.missingDeviceCard  i {
+   margin-right: 5px;
+}
+.missingCardText {
+    text-transform: capitalize;
+    font-size: 1.4em;
+    padding-left: 20px;
+}
+.noData {
+    width:100%;
+    text-align: center;
+}
+@media only screen and (max-width: 900px) {
+    #missing-devices-list {
+        flex-direction: column;
+    }
+}
+/*LOST DEVICES END */
+
 /*  CT css end*/
 .date-value {
     padding-left: 20px;
@@ -2681,4 +2726,73 @@ color: #fff;
 
 .apexcharts-menu-item{
 	font-size: 11px !important;
+}
+
+
+
+
+.circleBase {
+    border-radius: 50%;
+}
+.type1 {
+    width: 20px;
+    height: 20px;
+    /* background: #fff; */
+    border: 1px solid #fff;
+    margin: 2px 8px;
+}
+.circle-green{
+    color: green;
+    border: 3px solid green;
+    border-radius: 50px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+}
+.circle-red{
+    color: red;
+    border: 1px solid red;
+    border-radius: 3px;
+    padding: 5px;
+}
+#user_list tr {
+    background: none;
+}
+#user_list td {
+    border-top: none;
+}
+
+
+.circleBase {
+    border-radius: 50%;
+}
+.type1 {
+    width: 20px;
+    height: 20px;
+    /* background: #000; */
+    border: 1px solid green;
+    border-width: 2px;
+    margin: 2px 8px;
+}
+.circle-green{
+    color: green;
+    border: 3px solid green;
+    border-radius: 50px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+}
+.circle-red{
+    color: red;
+    border: 1px solid red;
+    border-radius: 3px;
+    padding: 5px;
+}
+#user_list tr {
+    background: none;
+}
+#user_list td {
+    border-top: none;
 }

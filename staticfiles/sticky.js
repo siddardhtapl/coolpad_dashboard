@@ -1,3 +1,11 @@
+var zone = localStorage.getItem('zone')
+var locationn = localStorage.getItem('location')
+var company = localStorage.getItem('company')
+var group = localStorage.getItem('group')
+var common4all = group + '__' + locationn + '__' + zone + '__' + company
+
+
+
 var user_name = "demo"
 function load_notes() {
     fetch('https://takvaviya.in/coolpad_backend/notes/getallnotes/' + user_name)

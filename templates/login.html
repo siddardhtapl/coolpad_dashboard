@@ -173,7 +173,15 @@ input:focus ~ .highlight {
                             if(resp["status"]=="success")
                             {
                                 localStorage.setItem("session","1")
-                               window.location.href="../dashboard";
+                               
+
+                                localStorage.setItem("zone", res.zone)
+                                localStorage.setItem("location", res.location)
+                                localStorage.setItem("company", res.company)
+                                localStorage.setItem("group", res.group)
+
+                                window.location.href="../dashboard";
+                                 
                             }
                             else
                             {
@@ -186,6 +194,7 @@ input:focus ~ .highlight {
         }
         
     </script>
+  
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 <!--    <script src="../../static/assets/js/libs/jquery-3.1.1.min.js"></script>-->
 <!--    <script src="../../static/bootstrap/js/popper.min.js"></script>-->

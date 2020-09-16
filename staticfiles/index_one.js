@@ -1,6 +1,15 @@
+start_date = '2020-08-03';
+end_date ='2020-08-07' 
+current_date = '2020-08-04'
 
+
+
+var zone = localStorage.getItem('zone')
+var locationn = localStorage.getItem('location')
+var company = localStorage.getItem('company')
+var group = localStorage.getItem('group')
+var common4all = group + '__' + locationn + '__' + zone + '__' + company
 // heat
-
 
 
 //Global Declartions
@@ -45,146 +54,208 @@ function opentab_history(evt, tabName) {
 
 function UserHistoy(option) {
 
-    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // $("#contact_trace_day").fnDestroy();
             // $("#contact_trace_wee").fnDestroy();
-
+            console.log(data)
             dataa = data[option];
             dataa_w = data[option];
             keys = []
             values = []
             duration = []
             obj = {}
-            m=1
+            m = 1
             keys_w = []
             values_w = []
             duration_w = []
             obj_w = {}
-            m_w=1
-
-            clk_d = dataa["24_hr_clock"]
+            m_w = 1
+            clk_d = dataa['24_hr_clock']
             const innerdiv0 = `   <p class="count-id">${clk_d}</p>`
             // document.getElementById("abc").innerHTML = innerdiv0
-            console.log(clk_d);
-            history_clk(clk_d);
-            history_clk_12hr(clk_d);
+            console.log("clk dataa", dataa);
 
-
-            const innerdiv = `   <p class="count-id">${dataa["Current Device ID"]}</p>`
-            document.getElementById("cdid").innerHTML = innerdiv
-
-            const innerdiv1 = `   <p class="count-id">${dataa["Users in Contact Day"]}</p>`
-            document.getElementById("nouinc").innerHTML = innerdiv1
-
-            const innerdiv2 = `   <p class="count-id">${dataa["Users in Contact Week"]}</p>`
-            document.getElementById("nouinw").innerHTML = innerdiv2
-
-            const innerdiv3 = `   <p class="count-id">${dataa["Max Contact Duration Day"]}</p>`
-            document.getElementById("hcdd").innerHTML = innerdiv3
-
-            const innerdiv4 = `   <p class="count-id">${dataa["Max Contact Duration Week"]}</p>`
-            document.getElementById("hcdw").innerHTML = innerdiv4
-
-
-            Object.keys(dataa["Contact History Day"]).map(item => { keys.push(item) })
-            //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
-            Object.keys(dataa["Contact History Day"]).map(item => {
-                values.push(dataa["Contact History Day"][item]["count"]);
-            })
-            Object.keys(dataa["Contact History Day"]).map(item => {
-                duration.push(dataa["Contact History Day"][item]["max_duration"]);
-            })
-            console.log("i", keys)
-            console.log("ii", duration)
-            for (var i = 0; i < keys.length; i++) {
-                obj[i] = { "sno":i+1,"pair": keys[i], "count": values[i], "duration": duration[i] };
-                console.log(i)
+            if (clk_d != null) {
+                history_clk(clk_d);
+                history_clk_12hr(clk_d);
+            } else {
+                document.getElementById("chart21").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available<a></div>'
+                document.getElementById("chart20").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available<a></div>'
             }
-            console.log("obj", Object.values(obj))
-            dataa = Object.values(obj)
-            $('#contact_trace_day').DataTable({
-                "searching": false,
-              "info": false,
-              "bLengthChange": false,
-              "bDestroy": true,
-                data: dataa, "columns": [{"data":"sno"},{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
-                   
-            });
-            
 
 
-            Object.keys(dataa_w["Contact History Day"]).map(item => { keys_w.push(item) })
-            //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
-            Object.keys(dataa_w["Contact History Day"]).map(item => {
-                values_w.push(dataa_w["Contact History Day"][item]["count"]);
-            })
-            Object.keys(dataa_w["Contact History Day"]).map(item => {
-                duration_w.push(dataa_w["Contact History Day"][item]["max_duration"]);
-            })
-            console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-            console.log("ii", duration_w)
-            for (var i = 0; i < keys_w.length; i++) {
-                obj[i] = {"sno":i+1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
-                console.log(i)
+            if (dataa["Current Device ID"] != null) {
+                const innerdiv = `   <p class="count-id">${dataa["Current Device ID"]}</p>`
+                document.getElementById("cdid").innerHTML = innerdiv
+
+            } else {
+                document.getElementById("cdid").innerHTML = '<div>No data available</div>'
             }
-            console.log("obj", Object.values(obj))
-            dataa = Object.values(obj)
-            $('#contact_trace_wee').DataTable({
-                "searching": false,
-              "info": false,
-              "bLengthChange": false,
-              "bDestroy": true,
-                data: dataa, "columns": [{"data":"sno"},{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
-            });
-            
-    // var d = 0;
-    // const innerdiv5 = Object.keys(dataa["Contact History Day"]).map(item => {
-
-    //     d = d + 1;
-    //     // console.log(dataa["24_hr_clock"])
-
-    //     // console.log("ssd", item);
-    //     return `<div class="row_user_status">
-    //         <div style="flex:1"><b>${d}</b></div>
-    //         <div style="flex:1"><b class="capi-text">${item}</b></div>
-    //         <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
-    //         <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
-    //       </div>`
-
-    // }).join(" ");
-    // document.getElementById("contact_history_day").innerHTML = innerdiv5
-
-    // const innerdiv15 = Object.keys(dataa["24_hr_clock"]).map(item => {
-    //     console.log(dataa["24_hr_clock"])
-    //     // console.log("ssd", item);
-
-    // }).join(" ");
 
 
+            if (dataa["Users in Contact Day"] != null) {
+                const innerdiv1 = `   <p class="count-id">${dataa["Users in Contact Day"]}</p>`
+                document.getElementById("nouinc").innerHTML = innerdiv1
+            } else {
+                document.getElementById("nouinc").innerHTML = '<div>No data available</div>'
+            }
 
-    // var c = 0;
-    // const innerdiv6 = Object.keys(dataa["Contact History Day"]).map(item => {
-    //     c = c + 1;
-    //     // console.log("ssd", item);
-    //     return `<div class="row_user_status">
-    //                 <div style="flex:1"><b>${c}</b></div>
-    //                 <div style="flex:1"><b class="capi-text">${item}</b></div>
-    //                 <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
-    //                 <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
-    //               </div>`
+            if (dataa["Users in Contact Week"] != null) {
+                const innerdiv2 = `   <p class="count-id">${dataa["Users in Contact Week"]}</p>`
+                document.getElementById("nouinw").innerHTML = innerdiv2
+            } else {
+                document.getElementById("nouinw").innerHTML = '<div>No data available</div>'
+            }
 
-    // }).join(" ");
+            if (dataa["Max Contact Duration Day"] != null) {
+                const innerdiv3 = `   <p class="count-id">${dataa["Max Contact Duration Day"]}</p>`
+                document.getElementById("hcdd").innerHTML = innerdiv3
+            } else {
+                document.getElementById("hcdd").innerHTML = '<div>No data available</div>'
+            }
+
+            if (dataa["Max Contact Duration Week"] != null) {
+                const innerdiv4 = `   <p class="count-id">${dataa["Max Contact Duration Week"]}</p>`
+                document.getElementById("hcdw").innerHTML = innerdiv4
+            }
+            else {
+                document.getElementById("hcdw").innerHTML = '<div>No data available</div>'
+            }
+            if (dataa["Contact History Week"] != null) {
+                document.getElementById('ctw').innerHTML = `<table id="contact_trace_wee" class=" " data-page-length='8'>
+                <thead align="center">
+                  <tr>
+                    <th>S.No</th>
+                    <th>User</th>
+                    <th>Count</th>
+                    <th>Max Duration</th>
+                  </tr>
+                </thead>
+                <tfoot></tfoot>
+              </table>`
+                Object.keys(dataa_w["Contact History Week"]).map(item => { keys_w.push(item) })
+                //  Object.values(data["emp 1"]["Contact History Week"]["count"]).map(item => { values.push(item) })
+                Object.keys(dataa_w["Contact History Week"]).map(item => {
+                    values_w.push(dataa_w["Contact History Week"][item]["count"]);
+                })
+                Object.keys(dataa_w["Contact History Week"]).map(item => {
+                    duration_w.push(dataa_w["Contact History Week"][item]["max_duration"]);
+                })
+                console.log("ii", duration_w)
+                for (var i = 0; i < keys_w.length; i++) {
+                    obj[i] = { "sno": i + 1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
+                    // console.log(i)
+                }
+                console.log("obj0", Object.values(obj))
+                dataa2 = Object.values(obj)
+                $('#contact_trace_wee').DataTable({
+                    "searching": false,
+                    "info": false,
+                    "bLengthChange": false,
+                    "bDestroy": true,
+                    data: dataa2, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+                });
+
+            }
+            else {
+                document.getElementById("ctw").innerHTML = '<div style="color:#007bff; padding:1rem"><a>No data available</a></div>'
+            }
+
+            console.log("cehking", dataa["Contact History Day"])
+            if (dataa["Contact History Day"] != null) {
+                document.getElementById('ctd').innerHTML = `<table id="contact_trace_day" class=" " data-page-length='8'>
+                <thead align="center">
+                  <tr>
+                    <th>S.No</th>
+                    <th>User</th>
+                    <th>Count</th>
+                    <th>Max Duration</th>
+                  </tr>
+                </thead>
+                <tfoot></tfoot>
+              </table>`
+
+                Object.keys(dataa["Contact History Day"]).map(item => { keys.push(item) })
+                //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
+                Object.keys(dataa["Contact History Day"]).map(item => {
+                    values.push(dataa["Contact History Day"][item]["count"]);
+                })
+                Object.keys(dataa["Contact History Day"]).map(item => {
+                    duration.push(dataa["Contact History Day"][item]["max_duration"]);
+                })
+                console.log("i", keys)
+                console.log("ii", duration)
+                for (var i = 0; i < keys.length; i++) {
+                    obj[i] = { "sno": i + 1, "pair": keys[i], "count": values[i], "duration": duration[i] };
+                    console.log(i)
+                }
+                console.log("obj1", Object.values(obj))
+                dataa = Object.values(obj)
+                $('#contact_trace_day').DataTable({
+                    "searching": false,
+                    "info": false,
+                    "bLengthChange": false,
+                    "bDestroy": true,
+                    data: dataa, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+
+                });
+            }
+            else {
+                document.getElementById("ctd").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available</a></div>'
+
+            }
 
 
 
-    // document.getElementById("contact_history_week").innerHTML = innerdiv6
+
+            // var d = 0;
+            // const innerdiv5 = Object.keys(dataa["Contact History Day"]).map(item => {
+
+            //     d = d + 1;
+            //     // console.log(dataa["24_hr_clock"])
+
+            //     // console.log("ssd", item);
+            //     return `<div class="row_user_status">
+            //         <div style="flex:1"><b>${d}</b></div>
+            //         <div style="flex:1"><b class="capi-text">${item}</b></div>
+            //         <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
+            //         <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
+            //       </div>`
+
+            // }).join(" ");
+            // document.getElementById("contact_history_day").innerHTML = innerdiv5
+
+            // const innerdiv15 = Object.keys(dataa["24_hr_clock"]).map(item => {
+            //     console.log(dataa["24_hr_clock"])
+            //     // console.log("ssd", item);
+
+            // }).join(" ");
+
+
+
+            // var c = 0;
+            // const innerdiv6 = Object.keys(dataa["Contact History Day"]).map(item => {
+            //     c = c + 1;
+            //     // console.log("ssd", item);
+            //     return `<div class="row_user_status">
+            //                 <div style="flex:1"><b>${c}</b></div>
+            //                 <div style="flex:1"><b class="capi-text">${item}</b></div>
+            //                 <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
+            //                 <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
+            //               </div>`
+
+            // }).join(" ");
+
+
+
+            // document.getElementById("contact_history_week").innerHTML = innerdiv6
 
 
 
 
-})
+        })
 
 }
 function history_clk(clk_d) {
@@ -303,19 +374,19 @@ function history_clk_12hr(clk_d) {
 
 
 function loadUserHistoy() {
-    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/getall' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log("ft", Object.keys(data));
-            const innerdiv = Object.keys(data).map(item => {
-                return `<option value='${item}'>${item}</option>`
+            let allUsers = Object.values(data);
+            let unDeletedUsers = allUsers.filter(user => user.is_Deleted === 'false');
+            let userNames = unDeletedUsers.map(user => user.user);
+            const innerdiv = userNames.map(userName => {
+                return `<option value='${userName}'>${userName}</option>`
             }).join("");
-            document.getElementById("user_history_select").innerHTML = innerdiv
-            // console.log("lll", Object.keys(data)[0])
+            document.getElementById("user_history_select").innerHTML = innerdiv;
             UserHistoy(Object.keys(data)[0])
             this.current_user = Object.keys(data)[0]
             localStorage.setItem('current_user', Object.keys(data)[0]);
-
         });
 }
 
@@ -336,16 +407,16 @@ function getSelectValueUserHistory() {
 
 function TeamHistoy(option) {
     keys = []
-      values = []
-      duration = []
-      obj = {}
+    values = []
+    duration = []
+    obj = {}
 
-      keys_w = []
-      values_w = []
-      duration_w = []
-      obj_w = {}
+    keys_w = []
+    values_w = []
+    duration_w = []
+    obj_w = {}
 
-    fetch('https://takvaviya.in/coolpad_backend/user/team_history/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
@@ -353,52 +424,65 @@ function TeamHistoy(option) {
 
             // console.log("k", dataa["Users in Contact"]);
 
-            const innerdiv = `   <p class="count-id">${dataa["Users in Contact"]}</p>`
-            document.getElementById("tuic").innerHTML = innerdiv
+            if (dataa["Users in Contact"] != null) {
+                const innerdiv = `   <p class="count-id">${dataa["Users in Contact"]}</p>`
+                document.getElementById("tuic").innerHTML = innerdiv
+            } else {
+                document.getElementById("tuic").innerHTML = `<div style="color:blue">No data available</div>`
+            }
 
-            const innerdiv4 = `   <p class="count-id">${dataa["Contacts in a Day"]}</p>`
-            document.getElementById("tcid").innerHTML = innerdiv4
+            if (dataa["Contacts in a Day"] != null) {
+                const innerdiv4 = `   <p class="count-id">${dataa["Contacts in a Day"]}</p>`
+                document.getElementById("tcid").innerHTML = innerdiv4
+            } else { document.getElementById("tcid").innerHTML = `<div style="color:blue">No data available</div>` }
 
-            const innerdiv1 = `   <p class="count-id">${dataa["Contacts in a Week"]}</p>`
-            document.getElementById("tciw").innerHTML = innerdiv1
+            if (dataa["Contacts in a Week"] != null) {
+                const innerdiv1 = `   <p class="count-id">${dataa["Contacts in a Week"]}</p>`
+                document.getElementById("tciw").innerHTML = innerdiv1
+            } else { document.getElementById("tciw").innerHTML = `<div style="color:blue">No data available</div>` }
 
-            const innerdiv2 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Day"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Day"])}</p>`
-            document.getElementById("tmcup").innerHTML = innerdiv2
+            if (dataa["Contacts in a Week"] != null) {
+                const innerdiv2 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Day"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Day"])}</p>`
+                document.getElementById("tmcup").innerHTML = innerdiv2
+            } else { document.getElementById("tmcup").innerHTML = `<div style="color:blue">No data available</div>` }
 
-            const innerdiv3 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Week"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Week"])}</p>`
-            document.getElementById("tmcupw").innerHTML = innerdiv3
+            if (dataa["Contacts in a Week"] != null) {
+                const innerdiv3 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Week"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Week"])}</p>`
+                document.getElementById("tmcupw").innerHTML = innerdiv3
+            }
+            else { document.getElementById("tmcupw").innerHTML = `<div style="color:blue">No data available</div>` }
 
 
-           Object.keys( dataa["top 5 users in contact Day"]).map(item => { keys.push(item) })
-           Object.values( dataa["top 5 users in contact Day"]).map(item => { values.push(item) })
-           for(var i = 0; i < keys.length; i++)
-            {
-            obj[i] = {"sno":i+1,"pair":keys[i],"contact":values[i]};
-           }
-          //  console.log("obj", Object.values(obj))
-           dataa = Object.values(obj)
+            Object.keys(dataa["top 5 users in contact Day"]).map(item => { keys.push(item) })
+            Object.values(dataa["top 5 users in contact Day"]).map(item => { values.push(item) })
+            for (var i = 0; i < keys.length; i++) {
+                obj[i] = { "sno": i + 1, "pair": keys[i], "contact": values[i] };
+            }
+            //  console.log("obj", Object.values(obj))
+            dataa = Object.values(obj)
             $('#user_contact').DataTable({
                 "searching": false,
-              "info": false,
-              "bLengthChange": false,
-              "bDestroy": true,
-            data: dataa, "columns": [{"data":"sno"},{ "data": "pair" },{ "data": "contact" }]});
+                "info": false,
+                "bLengthChange": false,
+                "bDestroy": true,
+                data: dataa, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "contact" }]
+            });
 
 
-            Object.keys( dataa_ww["top 5 users in contact Day"]).map(item => { keys_w.push(item) })
-           Object.values( dataa_ww["top 5 users in contact Day"]).map(item => { values_w.push(item) })
-           for(var i = 0; i < keys_w.length; i++)
-            {
-            obj[i] = {"sno":i+1,"pair":keys_w[i],"contact":values_w[i]};
-           }
-          //  console.log("obj", Object.values(obj))
-           dataa = Object.values(obj)
+            Object.keys(dataa_ww["top 5 users in contact Day"]).map(item => { keys_w.push(item) })
+            Object.values(dataa_ww["top 5 users in contact Day"]).map(item => { values_w.push(item) })
+            for (var i = 0; i < keys_w.length; i++) {
+                obj[i] = { "sno": i + 1, "pair": keys_w[i], "contact": values_w[i] };
+            }
+            //  console.log("obj", Object.values(obj))
+            dataa = Object.values(obj)
             $('#user_contact_weekss').DataTable({
                 "searching": false,
-              "info": false,
-              "bLengthChange": false,
-              "bDestroy": true,
-            data: dataa, "columns": [{"data":"sno"},{ "data": "pair" },{ "data": "contact" }]});
+                "info": false,
+                "bLengthChange": false,
+                "bDestroy": true,
+                data: dataa, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "contact" }]
+            });
 
             // var c = 0;
             // const innerdiv5 = Object.keys(dataa["top 5 users in contact Day"]).map(item => {
@@ -445,7 +529,7 @@ function loadTeamHistory() {
 
     // window.location.href = "http://106.51.3.224:6661/coolpad_report/team A-Team History.csv"
     // console.log("click");
-    fetch('https://takvaviya.in/coolpad_backend/user/team_history/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ start_date+'/'+ end_date + '/' + current_date  + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log("ft", Object.keys(data));
@@ -476,7 +560,7 @@ function dwnldusrpdf() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -489,7 +573,7 @@ function dwnldusrpdf() {
 function dwnldusrcsv() {
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".csv");
@@ -503,7 +587,7 @@ function dwnldusrxlsx() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
         .then(data => {
             //  console.log(data.path+".xlsx");
@@ -520,7 +604,7 @@ function dwnldtmpdf() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -534,7 +618,7 @@ function dwnldtmcsv() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".csv");
@@ -548,7 +632,7 @@ function dwnldtmxlsx() {
 
     // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/2020-08-03/2020-08-07/2020-08-04')
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".xlsx");
@@ -571,10 +655,10 @@ closeBtn.addEventListener('click', () => {
 });
 function Submit1() {
     var dateObj = new Date();
-var month = dateObj.getUTCMonth() + 1; //months from 1-12
-var day = dateObj.getUTCDate();
-var year = dateObj.getUTCFullYear();
-newdate = year + "-" + month + "-" + day;
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    newdate = year + "-" + month + "-" + day;
     console.log("clcikes", localStorage.getItem("current_user"));
     console.log("logged", document.getElementById("note_textt").value)
     var note = document.getElementById("note_textt").value
@@ -618,10 +702,10 @@ function load_notes_user() {
                     return `
                     <div class="note_card">
                     <div style="display: flex; flex-direction: row; align-items: center;">
-                    <div class="ndate" style='flex:5'><b>${ data[item][nitem].date_time}</b></div>
+                    <div class="ndate" style='flex:5'><b>${data[item][nitem].date_time}</b></div>
                     <div onclick="Note_delete(${nitem})" style="color: rgb(187, 66, 66); font-size:10px;cursor: pointer;margin-right: 1rem;"><b>REMOVE</b></div>
                     </div>
-                    <div class="nnote" id="nnote"><p style="padding-right: 40px;">${ data[item][nitem].notes}</p></div>
+                    <div class="nnote" id="nnote"><p style="padding-right: 40px;">${data[item][nitem].notes}</p></div>
                     </div>`
                 }).join(" ");
                 document.getElementById("load_notes").innerHTML = innerdiv
@@ -647,7 +731,7 @@ function load_notes_user() {
                     <div style="display: flex; flex-direction: row; align-items: center;">
                     <div class="ndate1" style='flex:5'><b>${da}</b></div>
                     </div>
-                    <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
+                    <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${stick_data.slice(-1)[0]}</p></div>
                     </div>`
                 document.getElementById("load_notes1").innerHTML = innerdiv1
 
@@ -656,7 +740,9 @@ function load_notes_user() {
             })
         });
 }
+
 load_notes_user();
+
 function Note_delete(id) {
     console.log("delete", id);
     // fetch()
@@ -704,10 +790,10 @@ closeBtn1.addEventListener('click', () => {
 });
 function Submit2() {
     var dateObj = new Date();
-var month = dateObj.getUTCMonth() + 1; //months from 1-12
-var day = dateObj.getUTCDate();
-var year = dateObj.getUTCFullYear();
-newdate = year + "-" + month + "-" + day;
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    newdate = year + "-" + month + "-" + day;
     console.log("clcikes", localStorage.getItem("current_team"));
     console.log("logged", document.getElementById("note_textt1").value)
     var note = document.getElementById("note_textt1").value
@@ -754,7 +840,7 @@ function load_notes_team() {
                     <div class="ndate" style='flex:5'><b>${data[item][nitem].date_time}</b></div>
                     <div onclick="Note_delete_team(${nitem})" style="color: rgb(187, 66, 66); font-size:10px;cursor: pointer;margin-right: 1rem;"><b>REMOVE</b></div>
                     </div>
-                    <div class="nnote" id="nnote"><p style="padding-right: 40px;">${ data[item][nitem].notes}</p></div>
+                    <div class="nnote" id="nnote"><p style="padding-right: 40px;">${data[item][nitem].notes}</p></div>
                     </div>`
                 }).join(" ");
                 document.getElementById("load_notes_team").innerHTML = innerdiv
@@ -772,7 +858,7 @@ function load_notes_team() {
                     <div style="display: flex; flex-direction: row; align-items: center;">
                     <div class="ndate1" style='flex:5'><b>${da}</b></div>
                     </div>
-                    <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
+                    <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${stick_data.slice(-1)[0]}</p></div>
                     </div>`
                 document.getElementById("load_notes2").innerHTML = innerdiv1
             })

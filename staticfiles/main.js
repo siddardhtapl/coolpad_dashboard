@@ -1,3 +1,12 @@
+var zone = localStorage.getItem('zone')
+var locationn = localStorage.getItem('location')
+var company = localStorage.getItem('company')
+var group = localStorage.getItem('group')
+var common4all = group + '__' + locationn + '__' + zone + '__' + company
+
+console.log("c4a", common4all);
+
+
 // heat chart toggle
 var input = document.getElementById('togBtn1');
 input.addEventListener('change', function () {
@@ -7,8 +16,8 @@ input.addEventListener('change', function () {
         document.getElementById("chartt").style.display = 'block';
     }
     else {
-       console.log("flaseee")
-        document.getElementById("contact_frequency1").style.display = 'block'; 
+        console.log("flaseee")
+        document.getElementById("contact_frequency1").style.display = 'block';
         document.getElementById("chartt").style.display = 'none';
     }
 });
@@ -21,8 +30,8 @@ input.addEventListener('change', function () {
         document.getElementById("chartt1").style.display = 'block';
     }
     else {
-       // console.log("flaseee")
-        document.getElementById("contact_frequency_weekly1").style.display = 'block'; 
+        // console.log("flaseee")
+        document.getElementById("contact_frequency_weekly1").style.display = 'block';
         document.getElementById("chartt1").style.display = 'none';
     }
 });
@@ -47,33 +56,34 @@ function contact_history_week() {
     values = []
     obj = {}
     aa = []
-    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/2020-08-03/2020-08-07')
-      .then(response => response.json())
-      .then(data => {
-        //  console.log( data);
-        Object.keys(data).map(item => { keys.push(item) })
-        Object.values(data).map(item => { values.push(item) })
-        //  console.log("i",keys)
-        //  console.log("ii",values)
-         for(var i = 0; i < keys.length; i++)
-         {
-          obj[i] = {"pair":keys[i],"count":values[i]};
-           console.log(i)
-         }
-         console.log("obj", Object.values(obj))
-         dataa = Object.values(obj)
-          $('#contact_his_week').DataTable({
-            "searching": false,
-              "info": false,
-              "bLengthChange": false,
-              data: dataa, "columns": [{
-              "render": function (data, type, full, meta) {
-                return mm++;
-              }},
-            { "data": "pair" },{ "data": "count" }]});
-      });
-  }
-  contact_history_week();
+    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/2020-08-03/2020-08-07'+ '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            //  console.log( data);
+            Object.keys(data).map(item => { keys.push(item) })
+            Object.values(data).map(item => { values.push(item) })
+            //  console.log("i",keys)
+            //  console.log("ii",values)
+            for (var i = 0; i < keys.length; i++) {
+                obj[i] = { "pair": keys[i], "count": values[i] };
+                console.log(i)
+            }
+            console.log("obj", Object.values(obj))
+            dataa = Object.values(obj)
+            $('#contact_his_week').DataTable({
+                "searching": false,
+                "info": false,
+                "bLengthChange": false,
+                data: dataa, "columns": [{
+                    "render": function (data, type, full, meta) {
+                        return mm++;
+                    }
+                },
+                { "data": "pair" }, { "data": "count" }]
+            });
+        });
+}
+contact_history_week();
 function conatct_history() {
     obj = []
     m = 1
@@ -86,72 +96,107 @@ function conatct_history() {
     values = []
     obj = {}
     aa = []
-    fetch('https://takvaviya.in/coolpad_backend/user/contact_history/2020-08-04')
-      .then(response => response.json())
-      .then(data => {
-        //  console.log( data);
-        Object.keys(data).map(item => { keys.push(item) })
-        Object.values(data).map(item => { values.push(item) })
-        //  console.log("i",keys)
-        //  console.log("ii",values)
-         for(var i = 0; i < keys.length; i++)
-         {
-          obj[i] = {"pair":keys[i],"count":values[i]};
-           console.log(i)
-         }
-         console.log("obj", Object.values(obj))
-         dataa = Object.values(obj)
-          $('#contact_his').DataTable({
-            "searching": false,
-              "info": false,
-              "bLengthChange": false,
-          data: dataa, "columns": [{
-              "render": function (data, type, full, meta) {
-                return m++;
-              }},
-            { "data": "pair" },{ "data": "count" }]});
-      });
-  }
-  conatct_history();
+
+    console.log('cc4all', common4all);
+    fetch('https://takvaviya.in/coolpad_backend/user/contact_history/'+ current_date +'/'+ common4all)
+        .then(response => response.json())
+        .then(data => {
+            //  console.log( data);
+            Object.keys(data).map(item => { keys.push(item) })
+            Object.values(data).map(item => { values.push(item) })
+            //  console.log("i",keys)
+            //  console.log("ii",values)
+            for (var i = 0; i < keys.length; i++) {
+                obj[i] = { "pair": keys[i], "count": values[i] };
+                console.log(i)
+            }
+            console.log("obj", Object.values(obj))
+            dataa = Object.values(obj)
+            $('#contact_his').DataTable({
+                "searching": false,
+                "info": false,
+                "bLengthChange": false,
+                data: dataa, "columns": [{
+                    "render": function (data, type, full, meta) {
+                        return m++;
+                    }
+                },
+                { "data": "pair" }, { "data": "count" }]
+            });
+        });
+}
+conatct_history();
+
 function userid() {
-    fetch('https://takvaviya.in/coolpad_backend/user/getall/')
+    obj1 = {}
+    sta = []
+    batery = []
+    fetch('https://takvaviya.in/coolpad_backend/user/getall' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
+            Object.values(data).map(item => {
+                var d = item['recent_heartbeat_event']['shutdown']
+                var bat = item['recent_heartbeat_event']['battery']
+                if (d === false) {
+                    console.log(d)
+                    sta.push('ON')
+                }
+                else if (d === true) {
+                    sta.push('OFF')
+                }
+                else {
+                    sta.push(d)
+                }
+                if (bat) {
+                    batery.push(bat)
+                }
+                else {
+                    batery.push(bat)
+                }
+            })
+            // console.log(batery)
+            for (var i = 0; i < dataa.length; i++) {
+                dataa[i]["sta"] = sta[i]
+                dataa[i]["battery"] = batery[i]
+            }
+            // console.log(dataa)
+            let undeletedUsers = dataa.filter(user => user.is_Deleted === "false");
+
             $('#user_status_table').DataTable({
+                "searching": false,
+                "info": false,
+                "bLengthChange": false,
+                data: undeletedUsers,
+                "columns": [{ "data": "user_id" }, { "data": "user" }, { "data": "device_id" }, { "data": "sta", "defaultContent": "-" }, { "data": "battery", "defaultContent": "-" }]
+            });
+        });
+}
+
+userid();
+
+function userlive() {
+    var i = 0
+    fetch('https://takvaviya.in/coolpad_backend/user/live_data/' + '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            dataa = Object.values(data)
+            i = i + 1
+            $('#usertable').DataTable({
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
 
                 data: dataa,
-                "columns": [{ "data": "user_id" }, { "data": "user" }, { "data": "device_id" }, { "defaultContent": "<th>OFF</th>" }]
+                "columns": [{
+                    "render": function (data, type, full, meta) {
+                        return i++;
+                    }
+                }, { "data": "local" }, { "data": "remote" }, { "data": "duration" }, { "data": "avgDist" }]
             });
         });
 }
-userid();   
-
-function userlive() {
-    var i = 0
-    fetch('https://takvaviya.in/coolpad_backend/user/live_data/')
-      .then(response => response.json())
-      .then(data => {
-        dataa = Object.values(data)
-        i = i + 1
-        $('#usertable').DataTable({
-          "searching": false,
-          "info": false,
-          "bLengthChange": false,
-
-          data: dataa,
-          "columns": [{
-            "render": function (data, type, full, meta) {
-              return i++;
-            }
-          }, { "data": "local" }, { "data": "remote" }, { "data": "duration" }, { "data": "avgDist" }]
-        });
-      });
-  }
-  userlive();
+userlive();
 //  tables end
 
 
@@ -209,21 +254,21 @@ function opentab(evt, tabName) {
 }
 
 
-function timerTick() {
-    with (new Date()) {
-        var h, m, s;
+// function timerTick() {
+//     with (new Date()) {
+//         var h, m, s;
 
-        h = 30 * ((getHours() % 12) + getMinutes() / 60);
-        m = 6 * getMinutes();
-        s = 6 * getSeconds();
+//         h = 30 * ((getHours() % 12) + getMinutes() / 60);
+//         m = 6 * getMinutes();
+//         s = 6 * getSeconds();
 
-        document.getElementById('h_pointer').setAttribute('transform', 'rotate(' + h + ', 50, 50)');
-        document.getElementById('m_pointer').setAttribute('transform', 'rotate(' + m + ', 50, 50)');
-        document.getElementById('s_pointer').setAttribute('transform', 'rotate(' + s + ', 50, 50)');
+//         document.getElementById('h_pointer').setAttribute('transform', 'rotate(' + h + ', 50, 50)');
+//         document.getElementById('m_pointer').setAttribute('transform', 'rotate(' + m + ', 50, 50)');
+//         document.getElementById('s_pointer').setAttribute('transform', 'rotate(' + s + ', 50, 50)');
 
-        setTimeout(timerTick, 1000);
-    }
-}
+//         setTimeout(timerTick, 1000);
+//     }
+// }
 
 
 
@@ -240,7 +285,7 @@ document.querySelector('button').addEventListener('click', function () {
 
 
 function clk_data() {
-    fetch("https://takvaviya.in/coolpad_backend/user/clock/").then(responsive => {
+    fetch("https://takvaviya.in/coolpad_backend/user/clock/" + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         var clock_data = data;
@@ -289,7 +334,8 @@ end_date = "2020-08-07"
 
 //User status
 function user_status() {
-    fetch("https://takvaviya.in/coolpad_backend/user/device_status/")
+    
+    fetch("https://takvaviya.in/coolpad_backend/user/device_status/" + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             console.log("timer", data);
@@ -319,7 +365,7 @@ user_status();
 
 
 function daily_live_user_tracker() {
-    fetch('https://takvaviya.in/coolpad_backend/user/live_data/')
+    fetch('https://takvaviya.in/coolpad_backend/user/live_data/'+ '/' + common4all)
         .then(response => response.json())
         .then(data => {
             console.log("live", data);
@@ -349,7 +395,7 @@ setInterval(function () { daily_live_user_tracker(); }, 10000);
 //Top contact history
 
 function daily_tracker_top_contacts() {
-    fetch('https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date).then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(val => {
         $("#chart9").empty();
@@ -412,7 +458,7 @@ daily_tracker_top_contacts();
 
 //total number of contact
 function daily_tracker_total_contact() {
-    fetch('https://takvaviya.in/coolpad_backend/user/total_number/' + current_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/total_number/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             document.getElementById("totalnocontact").innerHTML = `<b style="font-size:50px;">${data}</b>`
@@ -425,9 +471,9 @@ daily_tracker_total_contact();
 //contact history all
 function daily_tracker_contact_history() {
 
-        fetch('https://takvaviya.in/coolpad_backend/user/contact_history/' + current_date)
-            .then(response => response.json())
-            .then(data => {
+    fetch('https://takvaviya.in/coolpad_backend/user/contact_history/' + current_date + '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
             // console.log("his", data)
             $("#contact_history").empty();
             var i = 0;
@@ -454,7 +500,7 @@ daily_tracker_contact_history();
 
 function loadFreq(option) {
     console.log("sel", option);
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option]
@@ -496,7 +542,7 @@ function loadFreq(option) {
 }
 
 function daily_tracker_freq() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log("ft", Object.keys(data));
@@ -537,7 +583,7 @@ setInterval(function () {
 // Contact history all
 
 function weekly_contact_history() {
-    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date + '/' + common4all  )
         .then(response => response.json())
         .then(data => {
             // console.log("his", data)
@@ -563,7 +609,7 @@ weekly_contact_history();
 
 //Top contact history
 function weekly_top_contact() {
-    fetch('https://takvaviya.in/coolpad_backend/user/pairs_weekly/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/pairs_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             console.log("ss", Object.values(data));
@@ -624,7 +670,7 @@ weekly_top_contact();
 //total number of contact
 
 function weekly_total_number() {
-    fetch('https://takvaviya.in/coolpad_backend/user/total_number_weekly/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/total_number_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
 
@@ -671,7 +717,7 @@ weekly_total_number();
 // Contact Frequency matrix with teams
 function loadFreqWeekly(option) {
     console.log("sellll", option);
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option]
@@ -712,7 +758,7 @@ function loadFreqWeekly(option) {
 }
 
 function weekly_tracker_freq() {
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all )
         .then(response => response.json())
         .then(data => {
             // console.log("ft", Object.keys(data));
@@ -735,7 +781,7 @@ weekly_tracker_freq();
 
 // Weeklt team tracker
 function weekly_team_tracker() {
-    fetch('https://takvaviya.in/coolpad_backend/user/weekly_team_tracker/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/weekly_team_tracker/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             console.log("tdata", data)
@@ -825,7 +871,7 @@ clk_chart_24();
 function clk_chart_24() {
     // var am_data=[]
     // var pm_data=[]
-    fetch('https://takvaviya.in/coolpad_backend/user/clock/').then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock/' + '/' + common4all ).then(responsive => {
         return responsive.json();
     }).then(data => {
 
@@ -892,15 +938,15 @@ function clk_chart() {
     // var am_data=[]
     // var pm_data=[]
     var co;
-    if(localStorage.getItem("theme") == "dark"){ co ='white'}
-    else{co ='black'}
+    if (localStorage.getItem("theme") == "dark") { co = 'white' }
+    else { co = 'black' }
 
-    fetch('https://takvaviya.in/coolpad_backend/user/clock/').then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock/'+ '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         // am_data=data.slice(0,12)
         // pm_data=data.slice(12,24)
-        console.log(co,"deiiiiiiiiiii")
+        console.log(co, "deiiiiiiiiiii")
         $("#chart10").empty();
         var options = {
             series: [{
@@ -963,7 +1009,7 @@ function clk_chart() {
 
 /*Weekly */
 function weekly_total_number() {
-    fetch('https://takvaviya.in/coolpad_backend/user/total_number_weekly/' + start_date + '/' + end_date)
+    fetch('https://takvaviya.in/coolpad_backend/user/total_number_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             document.getElementById("totalnocontact_weekly").innerHTML = `<b style="font-size:50px;">${data}</b>`
@@ -971,7 +1017,7 @@ function weekly_total_number() {
 }
 weekly_total_number();
 function weekly_clk() {
-    fetch('https://takvaviya.in/coolpad_backend/user/clock_weekly/2020-08-03').then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock_weekly/'+start_date+ '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         $("#chart11").empty();
@@ -1035,7 +1081,7 @@ weekly_clk();
 var heatMapData;
 var heatMapChart;
 function getHeapMapData() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date).then(
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all).then(
         response => {
             if (response.ok) {
                 return response.json();
@@ -1048,132 +1094,132 @@ function getHeapMapData() {
             getDropDownOptions();
             renderHeatMap('team A')
         });
-        function getDropDownOptions() {
-            if (heatMapData) {
-                let teams = Object.getOwnPropertyNames(heatMapData);
-                let dropDown = document.getElementById('teamDropDownButton');
-                teams.forEach(team => {
-                    let dropDownItem = document.createElement('option');
-                    dropDownItem.id = `${team}`;
-                    dropDownItem.value = `${team}`;
-                    dropDownItem.innerHTML = `${team}`
-                    dropDown.append(dropDownItem);
-                });
-            }
+    function getDropDownOptions() {
+        if (heatMapData) {
+            let teams = Object.getOwnPropertyNames(heatMapData);
+            let dropDown = document.getElementById('teamDropDownButton');
+            teams.forEach(team => {
+                let dropDownItem = document.createElement('option');
+                dropDownItem.id = `${team}`;
+                dropDownItem.value = `${team}`;
+                dropDownItem.innerHTML = `${team}`
+                dropDown.append(dropDownItem);
+            });
         }
+    }
 }
 getHeapMapData();
 function renderHeatMap(team) {
-var seriesData = [];
-switchTeamChart(team);
-function switchTeamChart(team) {
-    seriesData = [];
-    if (heatMapData) {
-        let temp_team = heatMapData[team];
-        for (const emp in heatMapData[team]) {
-            let emp_data = temp_team[emp];
-            let chart_temp = []
-            for (const emp in emp_data) {
-                chart_temp.push({
-                    x: emp,
-                    y: emp_data[emp],
-                    min: -100,
-                    max: 100,
-                })
-            }
-            seriesData.push({
-                name: emp,
-                data: chart_temp
-            });
-        }
-        if (heatMapChart) {
-            heatMapChart.updateSeries(seriesData);
-        }
-        else {
-            renderChart();
-        }
-        document.getElementById('teamDropDownButton').value = `${team}`;
-    }
-};
-function renderChart() {
-    var options = {
-        series: seriesData,
-        chart: {
-            height: 330,
-            type: 'heatmap',
-        },
-        stroke: {
-            show: true,
-        },
-        dataLabels: {
-            enabled: false
-        },
-        legend:{
-            show: true,
-            labels:{
-                colors:'#888ea8'
-            },
-        },
-        // colors: [
-        //     "#F8C045",
-        //     "#F8C045",
-        //     "#F8C045",
-        //     "#F8C045"
-        //   ],
-        xaxis: {
-            labels: {
-                show: true,
-                style: {
-                    colors: ' #888EA8',
+    var seriesData = [];
+    switchTeamChart(team);
+    function switchTeamChart(team) {
+        seriesData = [];
+        if (heatMapData) {
+            let temp_team = heatMapData[team];
+            for (const emp in heatMapData[team]) {
+                let emp_data = temp_team[emp];
+                let chart_temp = []
+                for (const emp in emp_data) {
+                    chart_temp.push({
+                        x: emp,
+                        y: emp_data[emp],
+                        min: -100,
+                        max: 100,
+                    })
                 }
-            },
-            axisBorder: {
-                show: false
-            },
-        },
-        yaxis: {
-            labels: {
-                show: true,
-                style: {
-                    colors: "#888EA8",
-                    fontSize: '12px',
-                }
-            },
-        },
-          plotOptions: {
-            heatmap: {
-              shadeIntensity: 0.5,
-              radius: 0,
-              useFillColorAsStroke: true,
-              colorScale: {
-                ranges: [{
-                    from: 0,
-                    to: 0,
-                    color: '#1A1C2D'
-                  },
-                  {
-                    from: 1,
-                    to: 20,
-                    color: '#D6FEFF'
-                  },
-                  {
-                    from: 21,
-                    to: 45,
-                    color: '#7CEAFC'
-                  },
-                  {
-                    from: 46,
-                    to: 55,
-                    color: '#094198'
-                  }
-                ]
-              }
+                seriesData.push({
+                    name: emp,
+                    data: chart_temp
+                });
             }
-          },
+            if (heatMapChart) {
+                heatMapChart.updateSeries(seriesData);
+            }
+            else {
+                renderChart();
+            }
+            document.getElementById('teamDropDownButton').value = `${team}`;
+        }
     };
-    heatMapChart = new ApexCharts(document.querySelector("#chart30"), options);
-    heatMapChart.render();
-}
+    function renderChart() {
+        var options = {
+            series: seriesData,
+            chart: {
+                height: 330,
+                type: 'heatmap',
+            },
+            stroke: {
+                show: true,
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: true,
+                labels: {
+                    colors: '#888ea8'
+                },
+            },
+            // colors: [
+            //     "#F8C045",
+            //     "#F8C045",
+            //     "#F8C045",
+            //     "#F8C045"
+            //   ],
+            xaxis: {
+                labels: {
+                    show: true,
+                    style: {
+                        colors: ' #888EA8',
+                    }
+                },
+                axisBorder: {
+                    show: false
+                },
+            },
+            yaxis: {
+                labels: {
+                    show: true,
+                    style: {
+                        colors: "#888EA8",
+                        fontSize: '12px',
+                    }
+                },
+            },
+            plotOptions: {
+                heatmap: {
+                    shadeIntensity: 0.5,
+                    radius: 0,
+                    useFillColorAsStroke: true,
+                    colorScale: {
+                        ranges: [{
+                            from: 0,
+                            to: 0,
+                            color: '#1A1C2D'
+                        },
+                        {
+                            from: 1,
+                            to: 20,
+                            color: '#D6FEFF'
+                        },
+                        {
+                            from: 21,
+                            to: 45,
+                            color: '#7CEAFC'
+                        },
+                        {
+                            from: 46,
+                            to: 55,
+                            color: '#094198'
+                        }
+                        ]
+                    }
+                }
+            },
+        };
+        heatMapChart = new ApexCharts(document.querySelector("#chart30"), options);
+        heatMapChart.render();
+    }
 }
 function switchHeatMap(team) {
     renderHeatMap(team);
@@ -1184,7 +1230,7 @@ function switchHeatMap(team) {
 var heatMapDataWeekly;
 var heatMapChartWeekly;
 function getHeapMapDataWeekly() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date).then(
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all).then(
         response => {
             if (response.ok) {
                 return response.json();
@@ -1197,132 +1243,132 @@ function getHeapMapDataWeekly() {
             getDropDownOptions();
             renderHeatMapWeekly('team A')
         });
-        function getDropDownOptions() {
-            if (heatMapDataWeekly) {
-                let teams = Object.getOwnPropertyNames(heatMapDataWeekly);
-                let dropDown = document.getElementById('teamDropDownButtonWeek');
-                teams.forEach(team => {
-                    let dropDownItem = document.createElement('option');
-                    dropDownItem.id = `${team}`;
-                    dropDownItem.value = `${team}`;
-                    dropDownItem.innerHTML = `${team}`
-                    dropDown.append(dropDownItem);
-                });
-            }
+    function getDropDownOptions() {
+        if (heatMapDataWeekly) {
+            let teams = Object.getOwnPropertyNames(heatMapDataWeekly);
+            let dropDown = document.getElementById('teamDropDownButtonWeek');
+            teams.forEach(team => {
+                let dropDownItem = document.createElement('option');
+                dropDownItem.id = `${team}`;
+                dropDownItem.value = `${team}`;
+                dropDownItem.innerHTML = `${team}`
+                dropDown.append(dropDownItem);
+            });
         }
+    }
 }
 getHeapMapDataWeekly();
 function renderHeatMapWeekly(team) {
-var seriesData = [];
-switchTeamChartWeekly(team);
-function switchTeamChartWeekly(team) {
-    seriesData = [];
-    if (heatMapDataWeekly) {
-        let temp_team = heatMapDataWeekly[team];
-        for (const emp in heatMapDataWeekly[team]) {
-            let emp_data = temp_team[emp];
-            let chart_temp = []
-            for (const emp in emp_data) {
-                chart_temp.push({
-                    x: emp,
-                    y: emp_data[emp],
-                    min: -100,
-                    max: 100,
-                })
-            }
-            seriesData.push({
-                name: emp,
-                data: chart_temp
-            });
-        }
-        if (heatMapChartWeekly) {
-            heatMapChartWeekly.updateSeries(seriesData);
-        }
-        else {
-            renderChart();
-        }
-        document.getElementById('teamDropDownButton').value = `${team}`;
-    }
-};
-function renderChart() {
-    var options = {
-        series: seriesData,
-        chart: {
-            height: 330,
-            type: 'heatmap',
-        },
-        stroke: {
-            show: true,
-        },
-        dataLabels: {
-            enabled: false
-        },
-        legend:{
-            show: true,
-            labels:{
-                colors:'888ea8'
-            },
-        },
-        // colors: [
-        //     "#F8C045",
-        //     "#F8C045",
-        //     "#F8C045",
-        //     "#F8C045"
-        //   ],
-        xaxis: {
-            labels: {
-                show: true,
-                style: {
-                    colors: ' #888EA8',
+    var seriesData = [];
+    switchTeamChartWeekly(team);
+    function switchTeamChartWeekly(team) {
+        seriesData = [];
+        if (heatMapDataWeekly) {
+            let temp_team = heatMapDataWeekly[team];
+            for (const emp in heatMapDataWeekly[team]) {
+                let emp_data = temp_team[emp];
+                let chart_temp = []
+                for (const emp in emp_data) {
+                    chart_temp.push({
+                        x: emp,
+                        y: emp_data[emp],
+                        min: -100,
+                        max: 100,
+                    })
                 }
-            },
-            axisBorder: {
-                show: false
-            },
-        },
-        yaxis: {
-            labels: {
-                show: true,
-                style: {
-                    colors: "#888EA8",
-                    fontSize: '12px',
-                }
-            },
-        },
-          plotOptions: {
-            heatmap: {
-              shadeIntensity: 0.5,
-              radius: 0,
-              useFillColorAsStroke: true,
-              colorScale: {
-                ranges: [{
-                    from: 0,
-                    to: 0,
-                    color: '#1A1C2D'
-                  },
-                  {
-                    from: 1,
-                    to: 20,
-                    color: '#D6FEFF'
-                  },
-                  {
-                    from: 21,
-                    to: 45,
-                    color: '#7CEAFC'
-                  },
-                  {
-                    from: 46,
-                    to: 55,
-                    color: '#094198 '
-                  }
-                ]
-              }
+                seriesData.push({
+                    name: emp,
+                    data: chart_temp
+                });
             }
-          },
+            if (heatMapChartWeekly) {
+                heatMapChartWeekly.updateSeries(seriesData);
+            }
+            else {
+                renderChart();
+            }
+            document.getElementById('teamDropDownButton').value = `${team}`;
+        }
     };
-    heatMapChartWeekly = new ApexCharts(document.querySelector("#heatMapChartWeekly"), options);
-    heatMapChartWeekly.render();
-}
+    function renderChart() {
+        var options = {
+            series: seriesData,
+            chart: {
+                height: 330,
+                type: 'heatmap',
+            },
+            stroke: {
+                show: true,
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: true,
+                labels: {
+                    colors: '888ea8'
+                },
+            },
+            // colors: [
+            //     "#F8C045",
+            //     "#F8C045",
+            //     "#F8C045",
+            //     "#F8C045"
+            //   ],
+            xaxis: {
+                labels: {
+                    show: true,
+                    style: {
+                        colors: ' #888EA8',
+                    }
+                },
+                axisBorder: {
+                    show: false
+                },
+            },
+            yaxis: {
+                labels: {
+                    show: true,
+                    style: {
+                        colors: "#888EA8",
+                        fontSize: '12px',
+                    }
+                },
+            },
+            plotOptions: {
+                heatmap: {
+                    shadeIntensity: 0.5,
+                    radius: 0,
+                    useFillColorAsStroke: true,
+                    colorScale: {
+                        ranges: [{
+                            from: 0,
+                            to: 0,
+                            color: '#1A1C2D'
+                        },
+                        {
+                            from: 1,
+                            to: 20,
+                            color: '#D6FEFF'
+                        },
+                        {
+                            from: 21,
+                            to: 45,
+                            color: '#7CEAFC'
+                        },
+                        {
+                            from: 46,
+                            to: 55,
+                            color: '#094198 '
+                        }
+                        ]
+                    }
+                }
+            },
+        };
+        heatMapChartWeekly = new ApexCharts(document.querySelector("#heatMapChartWeekly"), options);
+        heatMapChartWeekly.render();
+    }
 }
 function switchHeatMapWeekly(team) {
     renderHeatMapWeekly(team);

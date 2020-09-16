@@ -1,3 +1,10 @@
+var zone = localStorage.getItem('zone')
+var locationn = localStorage.getItem('location')
+var company = localStorage.getItem('company')
+var group = localStorage.getItem('group')
+var common4all = group + '__' + locationn + '__' + zone + '__' + company
+
+
 var contactTracingData;
 var contactGraph;
 var immediateContacts;
@@ -19,7 +26,7 @@ function getContactTracingData(e, s_date, e_date) {
   let startDate = s_date;
   let endDate = e_date;
   if (emp && startDate && endDate) {
-    fetch(`https://takvaviya.in/coolpad_backend/user/contact_trace/${emp}/${startDate}/${endDate}`).then(
+    fetch('https://takvaviya.in/coolpad_backend/user/contact_trace/'+emp+'/'+startDate+'/'+endDate+'/'+common4all).then(
       response => {
         if (response.ok) {
           return response.json();
@@ -434,3 +441,22 @@ function removeL2Icons() {
     l2Icons.parentNode.removeChild(l2Icons);
   }
 }
+
+
+//###########################
+
+function getUserSelectDropdown() {
+  fetch('https://takvaviya.in/coolpad_backend/user/getall'+ '/' + common4all)
+      .then(response => response.json())
+      .then(data => {
+          let allUsers = Object.values(data);
+          let unDeletedUsers = allUsers.filter(user => user.is_Deleted === 'false');
+          let userNames = unDeletedUsers.map(user=> user.user);
+          const innerdiv = userNames.map(userName => {
+            // `<option value=''>select</option>`
+             return  `<option value='${userName}'>${userName}</option>`
+          }).join("");
+          document.getElementById("render_emp_list").innerHTML = `<option value=''>select</option>`+innerdiv;
+      });
+}
+getUserSelectDropdown()

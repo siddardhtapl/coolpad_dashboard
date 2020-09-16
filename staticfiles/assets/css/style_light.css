@@ -2499,6 +2499,53 @@ box-shadow:none !important;
         flex-direction: row;
     }
 }
+
+
+
+/*LOST DEVICES START */
+#missing-devices {
+    border: 1px solid #414750;
+}
+#missing-devices-list {
+    display: flex;
+    flex-wrap:wrap;
+    overflow: auto;
+    padding-bottom: 15px;
+}
+.missingDeviceCard {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction:column;
+    padding: 15px 50px 15px 15px;
+    color: #000;
+    border-radius: 5px;
+    margin-left: 16px;
+    margin-top: 15px;
+    min-height: 200px;
+    justify-content: space-around;
+    text-transform: capitalize;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
+}
+.missingDeviceCard  i {
+    margin-right: 5px;
+ }
+ .missingCardText {
+    text-transform: capitalize;
+    font-size: 1.4em;
+    padding-left: 20px;
+}
+.noData {
+    width:100%;
+    text-align: center;
+}
+@media only screen and (max-width: 900px) {
+    #missing-devices-list {
+        flex-direction: column;
+    }
+}
+/*LOST DEVICES END */
+
+
 /* Network Graph Ends */
 #user_list td {
     color: #000;

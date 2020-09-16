@@ -145,8 +145,8 @@
                                 <div class="date-value">
                                     <label>Report Contacted Person</label>
                                     <select id="render_emp_list" onchange="trigger_emp(this)">
-                                        <option>Select</option>
-                                        <script>
+                                         <!-- <option>Select</option> -->
+                                        <!--<script>
                                             var i;
                                             var append_op;
                                             var sample_data;
@@ -155,7 +155,7 @@
                                                 append_op += '<option  value="emp ' + i + '">Emp ' + i + '</option>';
                                                 $("#render_emp_list").append(append_op);
                                             }
-                                        </script>
+                                        </script> -->
                                         <!--                                    <option selected>Select</option>//onchange="trigger_contact(this)"
                                     <option>This is another Option</option>-->
                                     </select>
@@ -360,7 +360,7 @@
             }
         $.ajax({
                 type: "GET",
-                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date,
+                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date+ "/" + common4all,
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
