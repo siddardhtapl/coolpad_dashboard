@@ -342,18 +342,19 @@
             }
         }
         function netWorkGraphSwitch() {
-            var s_date = "2020-08-03"
-            var e_date = "2020-08-07"
             //console.log(contactTracingData);
             if(!contactTracingData){
                 getContactTracingData(e, s_date, e_date)
             }
         }
-
-
+/*            var s_date = "2020-08-03"
+            var e_date = "2020-08-07"*/
+var s_date,e_date;
         function trigger_contact() {
-            var s_date = "2020-08-03"
-            var e_date = "2020-08-07"
+            s_date=document.getElementById("startDate").value;
+            e_date=document.getElementById("endDate").value;
+            /*var s_date = "2020-08-03"
+              var e_date = "2020-08-07"*/
             console.log(e, 'kkkk');
             if(document.getElementById('network').style.display === 'block') {
              getContactTracingData(e, s_date, e_date);
