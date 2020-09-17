@@ -56,7 +56,7 @@ function load_user_list() {
                 <td>${user["zone"]}</td>
                 <td><span class="status text-success"></span> ${user["locations"]}</td>
                 <td class="action-icons">
-                    <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${user["user"]}', '${user["team"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${user["user"]}', '${user["team"]}','${user["device_id"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a href="#" class="delete btn btn-outline-danger" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true" onclick="delete_user('${user["device_id"]}')"></i></a>
                    <div id='${user["device_id"]}'> 
                    <a href="#" class="delete btn btn-outline-danger" title="clone" data-toggle="tooltip" onclick="deviceStatus('${user["device_id"]}')">
@@ -82,7 +82,7 @@ function delete_user(user) {
   if (confirm('Are you sure you want to delete this?')) {
     // Save it!
     console.log('Thing was saved to the database.');
-    fetch('https://takvaviya.in/coolpad_backend/user/deleteEmps/' + user + '/' + common4all , {
+    fetch('https://takvaviya.in/coolpad_backend/user/deleteEmps/' + user , {
       method: 'POST'
     })
       .then(function (response) {
@@ -119,10 +119,11 @@ function delete_user(user) {
 
 
 
-function update_user(user, current_team) {
+function update_user(user, current_team,device_id) {
 
   localStorage.setItem("cuser", user);
   localStorage.setItem("cteam", current_team);
+  localStorage.setItem("current_dev_id", device_id);
   document.getElementById("def_select").value = localStorage.getItem('cteam')
 
 
@@ -159,12 +160,25 @@ setInterval(load_user_list(), 30 * 60 * 1000);
 
 function save() {
   console.log(document.getElementById("modal_did").value + document.getElementById("team-value").value);
+    if(document.getElementById("team-value").value=="Select"){
+   var obj = {
+    "team": localStorage.getItem("cteam"),
+    "device_id": document.getElementById("modal_did").value
+  }
+    }
+    else if(document.getElementById("modal_did").value ==""){
 
+  var obj = {
+    "team": document.getElementById("team-value").value,
+    "device_id": localStorage.getItem("current_dev_id")
+  }
+    }
+    else{
   var obj = {
     "team": document.getElementById("team-value").value,
     "device_id": document.getElementById("modal_did").value
   }
-
+}
 
   console.log("fd", JSON.stringify(obj))
 
@@ -419,7 +433,7 @@ $(document).ready(function () {
   let toastContainer = document.createElement('div');
   toastContainer.id = "missingDevicesContainer";
   document.body.append(toastContainer);
-  startMissingDeviceWatch();
+ // startMissingDeviceWatch();
 });
 function startMissingDeviceWatch() {
   //TODO api call integ, multiple missing device implementation, changing to push notif
@@ -428,7 +442,7 @@ function startMissingDeviceWatch() {
     let missingDeviceId = 1234;
     let missingSince = 1;
     let toastContainer = document.getElementById('missingDevicesContainer');
-    fetch('https://takvaviya.in/coolpad_backend/user/notifyDevice/pd__chennai__a__coolpad').then(
+    fetch('https://takvaviya.in/coolpad_backend/user/notifyDevice/'+common4all).then(
       response => {
         if (response.ok) {
           return response.json();

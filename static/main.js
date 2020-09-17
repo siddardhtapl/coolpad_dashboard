@@ -1099,7 +1099,7 @@ function getHeapMapData() {
         }).then(function (responseJson) {
             heatMapData = responseJson;
             getDropDownOptions();
-            renderHeatMap('team A')
+            renderHeatMap('Team A')
         });
     function getDropDownOptions() {
         if (heatMapData) {
@@ -1248,7 +1248,7 @@ function getHeapMapDataWeekly() {
         }).then(function (responseJson) {
             heatMapDataWeekly = responseJson;
             getDropDownOptions();
-            renderHeatMapWeekly('team A')
+            renderHeatMapWeekly('Team A')
         });
     function getDropDownOptions() {
         if (heatMapDataWeekly) {

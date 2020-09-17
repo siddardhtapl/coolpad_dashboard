@@ -645,18 +645,22 @@ F
             document.getElementById("team1").value
             document.getElementById("company").value
 
-
             var obj =
             {
                 "user": document.getElementById("emp_name").value,
                 "user_id": document.getElementById("emp_id").value,
                 "device_id": document.getElementById("device_id").value,
-                "locations": document.getElementById("location").value,
+                "locations": localStorage.getItem('location'),
+                "company": localStorage.getItem('company'),
+                "zone": localStorage.getItem('zone'),
+                "team": document.getElementById("team1").value,
+                "group": localStorage.getItem('group')
+            }
+                /*"locations": document.getElementById("location").value,
                 "company": document.getElementById("company").value,
                 "zone": document.getElementById("zone").value,
                 "team": document.getElementById("team1").value,
-                "group": "default"
-            }
+                "group": "default"*/
 
             fetch('https://takvaviya.in/coolpad_backend/user/create/', {
                 method: 'POST', // or 'PUT'
