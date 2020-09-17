@@ -16,16 +16,20 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
     <script data-require="moment.js@2.10.2" data-semver="2.10.2"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"
+        crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="../../static/common.js"></script>
 
- 
+
+
     <style>
         .table-responsive {
             margin: 30px 0;
         }
+
         .table-title h2 {
             margin: 5px 0 0;
             font-size: 24px;
@@ -83,9 +87,9 @@
 
         }
 
-        .table-hover tbody tr:hover{
-        color:#888ea8 !important;
-            font-weight:bold !important;
+        .table-hover tbody tr:hover {
+            color: #888ea8 !important;
+            font-weight: bold !important;
         }
 
         table.table th i {
@@ -96,7 +100,7 @@
 
         .coolpad-table tr {
             /* color: #fff; */
-            color : #718093;
+            color: #718093;
             text-transform: capitalize;
 
         }
@@ -109,8 +113,8 @@
 
         table.table td a {
             /*font-weight: bold;*/
-           /* color: #fff; */
-           color : #718093;
+            /* color: #fff; */
+            color: #718093;
             display: inline-block;
             text-decoration: none;
         }
@@ -316,37 +320,38 @@
                             </div>
                         </li> -->
                         <li class="menu">
-                            <a href="../dashboard" class="menuu"><span class="side-menu-icon"><i class="fa fa-line-chart"
-                                        aria-hidden="true"></i>
+                            <a href="../dashboard" class="menuu"><span class="side-menu-icon"><i
+                                        class="fa fa-line-chart" aria-hidden="true"></i>
                                 </span>Dashboard</a>
                         </li>
                         <li class="menu">
-                            <a href="../history_dashboard" class="menuu"><span class="side-menu-icon"><i class="fa fa-dedent"
-                                        aria-hidden="true"></i>
+                            <a href="../history_dashboard" class="menuu"><span class="side-menu-icon"><i
+                                        class="fa fa-dedent" aria-hidden="true"></i>
                                 </span>User Dashboard</a>
                         </li>
                         <li class="menu">
-                            <a href="../contact" class="menuu"><span class="side-menu-icon"><i class="fa fa-address-book"
-                                        aria-hidden="true"></i>
+                            <a href="../contact" class="menuu"><span class="side-menu-icon"><i
+                                        class="fa fa-address-book" aria-hidden="true"></i>
                                 </span>Contact Tracing</a>
                         </li>
-                        <li class="menu" >
-                            <a href="#" onclick="share()" class="menuu"><span class="side-menu-icon"><i class="fa fa-share-alt"
-                                        aria-hidden="true"></i>
+                        <li class="menu">
+                            <a href="#" onclick="share()" class="menuu"><span class="side-menu-icon"><i
+                                        class="fa fa-share-alt" aria-hidden="true"></i>
                                 </span>Share</a>
                         </li>
                         <li class="menu">
-                            <a href="#" class="menuu"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                            <a href="#" class="menuu"><span class="side-menu-icon"><i class="fa fa-envelope"
+                                        aria-hidden="true"></i>
                                 </span>Email</a>
                         </li>
                         <li class="menu">
-                            <a href="../adduser" class="actives" class="menuu"><span class="side-menu-icon"><i class="fa fa-user"
-                                        aria-hidden="true"></i>
+                            <a href="../adduser" class="actives" class="menuu"><span class="side-menu-icon"><i
+                                        class="fa fa-user" aria-hidden="true"></i>
                                 </span>User Profile</a>
                         </li>
                         <li class="menu">
-                            <a href="../stickynotes" class="menuu"><span class="side-menu-icon"><i class="far fa-file-alt"
-                                        aria-hidden="true"></i>
+                            <a href="../stickynotes" class="menuu"><span class="side-menu-icon"><i
+                                        class="far fa-file-alt" aria-hidden="true"></i>
                                 </span>Notes</a>
                         </li>
                         <!-- <li class="menu">
@@ -363,23 +368,26 @@
                 <label class="switch1">
                     <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
                     <span class="slider1 round1"></span>
-                  </label>
+                </label>
                 <div class="layout-px-spacing">
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab1(event, 'daily')"><b>Add User</b></button>
                         <button class="tablinks " onclick="opentab1(event, 'weekly')"><b>Edit User</b></button>
                         <button class="tablinks " onclick="opentab1(event, 'oultliers')"><b>Outliers</b></button>
-                        <button class="tablinks " onclick="opentab1(event, 'missing-devices')"><b>Missing Devices</b></button>
+                        <button class="tablinks " onclick="opentab1(event, 'missing-devices')"><b>Missing
+                                Devices</b></button>
 
                     </div>
 
                     <!--Missing Devices Start-->
                     <div id="missing-devices" class="tabcontent" style="display: none;">
                         <div id="missing-devices-list">
-                            <div class="missingDeviceCard noData"><div id="missing-card-noData" class="missingCardText">No Data Available</div></div>
+                            <div class="missingDeviceCard noData">
+                                <div id="missing-card-noData" class="missingCardText">No Data Available</div>
+                            </div>
                         </div>
                     </div>
-                     <!--Missing Devices End-->
+                    <!--Missing Devices End-->
                     <div id="daily" class="tabcontent" style="display: block;">
                         <div class="container add-user mt-5">
                             <!-- <div class="row mb-4">
@@ -391,19 +399,23 @@
                                         <div class="widget widget-chart-one-contact">
                                             <div class="form-group">
                                                 <label for="text" class="text_style">Employee name</label>
-                                                <input type="text" class="form-control" placeholder="Employee name" id="emp_name">
+                                                <input type="text" class="form-control" placeholder="Employee name"
+                                                    id="emp_name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="text" class="text_style">Employee Id</label>
-                                                <input type="number" class="form-control" placeholder="Employee Id" id="emp_id">
+                                                <input type="number" class="form-control" placeholder="Employee Id"
+                                                    id="emp_id">
                                             </div>
                                             <div class="form-group">
                                                 <label for="text" class="text_style">Device Id</label>
-                                                <input type="number" class="form-control" placeholder="Device Id" id="device_id">
+                                                <input type="number" class="form-control" placeholder="Device Id"
+                                                    id="device_id">
                                             </div>
                                             <div class="form-group">
                                                 <label for="text" class="text_style">Location</label>
-                                                <input type="text" class="form-control" placeholder="Location" id="location">
+                                                <input type="text" class="form-control" placeholder="Location"
+                                                    id="location">
                                             </div>
                                             <div class="form-group">
                                                 <label for="text" class="text_style">Zone</label>
@@ -422,7 +434,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="text" class="text_style">Company</label>
-                                                <input type="text" class="form-control" placeholder="Company" id="company">
+                                                <input type="text" class="form-control" placeholder="Company"
+                                                    id="company">
                                             </div>
                                             <div class="mt-5 mb-5">
                                                 <button type="submit" class="btn btn-outline-primary user-submit"
@@ -445,8 +458,8 @@
                                         </div> -->
                                             <div class="col-sm-4 top-search-box">
                                                 <div class="input-group mb-2">
-                                                    <input type="text" id="myInput_search" class="form-control" placeholder="Search ..."
-                                                        aria-label="">
+                                                    <input type="text" id="myInput_search" class="form-control"
+                                                        placeholder="Search ..." aria-label="">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i
                                                                 class="fa fa-search"></i></span>
@@ -542,9 +555,35 @@
 
                     </div>
                     <div id="oultliers" class="tabcontent" style="display: none;">
-                        <div id="out" class="gri mt-5"></div>  
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="flex:6">
 
-                            <!-- <div class="center">
+                            </div>
+
+                            <!-- Check main,js for download logic -->
+
+                            <div style="margin-top: 20px; margin-bottom: 20px;">
+                                <div class="dropdownss">
+                                    <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                    <span class="dropbtnss">Report</span>
+                                    <div class="dropdown-contentss1">
+                                        <div style="padding:1rem; cursor: pointer;" onclick="out_pdf()"><span
+                                                class="report-icon"><i class="fa fa-file-pdf-o"
+                                                    aria-hidden="true"></i></span>PDF</div>
+                                        <div style="padding:1rem;  cursor: pointer;" onclick="out_xls()"><span
+                                                class="report-icon"><i class="fa fa-file-pdf-o"
+                                                    aria-hidden="true"></i></span>XLSX</div>
+                                        <div style="padding:1rem;  cursor: pointer;" onclick="out_csv()"><span
+                                                class="report-icon"><i class="fa fa-file-pdf-o"
+                                                    aria-hidden="true"></i></span>CSV</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="out" class="gri mt-5"></div>
+
+                        <!-- <div class="center">
 F
                                 <div class="profile">
                                     <div class="image">
@@ -568,7 +607,7 @@ F
 
                                 </div>
                             </div> -->
-                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -589,12 +628,12 @@ F
 
         // Add User Submit
 
-        $("#myInput_search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#user_list tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+        $("#myInput_search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#user_list tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
 
         function submit() {
             console.log("dsds", document.getElementById("team").value);
@@ -688,7 +727,7 @@ F
             evt.currentTarget.className += " active";
 
 
-            if(tabName === 'missing-devices') {
+            if (tabName === 'missing-devices') {
                 getAllMissingDevices();
             }
         }

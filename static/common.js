@@ -6,12 +6,16 @@ var common4all = group + '__' + locationn + '__' + zone + '__' + company
 
 
 
-current_date = "2020-08-04"
-start_date = "2020-08-03"
-end_date = "2020-08-07"
+// current_date = "2020-08-04"
+// start_date = "2020-08-03"
+// end_date = "2020-08-07"
 //  current_date = moment().format('YYYY-MM-DD');
 //  start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
 //  end_date=moment().add(1,'days').format('YYYY-MM-DD');
+
+current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
+start_date = moment().startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
 
 
 
@@ -407,3 +411,96 @@ missingDevicesInterval = setInterval(() => {
   getAllMissingDevices();
 }, 180000);
 /* LOST DEVICES END */
+
+
+/* missing device toast starts*/
+$(document).ready(function () {
+  $('.toast').toast();
+  let toastContainer = document.createElement('div');
+  toastContainer.id = "missingDevicesContainer";
+  document.body.append(toastContainer);
+  startMissingDeviceWatch();
+});
+function startMissingDeviceWatch() {
+  //TODO api call integ, multiple missing device implementation, changing to push notif
+  setInterval(() => { 
+    $('.toast').toast('hide')
+    let missingDeviceId = 1234;
+    let missingSince = 1;
+    let toastContainer = document.getElementById('missingDevicesContainer');
+    fetch('https://takvaviya.in/coolpad_backend/user/notifyDevice/pd__chennai__a__coolpad').then(
+      response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Request failed!');
+      }, networkError => {
+      }).then(function (responseJson) {
+        //dummy data for now
+        missingDeviceId = "1234XXXXXXX";
+        missingSince = 2;
+        });
+    toastInnerHtml = `<div style="position: absolute;top: 60px;right: 30px;" class="toast" data-autohide="false">
+                        <div class="toast-header bg-warning" style="color:white">
+                          <strong class="mr-auto">Device Missing !</strong>
+                          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+                        </div>
+                        <div class="toast-body" style="background-color:white; color:black">
+                          <div>Device with ID ${missingDeviceId} has been missing for ${missingSince} hrs </div>
+                        </div>
+                      </div>`
+    toastContainer.innerHTML = toastInnerHtml;
+    $('.toast').toast('show')
+  }, 360000); // change to suitable timelimit
+}
+/*missing device toast ends*/
+
+// Outliers report download 
+
+function out_pdf(){
+
+  //Todo not user instance its emp instance
+
+  var user_instance = localStorage.getItem('current_user');
+  console.log(user_instance);
+  // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
+  fetch('https://www.takvaviya.in/coolpad_backend/user/pdf_gen_outlier/' + start_date + '/' + end_date + '/' + common4all)
+      .then(response => response.json())
+      .then(data => {
+          // console.log(data.path+".pdf");
+          window.location.href = data.path + ".pdf"
+      });
+
+}
+
+function out_xls(){
+
+  //Todo not user instance its emp instance
+
+  var user_instance = localStorage.getItem('current_user');
+  console.log(user_instance);
+  // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
+  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/xlsx/'+ start_date + '/' + end_date +  '/' + common4all)
+      .then(response => response.json())
+      .then(data => {
+          // console.log(data.path+".pdf");
+          window.location.href = data.path + ".xlsx"
+      });
+
+}
+
+function out_csv(){
+
+  //Todo not user instance its emp instance
+
+  var user_instance = localStorage.getItem('current_user');
+  console.log(user_instance);
+  // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
+  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/csv/' + start_date + '/' + end_date  + '/' + common4all)
+  .then(response => response.json())
+  .then(data => {
+      // console.log(data.path+".pdf");
+      window.location.href = data.path + ".csv"
+  });
+
+}

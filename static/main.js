@@ -56,7 +56,7 @@ function contact_history_week() {
     values = []
     obj = {}
     aa = []
-    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/'+start_date+'/'+end_date+ '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             //  console.log( data);
@@ -98,7 +98,7 @@ function conatct_history() {
     aa = []
 
     console.log('cc4all', common4all);
-    fetch('https://takvaviya.in/coolpad_backend/user/contact_history/'+ current_date +'/'+ common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/contact_history/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             //  console.log( data);
@@ -326,15 +326,21 @@ clk_data();
 
 var current_date, start_date, end_date;
 
-current_date = "2020-08-04"
-start_date = "2020-08-03"
-end_date = "2020-08-07"
+// current_date = "2020-08-04"
+// start_date = "2020-08-03"
+// end_date = "2020-08-07"
+
+
+current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
+start_date = moment().startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
+
 //  current_date = moment().format('YYYY-MM-DD');
 //  start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
 
 //User status
 function user_status() {
-    
+
     fetch("https://takvaviya.in/coolpad_backend/user/device_status/" + '/' + common4all)
         .then(response => response.json())
         .then(data => {
@@ -365,7 +371,7 @@ user_status();
 
 
 function daily_live_user_tracker() {
-    fetch('https://takvaviya.in/coolpad_backend/user/live_data/'+ '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/live_data/' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             console.log("live", data);
@@ -395,6 +401,7 @@ setInterval(function () { daily_live_user_tracker(); }, 10000);
 //Top contact history
 
 function daily_tracker_top_contacts() {
+    console.log("dsds", 'https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date + '/' + common4all);
     fetch('https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(val => {
@@ -583,7 +590,7 @@ setInterval(function () {
 // Contact history all
 
 function weekly_contact_history() {
-    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date + '/' + common4all  )
+    fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log("his", data)
@@ -758,7 +765,7 @@ function loadFreqWeekly(option) {
 }
 
 function weekly_tracker_freq() {
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all )
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log("ft", Object.keys(data));
@@ -871,7 +878,7 @@ clk_chart_24();
 function clk_chart_24() {
     // var am_data=[]
     // var pm_data=[]
-    fetch('https://takvaviya.in/coolpad_backend/user/clock/' + '/' + common4all ).then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock/' + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
 
@@ -941,7 +948,7 @@ function clk_chart() {
     if (localStorage.getItem("theme") == "dark") { co = 'white' }
     else { co = 'black' }
 
-    fetch('https://takvaviya.in/coolpad_backend/user/clock/'+ '/' + common4all).then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock/' + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         // am_data=data.slice(0,12)
@@ -1017,7 +1024,7 @@ function weekly_total_number() {
 }
 weekly_total_number();
 function weekly_clk() {
-    fetch('https://takvaviya.in/coolpad_backend/user/clock_weekly/'+start_date+ '/' + common4all).then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock_weekly/' + start_date + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         $("#chart11").empty();
@@ -1373,3 +1380,38 @@ function renderHeatMapWeekly(team) {
 function switchHeatMapWeekly(team) {
     renderHeatMapWeekly(team);
 }
+
+// Daily report download 
+
+function rp_one_daily() {
+   
+    console.log("hello");
+    var user_instance = localStorage.getItem('current_user');
+    // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/'+ current_date +'/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data.path+".pdf");
+            window.location.href = data.path + ".pdf"
+        });
+}
+
+
+
+function rp_weekly(){
+
+    //Todo not user instance its emp instance
+
+    var user_instance = localStorage.getItem('current_user');
+    console.log(user_instance);
+    // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
+    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data.path+".pdf");
+            window.location.href = data.path + ".pdf"
+        });
+
+}
+
+

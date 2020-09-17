@@ -15,7 +15,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />
-  <script src="../../static/common.js"></script>
+  <script data-require="moment.js@2.10.2" data-semver="2.10.2"
+  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"  crossorigin="anonymous"></script>
+ <script src="../../static/common.js"></script>
 
 
 <!--  <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />-->
@@ -28,9 +32,7 @@
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
-
-
-
+       
 </head>
 
 <body class="body">
@@ -205,7 +207,7 @@
                       <div class="card service-card card-inverse">
                         <div class="card-block">
                           <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"
-                            style=""></span>
+                            ></span>
                           <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Current Device ID</h4>
                           <div id="cdid"></div>
                         </div>
@@ -386,6 +388,11 @@
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="emp_notes">
+                      <p class="para" style="border-bottom: 1px solid #ccc;width:97%; ">Device ID History</p>
                     </div>
                   </div>
                 </div>

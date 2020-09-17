@@ -13,8 +13,12 @@
     <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- <script data-require="moment.js@2.10.2" data-semver="2.10.2"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script> -->
     <script data-require="moment.js@2.10.2" data-semver="2.10.2"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"
+        crossorigin="anonymous"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
     <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
     <!-- plugin -->
@@ -137,6 +141,24 @@
                     <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
                     <span class="slider1 round1"></span>
                 </label>
+                <div style="float:right; margin-top: 55px;margin-right: 49px;">
+                    <div class="dropdownss" onclick="ct_rep();">
+                        <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i></span>
+                        <span class="dropbtnss">Report</span>
+                        <!-- <div class="dropdown-contentss">
+                            <div style="padding:1rem; cursor: pointer;" onclick="dwnldusrpdf();"><span
+                                    class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>PDF
+                            </div>
+                            <div style="padding:1rem;  cursor: pointer;" onclick="dwnldusrxlsx();"><span
+                                    class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>XLSX
+                            </div>
+                            <div style="padding:1rem;  cursor: pointer;" onclick="dwnldusrcsv();"><span
+                                    class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>CSV
+                            </div>
+
+                        </div>  -->
+                    </div>
+                </div>
                 <div class="layout-p-spacing">
 
                     <div class="date_n_emp">
@@ -145,7 +167,7 @@
                                 <div class="date-value">
                                     <label>Report Contacted Person</label>
                                     <select id="render_emp_list" onchange="trigger_emp(this)">
-                                         <!-- <option>Select</option> -->
+                                        <!-- <option>Select</option> -->
                                         <!--<script>
                                             var i;
                                             var append_op;
@@ -219,7 +241,9 @@
                 <div class="direct_contact_emp_toggle">
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab_cf(event, 'table')"><b>Table Model</b></button>
-                        <button class="tablinks " onclick="opentab_cf(event, 'network');  netWorkGraphSwitch('netWorkSwitch')"><b>Network Model</b></button>
+                        <button class="tablinks "
+                            onclick="opentab_cf(event, 'network');  netWorkGraphSwitch('netWorkSwitch')"><b>Network
+                                Model</b></button>
                         <!-- <button class="tablinks " onclick="opentab_cf(event, 'network'); trigger_contact()"><b>Network Model</b></button> -->
                     </div>
                     <div id="table" class="tabcontent" style="display: block;">
@@ -243,33 +267,38 @@
                     </div>
 
 
-                  <!--Network Graph Start-->
-                <div id="network" class="tabcontent" style="display: none;">
-                    <div class="contact-graph-container">
-                        <div class="contact-graph-legend">
-                            <span>
-                                <span style="font-size:2.5em;">&#8594;</span><span style="padding-left: 15px;">Direct Contacts</span>
-                            </span>
-                            <span>
-                                <span style="color: #20c997;font-size:2.5em;">&#8594;</span><span style="padding-left: 15px;">Indirect
-                                    Contacts</span>
-                            </span>
-                            <div id="teamIcons">
+                    <!--Network Graph Start-->
+                    <div id="network" class="tabcontent" style="display: none;">
+                        <div class="contact-graph-container">
+                            <div class="contact-graph-legend">
+                                <span>
+                                    <span style="font-size:2.5em;">&#8594;</span><span
+                                        style="padding-left: 15px;">Direct Contacts</span>
+                                </span>
+                                <span>
+                                    <span style="color: #20c997;font-size:2.5em;">&#8594;</span><span
+                                        style="padding-left: 15px;">Indirect
+                                        Contacts</span>
+                                </span>
+                                <div id="teamIcons">
+                                </div>
+                                <span style="font-size:24px; cursor: context-menu;">Direct Contacts of:</span>
+                                <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;"
+                                    id="label-currentEmp"></p>
+                                <div id="label-onclick">
+                                </div>
                             </div>
-                            <span style="font-size:24px; cursor: context-menu;">Direct Contacts of:</span>
-                            <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;" id="label-currentEmp"></p>
-                            <div id="label-onclick">
+                            <div id="contact-graph">
                             </div>
-                        </div>
-                        <div id="contact-graph">
-                        </div>
-                        <div style="display: none;" id="contact-graph-zoomControl">
-                            <button class="zoomButtons" id="zoomInButton" onclick="zoomContactGraph('in')">+</button>
-                            <button class="zoomButtons" id="zoomOutButton" onclick="zoomContactGraph('out')">-</button>
+                            <div style="display: none;" id="contact-graph-zoomControl">
+                                <button class="zoomButtons" id="zoomInButton"
+                                    onclick="zoomContactGraph('in')">+</button>
+                                <button class="zoomButtons" id="zoomOutButton"
+                                    onclick="zoomContactGraph('out')">-</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--Network Graph End-->
+                    <!--Network Graph End-->
 
 
 
@@ -328,13 +357,34 @@
         var e;
 
 
+        //contact tracing report 
+
+        function ct_rep() {
+
+
+
+            //Todo not user instance its emp instance
+
+           console.log("rep");
+            // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
+            fetch('https://takvaviya.in/coolpad_backend/'+ e +'/User_history_data/'+ start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data.path+".pdf");
+                    window.location.href = data.path + ".pdf"
+                });
+
+
+        }
+
+
         function trigger_emp(elm) {
             e = elm.value;
 
         }
         function zoomContactGraph(zoomAction) {
             console.log(zoomAction);
-            if(zoomAction === 'in') {
+            if (zoomAction === 'in') {
                 renderZoomContactGraph(0.5);
             }
             else {
@@ -343,25 +393,25 @@
         }
         function netWorkGraphSwitch() {
             //console.log(contactTracingData);
-            if(!contactTracingData){
+            if (!contactTracingData) {
                 getContactTracingData(e, s_date, e_date)
             }
         }
-/*            var s_date = "2020-08-03"
-            var e_date = "2020-08-07"*/
-var s_date,e_date;
+        /*            var s_date = "2020-08-03"
+                    var e_date = "2020-08-07"*/
+        var s_date, e_date;
         function trigger_contact() {
-            s_date=document.getElementById("startDate").value;
-            e_date=document.getElementById("endDate").value;
+            s_date = document.getElementById("startDate").value;
+            e_date = document.getElementById("endDate").value;
             /*var s_date = "2020-08-03"
               var e_date = "2020-08-07"*/
             console.log(e, 'kkkk');
-            if(document.getElementById('network').style.display === 'block') {
-             getContactTracingData(e, s_date, e_date);
+            if (document.getElementById('network').style.display === 'block') {
+                getContactTracingData(e, s_date, e_date);
             }
-        $.ajax({
+            $.ajax({
                 type: "GET",
-                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date+ "/" + common4all,
+                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date + "/" + common4all,
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
@@ -393,11 +443,11 @@ var s_date,e_date;
 
         }
 
-         var $links = $('.layer1_card');
-            $links.click(function(){
-               $links.removeClass('selected');
-               $(this).addClass('selected');
-            });
+        var $links = $('.layer1_card');
+        $links.click(function () {
+            $links.removeClass('selected');
+            $(this).addClass('selected');
+        });
 
         function open_indirect(elm) {
 
@@ -410,12 +460,10 @@ var s_date,e_date;
             //elm.style.backgroundColor = "#527581";
 
 
-            if($(elm).hasClass( "selected" ))
-            {
+            if ($(elm).hasClass("selected")) {
                 $(elm).removeClass("selected");
             }
-            else
-            {
+            else {
                 $(".layer1_card").removeClass("selected");
                 $(elm).addClass("selected");
             }
