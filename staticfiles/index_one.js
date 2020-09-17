@@ -119,7 +119,13 @@ function UserHistoy(option) {
             } else {
                 document.getElementById("hcdd").innerHTML = '<div>No data available</div>'
             }
-
+            if (dataa["Device History"] != null) {
+                const innerdiv4 = Object.values(dataa["Device History"]).map(item => { return `<div style="padding-bottom:1rem">${item}</div>`}).join(" ")
+                document.getElementById("device_id_history").innerHTML = innerdiv4
+            }
+            else {
+                document.getElementById("device_id_history").innerHTML = '<div>No data available</div>'
+            }
             if (dataa["Max Contact Duration Week"] != null) {
                 const innerdiv4 = `   <p class="count-id">${dataa["Max Contact Duration Week"]}</p>`
                 document.getElementById("hcdw").innerHTML = innerdiv4
