@@ -285,7 +285,7 @@ document.querySelector('button').addEventListener('click', function () {
 
 
 function clk_data() {
-    fetch("https://takvaviya.in/coolpad_backend/user/clock/" + '/' + common4all).then(responsive => {
+    fetch("https://takvaviya.in/coolpad_backend/user/clock" + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         var clock_data = data;
@@ -878,7 +878,7 @@ clk_chart_24();
 function clk_chart_24() {
     // var am_data=[]
     // var pm_data=[]
-    fetch('https://takvaviya.in/coolpad_backend/user/clock/' + '/' + common4all).then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock' + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
 
@@ -948,7 +948,7 @@ function clk_chart() {
     if (localStorage.getItem("theme") == "dark") { co = 'white' }
     else { co = 'black' }
 
-    fetch('https://takvaviya.in/coolpad_backend/user/clock/' + '/' + common4all).then(responsive => {
+    fetch('https://takvaviya.in/coolpad_backend/user/clock' + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
         // am_data=data.slice(0,12)
