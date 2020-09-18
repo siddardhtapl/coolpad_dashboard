@@ -1098,12 +1098,13 @@ function getHeapMapData() {
             document.getElementById("chart30").innerHTML = `${networkError.message}`;
         }).then(function (responseJson) {
             heatMapData = responseJson;
-            getDropDownOptions();
-            renderHeatMap('Team A')
+            let teams = Object.keys(heatMapData);
+            getDropDownOptions(teams);
+            renderHeatMap(teams[0]);
         });
-    function getDropDownOptions() {
+    function getDropDownOptions(teams) {
         if (heatMapData) {
-            let teams = Object.getOwnPropertyNames(heatMapData);
+            if(teams) {
             let dropDown = document.getElementById('teamDropDownButton');
             teams.forEach(team => {
                 let dropDownItem = document.createElement('option');
@@ -1112,6 +1113,9 @@ function getHeapMapData() {
                 dropDownItem.innerHTML = `${team}`
                 dropDown.append(dropDownItem);
             });
+            document.getElementById('teamDropDownButton').value=teams[0];
+            }
+
         }
     }
 }
@@ -1145,7 +1149,6 @@ function renderHeatMap(team) {
             else {
                 renderChart();
             }
-            document.getElementById('teamDropDownButton').value = `${team}`;
         }
     };
     function renderChart() {
@@ -1247,20 +1250,25 @@ function getHeapMapDataWeekly() {
             document.getElementById("heatMapChartWeekly").innerHTML = `${networkError.message}`;
         }).then(function (responseJson) {
             heatMapDataWeekly = responseJson;
-            getDropDownOptions();
-            renderHeatMapWeekly('Team A')
+            let teams = Object.keys(heatMapDataWeekly);
+            getDropDownOptions(teams);
+            renderHeatMapWeekly(teams[0])
         });
-    function getDropDownOptions() {
+    function getDropDownOptions(teams) {
         if (heatMapDataWeekly) {
-            let teams = Object.getOwnPropertyNames(heatMapDataWeekly);
-            let dropDown = document.getElementById('teamDropDownButtonWeek');
-            teams.forEach(team => {
-                let dropDownItem = document.createElement('option');
-                dropDownItem.id = `${team}`;
-                dropDownItem.value = `${team}`;
-                dropDownItem.innerHTML = `${team}`
-                dropDown.append(dropDownItem);
-            });
+            if(teams)
+            {
+                let dropDown = document.getElementById('teamDropDownButtonWeek');
+                teams.forEach(team => {
+                    let dropDownItem = document.createElement('option');
+                    dropDownItem.id = `${team}`;
+                    dropDownItem.value = `${team}`;
+                    dropDownItem.innerHTML = `${team}`
+                    dropDown.append(dropDownItem);
+                });
+                document.getElementById('teamDropDownButtonWeek').value=teams[0];
+            }
+
         }
     }
 }
@@ -1294,7 +1302,6 @@ function renderHeatMapWeekly(team) {
             else {
                 renderChart();
             }
-            document.getElementById('teamDropDownButton').value = `${team}`;
         }
     };
     function renderChart() {

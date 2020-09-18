@@ -441,10 +441,19 @@ table#layer3_append th {
     background: #9698a1 !important;
 }
 /* **************************************************** */
-#teamDropDownButtonWeek{
-    color: #000 !important;
-}#teamDropDownButton{
-    color: #000 !important;
+#teamDropDownButtonWeek {
+    background: none;
+    padding: 10px;
+    border-radius: 3px;
+    color: #000;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+#teamDropDownButtonWeek option {
+    background: none;
+    color: #000;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 #team_select_weekly {
     color: #000 !important;
@@ -2110,29 +2119,15 @@ text-transform:capitalize
     background: none;
     padding: 10px;
     border-radius: 3px;
-   color: #fff;
-    /* color: #718093; */
+    color: #000;
     font-weight: bolder;
+    text-transform: capitalize;
 }
 #teamDropDownButton option {
-    background: #191e3a;
-    /*color: #fff; */
-    color: #718093;
-    font-weight: bolder;
-}
-.teamDropDownButton {
     background: none;
-    padding: 10px;
-    border-radius: 3px;
-   color: #fff;
-    /* color: #718093; */
-    font-weight: bolder;
-}
-.teamDropDownButton option {
-    background: #191e3a;
-    /*color: #fff; */
-    color: #718093;
-    font-weight: bolder;
+    color: #000;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 #user_status b {
     padding-left: 4px;
@@ -2337,11 +2332,11 @@ text-align:center;
 .tab-content p{
 	font-weight: bold;
 }
-/*
-#contact_frequency {
-    border: 1px solid #ccc;
-    margin-top: 10px;
+
+#contact_frequency1 {
+    text-transform: capitalize;
 }
+/*
 #contact_frequency td {
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;

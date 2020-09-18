@@ -2414,30 +2414,31 @@ text-transform:capitalize
     background: none;
     padding: 10px;
     border-radius: 3px;
-   color: #fff;
-    /* color: #718093; */
+    color: #fff;
     font-weight: bolder;
+    text-transform: capitalize;
 }
 #teamDropDownButton option {
     background: #191e3a;
-    /*color: #fff; */
-    color: #718093;
-    font-weight: bolder;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
 }
-.teamDropDownButton {
+#teamDropDownButtonWeek {
     background: none;
     padding: 10px;
     border-radius: 3px;
-   color: #fff;
-    /* color: #718093; */
+    color: #fff;
     font-weight: bolder;
+    text-transform: capitalize;
 }
-.teamDropDownButton option {
+#teamDropDownButtonWeek option {
     background: #191e3a;
-    /*color: #fff; */
-    color: #718093;
-    font-weight: bolder;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
 }
+
 #user_status b {
     padding-left: 4px;
 }
