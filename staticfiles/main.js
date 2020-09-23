@@ -74,12 +74,7 @@ function contact_history_week() {
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
-                data: dataa, "columns": [{
-                    "render": function (data, type, full, meta) {
-                        return mm++;
-                    }
-                },
-                { "data": "pair" }, { "data": "count" }]
+                data: dataa, "columns": [{ "data": "pair" }, { "data": "count" }]
             });
         });
 }
@@ -116,12 +111,7 @@ function conatct_history() {
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
-                data: dataa, "columns": [{
-                    "render": function (data, type, full, meta) {
-                        return m++;
-                    }
-                },
-                { "data": "pair" }, { "data": "count" }]
+                data: dataa, "columns": [{ "data": "pair" }, { "data": "count" }]
             });
         });
 }
@@ -192,11 +182,7 @@ function userlive() {
                 "bLengthChange": false,
 
                 data: dataa,
-                "columns": [{
-                    "render": function (data, type, full, meta) {
-                        return i++;
-                    }
-                }, { "data": "local" }, { "data": "remote" }, { "data": "duration" }, { "data": "avgDist" }]
+                "columns": [{ "data": "local" }, { "data": "remote" }, { "data": "duration" }, { "data": "avgDist" }]
             });
         });
 }
@@ -539,11 +525,11 @@ function loadFreq(option) {
              <tr style="height: 50px;">
              <td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
                     Object.keys(dataa[item]).map(items => {
-                        // console.log("iii", data[item][items])
+                        console.log("iii", item)
                         if (dataa[item][items] > 0) {
-                            return `<td style="color: #e67e22;"><b>${dataa[item][items]}</b></td> `
+                            return `<td style="color: #e67e22;cursor: pointer;"><b>${dataa[item][items]}</b></td> `
                         }
-                        return `<td ><b>${dataa[item][items]}</b></td> `
+                        return `<td style="cursor: pointer;"><b>${dataa[item][items]}</b></td> `
                         // return ` <td><b>${dataa[item][items]}</b></td> `
                     }).join(" ");
             }).join(" ");

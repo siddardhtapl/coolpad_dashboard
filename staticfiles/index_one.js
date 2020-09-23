@@ -16,6 +16,8 @@ var common4all = group + '__' + locationn + '__' + zone + '__' + company
 // heat
 
 
+
+
 //Global Declartions
 
 var current_user;
@@ -137,7 +139,6 @@ function UserHistoy(option) {
                 document.getElementById('ctw').innerHTML = `<table id="contact_trace_wee" class=" " data-page-length='8'>
                 <thead align="center">
                   <tr>
-                    <th>S.No</th>
                     <th>User</th>
                     <th>Count</th>
                     <th>Max Duration</th>
@@ -155,17 +156,17 @@ function UserHistoy(option) {
                 })
                 console.log("ii", duration_w)
                 for (var i = 0; i < keys_w.length; i++) {
-                    obj[i] = { "sno": i + 1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
+                    obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
                     // console.log(i)
                 }
-                console.log("obj0", Object.values(obj))
-                dataa2 = Object.values(obj)
+                console.log("obj0", Object.values(obj_w))
+                dataa2 = Object.values(obj_w )
                 $('#contact_trace_wee').DataTable({
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
                     "bDestroy": true,
-                    data: dataa2, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+                    data: dataa2, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
                 });
 
             }
@@ -178,7 +179,6 @@ function UserHistoy(option) {
                 document.getElementById('ctd').innerHTML = `<table id="contact_trace_day" class=" " data-page-length='8'>
                 <thead align="center">
                   <tr>
-                    <th>S.No</th>
                     <th>User</th>
                     <th>Count</th>
                     <th>Max Duration</th>
@@ -198,7 +198,7 @@ function UserHistoy(option) {
                 console.log("i", keys)
                 console.log("ii", duration)
                 for (var i = 0; i < keys.length; i++) {
-                    obj[i] = { "sno": i + 1, "pair": keys[i], "count": values[i], "duration": duration[i] };
+                    obj[i] = { "sno": i + 1, "pair": keys[i], "count": values[i], "duration": duration[i]};
                     console.log(i)
                 }
                 console.log("obj1", Object.values(obj))
@@ -208,7 +208,7 @@ function UserHistoy(option) {
                     "info": false,
                     "bLengthChange": false,
                     "bDestroy": true,
-                    data: dataa, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+                    data: dataa, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
 
                 });
             }
@@ -432,7 +432,7 @@ function TeamHistoy(option) {
             dataa = data[option];
             dataa_ww = data[option];
 
-            // console.log("k", dataa["Users in Contact"]);
+            console.log('https://takvaviya.in/coolpad_backend/user/team_history/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all);
 
             if (dataa["Users in Contact"] != null) {
                 const innerdiv = `   <p class="count-id">${dataa["Users in Contact"]}</p>`
@@ -475,12 +475,12 @@ function TeamHistoy(option) {
                 "info": false,
                 "bLengthChange": false,
                 "bDestroy": true,
-                data: dataa, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "contact" }]
+                data: dataa, "columns": [ { "data": "pair" }, { "data": "contact" }]
             });
 
 
-            Object.keys(dataa_ww["top 5 users in contact Day"]).map(item => { keys_w.push(item) })
-            Object.values(dataa_ww["top 5 users in contact Day"]).map(item => { values_w.push(item) })
+            Object.keys(dataa_ww["top 5 users in contact Week"]).map(item => { keys_w.push(item) })
+            Object.values(dataa_ww["top 5 users in contact Week"]).map(item => { values_w.push(item) })
             for (var i = 0; i < keys_w.length; i++) {
                 obj[i] = { "sno": i + 1, "pair": keys_w[i], "contact": values_w[i] };
             }
@@ -491,7 +491,7 @@ function TeamHistoy(option) {
                 "info": false,
                 "bLengthChange": false,
                 "bDestroy": true,
-                data: dataa, "columns": [{ "data": "sno" }, { "data": "pair" }, { "data": "contact" }]
+                data: dataa, "columns": [{ "data": "pair" }, { "data": "contact" }]
             });
 
             // var c = 0;
