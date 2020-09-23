@@ -138,6 +138,8 @@ function userid() {
             Object.values(data).map(item => {
                 var d = item['recent_heartbeat_event']['shutdown']
                 var bat = item['recent_heartbeat_event']['battery']
+                console.log(bat/10,"check bat")
+                bat = Math.round(bat/10)
                 if (d === false) {
                     console.log(d)
                     sta.push('ON')
@@ -149,6 +151,7 @@ function userid() {
                     sta.push(d)
                 }
                 if (bat) {
+
                     batery.push(bat)
                 }
                 else {
@@ -156,6 +159,7 @@ function userid() {
                 }
             })
             // console.log(batery)
+
             for (var i = 0; i < dataa.length; i++) {
                 dataa[i]["sta"] = sta[i]
                 dataa[i]["battery"] = batery[i]
@@ -332,7 +336,7 @@ var current_date, start_date, end_date;
 
 
 current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
-start_date = moment().startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
 end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
 
 //  current_date = moment().format('YYYY-MM-DD');

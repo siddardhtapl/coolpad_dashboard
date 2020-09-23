@@ -3,7 +3,7 @@
 // current_date = '2020-08-04'
 
 current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
-start_date = moment().startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
 end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
 
 

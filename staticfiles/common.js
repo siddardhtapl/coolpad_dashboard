@@ -2,6 +2,7 @@ var zone = localStorage.getItem('zone')
 var locationn = localStorage.getItem('location')
 var company = localStorage.getItem('company')
 var group = localStorage.getItem('group')
+var sess_user = localStorage.getItem("session_user")
 var common4all = group + '__' + locationn + '__' + zone + '__' + company
 
 
@@ -14,7 +15,7 @@ var common4all = group + '__' + locationn + '__' + zone + '__' + company
 //  end_date=moment().add(1,'days').format('YYYY-MM-DD');
 
 current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
-start_date = moment().startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
 end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
 
 
@@ -52,13 +53,13 @@ function load_user_list() {
         return `<tr>
                 <td>${user["user"]}</td>
                 <td>${user["user_id"]}</td>
-                <td>${user["device_id"]}</td>                        
+                <td>${user["device_id"]}</td>
                 <td>${user["zone"]}</td>
                 <td><span class="status text-success"></span> ${user["locations"]}</td>
                 <td class="action-icons">
                     <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${user["user"]}', '${user["team"]}','${user["device_id"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a href="#" class="delete btn btn-outline-danger" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true" onclick="delete_user('${user["device_id"]}')"></i></a>
-                   <div id='${user["device_id"]}'> 
+                   <div id='${user["device_id"]}'>
                    <a href="#" class="delete btn btn-outline-danger" title="clone" data-toggle="tooltip" onclick="deviceStatus('${user["device_id"]}')">
 	                    <i class="fa fa-circle" aria-hidden="true"></i>
                     </a>
@@ -117,7 +118,7 @@ function delete_user(user) {
 
 
 
-
+console.log("ses",  sess_user);
 
 function update_user(user, current_team,device_id) {
 
@@ -202,15 +203,23 @@ function save() {
 
 }
 
+// sess_user
 /*Theme Toggle*/
 function toggleCheck() {
-  if (document.getElementById("myCheckbox").checked === true) {
+  if (document.getElementById("myCheckbox").checked === true ) {
     localStorage.setItem("theme", "light");
-    document.getElementById("img").src = "../../static/assets/img/coolpad-logo-black.png";
+    if(sess_user === 'demo')
+    {
+      document.getElementById("img").src = "../../static/assets/img/Tyson_Foods_logo.svg.png";
+    }
+    else{ document.getElementById("img").src = "../../static/assets/img/coolpad-logo-black.png";  }
+
     document.getElementById("img1").src = "../../static/assets/img/logo-final-black.png";
     document.getElementById('theme').href = "../../static/assets/css/style_light.css";
     try {
       changeNetworkmodelTheme('light');
+
+
 
     }
     catch (e) { console.log(e) }
@@ -226,7 +235,14 @@ function toggleCheck() {
   }
   else {
     localStorage.setItem("theme", "dark");
-    document.getElementById("img").src = "../../static/assets/img/coolpad-logo.png";
+
+    if(sess_user === 'demo')
+    {
+      document.getElementById("img").src = "../../static/assets/img/Tyson_Foods_logo_bright.svg.png";
+    }
+    else{ document.getElementById("img").src = "../../static/assets/img/coolpad-logo.png";  }
+
+
     document.getElementById("img1").src = "../../static/assets/img/takvaviya-main-logo.png";
     document.getElementById('theme').href = "../../static/assets/css/style.css";
     try {
