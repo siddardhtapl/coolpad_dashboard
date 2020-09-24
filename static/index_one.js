@@ -65,7 +65,7 @@ function UserHistoy(option) {
         .then(data => {
             // $("#contact_trace_day").fnDestroy();
             // $("#contact_trace_wee").fnDestroy();
-            console.log(data)
+            console.log('https://takvaviya.in/coolpad_backend/user/User_history_data/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
             dataa = data[option];
             dataa_w = data[option];
             keys = []
@@ -297,7 +297,7 @@ function history_clk(clk_d) {
         },
         xaxis: {
             type: 'string',
-            categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+            categories: ["1 AM", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12 PM", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12 AM"],
             labels: {
                 show: true,
                 style: {
@@ -452,9 +452,16 @@ function TeamHistoy(option) {
             } else { document.getElementById("tciw").innerHTML = `<div style="color:blue">No data available</div>` }
 
             if (dataa["Contacts in a Week"] != null) {
-                const innerdiv2 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Day"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Day"])}</p>`
-                document.getElementById("tmcup").innerHTML = innerdiv2
-            } else { document.getElementById("tmcup").innerHTML = `<div style="color:blue">No data available</div>` }
+                if(Object.values(dataa["Most contact user pair Day"])!=0){
+                    const innerdiv2 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Day"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Day"])}</p>`
+                    document.getElementById("tmcup").innerHTML = innerdiv2
+                }
+                else{
+                    document.getElementById("tmcup").innerHTML = `<div style="">No data available</div>`
+                }
+
+
+            } else { document.getElementById("tmcup").innerHTML = `<div style="">No data available</div>` }
 
             if (dataa["Contacts in a Week"] != null) {
                 const innerdiv3 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Week"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Week"])}</p>`
@@ -466,7 +473,9 @@ function TeamHistoy(option) {
             Object.keys(dataa["top 5 users in contact Day"]).map(item => { keys.push(item) })
             Object.values(dataa["top 5 users in contact Day"]).map(item => { values.push(item) })
             for (var i = 0; i < keys.length; i++) {
+                if(values[i] !=0 ){
                 obj[i] = { "sno": i + 1, "pair": keys[i], "contact": values[i] };
+            }
             }
             //  console.log("obj", Object.values(obj))
             dataa = Object.values(obj)
@@ -482,16 +491,16 @@ function TeamHistoy(option) {
             Object.keys(dataa_ww["top 5 users in contact Week"]).map(item => { keys_w.push(item) })
             Object.values(dataa_ww["top 5 users in contact Week"]).map(item => { values_w.push(item) })
             for (var i = 0; i < keys_w.length; i++) {
-                obj[i] = { "sno": i + 1, "pair": keys_w[i], "contact": values_w[i] };
+                obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "contact": values_w[i] };
             }
             //  console.log("obj", Object.values(obj))
-            dataa = Object.values(obj)
+            dataa_weak = Object.values(obj_w)
             $('#user_contact_weekss').DataTable({
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
                 "bDestroy": true,
-                data: dataa, "columns": [{ "data": "pair" }, { "data": "contact" }]
+                data: dataa_weak, "columns": [{ "data": "pair" }, { "data": "contact" }]
             });
 
             // var c = 0;

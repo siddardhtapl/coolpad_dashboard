@@ -4,7 +4,7 @@ var company = localStorage.getItem('company')
 var group = localStorage.getItem('group')
 var common4all = group + '__' + locationn + '__' + zone + '__' + company
 
-console.log("c4a", common4all);
+// console.log("c4a", common4all);
 
 
 // heat chart toggle
@@ -16,7 +16,7 @@ input.addEventListener('change', function () {
         document.getElementById("chartt").style.display = 'block';
     }
     else {
-        console.log("flaseee")
+        // console.log("flaseee")
         document.getElementById("contact_frequency1").style.display = 'block';
         document.getElementById("chartt").style.display = 'none';
     }
@@ -48,70 +48,79 @@ function contact_history_week() {
     obj = []
     mm = 1
     dataa = {};
-    dataa["idd"] = 23
-    dataa["name"] = 'hello'
-    obj.push(dataa);
-    console.log(obj);
-    keys = []
-    values = []
-    obj = {}
+    // dataa["idd"] = 23
+    // dataa["name"] = 'hello'
+    // obj.push(dataa);
+    // console.log(obj);
+    keys_week = []
+    values_week = []
+    obj_week = {}
     aa = []
     fetch('https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            //  console.log( data);
-            Object.keys(data).map(item => { keys.push(item) })
-            Object.values(data).map(item => { values.push(item) })
+             console.log( 'https://takvaviya.in/coolpad_backend/user/pairs_history_weekly/' + start_date + '/' + end_date + '/' + common4all);
+            Object.keys(data).map(item => { keys_week.push(item) })
+            Object.values(data).map(item => { values_week.push(item) })
             //  console.log("i",keys)
             //  console.log("ii",values)
-            for (var i = 0; i < keys.length; i++) {
-                obj[i] = { "pair": keys[i], "count": values[i] };
-                console.log(i)
+            for (var i = 0; i < keys_week.length; i++) {
+                if (values_week[i] != 0) {
+                obj_week[i] = { "pair": keys_week[i], "count": values_week[i] };
+                // console.log(i)
+                }
             }
-            console.log("obj", Object.values(obj))
-            dataa = Object.values(obj)
+            // console.log("obj", Object.values(obj))
+            dataa_week = Object.values(obj_week)
             $('#contact_his_week').DataTable({
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
-                data: dataa, "columns": [{ "data": "pair" }, { "data": "count" }]
+                data: dataa_week, "columns": [{ "data": "pair" }, { "data": "count" }]
             });
         });
 }
 contact_history_week();
+
 function conatct_history() {
     obj = []
     m = 1
-    dataa = {};
-    dataa["idd"] = 23
-    dataa["name"] = 'hello'
-    obj.push(dataa);
-    console.log(obj);
-    keys = []
-    values = []
-    obj = {}
+    dataa_history = {};
+    // dataa["idd"] = 23
+    // dataa["name"] = 'hello'
+    // obj.push(dataa);
+    // console.log(obj);
+    keys_history = []
+    values_history = []
+    obj_history = {}
     aa = []
 
-    console.log('cc4all', common4all);
+    // console.log('cc4all', common4all);
     fetch('https://takvaviya.in/coolpad_backend/user/contact_history/' + current_date + '/' + common4all)
         .then(response => response.json())
-        .then(data => {
-            //  console.log( data);
-            Object.keys(data).map(item => { keys.push(item) })
-            Object.values(data).map(item => { values.push(item) })
+        .then(data_hitory => {
+            //  console.log("datatatatttt",data_hitory);
+            Object.keys(data_hitory).map(item => { keys_history.push(item) })
+            Object.values(data_hitory).map(item => { values_history.push(item) })
             //  console.log("i",keys)
             //  console.log("ii",values)
-            for (var i = 0; i < keys.length; i++) {
-                obj[i] = { "pair": keys[i], "count": values[i] };
-                console.log(i)
+            for (var i = 0; i < keys_history.length; i++) {
+
+                if (values_history[i] != 0) {
+
+                    obj_history[i] = { "pair": keys_history[i], "count": values_history[i] };
+
+
+                }
+
+                // console.log(i)
             }
-            console.log("obj", Object.values(obj))
-            dataa = Object.values(obj)
+            dataa_history = Object.values(obj_history)
             $('#contact_his').DataTable({
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
-                data: dataa, "columns": [{ "data": "pair" }, { "data": "count" }]
+                data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }]
             });
         });
 }
@@ -121,25 +130,25 @@ function userid() {
     obj1 = {}
     sta = []
     batery = []
-    fetch('https://takvaviya.in/coolpad_backend/user/getall' + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/PWD__INDIA__South__Coolpad')
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
             Object.values(data).map(item => {
-                var d = item['recent_heartbeat_event']['shutdown']
+                // var d = item['recent_heartbeat_event']['shutdown']
                 var bat = item['recent_heartbeat_event']['battery']
-                console.log(bat/10,"check bat")
-                bat = Math.round(bat/10)
-                if (d === false) {
-                    console.log(d)
-                    sta.push('ON')
-                }
-                else if (d === true) {
-                    sta.push('OFF')
-                }
-                else {
-                    sta.push(d)
-                }
+                // console.log(bat/10,"check bat")
+                bat = Math.round(bat / 10)
+                // if (d === false) {
+                //     // console.log(d)
+                //     sta.push('ON')
+                // }
+                // else if (d === true) {
+                //     sta.push('OFF')
+                // }
+                // else {
+                //     sta.push(d)
+                // }
                 if (bat) {
 
                     batery.push(bat)
@@ -151,7 +160,7 @@ function userid() {
             // console.log(batery)
 
             for (var i = 0; i < dataa.length; i++) {
-                dataa[i]["sta"] = sta[i]
+                // dataa[i]["sta"] = sta[i]
                 dataa[i]["battery"] = batery[i]
             }
             // console.log(dataa)
@@ -162,7 +171,7 @@ function userid() {
                 "info": false,
                 "bLengthChange": false,
                 data: undeletedUsers,
-                "columns": [{ "data": "user_id" }, { "data": "user" }, { "data": "device_id" }, { "data": "sta", "defaultContent": "-" }, { "data": "battery", "defaultContent": "-" }]
+                "columns": [ { "data": "user" },{ "data": "user_id" },  { "data": "device_status", "defaultContent": "-" }, { "data": "battery", "defaultContent": "-" },{ "data": "time_stamp" }]
             });
         });
 }
@@ -174,6 +183,7 @@ function userlive() {
     fetch('https://takvaviya.in/coolpad_backend/user/live_data/' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
+            console.log('https://takvaviya.in/coolpad_backend/user/live_data/' + '/' + common4all)
             dataa = Object.values(data)
             i = i + 1
             $('#usertable').DataTable({
@@ -197,10 +207,10 @@ var input = document.getElementById('togBtn');
 input.addEventListener('change', function () {
 
     if (this.checked) {
-        console.log("true 24")
+        // console.log("true 24")
 
-        document.getElementById("chart10").style.display = 'none';
-        document.getElementById("chart12").style.visibility = 'visible';
+        document.getElementById("chart12").style.display = 'none';
+        document.getElementById("chart10").style.visibility = 'visible';
 
 
 
@@ -208,10 +218,10 @@ input.addEventListener('change', function () {
 
     }
     else {
-        console.log("flaseee")
-        document.getElementById("chart10").style.display = 'block';
+        // console.log("flaseee")
+        document.getElementById("chart12").style.display = 'block';
 
-        document.getElementById("chart12").style.visibility = 'hidden';
+        document.getElementById("chart10").style.visibility = 'hidden';
 
 
     }
@@ -284,9 +294,9 @@ function clk_data() {
         var clk_band_value = max_clk_value / 3
         var clk_band_medium = clk_band_value + clk_band_value
         var clk_band_high = clk_band_value + clk_band_value + clk_band_value
-        console.log(clk_band_value)
-        console.log(clk_band_medium)
-        console.log(clk_band_high)
+        // console.log(clk_band_value)
+        // console.log(clk_band_medium)
+        // console.log(clk_band_high)
 
         for (i = 0; i < data.length; i++) {
             document.getElementById('clk' + i).innerHTML = data[i]
@@ -323,7 +333,7 @@ var current_date, start_date, end_date;
 
 current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
 start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
-end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
+end_date = moment().add(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
 //  current_date = moment().format('YYYY-MM-DD');
 //  start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
@@ -334,7 +344,7 @@ function user_status() {
     fetch("https://takvaviya.in/coolpad_backend/user/device_status/" + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            console.log("timer", data);
+            // console.log("timer", data);
             $("#user_status").empty();
             var i = 0;
             const innerdiv = Object.keys(data).map(item => {
@@ -364,7 +374,7 @@ function daily_live_user_tracker() {
     fetch('https://takvaviya.in/coolpad_backend/user/live_data/' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            console.log("live", data);
+            // console.log("live", data);
             $("#live_contact").empty();
             var i = 0;
             const innerdiv = Object.keys(data).map(item => {
@@ -391,7 +401,7 @@ setInterval(function () { daily_live_user_tracker(); }, 10000);
 //Top contact history
 
 function daily_tracker_top_contacts() {
-    console.log("dsds", 'https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date + '/' + common4all);
+    // console.log("dsds", 'https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date + '/' + common4all);
     fetch('https://takvaviya.in/coolpad_backend/user/user_pair/' + current_date + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(val => {
@@ -496,15 +506,15 @@ daily_tracker_contact_history();
 
 
 function loadFreq(option) {
-    console.log("sel", option);
+    // console.log("sel", option);
     fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option]
-            console.log("dataq", dataa);
+            // console.log("dataq", dataa);
             const rowLen = Object.keys(dataa).length;
             var i = 0
-            console.log("fsahflk", Object.keys(dataa).length)
+            // console.log("fsahflk", Object.keys(dataa).length)
             $("#contact_frequency").empty();
             const outerdiv = ` <tr style="height: 50px;">
               <td class="demo-txt"><b>User</b></td> ` +
@@ -525,11 +535,11 @@ function loadFreq(option) {
              <tr style="height: 50px;">
              <td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
                     Object.keys(dataa[item]).map(items => {
-                        console.log("iii", item)
+                        // console.log("iii", item)
                         if (dataa[item][items] > 0) {
                             return `<td style="color: #e67e22;cursor: pointer;"><b>${dataa[item][items]}</b></td> `
                         }
-                        return `<td style="cursor: pointer;"><b>${dataa[item][items]}</b></td> `
+                        return `<td style="cursor: pointer;"><b> </b></td> `
                         // return ` <td><b>${dataa[item][items]}</b></td> `
                     }).join(" ");
             }).join(" ");
@@ -556,7 +566,7 @@ daily_tracker_freq();
 
 function getSelectValue() {
     var sel = document.getElementById('team_select').value;
-    console.log("hello", sel);
+    // console.log("hello", sel);
     this.loadFreq(sel);
 }
 
@@ -589,7 +599,7 @@ function weekly_contact_history() {
             const innerdiv = Object.keys(data).map(item => {
                 i = i + 1;
                 // console.log("his", data[item])
-                return `  
+                return `
             <div class="row_user_status">
             <div style="flex:1"><b>${i}</b></div>
             <div style="flex:2"><b>${item}</b></div>
@@ -609,7 +619,7 @@ function weekly_top_contact() {
     fetch('https://takvaviya.in/coolpad_backend/user/pairs_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            console.log("ss", Object.values(data));
+            // console.log("ss", Object.values(data));
             //chart 2
             $("#chart5").empty();
             var options = {
@@ -713,7 +723,7 @@ weekly_total_number();
 
 // Contact Frequency matrix with teams
 function loadFreqWeekly(option) {
-    console.log("sellll", option);
+    // console.log("sellll", option);
     fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
@@ -721,7 +731,7 @@ function loadFreqWeekly(option) {
             var rowlen1 = Object.keys(dataa).length;
             var n = 0;
             $("#contact_frequency_weekly").empty();
-            console.log("dataq", dataa);
+            // console.log("dataq", dataa);
             const outerdiv =
                 ` <tr style="height: 50px;">
               <td class="demo-txt"><b>User</b></td> ` +
@@ -746,7 +756,7 @@ function loadFreqWeekly(option) {
                         if (dataa[item][items] > 0) {
                             return `<td style="color: #e67e22;"><b>${dataa[item][items]}</b></td> `
                         }
-                        return `<td ><b>${dataa[item][items]}</b></td> `
+                        return `<td ><b> </b></td> `
                     }).join(" ");
             }).join(" ");
             // document.getElementById("contact_frequency_weekly").innerHTML = outerdiv + innerdiv
@@ -770,7 +780,7 @@ function weekly_tracker_freq() {
 
 function getSelectValueweekly() {
     var sel = document.getElementById('team_select_weekly').value;
-    console.log("hello", sel);
+    // console.log("hello", sel);
     this.loadFreqWeekly(sel);
 }
 
@@ -781,7 +791,7 @@ function weekly_team_tracker() {
     fetch('https://takvaviya.in/coolpad_backend/user/weekly_team_tracker/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            console.log("tdata", data)
+            // console.log("tdata", data)
             var la;
             var laa = []
             la = Object.keys(data).map(item => {
@@ -796,7 +806,7 @@ function weekly_team_tracker() {
                 chart: {
                     type: 'bar',
                     height: 350,
-                    // width:450   
+                    // width:450
                 },
                 grid: {
                     show: false
@@ -871,6 +881,7 @@ function clk_chart_24() {
     fetch('https://takvaviya.in/coolpad_backend/user/clock' + '/' + common4all).then(responsive => {
         return responsive.json();
     }).then(data => {
+        console.log('https://takvaviya.in/coolpad_backend/user/clock' + '/' + common4all)
 
         $("#chart12").empty();
         var options = {
@@ -900,7 +911,7 @@ function clk_chart_24() {
             },
             xaxis: {
                 type: 'string',
-                categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+                categories: ["1 AM", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12 PM", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12 AM"],
                 labels: {
                     show: true,
                     style: {
@@ -943,7 +954,7 @@ function clk_chart() {
     }).then(data => {
         // am_data=data.slice(0,12)
         // pm_data=data.slice(12,24)
-        console.log(co, "deiiiiiiiiiii")
+        // console.log(co, "deiiiiiiiiiii")
         $("#chart10").empty();
         var options = {
             series: [{
@@ -1227,7 +1238,7 @@ function switchHeatMap(team) {
 var heatMapDataWeekly;
 var heatMapChartWeekly;
 function getHeapMapDataWeekly() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all).then(
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all).then(
         response => {
             if (response.ok) {
                 return response.json();
@@ -1371,14 +1382,14 @@ function switchHeatMapWeekly(team) {
     renderHeatMapWeekly(team);
 }
 
-// Daily report download 
+// Daily report download
 
 function rp_one_daily() {
-   
-    console.log("hello");
+
+    // console.log("hello");
     var user_instance = localStorage.getItem('current_user');
     // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
-    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/'+ current_date +'/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -1388,12 +1399,12 @@ function rp_one_daily() {
 
 
 
-function rp_weekly(){
+function rp_weekly() {
 
     //Todo not user instance its emp instance
 
     var user_instance = localStorage.getItem('current_user');
-    console.log(user_instance);
+    // console.log(user_instance);
     // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
     fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
         .then(response => response.json())
