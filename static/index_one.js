@@ -1,32 +1,6 @@
-// start_date = '2020-08-03';
-// end_date ='2020-08-07' 
-// current_date = '2020-08-04'
-
-current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
-start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
-end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');
-
-
-
-var zone = localStorage.getItem('zone')
-var locationn = localStorage.getItem('location')
-var company = localStorage.getItem('company')
-var group = localStorage.getItem('group')
-var common4all = group + '__' + locationn + '__' + zone + '__' + company
-// heat
-
-
-
-
 //Global Declartions
-
 var current_user;
-
 var clk_d;
-
-
-
-
 if (!localStorage.getItem("session")) {
     window.location.href = "../login";
 }
@@ -63,8 +37,6 @@ function UserHistoy(option) {
     fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            // $("#contact_trace_day").fnDestroy();
-            // $("#contact_trace_wee").fnDestroy();
             console.log('https://takvaviya.in/coolpad_backend/user/User_history_data/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
             dataa = data[option];
             dataa_w = data[option];
@@ -202,13 +174,13 @@ function UserHistoy(option) {
                     console.log(i)
                 }
                 console.log("obj1", Object.values(obj))
-                dataa = Object.values(obj)
+                dataa_c = Object.values(obj)
                 $('#contact_trace_day').DataTable({
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
                     "bDestroy": true,
-                    data: dataa, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+                    data: dataa_c, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
 
                 });
             }
@@ -216,55 +188,40 @@ function UserHistoy(option) {
                 document.getElementById("ctd").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available</a></div>'
 
             }
-
-
-
-
-            // var d = 0;
-            // const innerdiv5 = Object.keys(dataa["Contact History Day"]).map(item => {
-
-            //     d = d + 1;
-            //     // console.log(dataa["24_hr_clock"])
-
-            //     // console.log("ssd", item);
-            //     return `<div class="row_user_status">
-            //         <div style="flex:1"><b>${d}</b></div>
-            //         <div style="flex:1"><b class="capi-text">${item}</b></div>
-            //         <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
-            //         <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
-            //       </div>`
-
-            // }).join(" ");
-            // document.getElementById("contact_history_day").innerHTML = innerdiv5
-
-            // const innerdiv15 = Object.keys(dataa["24_hr_clock"]).map(item => {
-            //     console.log(dataa["24_hr_clock"])
-            //     // console.log("ssd", item);
-
-            // }).join(" ");
-
-
-
-            // var c = 0;
-            // const innerdiv6 = Object.keys(dataa["Contact History Day"]).map(item => {
-            //     c = c + 1;
-            //     // console.log("ssd", item);
-            //     return `<div class="row_user_status">
-            //                 <div style="flex:1"><b>${c}</b></div>
-            //                 <div style="flex:1"><b class="capi-text">${item}</b></div>
-            //                 <div style="flex:1"><b>${dataa["Contact History Day"][item].count}</b></div>
-            //                 <div style="flex:1;"><b>${dataa["Contact History Day"][item].max_duration}</b></div>
-            //               </div>`
-
-            // }).join(" ");
-
-
-
-            // document.getElementById("contact_history_week").innerHTML = innerdiv6
-
-
-
-
+            document.getElementById('cea').innerHTML = `<table id="contact_event_all" class=" " data-page-length='8'>
+                <thead align="center">
+                  <tr>
+                    <th>User</th>
+                    <th>MinDist</th>
+                    <th>AvgDist</th>
+                    <th>Duration</th>
+                    <th>Timestamp</th>
+                  </tr>
+                </thead>
+                <tfoot></tfoot>
+              </table>`
+            var ceh = []
+            var na = []
+            Object.values(dataa["contact_event_all"]).map(item => {
+                ceh.push(Object.values(item)[0])
+                na.push(Object.keys(item)[0])
+            })
+            for(var i =0 ;i<ceh.length;i++){
+                Object.assign(ceh[i], {user: na[i]});
+            }
+            // ceh.push(na)
+              console.log(ceh)
+            $('#contact_event_all').DataTable({
+                "scrollY": "200px",
+                "retrieve": true,
+                "scrollCollapse": true,
+                "paging": false,
+                "searching": false,
+                "info": false,
+                "bLengthChange": false,
+                "bDestroy": true,
+                data: ceh, "columns": [{ "data": "user" },{ "data": "minDist" }, { "data": "avgDist" }, { "data": "duration" }, { "data": "timestamp" }]
+            });
         })
 
 }
@@ -384,7 +341,7 @@ function history_clk_12hr(clk_d) {
 
 
 function loadUserHistoy() {
-    fetch('https://takvaviya.in/coolpad_backend/user/getall' + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             let allUsers = Object.values(data);
@@ -407,7 +364,6 @@ loadUserHistoy();
 
 function getSelectValueUserHistory() {
     var sel = document.getElementById('user_history_select').value;
-    // console.log("hello", sel);
     this.UserHistoy(sel);
     localStorage.setItem('current_user', sel)
 }
@@ -431,26 +387,24 @@ function TeamHistoy(option) {
         .then(data => {
             dataa = data[option];
             dataa_ww = data[option];
-
-            console.log('https://takvaviya.in/coolpad_backend/user/team_history/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all);
-
             if (dataa["Users in Contact"] != null) {
                 const innerdiv = `   <p class="count-id">${dataa["Users in Contact"]}</p>`
                 document.getElementById("tuic").innerHTML = innerdiv
-            } else {
+            }
+            else {
                 document.getElementById("tuic").innerHTML = `<div style="color:blue">No data available</div>`
             }
-
             if (dataa["Contacts in a Day"] != null) {
                 const innerdiv4 = `   <p class="count-id">${dataa["Contacts in a Day"]}</p>`
                 document.getElementById("tcid").innerHTML = innerdiv4
-            } else { document.getElementById("tcid").innerHTML = `<div style="color:blue">No data available</div>` }
+            }
+            else { document.getElementById("tcid").innerHTML = `<div style="color:blue">No data available</div>` }
 
             if (dataa["Contacts in a Week"] != null) {
                 const innerdiv1 = `   <p class="count-id">${dataa["Contacts in a Week"]}</p>`
                 document.getElementById("tciw").innerHTML = innerdiv1
-            } else { document.getElementById("tciw").innerHTML = `<div style="color:blue">No data available</div>` }
-
+            }
+            else { document.getElementById("tciw").innerHTML = `<div style="color:blue">No data available</div>` }
             if (dataa["Contacts in a Week"] != null) {
                 if(Object.values(dataa["Most contact user pair Day"])!=0){
                     const innerdiv2 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Day"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Day"])}</p>`
@@ -459,8 +413,6 @@ function TeamHistoy(option) {
                 else{
                     document.getElementById("tmcup").innerHTML = `<div style="">No data available</div>`
                 }
-
-
             } else { document.getElementById("tmcup").innerHTML = `<div style="">No data available</div>` }
 
             if (dataa["Contacts in a Week"] != null) {
@@ -502,65 +454,22 @@ function TeamHistoy(option) {
                 "bDestroy": true,
                 data: dataa_weak, "columns": [{ "data": "pair" }, { "data": "contact" }]
             });
-
-            // var c = 0;
-            // const innerdiv5 = Object.keys(dataa["top 5 users in contact Day"]).map(item => {
-
-            //     c = c + 1;
-            //     // console.log("ssd", item);
-            //     return `<div class="row_user_status">
-            //     <div style="flex:1"><b>${c}</b></div>
-            //     <div style="flex:1"><b class="capi-text">${item}</b></div>
-            //     <div style="flex:1"><b>${dataa["top 5 users in contact Day"][item]}</b></div>
-            //   </div>`
-
-            // }).join(" ");
-
-
-            // document.getElementById("contact_history_tday").innerHTML = innerdiv5
-
-            // var d = 0;
-            // const innerdiv6 = Object.keys(dataa["top 5 users in contact Week"]).map(item => {
-            //     d = d + 1;
-            //     // console.log("ssd", item);
-            //     return `<div class="row_user_status">
-            //     <div style="flex:1"><b>${d}</b></div>
-            //     <div style="flex:1"><b class="capi-text">${item}</b></div>
-            //     <div style="flex:1"><b>${dataa["top 5 users in contact Week"][item]}</b></div>
-            //   </div>`
-
-            // }).join(" ");
-
-
-            // document.getElementById("contact_history_tweek").innerHTML = innerdiv6
-
-
-
-
         })
-
-
 }
 
 
 
 function loadTeamHistory() {
-
-    // window.location.href = "http://106.51.3.224:6661/coolpad_report/team A-Team History.csv"
-    // console.log("click");
-    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ start_date+'/'+ end_date + '/' + current_date  + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/getTeams/'+ '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log("ft", Object.keys(data));
-            const innerdiv = Object.keys(data).map(item => {
+            const innerdiv = Object.values(data.teams).map(item => {
                 return `<option value='${item}'>${item}</option>`
             }).join("");
             document.getElementById("team_history_select").innerHTML = innerdiv
-            // console.log("lll", Object.keys(data)[0])
-            TeamHistoy(Object.keys(data)[0])
+            TeamHistoy(Object.values(data)[0][0])
             localStorage.setItem('current_team', Object.keys(data)[0]);
         });
-
 }
 
 loadTeamHistory();
@@ -576,8 +485,6 @@ function getSelectValueTeamHistory() {
 // Download Report PDF
 
 function dwnldusrpdf() {
-
-    // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
     fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
@@ -764,9 +671,6 @@ load_notes_user();
 
 function Note_delete(id) {
     console.log("delete", id);
-    // fetch()
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
     function reqListener() {
         console.log("res", this.responseText);
     }

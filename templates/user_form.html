@@ -22,6 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="../../static/common.js"></script>
+    <script src="../../static/user_profile.js"></script>
 
 
 
@@ -620,10 +621,6 @@ F
             </div>
         </div>
     </div>
-
-
-
-    <script src="main.js"></script>
     <script>
 
         // Add User Submit
@@ -672,6 +669,7 @@ F
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
+                    load_user_list();
                     alert("User created successfully")
                 })
                 .catch((error) => {

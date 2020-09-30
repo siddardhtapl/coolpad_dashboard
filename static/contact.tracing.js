@@ -1,10 +1,3 @@
-var zone = localStorage.getItem('zone')
-var locationn = localStorage.getItem('location')
-var company = localStorage.getItem('company')
-var group = localStorage.getItem('group')
-var common4all = group + '__' + locationn + '__' + zone + '__' + company
-
-
 var contactTracingData;
 var contactGraph;
 var immediateContacts;
@@ -446,7 +439,7 @@ function removeL2Icons() {
 //###########################
 
 function getUserSelectDropdown() {
-  fetch('https://takvaviya.in/coolpad_backend/user/getall'+ '/' + common4all)
+  fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus'+ '/' + common4all)
       .then(response => response.json())
       .then(data => {
           let allUsers = Object.values(data);
