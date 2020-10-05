@@ -1,10 +1,3 @@
-var zone = localStorage.getItem('zone')
-var locationn = localStorage.getItem('location')
-var company = localStorage.getItem('company')
-var group = localStorage.getItem('group')
-var common4all = group + '__' + locationn + '__' + zone + '__' + company
-
-
 var contactTracingData;
 var contactGraph;
 var immediateContacts;
@@ -15,6 +8,26 @@ var defaultNodeColor = '#68BB59';
 var subContactNodeColor = '#20c997';
 var subContactEdgeColor = '#20c997';
 
+function opentab_cf(evt, tabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
 //Get Data from Api
 function getContactTracingData(e, s_date, e_date) {
@@ -446,7 +459,7 @@ function removeL2Icons() {
 //###########################
 
 function getUserSelectDropdown() {
-  fetch('https://takvaviya.in/coolpad_backend/user/getall'+ '/' + common4all)
+  fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus'+ '/' + common4all)
       .then(response => response.json())
       .then(data => {
           let allUsers = Object.values(data);

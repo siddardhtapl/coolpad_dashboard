@@ -25,7 +25,7 @@ function userid() {
     obj1 = {}
     sta = []
     batery = []
-    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/PWD__INDIA__South__Coolpad')
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/'+common4all)
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
@@ -822,7 +822,7 @@ weekly_data();
 
 
 function daily_data() {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/'+current_date+'/PWD__INDIA__South__Coolpad')
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/'+current_date+'/'+common4all)
         .then(response => response.json())
         .then(
             data => {
