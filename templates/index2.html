@@ -403,6 +403,9 @@
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
             e_date = document.getElementById("endDate").value;
+            if(s_date === e_date) {
+                e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
+            }
             /*var s_date = "2020-08-03"
               var e_date = "2020-08-07"*/
             console.log(e, 'kkkk');
