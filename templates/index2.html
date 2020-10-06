@@ -303,25 +303,10 @@
                     </div>
                     <!--Network Graph End-->
 
-
-
-
-
-
                 </div>
-
-
-
-
             </div>
-
-
         </div>
-
-
     </div>
-
-
     <script>
 
         $(document).ready(function () {
@@ -395,7 +380,7 @@
             }
         }
         function netWorkGraphSwitch() {
-            
+            //console.log(contactTracingData);
             if (!contactTracingData) {
                 if(s_date === e_date) {
                     //adding one day if start and end are same
@@ -418,7 +403,7 @@
             console.log(e, 'kkkk');
             if (document.getElementById('network').style.display === 'block') {
                 getContactTracingData(e, s_date, e_date);
-                
+
             }
             else {
                 contactTracingData = null
