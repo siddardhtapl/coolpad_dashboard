@@ -290,6 +290,9 @@
                             </div>
                             <div id="contact-graph">
                             </div>
+                            <div id="contact-graph-noData" style="display: none; text-align: center;width: 100%;">
+                                <h3>No Data Available</h3>
+                            </div>
                             <div style="display: none;" id="contact-graph-zoomControl">
                                 <button class="zoomButtons" id="zoomInButton"
                                     onclick="zoomContactGraph('in')">+</button>
@@ -379,9 +382,15 @@
         function netWorkGraphSwitch() {
             //console.log(contactTracingData);
             if (!contactTracingData) {
+                if(s_date === e_date) {
+                    //adding one day if start and end are same
+                e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
+            }
                 getContactTracingData(e, s_date, e_date)
             }
         }
+        /*            var s_date = "2020-08-03"
+                    var e_date = "2020-08-07"*/
         var s_date, e_date;
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
@@ -389,9 +398,15 @@
             if(s_date === e_date) {
                 e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
             }
+            /*var s_date = "2020-08-03"
+              var e_date = "2020-08-07"*/
             console.log(e, 'kkkk');
             if (document.getElementById('network').style.display === 'block') {
                 getContactTracingData(e, s_date, e_date);
+
+            }
+            else {
+                contactTracingData = null
             }
             $.ajax({
                 type: "GET",
