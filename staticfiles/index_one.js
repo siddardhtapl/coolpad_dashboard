@@ -4,7 +4,17 @@ var clk_d;
 if (!localStorage.getItem("session")) {
     window.location.href = "../login";
 }
-//tab controls
+
+var data_user2
+window.onload = exampleFunction();
+function exampleFunction() {
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+    .then(response => response.json())
+    .then(data_user => {
+        data_user2= data_user
+        UserHistoy(Object.keys(data_user2)[0])
+    })
+}
 
 function opentab_history(evt, tabName) {
     // Declare all variables
@@ -34,12 +44,8 @@ function opentab_history(evt, tabName) {
 
 function UserHistoy(option) {
 
-    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            console.log('https://takvaviya.in/coolpad_backend/user/User_history_data/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
-            dataa = data[option];
-            dataa_w = data[option];
+            dataa = data_user2[option];
+            dataa_w = data_user2[option];
             keys = []
             values = []
             duration = []
@@ -222,7 +228,7 @@ function UserHistoy(option) {
                 "bDestroy": true,
                 data: ceh, "columns": [{ "data": "user" },{ "data": "minDist" }, { "data": "avgDist" }, { "data": "duration" }, { "data": "timestamp" }]
             });
-        })
+
 
 }
 function history_clk(clk_d) {
@@ -594,7 +600,7 @@ function Submit1() {
         "date_time": String(newdate),
         "zone": "a",
         "team": "team a",
-        "location": "delhi",
+        "location": common4all,
         "notes": note
     }
     fetch('https://takvaviya.in/coolpad_backend/user/saveEmpnote/', {
@@ -617,7 +623,7 @@ function Submit1() {
         });
 }
 function load_notes_user() {
-    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/delhi')
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/'+common4all)
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);
@@ -815,3 +821,9 @@ function Note_delete_team(id) {
         });
     load_notes_team();
 }
+
+
+setInterval(function(){
+exampleFunction();
+loadTeamHistory();
+}, 300000);

@@ -600,7 +600,7 @@ function Submit1() {
         "date_time": String(newdate),
         "zone": "a",
         "team": "team a",
-        "location": "delhi",
+        "location": common4all,
         "notes": note
     }
     fetch('https://takvaviya.in/coolpad_backend/user/saveEmpnote/', {
@@ -623,7 +623,7 @@ function Submit1() {
         });
 }
 function load_notes_user() {
-    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/delhi')
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/'+common4all)
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);

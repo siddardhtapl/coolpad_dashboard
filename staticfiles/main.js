@@ -1,3 +1,48 @@
+// Global decleration
+
+var contact_f_data
+var contact_f_data_week
+
+var co;
+function color(){
+if (localStorage.getItem("theme") == "light")
+{
+    co = 'black'
+    daily_data()
+    weekly_data()
+ }
+else if (localStorage.getItem("theme") == "dark")
+ {
+     co = 'white'
+     weekly_data()
+     daily_data()
+     }
+    }
+
+window.onload = exampleFunction();
+function exampleFunction() {
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
+        .then(response => response.json())
+        .then(data_user => {
+            contact_f_data = data_user
+            loadFreq(Object.keys(contact_f_data)[0])
+            daily_tracker_freq()
+            getHeapMapData()
+            console.log(Object.keys(contact_f_data)[0])
+        })
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
+        .then(response => response.json())
+        .then(data_week => {
+            contact_f_data_week = data_week
+            loadFreqWeekly(Object.keys(contact_f_data_week)[0])
+            getHeapMapDataWeekly();
+        })
+}
+
+
+
+
+
 var input = document.getElementById('togBtn1');
 input.addEventListener('change', function () {
     if (this.checked) {
@@ -47,7 +92,7 @@ function userid() {
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
-                 data: undeletedUsers,
+                data: undeletedUsers,
                 "columns": [{ "data": "user" }, { "data": "user_id" }, { "data": "device_status", "defaultContent": "-" }, { "data": "battery", "defaultContent": "-" }, { "data": "time_stamp" }]
             });
         });
@@ -99,108 +144,55 @@ function opentab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+    daily_data()
+    weekly_data()
 }
-/*function daily_live_user_tracker() {
-    fetch('https://takvaviya.in/coolpad_backend/user/live_data' + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            // console.log("live", data);
-            $("#live_contact").empty();
-            var i = 0;
-            const innerdiv = Object.keys(data).map(item => {
-                i = i + 1;
-                var st = data[item].local;
-                var st1 = data[item].remote;
-                // console.log(data[item].device_id)
-                return `<div class="row_user_status">
-        <div style="flex:1"><b>${i}</b></div>
-        <div style="flex:2"><b>${st.charAt(0).toUpperCase() + st.slice(1)}</b></div>
-        <div style="flex:2"><b>${st1.charAt(0).toUpperCase() + st1.slice(1)}</b></div>
-        <div style="flex:2"><b>${data[item].duration}</b></div>
-        <div style="flex:2"><b>${data[item].avgDist}</b></div>
-        </div>`
-            }).join(" ");
-            $("#live_contact").append(innerdiv);
-        });
-}
-daily_live_user_tracker();
-setInterval(function () { daily_live_user_tracker(); }, 10000);*/
-
-function daily_tracker_contact_history() {
-
-    fetch('https://takvaviya.in/coolpad_backend/user/contact_history/' + current_date + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            $("#contact_history").empty();
-            var i = 0;
-            const innerdiv = Object.keys(data).map(item => {
-                i = i + 1;
-                return `
-            <div class="row_user_status">
-            <div style="flex:1"><b>${i}</b></div>
-            <div style="flex:2;"><b>${item}</b></div>
-            <div style='flex:1;'><b>${data[item]}</b></div>
-        </div>`
-            }).join(" ");
-            $("#contact_history").append(innerdiv);
-        });
-}
-
-daily_tracker_contact_history();
-
-
 function loadFreq(option) {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            dataa = data[option]
-            const rowLen = Object.keys(dataa).length;
-            var i = 0
-            $("#contact_frequency").empty();
-            const outerdiv = ` <tr style="height: 50px;">
+    dataa = contact_f_data[option]
+    const rowLen = Object.keys(dataa).length;
+    var i = 0
+    $("#contact_frequency").empty();
+    const outerdiv = ` <tr style="height: 50px;">
               <td class="demo-txt"><b>User</b></td> ` +
-                Object.keys(dataa).map(item => {
-                    i = i + 1
-                    if (rowLen === i) {
-                        // console.log("enter")
-                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
-                            `<td class="demo-txt"><b>Others</b></td>`
-                    }
-                    else {
-                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
-                    }
-                }).join(" ") + `</tr>`
-            const innerdiv = Object.keys(dataa).map(item => {
-                return `
+        Object.keys(dataa).map(item => {
+            i = i + 1
+            if (rowLen === i) {
+                // console.log("enter")
+                return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
+                    `<td class="demo-txt"><b>Others</b></td>`
+            }
+            else {
+                return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
+            }
+        }).join(" ") + `</tr>`
+    const innerdiv = Object.keys(dataa).map(item => {
+        return `
              <tr style="height: 50px;">
              <td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
-                    Object.keys(dataa[item]).map(items => {
-                        // console.log("iii", item)
-                        if (dataa[item][items] > 0) {
-                            return `<td style="color: #e67e22;cursor: pointer;"><b>${dataa[item][items]}</b></td> `
-                        }
-                        return `<td style="cursor: pointer;"><b> </b></td> `
-                        // return ` <td><b>${dataa[item][items]}</b></td> `
-                    }).join(" ");
+            Object.keys(dataa[item]).map(items => {
+                // console.log("iii", item)
+                if (dataa[item][items] > 0) {
+                    return `<td style="color: #e67e22;cursor: pointer;"><b>${dataa[item][items]}</b></td> `
+                }
+                return `<td style="cursor: pointer;"><b> </b></td> `
+                // return ` <td><b>${dataa[item][items]}</b></td> `
             }).join(" ");
-            // document.getElementById("contact_frequency").innerHTML = outerdiv + innerdiv
-            $("#contact_frequency").append(outerdiv + innerdiv);
-        });
+    }).join(" ");
+    // document.getElementById("contact_frequency").innerHTML = outerdiv + innerdiv
+    $("#contact_frequency").append(outerdiv + innerdiv);
+    // });
 }
 
 function daily_tracker_freq() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            const innerdiv = Object.keys(data).map(item => {
-                return `<option value='${item}'>${item.charAt(0).toUpperCase() + item.slice(1)}</option>`
-            }).join("");
-            document.getElementById("team_select").innerHTML = innerdiv
-            loadFreq(Object.keys(data)[0])
-        });
+    const innerdiv = Object.keys(contact_f_data).map(item => {
+        return `<option value='${item}'>${item.charAt(0).toUpperCase() + item.slice(1)}</option>`
+    }).join("");
+    document.getElementById("team_select").innerHTML = innerdiv
+    loadFreq(Object.keys(contact_f_data)[0])
+    // });
 }
 
-daily_tracker_freq();
+// daily_tracker_freq();
 
 function getSelectValue() {
     var sel = document.getElementById('team_select').value;
@@ -208,53 +200,52 @@ function getSelectValue() {
     this.loadFreq(sel);
 }
 setInterval(function () {
-    clk_chart();
-    clk_chart_24();
-    daily_tracker_total_contact();
-    daily_tracker_contact_history();
     daily_tracker_freq();
+    daily_data();
+    exampleFunction();
     //TODO refresh clock
 }, 300000);
 
 function loadFreqWeekly(option) {
-    // console.log("sellll", option);
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            dataa = data[option]
-            var rowlen1 = Object.keys(dataa).length;
-            var n = 0;
-            console.log(dataa)
-            $("#contact_frequency_weekly").empty();
-            const outerdiv =
-                ` <tr style="height: 50px;">
+    dataa = contact_f_data_week[option]
+    console.log(dataa)
+
+    // console.log(contact_f_data_week)
+
+
+    var rowlen1 = Object.keys(dataa).length;
+    var n = 0;
+    console.log(dataa)
+    $("#contact_frequency_weekly").empty();
+    const outerdiv =
+        ` <tr style="height: 50px;">
               <td class="demo-txt"><b>User</b></td> ` +
-                Object.keys(dataa).map(item => {
-                    n = n + 1
-                    if (rowlen1 === n) {
-                        // console.log("enter")
-                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
-                            `<td class="demo-txt"><b>Others</b></td>`
-                    }
-                    else {
-                        return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
-                    }
-                    //  return `<td style="color:white"><b>${item.toUpperCase()}</b></td>`
-                }).join(" ") + `</tr>`
-            const innerdiv = Object.keys(dataa).map(item => {
-                return `
+        Object.keys(dataa).map(item => {
+            n = n + 1
+            if (rowlen1 === n) {
+                // console.log("enter")
+                return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>` +
+                    `<td class="demo-txt"><b>Others</b></td>`
+            }
+            else {
+                return `<td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td>`;
+            }
+            //  return `<td style="color:white"><b>${item.toUpperCase()}</b></td>`
+        }).join(" ") + `</tr>`
+    const innerdiv = Object.keys(dataa).map(item => {
+        return `
              <tr style="height: 50px;">
              <td class="demo-txt"><b>${item.charAt(0).toUpperCase() + item.slice(1)}</b></td> ` +
-                    Object.keys(dataa[item]).map(items => {
-                        // console.log("iii", dataa[item][items])
-                        if (dataa[item][items] > 0) {
-                            return `<td style="color: #e67e22;"><b>${dataa[item][items]}</b></td> `
-                        }
-                        return `<td ><b> </b></td> `
-                    }).join(" ");
+            Object.keys(dataa[item]).map(items => {
+                // console.log("iii", dataa[item][items])
+                if (dataa[item][items] > 0) {
+                    return `<td style="color: #e67e22;"><b>${dataa[item][items]}</b></td> `
+                }
+                return `<td ><b> </b></td> `
             }).join(" ");
-            $("#contact_frequency_weekly").append(outerdiv + innerdiv);
-        });
+    }).join(" ");
+    $("#contact_frequency_weekly").append(outerdiv + innerdiv);
+    // });
 }
 function getSelectValueweekly() {
     var sel = document.getElementById('team_select_weekly').value;
@@ -267,44 +258,36 @@ setInterval(function () {
     weekly_data();
     // weekly_clk();
     //TODO refresh clock
-}, 1000 * 60 *60);
+}, 1000 * 60 * 60);
 
 // elamparithi heat chart
 var heatMapData;
 var heatMapChart;
 function getHeapMapData() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all).then(
-        response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Request failed!');
-        }, networkError => {
-            document.getElementById("chart30").innerHTML = `${networkError.message}`;
-        }).then(function (responseJson) {
-            heatMapData = responseJson;
-            let teams = Object.keys(heatMapData);
-            getDropDownOptions(teams);
-            renderHeatMap(teams[0]);
+    heatMapData = contact_f_data;
+    let teams = Object.keys(heatMapData);
+    getDropDownOptions(teams);
+    renderHeatMap(teams[0]);
 
-        });
+    // });
     function getDropDownOptions(teams) {
         if (heatMapData) {
-            if(teams) {
-            let dropDown = document.getElementById('teamDropDownButton');
-            teams.forEach(team => {
-                let dropDownItem = document.createElement('option');
-                dropDownItem.id = `${team}`;
-                dropDownItem.value = `${team}`;
-                dropDownItem.innerHTML = `${team}`
-                dropDown.append(dropDownItem);
-            });
-                document.getElementById('teamDropDownButton').value=teams[0];
+            if (teams) {
+                $("#teamDropDownButton").empty();
+                let dropDown = document.getElementById('teamDropDownButton');
+                teams.forEach(team => {
+                    let dropDownItem = document.createElement('option');
+                    dropDownItem.id = `${team}`;
+                    dropDownItem.value = `${team}`;
+                    dropDownItem.innerHTML = `${team}`
+                    dropDown.append(dropDownItem);
+                });
+                document.getElementById('teamDropDownButton').value = teams[0];
             }
         }
     }
 }
-getHeapMapData();
+// getHeapMapData();
 function renderHeatMap(team) {
     var seriesData = [];
     switchTeamChart(team);
@@ -419,24 +402,14 @@ function switchHeatMap(team) {
 var heatMapDataWeekly;
 var heatMapChartWeekly;
 function getHeapMapDataWeekly() {
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all).then(
-        response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Request failed!');
-        }, networkError => {
-            document.getElementById("heatMapChartWeekly").innerHTML = `${networkError.message}`;
-        }).then(function (responseJson) {
-            heatMapDataWeekly = responseJson;
-            let teams = Object.keys(heatMapDataWeekly);
-            getDropDownOptions(teams);
-            renderHeatMapWeekly(teams[0])
-        });
+    heatMapDataWeekly = contact_f_data_week;
+    let teams = Object.keys(heatMapDataWeekly);
+    getDropDownOptions(teams);
+    renderHeatMapWeekly(teams[0])
     function getDropDownOptions(teams) {
         if (heatMapDataWeekly) {
-            if(teams)
-            {
+            if (teams) {
+                $("#teamDropDownButtonWeek").empty();
                 let dropDown = document.getElementById('teamDropDownButtonWeek');
                 teams.forEach(team => {
                     let dropDownItem = document.createElement('option');
@@ -445,12 +418,11 @@ function getHeapMapDataWeekly() {
                     dropDownItem.innerHTML = `${team}`
                     dropDown.append(dropDownItem);
                 });
-                document.getElementById('teamDropDownButtonWeek').value=teams[0];
+                document.getElementById('teamDropDownButtonWeek').value = teams[0];
             }
         }
     }
 }
-getHeapMapDataWeekly();
 function renderHeatMapWeekly(team) {
     var seriesData = [];
     switchTeamChartWeekly(team);
@@ -563,10 +535,7 @@ function switchHeatMapWeekly(team) {
 // Daily report download
 
 function rp_one_daily() {
-
-    // console.log("hello");
     var user_instance = localStorage.getItem('current_user');
-    // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
     fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
@@ -578,51 +547,43 @@ function rp_one_daily() {
 
 
 function rp_weekly() {
-
     //Todo not user instance its emp instance
-
     var user_instance = localStorage.getItem('current_user');
     fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log(data.path+".pdf");
             window.location.href = data.path + ".pdf"
         });
-
 }
 
-
-
-
 function weekly_data() {
-    var total_no_contact
-    var week_team_track
-    var contact_frequency_week
-    var top5_contact_history_week
-    var contact_history_all_weelk
-    var daily_total_for_week
+    var total_no_contact;
+    var week_team_track;
+    var contact_frequency_week;
+    var top5_contact_history_week;
+    var contact_history_all_weelk;
+    var daily_total_for_week;
 
-    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/'+start_date+'/'+end_date+'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
-
                 total_no_contact = data['total_no_of_contacts_weekly']
                 week_team_track = data['weekly_team_tracker']
                 contact_frequency_week = data['freqency_matrix_weekly']
                 top5_contact_history_week = data['top_pairs_maxmium_contact_week']
                 contact_history_all_weelk = data['pairs_history_weekly']
                 daily_total_for_week = data['clk_chart_weekly']
-
                 document.getElementById("totalnocontact_weekly").innerHTML = `<b style="font-size:50px;">${total_no_contact}</b>`
 
                 var la;
                 var laa = []
                 la = Object.keys(week_team_track).map(item => {
-                    // la.append(item)
                     laa.push(item.charAt(0).toUpperCase() + item.slice(1))
                 })
                 $("#chart7").empty();
+
+
                 var options = {
                     series: [{
                         name: 'Data',
@@ -641,7 +602,7 @@ function weekly_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: "#718093",
+                                colors: co,
                                 fontSize: '18px',
                             }
                         },
@@ -653,7 +614,7 @@ function weekly_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: '#718093',
+                                colors: co,
                                 fontSize: '12px',
                             }
                         },
@@ -671,12 +632,8 @@ function weekly_data() {
                         }
                     }
                 };
-
                 var chart = new ApexCharts(document.querySelector("#chart7"), options);
                 chart.render();
-
-                // end
-
                 $("#chart5").empty();
                 var options = {
                     series: [{
@@ -695,8 +652,8 @@ function weekly_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: ' #888ea8',
-                                fontSize: '8px',
+                                colors: co,
+                                fontSize: '12px',
                             }
                         },
                         axisBorder: {
@@ -707,7 +664,7 @@ function weekly_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: "#888ea8",
+                                colors: co,
                                 fontSize: '12px',
                             }
                         },
@@ -749,8 +706,6 @@ function weekly_data() {
                     "bLengthChange": false,
                     data: dataa_week, "columns": [{ "data": "pair" }, { "data": "count" }]
                 });
-                // end
-
                 $("#chart11").empty();
                 var options = {
                     series: [{
@@ -782,7 +737,7 @@ function weekly_data() {
                         categories: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
                         labels: {
                             style: {
-                                colors: '#888ea8',
+                                colors: co,
                             },
                         },
                     },
@@ -790,7 +745,7 @@ function weekly_data() {
                     yaxis: {
                         labels: {
                             style: {
-                                colors: '#888ea8',
+                                colors: co,
                                 // fontSize: '14px',
                             }
 
@@ -799,30 +754,22 @@ function weekly_data() {
                 };
                 var chart = new ApexCharts(document.querySelector("#chart11"), options);
                 chart.render();
-                // end
-
-
-
-                // contact_frequency_week
-
                 const innerdiv = Object.keys(contact_frequency_week).map(item => {
                     return `<option value='${item}'>${item.charAt(0).toUpperCase() + item.slice(1)}</option>`
                 }).join("");
                 document.getElementById("team_select_weekly").innerHTML = innerdiv
                 loadFreqWeekly(Object.keys(contact_frequency_week)[0])
-
-
-
-
             }
         )
 }
 
 weekly_data();
+var value = 100
+console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
 
 
 function daily_data() {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/'+current_date+'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -831,8 +778,10 @@ function daily_data() {
                 var clock_data_daily = data['clk_chart']
                 var contact_frequency_daily = data['contact_History_all']
                 $("#chart9").empty();
+                console.log(co);
                 var top = Object.keys(top_contact_history)
                 var options = {
+
                     series: [{
                         name: 'Data',
                         data: Object.values(top_contact_history)
@@ -849,7 +798,7 @@ function daily_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: ' #888ea8',
+                                colors: co,
                                 fontSize: '11px',
                             }
                         },
@@ -861,7 +810,7 @@ function daily_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: "#888ea8",
+                                colors: co,
                                 fontSize: '12px',
                             }
                         },
@@ -913,7 +862,7 @@ function daily_data() {
                         labels: {
                             show: true,
                             style: {
-                                colors: '#888ea8',
+                                colors: co,
                                 fontSize: '14px',
                             }
                         },
@@ -921,7 +870,7 @@ function daily_data() {
                     yaxis: {
                         labels: {
                             style: {
-                                colors: '#888ea8',
+                                colors: co,
                             }
                         }
                     },
@@ -934,9 +883,7 @@ function daily_data() {
                 var chart = new ApexCharts(document.querySelector("#chart12"), options);
                 chart.render();
                 var am_data = []
-                var co;
-                if (localStorage.getItem("theme") == "dark") { co = 'white' }
-                else { co = 'black' }
+
                 $("#chart10").empty();
                 var options = {
                     series: [{
@@ -1007,6 +954,8 @@ function daily_data() {
                 }
                 dataa_history = Object.values(obj_history)
                 $('#contact_his').DataTable({
+                    "retrieve": true,
+
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
@@ -1020,10 +969,6 @@ daily_data();
 
 
 
-function render(){
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
-        .then(response => response.json())
-        .then(data => {
-            daily_contact_freq = data[option]
-})
+function render() {
+    daily_contact_freq = contact_f_data[option]
 }

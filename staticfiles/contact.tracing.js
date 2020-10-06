@@ -31,6 +31,7 @@ function opentab_cf(evt, tabName) {
 
 //Get Data from Api
 function getContactTracingData(e, s_date, e_date) {
+  document.getElementById("contact-graph").style.display = "block";
   if (!contactGraph) {
     initSigma();
   }
@@ -55,7 +56,18 @@ function getContactTracingData(e, s_date, e_date) {
             behavior: 'smooth'
           });
         contactTracingData = responseJson;
-        getGraphData(contactTracingData[1]);
+        if(contactTracingData[2].length > 0)
+        {
+          getGraphData(contactTracingData[1]);
+          document.getElementById("contact-graph-noData").style.display = "none";
+        }
+        else
+        {
+          document.getElementById("contact-graph").style.display = "none";
+          document.getElementById("contact-graph-noData").style.display = "block";
+          contactTracingData = null
+        }
+        
       });
   }
 }
@@ -453,6 +465,7 @@ function removeL2Icons() {
   if(l2Icons) {
     l2Icons.parentNode.removeChild(l2Icons);
   }
+  document.getElementById('teamIcons').innerHTML = '';
 }
 
 
