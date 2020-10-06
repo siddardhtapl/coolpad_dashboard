@@ -45,9 +45,7 @@ function toggleCheck() {
       changeNetworkmodelTheme('light');
     }
     catch (e) { console.log(e) }
-    try {
-      clk_chart();
-    }
+    try {color();}
     catch (e) { console.log(e) }
   }
   else {
@@ -63,9 +61,7 @@ function toggleCheck() {
       changeNetworkmodelTheme('dark');
     }
     catch (e) { console.log(e) }
-    try {
-      clk_chart();
-    }
+    try {color();}
     catch (e) { console.log(e) }
   }
 }
