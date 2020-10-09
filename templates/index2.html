@@ -427,9 +427,9 @@
                     append_data += '<h4 class="dir_title mt-4">Direct Contacts of Contacted Person</h4>'
                     for (var i in response[1][e]) {
                         var c_date = response[1][e][i]['Date'].split("T");
-
+                        let c_date1 = moment(c_date[0]).format("MM-DD-YYYY")
                         append_data += '<div class="layer1_card act" onclick="open_indirect(this)" id="cd_title" value = "' + i + '" style="cursor:pointer">';
-                        append_data += '<p><i class="fa fa-calendar-o"></i> ' + c_date[0] + '</p>';
+                        append_data += '<p><i class="fa fa-calendar-o"></i> ' + c_date1 + '</p>';
                         append_data += '<h4 >' + i + '</h4><br>';
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[1][e][i]['count'] + '</span></div>'
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Duration ' + response[1][e][i]['max_duration'] + '</span></div>'
