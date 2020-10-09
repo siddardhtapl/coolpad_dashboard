@@ -8,14 +8,14 @@ function color(){
 if (localStorage.getItem("theme") == "light")
 {
     co = 'black'
-    daily_data()
+    daily_data(selectdate)
     weekly_data()
  }
 else if (localStorage.getItem("theme") == "dark")
  {
      co = 'white'
      weekly_data()
-     daily_data()
+     daily_data(selectdate)
      }
     }
 
@@ -78,9 +78,12 @@ function userid() {
                 var bat = item['recent_heartbeat_event']['battery']
                 bat = Math.round(bat / 10)
                 if (bat) {
+                console.log(bat,"yes")
                     batery.push(bat)
                 }
                 else {
+                console.log(bat,"no")
+                bat = "-";
                     batery.push(bat)
                 }
             })
@@ -144,7 +147,7 @@ function opentab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
-    daily_data()
+    daily_data(selectdate)
     weekly_data()
 }
 function loadFreq(option) {
@@ -201,7 +204,7 @@ function getSelectValue() {
 }
 setInterval(function () {
     daily_tracker_freq();
-    daily_data();
+    daily_data(selectdate);
     exampleFunction();
     //TODO refresh clock
 }, 300000);
@@ -536,7 +539,7 @@ function switchHeatMapWeekly(team) {
 
 function rp_one_daily() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + current_date + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + selectdate + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -768,8 +771,8 @@ var value = 100
 console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
 
 
-function daily_data() {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
+function daily_data(selectdate) {
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/'+common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -965,10 +968,44 @@ function daily_data() {
             }
         )
 }
-daily_data();
+daily_data(selectdate);
 
 
 
 function render() {
     daily_contact_freq = contact_f_data[option]
+}
+
+var selectdate;
+
+$(function () {
+    var today = new Date();
+    var lastDay = new Date();
+    lastDay.setDate(lastDay.getDate() - 7);
+    var minDate = convertDateToReadableDate(today);
+    var maxDate = convertDateToReadableDate(lastDay);
+    $('#txtDate').attr('min', maxDate);
+    $('#txtDate').attr('max', minDate);
+    selectdate = convertDateToReadableDate(today)
+    daily_data(selectdate)
+    $('#txtDate').val(current_date);
+    $("#txtDate").on('change', function (event) {
+        event.preventDefault();
+        selectdate = this.value
+        console.log(selectdate)
+        console.log("curr",current_date)
+        daily_data(selectdate)
+    });
+    // console.log(selectdate)
+});
+function convertDateToReadableDate(date) {
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var readableDate = year + '-' + month + '-' + day;
+    return readableDate;
 }

@@ -123,7 +123,7 @@
                 </span>Share</a>
             </li>
             <li class="menu">
-              <a class="menuu" href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+              <a class="menuu" href="#" onclick="email_share()"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
                 </span>Email</a>
             </li>
             <li class="menu">
@@ -380,7 +380,7 @@
 
                       <div style="display: flex; flex-direction: row; justify-content: flex-end; float:right;display: inline-block;">
 
-                        <button style="margin:1rem" id="open-modal-btn"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
+                        <button style="margin:1rem"  id="open-modal-btn"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
                         <a href="#notess" class="all-nt" button style="margin:1rem;" onclick="notess()">All Notes</a></button><br>
 
                       </div>
@@ -459,7 +459,7 @@
                   <p><textarea style="height: 300px; width:300px; font-size: 15px;" id="note_textt1"></textarea></p>
                   <div class="actions">
                     <button onclick="Submit2()" class='ph-button ph-btn-green'>Submit</button>
-                    <button id="close-modal-btn1" class='ph-button ph-btn-red'>Close</button>
+                    <button onclick="close_team_notes()" id="close-modal-btn1" class='ph-button ph-btn-red'>Close</button>
                   </div>
                 </dialog>
 
@@ -593,7 +593,7 @@
                       <p class="para" style="color: rgb(255, 255, 255);">Notes</p>
                       <div style="float:right; ">
 
-                        <button style="margin:1rem" id="open-modal-btn1"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                        <button style="margin:1rem" onclick="team_notes_show()" id="open-modal-btn1"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
                           Add </button>
                         <a href="#notess1" class="all-nt" button="" style="margin:1rem ;" onclick="notess1()">All Notes</a><br>
                       </div>

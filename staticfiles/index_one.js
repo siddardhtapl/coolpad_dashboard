@@ -5,7 +5,8 @@ if (!localStorage.getItem("session")) {
     window.location.href = "../login";
 }
 
-var data_user2
+var data_user2;
+var dev_id;
 window.onload = exampleFunction();
 function exampleFunction() {
     fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
@@ -13,6 +14,13 @@ function exampleFunction() {
     .then(data_user => {
         data_user2= data_user
         UserHistoy(Object.keys(data_user2)[0])
+    })
+
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
+    .then(response => response.json())
+    .then(data => {
+        dev_id = data
+        load_notes_user();
     })
 }
 
@@ -469,12 +477,16 @@ function loadTeamHistory() {
     fetch('https://takvaviya.in/coolpad_backend/user/getTeams/'+ '/' + common4all)
         .then(response => response.json())
         .then(data => {
+
+
             const innerdiv = Object.values(data.teams).map(item => {
                 return `<option value='${item}'>${item}</option>`
             }).join("");
             document.getElementById("team_history_select").innerHTML = innerdiv
             TeamHistoy(Object.values(data)[0][0])
-            localStorage.setItem('current_team', Object.keys(data)[0]);
+
+            localStorage.setItem('current_team', Object.values(data)[0][0]);
+            load_notes_team();
         });
 }
 
@@ -596,10 +608,8 @@ function Submit1() {
     var note = document.getElementById("note_textt").value
     //TODO dynamci location 
     const data = {
-        "user": localStorage.getItem("current_user"),
+       "user": dev_id[localStorage.getItem("current_user")]['device_id'],
         "date_time": String(newdate),
-        "zone": "a",
-        "team": "team a",
         "location": common4all,
         "notes": note
     }
@@ -623,7 +633,7 @@ function Submit1() {
         });
 }
 function load_notes_user() {
-    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + dev_id[localStorage.getItem("current_user")]['device_id']  + '/'+common4all)
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);
@@ -658,6 +668,14 @@ function load_notes_user() {
                 // </div>
                 // <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
                 // </div>`
+
+                 if(da == undefined){
+                    da ='N/A'
+                }
+                if(stick_data.length == 0){
+                    stick_data ='-'
+                }
+
                 const innerdiv1 = `
                     <div class="note_card1">
                     <div style="display: flex; flex-direction: row; align-items: center;">
@@ -707,14 +725,20 @@ function Note_delete(id) {
 // Team Sticky notes
 // USer  Modal
 const trigger1 = document.getElementById("open-modal-btn1")
-const closeBtn1 = document.getElementById("close-modal-btn1")
-const modal1 = document.getElementById("my-modal1")
-trigger1.addEventListener('click', () => {
-    modal1.showModal();
+//const closeBtn1 = document.getElementById("close-modal-btn1")
+//const modal1 = document.getElementById("my-modal1")
+
+function team_notes_show(){
+ document.getElementById("my-modal1").showModal();
     console.log("clicked");
-});
+}
+//trigger1.addEventListener('click', () => {
+//alert();
+//    modal1.showModal();
+//    console.log("clicked");
+//});
 closeBtn1.addEventListener('click', () => {
-    modal1.close();
+    document.getElementById("close-modal-btn1").close();
     document.getElementById("note_textt1").value = '';
 });
 function Submit2() {
@@ -730,8 +754,7 @@ function Submit2() {
     const data = {
         "team": localStorage.getItem("current_team").toLowerCase(),
         "date_time": String(newdate),
-        "zone": "a",
-        "location": "ch",
+        "location": common4all,
         "notes": note
     }
     fetch('https://takvaviya.in/coolpad_backend/user/saveTeamnote/', {
@@ -745,17 +768,17 @@ function Submit2() {
         .then(data => {
             console.log('Success:', data);
             load_notes_team();
-            modal1.close();
+            document.getElementById("my-modal1").close();
             document.getElementById("note_textt1").value = '';
         })
         .catch((error) => {
             console.error('Error:', error);
-            modal1.close();
+            document.getElementById("my-modal1").close();
         });
 }
 function load_notes_team() {
     var a = String(localStorage.getItem("current_team").toLowerCase())
-    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/ch')
+    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/'+common4all)
         .then(response => response.json())
         .then(data => {
             console.log("xx", data);
@@ -781,6 +804,13 @@ function load_notes_team() {
                     stick_data.push(data[item][nitem].notes)
                     da = data[item][nitem].date_time
                 }).join(" ");
+
+                if(da == undefined){
+                    da ='N/A'
+                }
+                if(stick_data.length == 0){
+                    stick_data ='-'
+                }
 
                 const innerdiv1 = `
                     <div class="note_card1">
