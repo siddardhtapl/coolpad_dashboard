@@ -13,7 +13,8 @@ function exampleFunction() {
     .then(response => response.json())
     .then(data_user => {
         data_user2= data_user
-        UserHistoy(Object.keys(data_user2)[0])
+        loadUserHistoy()
+/*        UserHistoy(Object.keys(data_user2)[0])*/
     })
 
     fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
@@ -351,16 +352,14 @@ function loadUserHistoy() {
                 return `<option value='${userName}'>${userName}</option>`
             }).join("");
             document.getElementById("user_history_select").innerHTML = innerdiv;
-/*
             UserHistoy(Object.keys(data)[0])
-*/
             this.current_user = Object.keys(data)[0]
             localStorage.setItem('current_user', Object.keys(data)[0]);
         });
 }
 
 
-loadUserHistoy();
+//loadUserHistoy();
 
 
 
