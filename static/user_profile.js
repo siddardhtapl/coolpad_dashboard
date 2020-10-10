@@ -121,7 +121,7 @@ function save() {
   }
 }
   console.log("fd", JSON.stringify(obj))
-  fetch("https://takvaviya.in/coolpad_backend/user/update_emp/" + localStorage.getItem('cuser'), {
+  fetch("https://takvaviya.in/coolpad_backend/user/update_emp/" + localStorage.getItem('cuser') +"/"+ common4all, {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
