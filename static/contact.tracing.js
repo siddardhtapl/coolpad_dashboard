@@ -31,7 +31,6 @@ function opentab_cf(evt, tabName) {
 
 //Get Data from Api
 function getContactTracingData(e, s_date, e_date) {
-  document.getElementById("contact-graph").style.display = "block";
   if (!contactGraph) {
     initSigma();
   }
@@ -52,19 +51,22 @@ function getContactTracingData(e, s_date, e_date) {
       }).then(function (responseJson) {
         if (window.scrollY < 200)
           window.scroll({
-            top: 300,
+            top: 500,
             left: 0,
             behavior: 'smooth'
           });
         contactTracingData = responseJson;
         if(contactTracingData[2].length > 0)
         {
+          document.getElementById("contact-graph").style.display = "block";
+          document.getElementById("contact-graph-zoomControl").style.display = "block";
           getGraphData(contactTracingData[1]);
           document.getElementById("contact-graph-noData").style.display = "none";
         }
         else
         {
           document.getElementById("contact-graph").style.display = "none";
+          document.getElementById("contact-graph-zoomControl").style.display = "none";
           document.getElementById("contact-graph-noData").style.display = "block";
           contactTracingData = null
         }
@@ -339,7 +341,7 @@ function renderContactGraph(graph) {
 //Node Distribution Plugin
 function forceAtlasGraph() {
   contactGraph.startForceAtlas2({ worker:true, barnesHutOptimize: false, slowdown: 1000, startingIterations: 1000, iterationsPerRender: 1000, gravity: 0 });
-  setTimeout(function () { contactGraph.stopForceAtlas2(); }, 3000);
+  setTimeout(function () { contactGraph.stopForceAtlas2(); }, 1000);
   contactGraph.cameras[0].goTo(
     {
       x: 0,
