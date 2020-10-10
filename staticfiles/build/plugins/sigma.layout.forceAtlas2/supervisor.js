@@ -166,11 +166,13 @@
         j = 0,
         realIndex;
 
-    // Moving nodes
+    // Moving nodes TODO Reg: this plugin breaks down if nodes.len < 9
     for (var i = 0, l = this.nodesByteArray.length; i < l; i += this.ppn) {
-      nodes[j].x = this.nodesByteArray[i];
-      nodes[j].y = this.nodesByteArray[i + 1];
-      j++;
+      if(j<nodes.length) {
+        nodes[j].x = this.nodesByteArray[i];
+        nodes[j].y = this.nodesByteArray[i + 1];
+        j++;
+      }
     }
   };
 

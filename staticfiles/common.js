@@ -132,22 +132,24 @@ $(document).ready(function () {
 function getAllMissingDevices() {
   let missingDevicesTab = document.getElementById('missing-devices');
   //don't call api if not on the missing devices tab
-  if (missingDevicesTab.style.display === 'block') {
-    fetch('https://takvaviya.in/coolpad_backend/user/missedDevice/'+common4all).then(
-      response => {
-        if (response.ok) {
-          return response.json();
-        }
-        document.getElementById("missing-card-noData").innerHTML = `Request failed!`;
-        throw new Error('Request failed!');
-      }, networkError => {
-        document.getElementById("missing-card-noData").innerHTML = `${networkError.message}`;
-      }).then(function (responseJson) {
-        let allmissingDevices = Object.values(responseJson);
-        if (allmissingDevices && allmissingDevices.length > 0) {
-          renderMissingDevices(allmissingDevices)
-        }
-      });
+  if(missingDevicesTab){
+    if (missingDevicesTab.style.display === 'block') {
+      fetch('https://takvaviya.in/coolpad_backend/user/missedDevice/'+common4all).then(
+        response => {
+          if (response.ok) {
+            return response.json();
+          }
+          document.getElementById("missing-card-noData").innerHTML = `Request failed!`;
+          throw new Error('Request failed!');
+        }, networkError => {
+          document.getElementById("missing-card-noData").innerHTML = `${networkError.message}`;
+        }).then(function (responseJson) {
+          let allmissingDevices = Object.values(responseJson);
+          if (allmissingDevices && allmissingDevices.length > 0) {
+            renderMissingDevices(allmissingDevices)
+          }
+        });
+    }
   }
   //todo filter only today's devices.
 }
