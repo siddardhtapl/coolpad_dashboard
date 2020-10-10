@@ -36,6 +36,7 @@ function getContactTracingData(e, s_date, e_date) {
     initSigma();
   }
   removeContactLabel();
+  removeL1Icons();
   let emp = e;
   let startDate = s_date;
   let endDate = e_date;
@@ -337,8 +338,8 @@ function renderContactGraph(graph) {
 }
 //Node Distribution Plugin
 function forceAtlasGraph() {
-  contactGraph.startForceAtlas2({ worker: true, barnesHutOptimize: false, startingIterations: 10000, iterationsPerRender: 100000, gravity: 0 });
-  setTimeout(function () { contactGraph.stopForceAtlas2(); }, 1000);
+  contactGraph.startForceAtlas2({ worker:true, barnesHutOptimize: false, slowdown: 1000, startingIterations: 1000, iterationsPerRender: 1000, gravity: 0 });
+  setTimeout(function () { contactGraph.stopForceAtlas2(); }, 3000);
   contactGraph.cameras[0].goTo(
     {
       x: 0,
@@ -459,13 +460,14 @@ function removeContactLabel() {
   }
   removeL2Icons();
 }
-
+function removeL1Icons() {
+  document.getElementById('teamIcons').innerHTML = '';
+}
 function removeL2Icons() {
   let l2Icons = document.getElementById('l2_teamIcons');
   if(l2Icons) {
     l2Icons.parentNode.removeChild(l2Icons);
   }
-  document.getElementById('teamIcons').innerHTML = '';
 }
 
 
