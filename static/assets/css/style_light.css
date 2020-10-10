@@ -1079,7 +1079,7 @@ text-transform:capitalize;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   box-sizing: border-box;
-  display: inline-block;
+  /* display: inline-block; */
   min-width: 1.5em;
   padding: 0.5em 1em;
   margin-left: 1px;
@@ -2620,3 +2620,22 @@ color: #000;
   table.dataTable thead .sorting_desc_disabled {
     background-image: url("../images/sort_desc_disabled.png") !important;
   }
+
+  input[type=date].form-control,
+input[type=datetime-local].form-control,
+input[type=month].form-control,
+input[type=time].form-control {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-color: #fff !important;
+    border-radius: 5px !important;
+}
+
+.widget-chart-two::-webkit-scrollbar {
+    width: 10px;
+}
+.widget-chart-two::-webkit-scrollbar-thumb {
+    background-color: gainsboro;
+    border-radius: 20px;
+}

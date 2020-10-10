@@ -57,12 +57,12 @@ table.dataTable.no-footer {
     color: white;
 }
 
-.date-show .form-control {
+/* .date-show .form-control {
     background: none;
     color: #fff;
     border: 1px solid #303131;
-}
-
+} */
+/* 
 .date-show input[type="date"] {
     position: relative;
     padding: 10px;
@@ -80,14 +80,14 @@ table.dataTable.no-footer {
     display: block;
     font-family: 'FontAwesome';
     content: '\f073';
-    /* This is the calendar icon in FontAwesome */
+
     width: 15px;
     height: 20px;
     position: absolute;
     top: 5px;
     right: 6px;
     color: #fff;
-}
+} */
 
 .all_third_pair {
     display: block;
@@ -592,12 +592,12 @@ text-align:center;
     border: 1px solid #303131 !important;
     color:white;
 }
-.date-show .form-control {
+/* .date-show .form-control {
     background: none;
     color: #fff;
     border: 1px solid #303131;
-}
-.date-show input[type="date"] {
+} */
+/* .date-show input[type="date"] {
   position: relative;
   padding: 10px;
 }
@@ -612,14 +612,14 @@ text-align:center;
   display: block;
   font-family: 'FontAwesome';
   content: '\f073';
-  /* This is the calendar icon in FontAwesome */
+
   width: 15px;
   height: 20px;
   position: absolute;
   top: 5px;
   right: 6px;
   color: #fff;
-}
+} */
 .all_third_pair{
 display:block;
 float : left;
@@ -1046,14 +1046,14 @@ input:checked + .slider .off
  }
  /* note 1 */
 
- .note_card1
+ .note1 
  {
-    border: 0.5px solid;
+    border: 0.5px solid !important;
 
-     height: 248px;
+     height: 250px !important;
      /* background-color: #2c2f4b; */
-     margin: 1rem;
-     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+     margin: 1rem !important;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
  }
  /* .note_card1:hover
  {
@@ -1100,16 +1100,16 @@ input:checked + .slider .off
 	background-color: #009688;
 }
  /* end */
- .note_card
+ .note_card1
   {
-    border: 0.5px solid;
+    border: 0.5px solid ;
 
-     height: 250px;
-     background-color: #1A1C2D;
-     margin: 1rem;
-     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+     height: 250px ;
+     /* background-color: #1A1C2D !important; */
+     margin: 1rem ;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) ;
  }
- .note_card:hover
+ .note_card1:hover
  {
     background-color: #2c2f4b;
  }
@@ -1291,7 +1291,7 @@ text-transform:capitalize;
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   box-sizing: border-box;
-  display: inline-block;
+  /* display: inline-block; */
   min-width: 1.5em;
   padding: 0.5em 1em;
   margin-left: 1px;
@@ -2250,11 +2250,11 @@ body {
     margin-left: -17px;}
 
     .widget-chart-one-team-notes{
-margin-top: -129px;
-    height: 430px;
+    margin-top: -133px;
+    height: 370px;
     }
 .widget-chart-one-team{
-height:301px;
+height:340px;
 }
 .widget-chart-one-userhistory{
     height:242px;
@@ -2724,10 +2724,10 @@ color:#fff;
 #user_list td {
     color: #fff;
 }
-.date-show {
+/* .date-show {
     margin-left: 20px;
     color: #fff;
-}
+} */
 
 .aff_hd {
     font-size: 24px;
@@ -2823,4 +2823,23 @@ color: #fff;
 }
 #user_list td {
     border-top: none;
+}
+input[type=date].form-control,
+input[type=datetime-local].form-control,
+input[type=month].form-control,
+input[type=time].form-control {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-color: #f1f1f1f1!important;
+    border-radius: 5px !important;
+}
+
+
+.widget-chart-two::-webkit-scrollbar {
+    width: 10px;
+}
+.widget-chart-two::-webkit-scrollbar-thumb {
+    background-color: #718093;
+    border-radius: 20px;
 }

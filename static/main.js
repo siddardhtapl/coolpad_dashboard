@@ -1,23 +1,22 @@
 // Global decleration
-
 var contact_f_data
 var contact_f_data_week
+var api 
+
 
 var co;
-function color(){
-if (localStorage.getItem("theme") == "light")
-    {
-    co = 'black'
+function color() {
+    if (localStorage.getItem("theme") == "light") {
+        co = 'black'
     }
-else if (localStorage.getItem("theme") == "dark")
-    {
-     co = 'white'
-     }
-    console.log(selectdate,"AHEMM")
-    if (selectdate === undefined) {daily_data(current_date)}
-    else {daily_data(selectdate)}
+    else if (localStorage.getItem("theme") == "dark") {
+        co = 'white'
+    }
+    // console.log(selectdate, "AHEMM")
+    if (selectdate === undefined) { daily_data(current_date) }
+    else { daily_data(selectdate) }
     weekly_data()
- }
+}
 
 function exampleFunction(selectdate) {
     fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate + '/' + common4all)
@@ -68,7 +67,9 @@ function userid() {
     obj1 = {}
     sta = []
     batery = []
-    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/' + common4all)
+        // response.json()
+        // fetch(api)
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
@@ -79,7 +80,7 @@ function userid() {
                     batery.push(bat)
                 }
                 else {
-                bat = "-";
+                    bat = "-";
                     batery.push(bat)
                 }
             })
@@ -337,7 +338,7 @@ function renderHeatMap(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: ' #888EA8',
+                        colors: '#888EA8',
                     }
                 },
                 axisBorder: {
@@ -348,7 +349,7 @@ function renderHeatMap(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: "#888EA8",
+                        colors: '#888EA8',
                         fontSize: '12px',
                     }
                 },
@@ -472,7 +473,7 @@ function renderHeatMapWeekly(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: ' #888EA8',
+                        colors: '#888EA8',
                     }
                 },
                 axisBorder: {
@@ -483,7 +484,7 @@ function renderHeatMapWeekly(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: "#888EA8",
+                        colors: '#888EA8',
                         fontSize: '12px',
                     }
                 },
@@ -758,11 +759,11 @@ function weekly_data() {
         )
 }
 var value = 100
-console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
+console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/' + common4all)
 
 
 function daily_data(selectdate) {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -976,7 +977,7 @@ $(function () {
         event.preventDefault();
         selectdate = this.value
         console.log(selectdate)
-        console.log("curr",current_date)
+        console.log("curr", current_date)
         daily_data(selectdate)
         exampleFunction(selectdate);
 

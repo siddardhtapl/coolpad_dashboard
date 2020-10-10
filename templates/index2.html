@@ -188,7 +188,7 @@
                                 <div class="date-show">
                                     <div class="form-group">
                                         <label>Start Date</label>
-                                        <input type="date" id="startDate" name="bday" max="3000-12-31" min="1000-01-01"
+                                        <input type="date" id="startDate" name="bday" min="1000-01-01"
                                             class="form-control">
                                     </div>
 
@@ -308,6 +308,21 @@
         </div>
     </div>
     <script>
+        
+    $(function(){
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    $('#startDate').attr('max', maxDate);
+    $('#endDate').attr('max', maxDate);
+});
+    
 
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
