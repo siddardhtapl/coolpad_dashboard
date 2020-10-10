@@ -5,14 +5,23 @@ if (!localStorage.getItem("session")) {
     window.location.href = "../login";
 }
 
-var data_user2
+var data_user2;
+var dev_id;
 window.onload = exampleFunction();
 function exampleFunction() {
     fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
     .then(response => response.json())
     .then(data_user => {
         data_user2= data_user
-        UserHistoy(Object.keys(data_user2)[0])
+        loadUserHistoy()
+/*        UserHistoy(Object.keys(data_user2)[0])*/
+    })
+
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
+    .then(response => response.json())
+    .then(data => {
+        dev_id = data
+        load_notes_user();
     })
 }
 
@@ -43,7 +52,6 @@ function opentab_history(evt, tabName) {
 // User history
 
 function UserHistoy(option) {
-
             dataa = data_user2[option];
             dataa_w = data_user2[option];
             keys = []
@@ -59,8 +67,6 @@ function UserHistoy(option) {
             clk_d = dataa['24_hr_clock']
             const innerdiv0 = `   <p class="count-id">${clk_d}</p>`
             // document.getElementById("abc").innerHTML = innerdiv0
-            console.log("clk dataa", dataa);
-
             if (clk_d != null) {
                 history_clk(clk_d);
                 history_clk_12hr(clk_d);
@@ -132,12 +138,9 @@ function UserHistoy(option) {
                 Object.keys(dataa_w["Contact History Week"]).map(item => {
                     duration_w.push(dataa_w["Contact History Week"][item]["max_duration"]);
                 })
-                console.log("ii", duration_w)
                 for (var i = 0; i < keys_w.length; i++) {
                     obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
-                    // console.log(i)
                 }
-                console.log("obj0", Object.values(obj_w))
                 dataa2 = Object.values(obj_w )
                 $('#contact_trace_wee').DataTable({
                     "searching": false,
@@ -146,13 +149,10 @@ function UserHistoy(option) {
                     "bDestroy": true,
                     data: dataa2, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
                 });
-
             }
             else {
                 document.getElementById("ctw").innerHTML = '<div style="color:#007bff; padding:1rem"><a>No data available</a></div>'
             }
-
-            console.log("cehking", dataa["Contact History Day"])
             if (dataa["Contact History Day"] != null) {
                 document.getElementById('ctd').innerHTML = `<table id="contact_trace_day" class=" " data-page-length='8'>
                 <thead align="center">
@@ -173,13 +173,9 @@ function UserHistoy(option) {
                 Object.keys(dataa["Contact History Day"]).map(item => {
                     duration.push(dataa["Contact History Day"][item]["max_duration"]);
                 })
-                console.log("i", keys)
-                console.log("ii", duration)
                 for (var i = 0; i < keys.length; i++) {
                     obj[i] = { "sno": i + 1, "pair": keys[i], "count": values[i], "duration": duration[i]};
-                    console.log(i)
                 }
-                console.log("obj1", Object.values(obj))
                 dataa_c = Object.values(obj)
                 $('#contact_trace_day').DataTable({
                     "searching": false,
@@ -216,7 +212,6 @@ function UserHistoy(option) {
                 Object.assign(ceh[i], {user: na[i]});
             }
             // ceh.push(na)
-              console.log(ceh)
             $('#contact_event_all').DataTable({
                 "scrollY": "200px",
                 "retrieve": true,
@@ -364,7 +359,7 @@ function loadUserHistoy() {
 }
 
 
-loadUserHistoy();
+//loadUserHistoy();
 
 
 
@@ -372,6 +367,7 @@ function getSelectValueUserHistory() {
     var sel = document.getElementById('user_history_select').value;
     this.UserHistoy(sel);
     localStorage.setItem('current_user', sel)
+    load_notes_user();
 }
 
 
@@ -435,7 +431,6 @@ function TeamHistoy(option) {
                 obj[i] = { "sno": i + 1, "pair": keys[i], "contact": values[i] };
             }
             }
-            //  console.log("obj", Object.values(obj))
             dataa = Object.values(obj)
             $('#user_contact').DataTable({
                 "searching": false,
@@ -451,7 +446,6 @@ function TeamHistoy(option) {
             for (var i = 0; i < keys_w.length; i++) {
                 obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "contact": values_w[i] };
             }
-            //  console.log("obj", Object.values(obj))
             dataa_weak = Object.values(obj_w)
             $('#user_contact_weekss').DataTable({
                 "searching": false,
@@ -474,7 +468,8 @@ function loadTeamHistory() {
             }).join("");
             document.getElementById("team_history_select").innerHTML = innerdiv
             TeamHistoy(Object.values(data)[0][0])
-            localStorage.setItem('current_team', Object.keys(data)[0]);
+            localStorage.setItem('current_team', Object.values(data)[0][0]);
+            load_notes_team();
         });
 }
 
@@ -482,11 +477,10 @@ loadTeamHistory();
 
 function getSelectValueTeamHistory() {
     var sel = document.getElementById('team_history_select').value;
-    // console.log("hello", sel);
     this.TeamHistoy(sel);
-    localStorage.setItem('current_team', sel)
+    localStorage.setItem('current_team', sel);
+    load_notes_team();
 }
-
 
 // Download Report PDF
 
@@ -495,7 +489,6 @@ function dwnldusrpdf() {
     fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log(data.path+".pdf");
             window.location.href = data.path + ".pdf"
         });
 }
@@ -503,12 +496,10 @@ function dwnldusrpdf() {
 // Download Report CSV
 
 function dwnldusrcsv() {
-    // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
     fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log(data.path+".csv");
             window.location.href = data.path + ".csv"
         });
 }
@@ -517,12 +508,10 @@ function dwnldusrcsv() {
 
 function dwnldusrxlsx() {
 
-    // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_user');
     fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            //  console.log(data.path+".xlsx");
             window.location.href = data.path + ".xlsx"
         });
 }
@@ -534,12 +523,10 @@ function dwnldusrxlsx() {
 
 function dwnldtmpdf() {
 
-    // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
     fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log(data.path+".pdf");
             window.location.href = data.path + ".pdf"
         });
 }
@@ -547,13 +534,10 @@ function dwnldtmpdf() {
 // Download Report CSV
 
 function dwnldtmcsv() {
-
-    // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
     fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log(data.path+".csv");
             window.location.href = data.path + ".csv"
         });
 }
@@ -562,12 +546,10 @@ function dwnldtmcsv() {
 
 function dwnldtmxlsx() {
 
-    // console.log("lll", localStorage.getItem('current_user'));
     var user_instance = localStorage.getItem('current_team');
     fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            // console.log(data.path+".xlsx");
             window.location.href = data.path + ".xlsx"
         });
 }
@@ -579,7 +561,6 @@ const closeBtn = document.getElementById("close-modal-btn")
 const modal = document.getElementById("my-modal")
 trigger.addEventListener('click', () => {
     modal.showModal();
-    console.log("clicked");
 });
 closeBtn.addEventListener('click', () => {
     modal.close();
@@ -591,15 +572,11 @@ function Submit1() {
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     newdate = year + "-" + month + "-" + day;
-    console.log("clcikes", localStorage.getItem("current_user"));
-    console.log("logged", document.getElementById("note_textt").value)
     var note = document.getElementById("note_textt").value
     //TODO dynamci location 
     const data = {
-        "user": localStorage.getItem("current_user"),
+       "user": dev_id[localStorage.getItem("current_user")]['device_id'],
         "date_time": String(newdate),
-        "zone": "a",
-        "team": "team a",
         "location": common4all,
         "notes": note
     }
@@ -612,7 +589,6 @@ function Submit1() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             load_notes_user();
             modal.close();
             document.getElementById("note_textt").value = '';
@@ -623,14 +599,11 @@ function Submit1() {
         });
 }
 function load_notes_user() {
-    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + localStorage.getItem("current_user") + '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + dev_id[localStorage.getItem("current_user")]['device_id']  + '/'+common4all)
         .then(response => response.json())
         .then(data => {
-            console.log("xx", data);
             Object.keys(data).map(item => {
-                console.log("item", Object.keys(data[item]));
                 const innerdiv = Object.keys(data[item]).map(nitem => {
-                    console.log("nn", data[item][nitem].date_time)
                     return `
                     <div class="note_card">
                     <div style="display: flex; flex-direction: row; align-items: center;">
@@ -644,20 +617,18 @@ function load_notes_user() {
                 // **************************************
                 var stick_data = [];
                 var da;
-
-                console.log("thies", Object.keys(data[item]).length)
                 Object.keys(data[item]).map(nitem => {
                     stick_data.push(data[item][nitem].notes)
                     da = data[item][nitem].date_time
 
                 }).join(" ");
-                // return `
-                // <div class="note_card1">
-                // <div style="display: flex; flex-direction: row; align-items: center;">
-                // <div class="ndate1" style='flex:5'><b>${ data[item][nitem].date_time}</b></div>
-                // </div>
-                // <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${ stick_data.slice(-1)[0]}</p></div>
-                // </div>`
+                 if(da == undefined){
+                    da ='N/A'
+                }
+                if(stick_data.length == 0){
+                    stick_data ='-'
+                }
+
                 const innerdiv1 = `
                     <div class="note_card1">
                     <div style="display: flex; flex-direction: row; align-items: center;">
@@ -666,17 +637,12 @@ function load_notes_user() {
                     <div class="nnote1" id="nnote1"><p style="padding-right: 40px; color:#cec1c1">${stick_data.slice(-1)[0]}</p></div>
                     </div>`
                 document.getElementById("load_notes1").innerHTML = innerdiv1
-
-                console.log("0000000000000000", stick_data.slice(-1)[0])
-
             })
         });
 }
 
-load_notes_user();
 
 function Note_delete(id) {
-    console.log("delete", id);
     function reqListener() {
         console.log("res", this.responseText);
     }
@@ -688,7 +654,6 @@ function Note_delete(id) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             load_notes_user();
             modal.close();
             document.getElementById("note_textt").value = '';
@@ -701,37 +666,26 @@ function Note_delete(id) {
 }
 // end user sticky notes
 
-
-
-
-// Team Sticky notes
-// USer  Modal
-const trigger1 = document.getElementById("open-modal-btn1")
-const closeBtn1 = document.getElementById("close-modal-btn1")
-const modal1 = document.getElementById("my-modal1")
-trigger1.addEventListener('click', () => {
-    modal1.showModal();
-    console.log("clicked");
-});
-closeBtn1.addEventListener('click', () => {
-    modal1.close();
+function team_notes_show(){
+ document.getElementById("my-modal1").showModal();
+}
+function close_team_notes(){
+    document.getElementById("my-modal1").close();
     document.getElementById("note_textt1").value = '';
-});
+}
 function Submit2() {
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     newdate = year + "-" + month + "-" + day;
-    console.log("clcikes", localStorage.getItem("current_team"));
-    console.log("logged", document.getElementById("note_textt1").value)
+
     var note = document.getElementById("note_textt1").value
     //TODO dynamci location 
     const data = {
         "team": localStorage.getItem("current_team").toLowerCase(),
         "date_time": String(newdate),
-        "zone": "a",
-        "location": "ch",
+        "location": common4all,
         "notes": note
     }
     fetch('https://takvaviya.in/coolpad_backend/user/saveTeamnote/', {
@@ -743,26 +697,22 @@ function Submit2() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             load_notes_team();
-            modal1.close();
+            document.getElementById("my-modal1").close();
             document.getElementById("note_textt1").value = '';
         })
         .catch((error) => {
             console.error('Error:', error);
-            modal1.close();
+            document.getElementById("my-modal1").close();
         });
 }
 function load_notes_team() {
     var a = String(localStorage.getItem("current_team").toLowerCase())
-    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/ch')
+    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/'+common4all)
         .then(response => response.json())
         .then(data => {
-            console.log("xx", data);
             Object.keys(data).map(item => {
-                console.log("item", Object.keys(data[item]));
                 const innerdiv = Object.keys(data[item]).map(nitem => {
-                    console.log("nn", data[item][nitem].date_time)
                     return `
                     <div class="note_card">
                     <div style="display: flex; flex-direction: row; align-items: center;">
@@ -775,13 +725,16 @@ function load_notes_team() {
                 document.getElementById("load_notes_team").innerHTML = innerdiv
                 var stick_data = [];
                 var da;
-
-                console.log("thies", Object.keys(data[item]).length)
                 Object.keys(data[item]).map(nitem => {
                     stick_data.push(data[item][nitem].notes)
                     da = data[item][nitem].date_time
                 }).join(" ");
-
+                if(da == undefined){
+                    da ='N/A'
+                }
+                if(stick_data.length == 0){
+                    stick_data ='-'
+                }
                 const innerdiv1 = `
                     <div class="note_card1">
                     <div style="display: flex; flex-direction: row; align-items: center;">
@@ -795,10 +748,6 @@ function load_notes_team() {
 }
 load_notes_team();
 function Note_delete_team(id) {
-    console.log("delete", id);
-    // fetch()
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
     function reqListener() {
         console.log("res", this.responseText);
     }
@@ -810,7 +759,6 @@ function Note_delete_team(id) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             load_notes_team();
             modal.close();
             document.getElementById("note_textt").value = '';

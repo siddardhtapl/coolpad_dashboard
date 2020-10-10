@@ -29,12 +29,47 @@ function share() {
   window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
 }
 
+
+
+
+function email_share() {
+var daily_report,weekly_reoprt;
+
+             $.ajax({
+                type: "GET",
+                url: "https://www.takvaviya.in/coolpad_backend/user/weekly_report/" + start_date + "/" + end_date + "/" + current_date + "/" + common4all,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    weekly_reoprt = response;}
+                    });
+              $.ajax({
+                type: "GET",
+                url: "https://www.takvaviya.in/coolpad_backend/user/daily_report/"  + current_date + "/" + common4all,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    daily_report = response;}
+                    });
+//  var daily_report =
+//  var weekly_reoprt = "https://takvaviya.in/coolpad/project/login/";
+setTimeout(function(){
+console.log(daily_report,'kkk');
+    var Rdaily_report = daily_report['path']+'.pdf';
+    var Rweekly_reoprt = weekly_reoprt['path']+'.pdf';
+      var msgbody = "https://takvaviya.in/coolpad/project/login/";
+
+  var url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Coolpad Dashboard&body= login link: '+msgbody+'%0D%0A daily report link : ' + Rdaily_report +',%0D%0A weekly report link : '+Rweekly_reoprt+' &ui=2&tf=1&pli=1';
+  window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
+   }, 2000);
+}
+
 // praveen
 /*Theme Toggle*/
 function toggleCheck() {
   if (document.getElementById("myCheckbox").checked === true ) {
     localStorage.setItem("theme", "light");
-    if(sess_user === 'demo')
+    if(sess_user === 'demo' || sess_user === 'tyson_test')
     {
       document.getElementById("img").src = "../../static/assets/img/Tyson_Foods_logo.svg.png";
     }
@@ -50,7 +85,7 @@ function toggleCheck() {
   }
   else {
     localStorage.setItem("theme", "dark");
-    if(sess_user === 'demo')
+    if(sess_user === 'demo' || sess_user === 'tyson_test')
     {
       document.getElementById("img").src = "../../static/assets/img/Tyson_Foods_logo_bright.svg.png";
     }

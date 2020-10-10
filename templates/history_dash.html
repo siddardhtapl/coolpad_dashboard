@@ -11,24 +11,21 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-  <link href="../../static/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="../../static/assets/bootstrap/css/bootstrap.min.css?version=1" rel="stylesheet" type="text/css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />
+  <link href="../../static/assets/css/style_light.css?version=1" rel="stylesheet" type="text/css" id="theme" />
   <script data-require="moment.js@2.10.2" data-semver="2.10.2"
   src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"  crossorigin="anonymous"></script>
- <script src="../../static/common.js"></script>
-
-
-<!--  <link href="../../static/assets/css/style_light.css" rel="stylesheet" type="text/css" id="theme" />-->
+ <script src="../../static/common.js?version=1"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
-  <link rel="shortcut icon" href="../../static/coolpad_favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../../static/coolpad_favicon.ico?version=1" type="image/x-icon">
 <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">-->
-  <link href="../../static/assets/css/paginate.css" rel="stylesheet" type="text/css"  />
+  <link href="../../static/assets/css/paginate.css?version=1" rel="stylesheet" type="text/css"  />
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
@@ -48,12 +45,12 @@
                     </li>-->
           <li class="nav-item theme-text">
             <a class="nav-link top-logo">
-              <img id="img" src="../../static/assets/img/coolpad-logo.png" alt="main-logo"></a>
+              <img id="img" src="../../static/assets/img/coolpad-logo.png?version=1" alt="main-logo"></a>
           </li>
         </ul>
         <ul class="navbar-item flex-row ml-md-auto">
           <li class="main-logo">
-            <img id="img1" src="../../static/assets/img/takvaviya-main-logo.png" alt="main-logo">
+            <img id="img1" src="../../static/assets/img/takvaviya-main-logo.png?version=1" alt="main-logo">
           </li>
           <li class="user-logout" onclick="logout()">
             <span class="logout-icon"><i class="fas fa-sign-out-alt" title="sign-out" aria-hidden="true"></i></span>
@@ -123,7 +120,7 @@
                 </span>Share</a>
             </li>
             <li class="menu">
-              <a class="menuu" href="#"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+              <a class="menuu" href="#" onclick="email_share()"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
                 </span>Email</a>
             </li>
             <li class="menu">
@@ -380,7 +377,7 @@
 
                       <div style="display: flex; flex-direction: row; justify-content: flex-end; float:right;display: inline-block;">
 
-                        <button style="margin:1rem" id="open-modal-btn"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
+                        <button style="margin:1rem"  id="open-modal-btn"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
                         <a href="#notess" class="all-nt" button style="margin:1rem;" onclick="notess()">All Notes</a></button><br>
 
                       </div>
@@ -459,7 +456,7 @@
                   <p><textarea style="height: 300px; width:300px; font-size: 15px;" id="note_textt1"></textarea></p>
                   <div class="actions">
                     <button onclick="Submit2()" class='ph-button ph-btn-green'>Submit</button>
-                    <button id="close-modal-btn1" class='ph-button ph-btn-red'>Close</button>
+                    <button onclick="close_team_notes()" id="close-modal-btn1" class='ph-button ph-btn-red'>Close</button>
                   </div>
                 </dialog>
 
@@ -593,7 +590,7 @@
                       <p class="para" style="color: rgb(255, 255, 255);">Notes</p>
                       <div style="float:right; ">
 
-                        <button style="margin:1rem" id="open-modal-btn1"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                        <button style="margin:1rem" onclick="team_notes_show()" id="open-modal-btn1"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
                           Add </button>
                         <a href="#notess1" class="all-nt" button="" style="margin:1rem ;" onclick="notess1()">All Notes</a><br>
                       </div>
@@ -710,9 +707,7 @@
     </script>
 
 
-    <script src="../../static/index_one.js"></script>
-<!--    <script src="../../static/main.js"></script>-->
-
+    <script src="../../static/index_one.js?version=1"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
     <script src='https://superal.github.io/canvas2image/canvas2image.js'></script>
   </div>

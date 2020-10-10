@@ -6,29 +6,27 @@ var contact_f_data_week
 var co;
 function color(){
 if (localStorage.getItem("theme") == "light")
-{
+    {
     co = 'black'
-    daily_data()
+    }
+else if (localStorage.getItem("theme") == "dark")
+    {
+     co = 'white'
+     }
+    console.log(selectdate,"AHEMM")
+    if (selectdate === undefined) {daily_data(current_date)}
+    else {daily_data(selectdate)}
     weekly_data()
  }
-else if (localStorage.getItem("theme") == "dark")
- {
-     co = 'white'
-     weekly_data()
-     daily_data()
-     }
-    }
 
-window.onload = exampleFunction();
-function exampleFunction() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
+function exampleFunction(selectdate) {
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate + '/' + common4all)
         .then(response => response.json())
         .then(data_user => {
             contact_f_data = data_user
             loadFreq(Object.keys(contact_f_data)[0])
             daily_tracker_freq()
             getHeapMapData()
-            console.log(Object.keys(contact_f_data)[0])
         })
     fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
@@ -81,6 +79,7 @@ function userid() {
                     batery.push(bat)
                 }
                 else {
+                bat = "-";
                     batery.push(bat)
                 }
             })
@@ -144,7 +143,8 @@ function opentab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
-    daily_data()
+    daily_data(selectdate)
+    exampleFunction(selectdate);
     weekly_data()
 }
 function loadFreq(option) {
@@ -201,21 +201,16 @@ function getSelectValue() {
 }
 setInterval(function () {
     daily_tracker_freq();
-    daily_data();
-    exampleFunction();
+    daily_data(selectdate);
+    exampleFunction(selectdate);
     //TODO refresh clock
 }, 300000);
 
 function loadFreqWeekly(option) {
     dataa = contact_f_data_week[option]
-    console.log(dataa)
-
     // console.log(contact_f_data_week)
-
-
     var rowlen1 = Object.keys(dataa).length;
     var n = 0;
-    console.log(dataa)
     $("#contact_frequency_weekly").empty();
     const outerdiv =
         ` <tr style="height: 50px;">
@@ -536,7 +531,7 @@ function switchHeatMapWeekly(team) {
 
 function rp_one_daily() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + current_date + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + selectdate + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -762,14 +757,12 @@ function weekly_data() {
             }
         )
 }
-
-weekly_data();
 var value = 100
 console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
 
 
-function daily_data() {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
+function daily_data(selectdate) {
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/'+common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -778,7 +771,6 @@ function daily_data() {
                 var clock_data_daily = data['clk_chart']
                 var contact_frequency_daily = data['contact_History_all']
                 $("#chart9").empty();
-                console.log(co);
                 var top = Object.keys(top_contact_history)
                 var options = {
 
@@ -954,21 +946,50 @@ function daily_data() {
                 }
                 dataa_history = Object.values(obj_history)
                 $('#contact_his').DataTable({
-                    "retrieve": true,
-
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
+                    "bDestroy": true,
                     data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }]
                 });
 
             }
         )
 }
-daily_data();
-
-
-
 function render() {
     daily_contact_freq = contact_f_data[option]
+}
+var selectdate;
+$(function () {
+    var today = new Date();
+    var lastDay = new Date();
+    lastDay.setDate(lastDay.getDate() - 7);
+    var minDate = convertDateToReadableDate(today);
+    var maxDate = convertDateToReadableDate(lastDay);
+    $('#txtDate').attr('min', maxDate);
+    $('#txtDate').attr('max', minDate);
+    selectdate = convertDateToReadableDate(today)
+    daily_data(selectdate)
+    exampleFunction(selectdate);
+    $('#txtDate').val(selectdate);
+    $("#txtDate").on('change', function (event) {
+        event.preventDefault();
+        selectdate = this.value
+        console.log(selectdate)
+        console.log("curr",current_date)
+        daily_data(selectdate)
+        exampleFunction(selectdate);
+
+    });
+});
+function convertDateToReadableDate(date) {
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var readableDate = year + '-' + month + '-' + day;
+    return readableDate;
 }
