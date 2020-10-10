@@ -6,20 +6,18 @@ var contact_f_data_week
 var co;
 function color(){
 if (localStorage.getItem("theme") == "light")
-{
+    {
     co = 'black'
-/*    daily_data(selectdate)*/
+    }
+else if (localStorage.getItem("theme") == "dark")
+    {
+     co = 'white'
+     }
+    console.log(selectdate,"AHEMM")
+    if (selectdate === undefined) {daily_data(current_date)}
+    else {daily_data(selectdate)}
     weekly_data()
  }
-else if (localStorage.getItem("theme") == "dark")
- {
-     co = 'white'
-     weekly_data()
-/*
-     daily_data(selectdate)
-*/
-     }
-    }
 
 function exampleFunction(selectdate) {
     fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate + '/' + common4all)
@@ -759,8 +757,6 @@ function weekly_data() {
             }
         )
 }
-
-weekly_data();
 var value = 100
 console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
 
@@ -975,8 +971,7 @@ $(function () {
     selectdate = convertDateToReadableDate(today)
     daily_data(selectdate)
     exampleFunction(selectdate);
-
-    $('#txtDate').val(current_date);
+    $('#txtDate').val(selectdate);
     $("#txtDate").on('change', function (event) {
         event.preventDefault();
         selectdate = this.value
