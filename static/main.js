@@ -67,14 +67,17 @@ function userid() {
     obj1 = {}
     sta = []
     batery = []
+    uuID = []
     fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/' + common4all)
         // response.json()
         // fetch(api)
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
+            console.log(dataa,"uuuuuidddd")
             Object.values(data).map(item => {
                 var bat = item['recent_heartbeat_event']['battery']
+
                 bat = Math.round(bat / 10)
                 if (bat) {
                     batery.push(bat)
@@ -83,9 +86,12 @@ function userid() {
                     bat = "-";
                     batery.push(bat)
                 }
+                var uuid = item["user_id"]
+                uuID.push(uuid.slice(0,3))
             })
             for (var i = 0; i < dataa.length; i++) {
                 dataa[i]["battery"] = batery[i]
+                dataa[i]["user_id"] = uuID[i]
             }
             let undeletedUsers = dataa.filter(user => user.is_Deleted === "false");
             $('#user_status_table').DataTable({

@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+#device_id_history{
+color: black !important;
+}
+
 .selected{
 background-color:#afb3b4 !important;
 }

@@ -1,32 +1,32 @@
 function Get_team_add_edit() {
-  fetch('https://takvaviya.in/coolpad_backend/user/getTeams'+ '/' + common4all)
+  fetch('https://takvaviya.in/coolpad_backend/user/getTeams' + '/' + common4all)
     .then(response => response.json())
     .then(data => {
       const innerdiv = Object.values(data.teams).map(item => {
         return `<option>${item}</option>`
       }).join(" ");
       document.getElementById('team1').innerHTML = `<option>Select</option>` + innerdiv
-        const innerdiv_edit_team = Object.values(data.teams).map(item => {
+      const innerdiv_edit_team = Object.values(data.teams).map(item => {
         return `<option>${item}</option>`
       }).join(" ");
       document.getElementById('team-value').innerHTML = `<option>Select</option>` + innerdiv_edit_team
     });
 }
 Get_team_add_edit();
-function out_csv(){
+function out_csv() {
 
   //Todo not user instance its emp instance
 
   var user_instance = localStorage.getItem('current_user');
-  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/csv/' + start_date + '/' + end_date  + '/' + common4all)
-  .then(response => response.json())
-  .then(data => {
+  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/csv/' + start_date + '/' + end_date + '/' + common4all)
+    .then(response => response.json())
+    .then(data => {
       // console.log(data.path+".pdf");
       window.location.href = data.path + ".csv"
-  });
+    });
 
 }
-function out_pdf(){
+function out_pdf() {
 
   //Todo not user instance its emp instance
 
@@ -34,32 +34,32 @@ function out_pdf(){
   console.log(user_instance);
   // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
   fetch('https://www.takvaviya.in/coolpad_backend/user/pdf_gen_outlier/' + start_date + '/' + end_date + '/' + common4all)
-      .then(response => response.json())
-      .then(data => {
-          // console.log(data.path+".pdf");
-          window.location.href = data.path + ".pdf"
-      });
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data.path+".pdf");
+      window.location.href = data.path + ".pdf"
+    });
 
 }
 
-function out_xls(){
+function out_xls() {
 
   //Todo not user instance its emp instance
 
   var user_instance = localStorage.getItem('current_user');
   console.log(user_instance);
-  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/xlsx/'+ start_date + '/' + end_date +  '/' + common4all)
-      .then(response => response.json())
-      .then(data => {
-          // console.log(data.path+".pdf");
-          window.location.href = data.path + ".xlsx"
-      });
+  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/xlsx/' + start_date + '/' + end_date + '/' + common4all)
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data.path+".pdf");
+      window.location.href = data.path + ".xlsx"
+    });
 }
 /**/
 
 
 function outlier() {
-  fetch('https://takvaviya.in/coolpad_backend/user/outliers/'+start_date+'/'+end_date+'/'+common4all).then(responsive => {
+  fetch('https://takvaviya.in/coolpad_backend/user/outliers/' + start_date + '/' + end_date + '/' + common4all).then(responsive => {
     return responsive.json();
   }).then(data => {
 
@@ -100,53 +100,132 @@ outlier();
 
 /* Edit USER*/
 function save() {
-  console.log(document.getElementById("modal_did").value + document.getElementById("team-value").value);
-    if(document.getElementById("team-value").value=="Select"){
-   var obj = {
-    "team": localStorage.getItem("cteam"),
-    "device_id": document.getElementById("modal_did").value
-  }
-    }
-    else if(document.getElementById("modal_did").value ==""){
 
-  var obj = {
-    "team": document.getElementById("team-value").value,
-    "device_id": localStorage.getItem("current_dev_id")
-  }
+  if (localStorage.getItem('priv') === 'HR') {
+    console.log(document.getElementById("modal_uid").value + document.getElementById("team-value").value);
+    console.log("HR save logic");
+
+    if (document.getElementById("team-value").value == "Select") {
+      var obj = {
+        "team": localStorage.getItem("cteam"),
+        "user_id": document.getElementById("modal_uid").value
+      }
+      console.log(obj);
     }
-    else{
-  var obj = {
-    "team": document.getElementById("team-value").value,
-    "device_id": document.getElementById("modal_did").value
-  }
-}
-  console.log("fd", JSON.stringify(obj))
-  fetch("https://takvaviya.in/coolpad_backend/user/update_emp/" + localStorage.getItem('cuser') +"/"+ common4all, {
-    method: 'POST', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      load_user_list();
+    else if (document.getElementById("modal_uid").value == "") {
+
+      var obj = {
+        "team": document.getElementById("team-value").value,
+        "user_id": localStorage.getItem("current_user_id")
+      }
+      console.log(obj);
+    }
+    else {
+      var obj = {
+        "team": document.getElementById("team-value").value,
+        "user_id": document.getElementById("modal_uid").value
+      }
+      console.log(obj);
+    }
+
+    fetch("https://www.takvaviya.in/coolpad_backend/user/editUsername/" + localStorage.getItem('cuser') + "/" + common4all, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
     })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        load_user_list();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+
+
+  }
+  else {
+    console.log(document.getElementById("modal_did").value + document.getElementById("team-value").value);
+    if (document.getElementById("team-value").value == "Select") {
+      var obj = {
+        "team": localStorage.getItem("cteam"),
+        "device_id": document.getElementById("modal_did").value
+      }
+    }
+    else if (document.getElementById("modal_did").value == "") {
+
+      var obj = {
+        "team": document.getElementById("team-value").value,
+        "device_id": localStorage.getItem("current_dev_id")
+      }
+    }
+    else {
+      var obj = {
+        "team": document.getElementById("team-value").value,
+        "device_id": document.getElementById("modal_did").value
+      }
+    }
+    console.log("fd", JSON.stringify(obj))
+    fetch("https://takvaviya.in/coolpad_backend/user/update_emp/" + localStorage.getItem('cuser') + "/" + common4all, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        load_user_list();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
 
 }
 
-function update_user(user, current_team,device_id) {
+function update_user(user, current_team, device_id, user_id) {
+
+  document.getElementById("dialog_update").innerHTML = "";
+
+  document.getElementById("checkbox_update").innerHTML = "";
+
+  if (localStorage.getItem('priv') === 'HR') {
+
+    document.getElementById("checkbox_update").innerHTML = `User Name`;
+
+    document.getElementById("dialog_update").innerHTML = `<div class="form-group">
+    <label>User Name</label>
+   <input type="text" class="form-control" placeholder="User Name"
+       id="modal_uid">
+ </div>`;
+
+
+  } else {
+    document.getElementById("checkbox_update").innerHTML = `Device ID`;
+    document.getElementById("dialog_update").innerHTML = `<div class="form-group">
+   <label>Device ID</label>
+  <input type="text" class="form-control" placeholder="Device ID"
+      id="modal_did">
+</div>`
+  }
+
+
   localStorage.setItem("cuser", user);
   localStorage.setItem("cteam", current_team);
   localStorage.setItem("current_dev_id", device_id);
+  localStorage.setItem("current_user_id", user_id);
   document.getElementById("def_select").value = localStorage.getItem('cteam')
+
+
 }
 function deviceStatus(deviceId) {
-  fetch('https://takvaviya.in/coolpad_backend/user/deviceStatus/' + deviceId )
+  fetch('https://takvaviya.in/coolpad_backend/user/deviceStatus/' + deviceId)
     .then(response => response.json())
     .then(data => {
       if (data.shutdown === "ON") {
@@ -164,7 +243,7 @@ function delete_user(user) {
   if (confirm('Are you sure you want to delete this?')) {
     // Save it!
     console.log('Thing was saved to the database.');
-    fetch('https://takvaviya.in/coolpad_backend/user/deleteEmps/' + user , {
+    fetch('https://takvaviya.in/coolpad_backend/user/deleteEmps/' + user, {
       method: 'POST'
     })
       .then(function (response) {
@@ -182,7 +261,7 @@ function delete_user(user) {
 }
 
 function load_user_list() {
-  fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus'+ '/' + common4all)
+  fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
     .then(response => response.json())
     .then(data => {
       let allUsers = Object.values(data);
@@ -195,7 +274,7 @@ function load_user_list() {
                 <td>${user["zone"]}</td>
                 <td><span class="status text-success"></span> ${user["locations"]}</td>
                 <td class="action-icons">
-                    <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${user["user"]}', '${user["team"]}','${user["device_id"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${user["user"]}', '${user["team"]}','${user["device_id"]}', '${user["user_id"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a href="#" class="delete btn btn-outline-danger" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true" onclick="delete_user('${user["device_id"]}')"></i></a>
                    <div id='${user["device_id"]}'>
                    <a href="#" class="delete btn btn-outline-danger" title="clone" data-toggle="tooltip" onclick="deviceStatus('${user["device_id"]}')">

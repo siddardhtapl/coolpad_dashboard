@@ -2790,7 +2790,9 @@ color: #fff;
 #user_list td {
     border-top: none;
 }
-
+#device_id_history{
+color: white !important;
+}
 
 .circleBase {
     border-radius: 50%;
