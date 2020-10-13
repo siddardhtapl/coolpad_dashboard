@@ -87,7 +87,7 @@ function userid() {
                     batery.push(bat)
                 }
                 var uuid = item["user_id"]
-                uuID.push(uuid.slice(0,3))
+                uuID.push(uuid.slice(0,5))
             })
             for (var i = 0; i < dataa.length; i++) {
                 dataa[i]["battery"] = batery[i]

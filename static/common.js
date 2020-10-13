@@ -79,7 +79,7 @@ function daily_report_resp(){
 function toggleCheck() {
   if (document.getElementById("myCheckbox").checked === true ) {
     localStorage.setItem("theme", "light");
-    if(sess_user === 'demo' || sess_user === 'tyson_test')
+    if(sess_user === 'demo' || sess_user === 'tyson_test' || sess_user === 'tyson_poc')
     {
       document.getElementById("img").src = "../../static/assets/img/Tyson_Foods_logo.svg.png";
     }
@@ -95,7 +95,7 @@ function toggleCheck() {
   }
   else {
     localStorage.setItem("theme", "dark");
-    if(sess_user === 'demo' || sess_user === 'tyson_test')
+    if(sess_user === 'demo' || sess_user === 'tyson_test' || sess_user === 'tyson_poc')
     {
       document.getElementById("img").src = "../../static/assets/img/Tyson_Foods_logo_bright.svg.png";
     }
