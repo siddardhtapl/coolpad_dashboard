@@ -356,7 +356,7 @@ function renderLabel(node) {
   if (immediateContacts.hasOwnProperty(node.id)) {
     let labelDiv = document.getElementById('label-onclick');
     let label = node.id;
-    let innerHtml = `<p style="font-size:20px; cursor: context-menu;">Contact Details</p><div id="contact-graph-label" class="layer1_card act"><p><i class="fa fa-calendar-o" aria-hidden="true"></i> ${moment(immediateContacts[label].Date.split("T")[0]).format("MM-DD-YYYY")}</p><h4  id="cd_title" value="emp 11">${label}</h4><br><div class="in_content mt-2"><span><i class="fa fa-users" aria-hidden="true"></i> Intraction ${immediateContacts[label].count}</span></div><div class="in_content mt-2"><span><i class="fa fa-clock-o" aria-hidden="true"></i> Duration ${immediateContacts[label].max_duration}</span></div></div>`
+    let innerHtml = `<p style="font-size:20px; cursor: context-menu;">Contact Details</p><div id="contact-graph-label" class="layer1_card act"><p><i class="fa fa-calendar-o" aria-hidden="true"></i> ${moment(immediateContacts[label].Date.split("T")[0]).format("MM-DD-YYYY")}</p><h4  id="cd_title" value="emp 11">${label}</h4><br><div class="in_content mt-2"><span><i class="fa fa-users" aria-hidden="true"></i> Interaction ${immediateContacts[label].count}</span></div><div class="in_content mt-2"><span><i class="fa fa-clock-o" aria-hidden="true"></i> Max Duration ${immediateContacts[label].max_duration}</span></div></div>`
     labelDiv.innerHTML = innerHtml;
   }
 }

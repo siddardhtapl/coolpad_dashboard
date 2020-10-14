@@ -279,7 +279,7 @@ function load_user_list() {
                     <a href="#" class="Edit btn btn-outline-primary" data-toggle="modal"  onclick="update_user('${user["user"]}', '${user["team"]}','${user["device_id"]}', '${user["user_id"]}')" data-target="#myModal" title="Edit" data-toggle="tooltip"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     <a href="#" class="delete btn btn-outline-danger" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true" onclick="delete_user('${user["device_id"]}')"></i></a>
                    <div id='${user["device_id"]}'>
-                   <a href="#" class="delete btn btn-outline-danger" title="clone" data-toggle="tooltip" onclick="deviceStatus('${user["device_id"]}')">
+                   <a href="#" class="delete btn btn-outline-danger" title="Ping" data-toggle="tooltip" onclick="deviceStatus('${user["device_id"]}')">
 	                    <i class="fa fa-circle" aria-hidden="true"></i>
                     </a>
                     </div>

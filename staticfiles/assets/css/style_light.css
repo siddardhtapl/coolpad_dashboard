@@ -299,14 +299,33 @@ background-color:#afb3b4 !important;
     top: 30%;
     margin-top: 21px;
     margin-left: 35px;
-    width: 600px !important;
+    width: 640px !important;
     border: 0.1px solid gray;
     background: #1a1c2d;
     padding: 20px;
     border-radius: 5px;
     color: white;
     display: none;
+    height: 500px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 .indirect_emps table {
     font-family: arial, sans-serif;
@@ -355,6 +374,7 @@ table#layer3_append td {
     background: #1a1c2d;
     border: none !important;
     color: #fff;
+    text-align:center;
 }
 table#layer3_append tr {
     border-bottom: 1px solid gray;
@@ -409,7 +429,7 @@ table#layer3_append th {
 .layer1_card {
     background-color: #ffffff;
     float: left;
-    width: 250px;
+    width: 260px;
     padding: 15px 50px 15px 15px;
     /* border: 1px solid #4f5153; */
     color: #000 !important;
