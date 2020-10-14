@@ -365,7 +365,8 @@
 
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                                        <div class="widget widget-chart-two">
+                                        <!--<div class="widget widget-chart-two">-->
+                                         <div class="widget widget-chart-two" style="max-height: 500px; overflow-y: auto;">
                                             <div style="display:flex;flex-direction: row;color: #888EA8;">
                                                 <p class="para"
                                                     style="flex:5;border-bottom: 1px solid #ccc;width: 100%;">Contact
@@ -396,14 +397,15 @@
 
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                                        <div class="widget widget-chart-one">
+                                        <!--<div class="widget widget-chart-one">-->
+                                         <div class="widget widget-chart-one" style="max-height: 500px; overflow-y: auto;">
                                             <!-- <p>No of user on</p> -->
                                             <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">User Status</p>
                                             <table id="user_status_table" class="" data-page-length='8'>
                                                 <thead align="center">
                                                     <tr style="background-color:none ;">
-                                                        <th>User</th>
                                                         <th>U-ID</th>
+                                                        <th>Username</th>
                                                         <th>Status</th>
                                                         <th>Battery %</th>
                                                         <th>Time Stamp</th>
@@ -432,8 +434,8 @@
 
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing;">
                                         <div class="widget widget-chart-one">
-                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Users In Contact </p>
-                                            <table id="usertable" class=" ">
+                                            <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Users In Contact <span class="userdata-info" style="font-size: 13px; position: relative; bottom: 1px;">&nbsp; &nbsp;( Last 2 hrs data )</span> </p>
+                                            <table id="usertable" class=" " data-page-length='8'>
                                                 <thead align="center" style="border-bottom:1px solid white;">
                                                     <tr style="background: none;">
                                                         <!-- <th>S.No</th> -->

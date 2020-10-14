@@ -472,8 +472,8 @@
                                     <table class="table table-striped coolpad-table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Emp name</th>
-                                                <th>Emp ID</th>
+                                                <th>U-ID</th>
+                                                <th>Username</th>
                                                 <th>Device ID</th>
                                                 <th>Zone </th>
                                                 <th>Location</th>
@@ -501,9 +501,14 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-6">
+
+                                                   
                                                     <label for="chkPassport">
-                                                        <input type="checkbox" id="chkPassport" />
-                                                        Device ID
+                                                        <div style="display: flex; flex-direction: row;">
+                                                            <input type="checkbox" id="chkPassport" />
+                                                            <div id="checkbox_update" style="padding-left: 1rem;"></div>
+                                                        </div>
+                                                        
                                                     </label>
                                                 </div>
 
@@ -520,11 +525,14 @@
 
                                         <hr />
                                         <div id="dvPassport" style="display: none">
-                                            <div class="form-group">
+                                            <div id="dialog_update">dsdds</div>
+                                            <!-- <div class="form-group">
+
+                                                
                                                 <label>Device ID</label>
                                                 <input type="text" class="form-control" placeholder="Device ID"
                                                     id="modal_did">
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <div id="team-cnt" style="display: none">

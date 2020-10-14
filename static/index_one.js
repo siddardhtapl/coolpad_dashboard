@@ -435,6 +435,7 @@ function TeamHistoy(option) {
             $('#user_contact').DataTable({
                 "searching": false,
                 "info": false,
+                "paging":false,
                 "bLengthChange": false,
                 "bDestroy": true,
                 data: dataa, "columns": [ { "data": "pair" }, { "data": "contact" }]
@@ -449,6 +450,7 @@ function TeamHistoy(option) {
             dataa_weak = Object.values(obj_w)
             $('#user_contact_weekss').DataTable({
                 "searching": false,
+                "paging":false,
                 "info": false,
                 "bLengthChange": false,
                 "bDestroy": true,

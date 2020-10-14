@@ -1,34 +1,31 @@
 // Global decleration
-
 var contact_f_data
 var contact_f_data_week
+var api 
+
 
 var co;
-function color(){
-if (localStorage.getItem("theme") == "light")
-{
-    co = 'black'
-    daily_data(selectdate)
-    weekly_data()
- }
-else if (localStorage.getItem("theme") == "dark")
- {
-     co = 'white'
-     weekly_data()
-     daily_data(selectdate)
-     }
+function color() {
+    if (localStorage.getItem("theme") == "light") {
+        co = 'black'
     }
+    else if (localStorage.getItem("theme") == "dark") {
+        co = 'white'
+    }
+    // console.log(selectdate, "AHEMM")
+    if (selectdate === undefined) { daily_data(current_date) }
+    else { daily_data(selectdate) }
+    weekly_data()
+}
 
-window.onload = exampleFunction();
-function exampleFunction() {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + current_date + '/' + common4all)
+function exampleFunction(selectdate) {
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate + '/' + common4all)
         .then(response => response.json())
         .then(data_user => {
             contact_f_data = data_user
             loadFreq(Object.keys(contact_f_data)[0])
             daily_tracker_freq()
             getHeapMapData()
-            console.log(Object.keys(contact_f_data)[0])
         })
     fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
         .then(response => response.json())
@@ -70,25 +67,31 @@ function userid() {
     obj1 = {}
     sta = []
     batery = []
-    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/'+common4all)
+    uuID = []
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus/' + common4all)
+        // response.json()
+        // fetch(api)
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
+            console.log(dataa,"uuuuuidddd")
             Object.values(data).map(item => {
                 var bat = item['recent_heartbeat_event']['battery']
+
                 bat = Math.round(bat / 10)
                 if (bat) {
-                console.log(bat,"yes")
                     batery.push(bat)
                 }
                 else {
-                console.log(bat,"no")
-                bat = "-";
+                    bat = "-";
                     batery.push(bat)
                 }
+                var uuid = item["user_id"]
+                uuID.push(uuid.slice(0,5))
             })
             for (var i = 0; i < dataa.length; i++) {
                 dataa[i]["battery"] = batery[i]
+                dataa[i]["user_id"] = uuID[i]
             }
             let undeletedUsers = dataa.filter(user => user.is_Deleted === "false");
             $('#user_status_table').DataTable({
@@ -148,6 +151,7 @@ function opentab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
     daily_data(selectdate)
+    exampleFunction(selectdate);
     weekly_data()
 }
 function loadFreq(option) {
@@ -205,20 +209,15 @@ function getSelectValue() {
 setInterval(function () {
     daily_tracker_freq();
     daily_data(selectdate);
-    exampleFunction();
+    exampleFunction(selectdate);
     //TODO refresh clock
 }, 300000);
 
 function loadFreqWeekly(option) {
     dataa = contact_f_data_week[option]
-    console.log(dataa)
-
     // console.log(contact_f_data_week)
-
-
     var rowlen1 = Object.keys(dataa).length;
     var n = 0;
-    console.log(dataa)
     $("#contact_frequency_weekly").empty();
     const outerdiv =
         ` <tr style="height: 50px;">
@@ -345,7 +344,7 @@ function renderHeatMap(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: ' #888EA8',
+                        colors: '#888EA8',
                     }
                 },
                 axisBorder: {
@@ -356,7 +355,7 @@ function renderHeatMap(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: "#888EA8",
+                        colors: '#888EA8',
                         fontSize: '12px',
                     }
                 },
@@ -480,7 +479,7 @@ function renderHeatMapWeekly(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: ' #888EA8',
+                        colors: '#888EA8',
                     }
                 },
                 axisBorder: {
@@ -491,7 +490,7 @@ function renderHeatMapWeekly(team) {
                 labels: {
                     show: true,
                     style: {
-                        colors: "#888EA8",
+                        colors: '#888EA8',
                         fontSize: '12px',
                     }
                 },
@@ -765,14 +764,12 @@ function weekly_data() {
             }
         )
 }
-
-weekly_data();
 var value = 100
-console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/'+common4all)
+console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/' + common4all)
 
 
 function daily_data(selectdate) {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -781,7 +778,6 @@ function daily_data(selectdate) {
                 var clock_data_daily = data['clk_chart']
                 var contact_frequency_daily = data['contact_History_all']
                 $("#chart9").empty();
-                console.log(co);
                 var top = Object.keys(top_contact_history)
                 var options = {
 
@@ -957,27 +953,20 @@ function daily_data(selectdate) {
                 }
                 dataa_history = Object.values(obj_history)
                 $('#contact_his').DataTable({
-                    "retrieve": true,
-
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
+                    "bDestroy": true,
                     data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }]
                 });
 
             }
         )
 }
-daily_data(selectdate);
-
-
-
 function render() {
     daily_contact_freq = contact_f_data[option]
 }
-
 var selectdate;
-
 $(function () {
     var today = new Date();
     var lastDay = new Date();
@@ -988,15 +977,17 @@ $(function () {
     $('#txtDate').attr('max', minDate);
     selectdate = convertDateToReadableDate(today)
     daily_data(selectdate)
-    $('#txtDate').val(current_date);
+    exampleFunction(selectdate);
+    $('#txtDate').val(selectdate);
     $("#txtDate").on('change', function (event) {
         event.preventDefault();
         selectdate = this.value
         console.log(selectdate)
-        console.log("curr",current_date)
+        console.log("curr", current_date)
         daily_data(selectdate)
+        exampleFunction(selectdate);
+
     });
-    // console.log(selectdate)
 });
 function convertDateToReadableDate(date) {
     var month = date.getMonth() + 1;

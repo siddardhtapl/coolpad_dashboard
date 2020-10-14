@@ -170,18 +170,18 @@ input:focus ~ .highlight {
                           data: data,
                           success: function (res){
                             var resp = res;
-                            console.log("success",res);
+                            console.log("success34",res);
                             if(resp["status"]=="success")
                             {
                                 localStorage.setItem("session","1")
                                
-
+                                localStorage.setItem("priv", res.priv)
                                 localStorage.setItem("zone", res.zone)
                                 localStorage.setItem("location", res.location)
                                 localStorage.setItem("company", res.company)
                                 localStorage.setItem("group", res.group)
                                 localStorage.setItem("session_user", $("#username").val())
-
+                              
                                 window.location.href="../dashboard";
 
                             }

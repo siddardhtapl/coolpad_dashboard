@@ -31,11 +31,11 @@ function opentab_cf(evt, tabName) {
 
 //Get Data from Api
 function getContactTracingData(e, s_date, e_date) {
-  document.getElementById("contact-graph").style.display = "block";
   if (!contactGraph) {
     initSigma();
   }
   removeContactLabel();
+  removeL1Icons();
   let emp = e;
   let startDate = s_date;
   let endDate = e_date;
@@ -51,19 +51,22 @@ function getContactTracingData(e, s_date, e_date) {
       }).then(function (responseJson) {
         if (window.scrollY < 200)
           window.scroll({
-            top: 300,
+            top: 500,
             left: 0,
             behavior: 'smooth'
           });
         contactTracingData = responseJson;
         if(contactTracingData[2].length > 0)
         {
+          document.getElementById("contact-graph").style.display = "block";
+          document.getElementById("contact-graph-zoomControl").style.display = "block";
           getGraphData(contactTracingData[1]);
           document.getElementById("contact-graph-noData").style.display = "none";
         }
         else
         {
           document.getElementById("contact-graph").style.display = "none";
+          document.getElementById("contact-graph-zoomControl").style.display = "none";
           document.getElementById("contact-graph-noData").style.display = "block";
           contactTracingData = null
         }
@@ -337,7 +340,7 @@ function renderContactGraph(graph) {
 }
 //Node Distribution Plugin
 function forceAtlasGraph() {
-  contactGraph.startForceAtlas2({ worker: true, barnesHutOptimize: false, startingIterations: 10000, iterationsPerRender: 100000, gravity: 0 });
+  contactGraph.startForceAtlas2({ worker:true, barnesHutOptimize: false, slowdown: 1000, startingIterations: 1000, iterationsPerRender: 1000, gravity: 0 });
   setTimeout(function () { contactGraph.stopForceAtlas2(); }, 1000);
   contactGraph.cameras[0].goTo(
     {
@@ -353,7 +356,7 @@ function renderLabel(node) {
   if (immediateContacts.hasOwnProperty(node.id)) {
     let labelDiv = document.getElementById('label-onclick');
     let label = node.id;
-    let innerHtml = `<p style="font-size:20px; cursor: context-menu;">Contact Details</p><div id="contact-graph-label" class="layer1_card act"><p><i class="fa fa-calendar-o" aria-hidden="true"></i> ${immediateContacts[label].Date.slice(0, 10)}</p><h4  id="cd_title" value="emp 11">${label}</h4><br><div class="in_content mt-2"><span><i class="fa fa-users" aria-hidden="true"></i> Intraction ${immediateContacts[label].count}</span></div><div class="in_content mt-2"><span><i class="fa fa-clock-o" aria-hidden="true"></i> Duration ${immediateContacts[label].max_duration}</span></div></div>`
+    let innerHtml = `<p style="font-size:20px; cursor: context-menu;">Contact Details</p><div id="contact-graph-label" class="layer1_card act"><p><i class="fa fa-calendar-o" aria-hidden="true"></i> ${moment(immediateContacts[label].Date.split("T")[0]).format("MM-DD-YYYY")}</p><h4  id="cd_title" value="emp 11">${label}</h4><br><div class="in_content mt-2"><span><i class="fa fa-users" aria-hidden="true"></i> Intraction ${immediateContacts[label].count}</span></div><div class="in_content mt-2"><span><i class="fa fa-clock-o" aria-hidden="true"></i> Duration ${immediateContacts[label].max_duration}</span></div></div>`
     labelDiv.innerHTML = innerHtml;
   }
 }
@@ -459,13 +462,14 @@ function removeContactLabel() {
   }
   removeL2Icons();
 }
-
+function removeL1Icons() {
+  document.getElementById('teamIcons').innerHTML = '';
+}
 function removeL2Icons() {
   let l2Icons = document.getElementById('l2_teamIcons');
   if(l2Icons) {
     l2Icons.parentNode.removeChild(l2Icons);
   }
-  document.getElementById('teamIcons').innerHTML = '';
 }
 
 
