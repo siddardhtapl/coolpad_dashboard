@@ -143,6 +143,9 @@ function UserHistoy(option) {
                 }
                 dataa2 = Object.values(obj_w )
                 $('#contact_trace_wee').DataTable({
+                columnDefs: [
+                    { type: 'natural-nohtml', targets: 0 }
+                  ],
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
@@ -178,6 +181,9 @@ function UserHistoy(option) {
                 }
                 dataa_c = Object.values(obj)
                 $('#contact_trace_day').DataTable({
+                columnDefs: [
+                    { type: 'natural-nohtml', targets: 0 }
+                  ],
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
@@ -381,6 +387,10 @@ function TeamHistoy(option) {
 
     keys_w = []
     values_w = []
+    keys_w_team = []
+    values_w_team = []
+    keys_team = []
+    values_team = []
     duration_w = []
     obj_w = {}
 
@@ -424,31 +434,35 @@ function TeamHistoy(option) {
             else { document.getElementById("tmcupw").innerHTML = `<div style="color:blue">No data available</div>` }
 
 
-            Object.keys(dataa["top 5 users in contact Day"]).map(item => { keys.push(item) })
-            Object.values(dataa["top 5 users in contact Day"]).map(item => { values.push(item) })
-            for (var i = 0; i < keys.length; i++) {
-                if(values[i] !=0 ){
-                obj[i] = { "sno": i + 1, "pair": keys[i], "contact": values[i] };
+            Object.keys(dataa["top 5 users in contact Day"]).map(item => { keys_team.push(item) })
+            Object.values(dataa["top 5 users in contact Day"]).map(item => { values_team.push(item) })
+            for (var i = 0; i < keys_team.length; i++) {
+                if(values_team[i] !=0 ){
+                obj[i] = { "sno": i + 1, "pair": keys_team[i], "contact": values_team[i] };
             }
             }
-            dataa = Object.values(obj)
+            dataa_top_5_team = Object.values(obj)
             $('#user_contact').DataTable({
+            columnDefs: [
+                    { type: 'natural-nohtml', targets: 0 }
+                  ],
                 "searching": false,
                 "info": false,
                 "paging":false,
                 "bLengthChange": false,
                 "bDestroy": true,
-                data: dataa, "columns": [ { "data": "pair" }, { "data": "contact" }]
+                data: dataa_top_5_team, "columns": [ { "data": "pair" }, { "data": "contact" }]
             });
-
-
-            Object.keys(dataa_ww["top 5 users in contact Week"]).map(item => { keys_w.push(item) })
-            Object.values(dataa_ww["top 5 users in contact Week"]).map(item => { values_w.push(item) })
-            for (var i = 0; i < keys_w.length; i++) {
-                obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "contact": values_w[i] };
+            Object.keys(dataa_ww["top 5 users in contact Week"]).map(item => { keys_w_team.push(item) })
+            Object.values(dataa_ww["top 5 users in contact Week"]).map(item => { values_w_team.push(item) })
+            for (var i = 0; i < keys_w_team.length; i++) {
+                obj_w[i] = { "sno": i + 1, "pair": keys_w_team[i], "contact": values_w_team[i] };
             }
             dataa_weak = Object.values(obj_w)
             $('#user_contact_weekss').DataTable({
+            columnDefs: [
+                    { type: 'natural-nohtml', targets: 0 }
+                  ],
                 "searching": false,
                 "paging":false,
                 "info": false,
@@ -491,7 +505,8 @@ function dwnldusrpdf() {
     fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            window.location.href = data.path + ".pdf"
+//            window.location.href = data.path + ".pdf"
+            window.open(data.path + ".pdf");
         });
 }
 
@@ -502,7 +517,9 @@ function dwnldusrcsv() {
     fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            window.location.href = data.path + ".csv"
+//            window.location.href = data.path + ".csv"
+            window.open(data.path + ".csv");
+
         });
 }
 
@@ -514,7 +531,7 @@ function dwnldusrxlsx() {
     fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            window.location.href = data.path + ".xlsx"
+            window.open(data.path + ".xlsx");
         });
 }
 
@@ -529,7 +546,7 @@ function dwnldtmpdf() {
     fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            window.location.href = data.path + ".pdf"
+            window.open(data.path + ".pdf");
         });
 }
 
@@ -540,7 +557,9 @@ function dwnldtmcsv() {
     fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
-            window.location.href = data.path + ".csv"
+//            window.location.href = data.path + ".csv"
+              window.open(data.path + ".csv");
+
         });
 }
 
@@ -552,7 +571,10 @@ function dwnldtmxlsx() {
     fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
         .then(response => response.json())
         .then(data => {
+/*
             window.location.href = data.path + ".xlsx"
+*/
+            window.open(data.path + ".xlsx");
         });
 }
 

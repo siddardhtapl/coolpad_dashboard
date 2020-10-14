@@ -22,7 +22,8 @@ function out_csv() {
     .then(response => response.json())
     .then(data => {
       // console.log(data.path+".pdf");
-      window.location.href = data.path + ".csv"
+      window.open(data.path + ".csv");
+
     });
 
 }
@@ -37,7 +38,7 @@ function out_pdf() {
     .then(response => response.json())
     .then(data => {
       // console.log(data.path+".pdf");
-      window.location.href = data.path + ".pdf"
+      window.open(data.path + ".pdf");
     });
 
 }
@@ -52,7 +53,7 @@ function out_xls() {
     .then(response => response.json())
     .then(data => {
       // console.log(data.path+".pdf");
-      window.location.href = data.path + ".xlsx"
+      window.open(data.path + ".xlsx");
     });
 }
 /**/
@@ -250,11 +251,12 @@ function delete_user(user) {
         return response.json();
       }).then(function (data) {
         console.log(data);
-        if (data.status === "success") {
+        if (data['deleted'] === "true") {
           load_user_list();
         }
       });
-  } else {
+  }
+   else {
     // Do nothing!
     console.log('Thing was not saved to the database.');
   }

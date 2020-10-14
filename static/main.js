@@ -77,7 +77,6 @@ function userid() {
             console.log(dataa,"uuuuuidddd")
             Object.values(data).map(item => {
                 var bat = item['recent_heartbeat_event']['battery']
-
                 bat = Math.round(bat / 10)
                 if (bat) {
                     batery.push(bat)
@@ -95,6 +94,9 @@ function userid() {
             }
             let undeletedUsers = dataa.filter(user => user.is_Deleted === "false");
             $('#user_status_table').DataTable({
+                columnDefs: [
+                    { type: 'natural-nohtml', targets: [0,1] }
+                  ],
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
@@ -542,7 +544,8 @@ function rp_one_daily() {
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
-            window.location.href = data.path + ".pdf"
+    /*            window.location.href = data.path + ".pdf"*/
+            window.open(data.path + ".pdf");
         });
 }
 
@@ -554,7 +557,8 @@ function rp_weekly() {
     fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-            window.location.href = data.path + ".pdf"
+/*            window.location.href = data.path + ".pdf"*/
+            window.open(data.path + ".pdf");
         });
 }
 
