@@ -377,10 +377,7 @@
         }
         function netWorkGraphSwitch() {
             if (!contactTracingData) {
-                if(s_date === e_date) {
-                    //adding one day if start and end are same
                 e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
-            }
                 getContactTracingData(e, s_date, e_date)
             }
         }
@@ -390,9 +387,7 @@
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
             e_date = document.getElementById("endDate").value;
-            if(s_date === e_date) {
-                e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
-            }
+            e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
             /*var s_date = "2020-08-03"
               var e_date = "2020-08-07"*/
             console.log(e, 'kkkk');
@@ -427,7 +422,7 @@
                         append_data += '<p><i class="fa fa-calendar-o"></i> ' + c_date1 + '</p>';
                         append_data += '<h4 >' + i + '</h4><br>';
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[1][e][i]['count'] + '</span></div>'
-                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Duration ' + response[1][e][i]['max_duration'] + '</span></div>'
+                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Max Duration ' + response[1][e][i]['max_duration'] + '</span></div>'
                         append_data += '</div>';
 
                     }
