@@ -12,9 +12,12 @@ function color() {
     else if (localStorage.getItem("theme") == "dark") {
         co = 'white'
     }
-    // console.log(selectdate, "AHEMM")
-    if (selectdate === undefined) { daily_data(current_date) }
-    else { daily_data(selectdate) }
+    if (selectdate === undefined) {
+    console.log(selectdate)
+    }
+    else {
+    daily_data(selectdate);
+    }
     weekly_data()
 }
 
