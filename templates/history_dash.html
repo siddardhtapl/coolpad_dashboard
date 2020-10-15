@@ -26,8 +26,10 @@
   <link rel="shortcut icon" href="../../static/coolpad_favicon.ico?version=2" type="image/x-icon">
 <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">-->
   <link href="../../static/assets/css/paginate.css?version=2" rel="stylesheet" type="text/css"  />
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+        <script src="../../static/dataTable.js"></script>
+
+<!--    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>-->
 
        
 </head>
@@ -155,7 +157,12 @@
               <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
               <span class="slider1 round1"></span>
             </label>
+            <div class="form-group" style="padding-left:20px;width: 185px;float:left;margin-top: 10px;">
+              <input type="date" id="date_history" name="datee" class="form-control" />
           </div>
+
+          </div>
+
 
           <div id="user_history" class="tabcontent" style="display: block;">
             <section class="service-categories text-xs-center">
@@ -169,7 +176,9 @@
                     </select>
                   </div>
 
-                  <div style="margin-top: 20px; margin-bottom: 20px;">
+
+
+                  <div style="margin-top: 10px; ">
                     <div class="dropdownss">
                       <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i></span>
                       <span class="dropbtnss">Report</span>
@@ -436,7 +445,7 @@
                     </select>
                   </div>
 
-                  <div style="margin-top: 20px; margin-bottom: 20px;">
+                  <div style="margin-top: 10px;">
                     <div class="dropdownss">
                       <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
                         <span class="dropbtnss">Report</span>

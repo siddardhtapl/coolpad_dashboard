@@ -1,5 +1,9 @@
 //Global Declartions
+var crnt_date
 var current_user;
+var select_date
+var st_date
+var en_date
 var clk_d;
 if (!localStorage.getItem("session")) {
     window.location.href = "../login";
@@ -7,9 +11,9 @@ if (!localStorage.getItem("session")) {
 
 var data_user2;
 var dev_id;
-window.onload = exampleFunction();
+// window.onload = exampleFunction();
 function exampleFunction() {
-    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date + '/' + common4all)
     .then(response => response.json())
     .then(data_user => {
         data_user2= data_user
@@ -394,7 +398,8 @@ function TeamHistoy(option) {
     duration_w = []
     obj_w = {}
 
-    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ start_date+'/'+ end_date + '/' + current_date + '/' + common4all)
+
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ st_date+'/'+ en_date + '/' + select_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
@@ -597,7 +602,7 @@ function Submit1() {
     var year = dateObj.getUTCFullYear();
     newdate = year + "-" + month + "-" + day;
     var note = document.getElementById("note_textt").value
-    //TODO dynamci location 
+    //TODO dynamci location
     const data = {
        "user": dev_id[localStorage.getItem("current_user")]['device_id'],
         "date_time": String(newdate),
@@ -705,7 +710,7 @@ function Submit2() {
     newdate = year + "-" + month + "-" + day;
 
     var note = document.getElementById("note_textt1").value
-    //TODO dynamci location 
+    //TODO dynamci location
     const data = {
         "team": localStorage.getItem("current_team").toLowerCase(),
         "date_time": String(newdate),
@@ -799,3 +804,53 @@ setInterval(function(){
 exampleFunction();
 loadTeamHistory();
 }, 300000);
+
+
+$(function(){
+
+    var today = new Date();
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    $('#date_history').attr('max', maxDate);
+    $('#date_history').attr('max', maxDate);
+    select_date = current_date
+    $('#date_history').val(select_date);
+
+    st_date = moment(select_date).startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+    en_date = moment(select_date).endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
+    exampleFunction()
+    console.log(crnt_date)
+    $("#date_history").on('change', function (event) {
+        event.preventDefault();
+        select_date = this.value
+        // console.log(select_date)
+        // console.log("curr", se_date)
+        st_date = moment(select_date).startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+        en_date = moment(select_date).endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
+        exampleFunction()
+        loadTeamHistory()
+
+    });
+
+
+
+
+});
+function convertDateToReadableDate(date) {
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var readableDate = year + '-' + month + '-' + day;
+    return readableDate;
+}
