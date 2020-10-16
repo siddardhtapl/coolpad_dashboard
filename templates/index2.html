@@ -15,10 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- <script data-require="moment.js@2.10.2" data-semver="2.10.2"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script> -->
-    <script data-require="moment.js@2.10.2" data-semver="2.10.2"
-        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"
-        crossorigin="anonymous"></script>
+    <script data-require="moment.js@2.10.2" data-semver="2.10.2" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js" crossorigin="anonymous"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
     <link rel="shortcut icon" href="../../static/coolpad_favicon.ico?version=2" type="image/x-icon">
     <!-- plugin -->
@@ -27,8 +25,7 @@
     <script type="text/javascript" src="../../static/build/plugins/sigma.layout.forceAtlas2/worker.js?version=2"></script>
     <script type="text/javascript" src="../../static/build/plugins/sigma.layout.forceAtlas2/supervisor.js?version=2"></script>
 
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <!-- plugin end -->
 
@@ -188,8 +185,7 @@
                                 <div class="date-show">
                                     <div class="form-group">
                                         <label>Start Date</label>
-                                        <input type="date" id="startDate" name="bday" min="1000-01-01"
-                                            class="form-control">
+                                        <input type="date" id="startDate" name="bday" min="1000-01-01" class="form-control">
                                     </div>
 
                                 </div>
@@ -241,8 +237,7 @@
                 <div class="direct_contact_emp_toggle">
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab_cf(event, 'table')"><b>Table Model</b></button>
-                        <button class="tablinks "
-                            onclick="opentab_cf(event, 'network');  netWorkGraphSwitch('netWorkSwitch')"><b>Network
+                        <button class="tablinks " onclick="opentab_cf(event, 'network');  netWorkGraphSwitch('netWorkSwitch')"><b>Network
                                 Model</b></button>
                         <!-- <button class="tablinks " onclick="opentab_cf(event, 'network'); trigger_contact()"><b>Network Model</b></button> -->
                     </div>
@@ -253,38 +248,52 @@
 
                             </div>
 
+                            <div class="row mr-3">
+                                <div class="col-md-6">
+                                    <div class="indirect_emps" id="indirect_emps">
+                                        <div class="in_header">
+                                            <h5>Indirect contacts of Contacted Person</h5>
+                                            <p style="cursor:pointer" onclick="close_indirect()">Close</p>
+                                        </div>
+                                        <table id="layer3_append">
 
-                            <div class="indirect_emps" id="indirect_emps">
-                                <div class="in_header">
-                                    <h5>Indirect contacts of Contacted Person</h5>
-                                    <p style="cursor:pointer" onclick="close_indirect()">Close</p>
+                                        </table>
+                                    </div>
                                 </div>
-                                <table id="layer3_append">
+                                <div class="col-md-6">
+                                    <div class="indirect_emps" id="indirect_emps_status">
+                                        <div class="in_header">
+                                            <h5 id="interaction_tittle"></h5>
+                                            <p style="cursor:pointer" onclick="close_indirect_status()">Close</p>
+                                        </div>
+                                        <table id="status_contact">
 
-                                </table>
+                                        </table>
+                                        <!-- <table id="layer3_append"> -->
+
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
-
 
                     <!--Network Graph Start-->
                     <div id="network" class="tabcontent" style="display: none;">
                         <div class="contact-graph-container">
                             <div class="contact-graph-legend">
                                 <span>
-                                    <span style="font-size:2.5em;">&#8594;</span><span
-                                        style="padding-left: 15px;margin-top:15px;">Direct Contacts</span>
+                                    <span style="font-size:2.5em;">&#8594;</span><span style="padding-left: 15px;margin-top:15px;">Direct Contacts</span>
                                 </span>
                                 <span>
-                                    <span style="color: #20c997;font-size:2.5em;">&#8594;</span><span
-                                        style="padding-left: 15px;margin-top:15px;">Indirect
+                                    <span style="color: #20c997;font-size:2.5em;">&#8594;</span><span style="padding-left: 15px;margin-top:15px;">Indirect
                                         Contacts</span>
                                 </span>
                                 <div id="teamIcons" style="padding-top:20px;">
                                 </div>
                                 <span style="padding-top:25px;font-size:24px; cursor: context-menu;">Direct Contacts of:</span>
-                                <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;"
-                                    id="label-currentEmp"></p>
+                                <p style="font-size:24px;text-transform: capitalize; cursor: context-menu;" id="label-currentEmp"></p>
                                 <div id="label-onclick">
                                 </div>
                             </div>
@@ -294,10 +303,8 @@
                                 <h3>No Data Available</h3>
                             </div>
                             <div style="display: none;" id="contact-graph-zoomControl">
-                                <button class="zoomButtons" id="zoomInButton"
-                                    onclick="zoomContactGraph('in')">+</button>
-                                <button class="zoomButtons" id="zoomOutButton"
-                                    onclick="zoomContactGraph('out')">-</button>
+                                <button class="zoomButtons" id="zoomInButton" onclick="zoomContactGraph('in')">+</button>
+                                <button class="zoomButtons" id="zoomOutButton" onclick="zoomContactGraph('out')">-</button>
                             </div>
                         </div>
                     </div>
@@ -308,25 +315,25 @@
         </div>
     </div>
     <script>
-        
-    $(function(){
-    var dtToday = new Date();
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-    var maxDate = year + '-' + month + '-' + day;
-    $('#startDate').attr('max', maxDate);
-    $('#endDate').attr('max', maxDate);
-});
-    
+        $(function() {
+            var dtToday = new Date();
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+            var maxDate = year + '-' + month + '-' + day;
+            $('#startDate').attr('max', maxDate);
+            $('#endDate').attr('max', maxDate);
+        });
 
-        $(document).ready(function () {
+
+        $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
+
         function opentab_history(evt, tabName) {
             // Declare all variables
             var i, tabcontent, tablinks;
@@ -353,11 +360,10 @@
 
 
     <script>
-
         var e;
 
 
-        //contact tracing report 
+        //contact tracing report
 
         function ct_rep() {
 
@@ -365,9 +371,9 @@
 
             //Todo not user instance its emp instance
 
-           console.log("rep");
+            console.log("rep");
             // 'https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all
-            fetch('https://takvaviya.in/coolpad_backend/'+ e +'/User_history_data/'+ start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+            fetch('https://takvaviya.in/coolpad_backend/' + e + '/User_history_data/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
                 .then(response => response.json())
                 .then(data => {
                     // console.log(data.path+".pdf");
@@ -382,14 +388,15 @@
             e = elm.value;
 
         }
+
         function zoomContactGraph(zoomAction) {
             if (zoomAction === 'in') {
                 renderZoomContactGraph(0.5);
-            }
-            else {
+            } else {
                 renderZoomContactGraph(2);
             }
         }
+
         function netWorkGraphSwitch() {
             if (!contactTracingData) {
                 e_date = moment(e_date, "YYYY-MM-DD").add(1, 'd').format("YYYY-MM-DD");
@@ -399,6 +406,7 @@
         /*            var s_date = "2020-08-03"
                     var e_date = "2020-08-07"*/
         var s_date, e_date;
+
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
             e_date = document.getElementById("endDate").value;
@@ -409,18 +417,21 @@
             if (document.getElementById('network').style.display === 'block') {
                 getContactTracingData(e, s_date, e_date);
 
-            }
-            else {
+            } else {
                 contactTracingData = null
             }
             $.ajax({
                 type: "GET",
                 url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date + "/" + common4all,
                 dataType: 'json',
-                success: function (response) {
-                    console.log(response);
-                    res = response;
+                success: function(response) {
+                    document.getElementById('indirect_emps').style.display = "none";
 
+                    document.getElementById('indirect_emps_status').style.display = "none";
+                    console.log("https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date + "/" + common4all);
+                    res = response;
+                    eve = response[1][e]
+                    console.log(response[1][e])
                     document.getElementById("emp_name").innerHTML = e
                     document.getElementById("st_val").innerHTML = $("#startDate").val();
                     document.getElementById("end_val").innerHTML = $("#endDate").val();
@@ -439,6 +450,7 @@
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[1][e][i]['count'] + '</span></div>'
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Max Duration ' + response[1][e][i]['max_duration'] + '</span></div>'
                         append_data += '</div>';
+                        console.log(i)
 
                     }
                     $('#all_third_pair').append(append_data);
@@ -448,10 +460,12 @@
         }
 
         var $links = $('.layer1_card');
-        $links.click(function () {
+        $links.click(function() {
             $links.removeClass('selected');
             $(this).addClass('selected');
         });
+
+        var status_table_render;
 
         function open_indirect(elm) {
 
@@ -466,8 +480,7 @@
 
             if ($(elm).hasClass("selected")) {
                 $(elm).removeClass("selected");
-            }
-            else {
+            } else {
                 $(".layer1_card").removeClass("selected");
                 $(elm).addClass("selected");
             }
@@ -478,6 +491,9 @@
             layer_ind = '';
             console.log(elm.getAttribute('value'));
             document.getElementById('indirect_emps').style.display = "block";
+            document.getElementById('indirect_emps_status').style.display = "block";
+
+
             $("#layer3_append").empty();
             layer_ind += '<tr>'
             layer_ind += ' <th>Indirect Contacts</th>'
@@ -486,6 +502,7 @@
             layer_ind += '<th>Date</th>'
             layer_ind += ' </tr>';
             var third_layer;
+
             for (var k in res[2]) {
                 console.log(res[2][k][elm.getAttribute('value')]);
                 third_layer = res[2][k][elm.getAttribute('value')];
@@ -501,19 +518,39 @@
             }
 
             $("#layer3_append").append(layer_ind);
-            window.scrollTo(0,document.getElementById("indirect_emps").offsetTop);
+            $("#status_contact").empty()
+            console.log(eve[elm.getAttribute('value')]['events'], e, elm.getAttribute('value'))
+            document.getElementById('interaction_tittle').innerHTML = e + ' and ' + elm.getAttribute('value') + ' Interactions'
+            status_table_render = '';
+            status_table_render += '<tr id = "status_table_head"><td>Timestamp</td><td>Duration</td><td>AvgDist</td><td>MinDist</td></tr>';
 
+            for (var n in eve[elm.getAttribute('value')]['events']) {
+                event_data = eve[elm.getAttribute('value')]['events'][n]
+                status_table_render += '<tr><td>' + event_data['timestamp'] + '</td>'
+                status_table_render += '<td>' + event_data['duration'] + '</td>'
+                status_table_render += '<td>' + event_data['avgDist'] + '</td>'
+                status_table_render += '<td>' + event_data['minDist'] + '</td></tr>'
+
+                console.log(event_data)
+            }
+
+            $("#status_contact").append(status_table_render);
         }
 
         function close_indirect() {
             document.getElementById('indirect_emps').style.display = "none";
+
         }
 
+        function close_indirect_status() {
 
+            document.getElementById('indirect_emps_status').style.display = "none";
+
+        }
     </script>
     <script>
-        $(document).ready(function () {
-            $('ul li a').click(function () {
+        $(document).ready(function() {
+            $('ul li a').click(function() {
                 $('li a').removeClass("actives");
                 $(this).addClass("actives");
             });

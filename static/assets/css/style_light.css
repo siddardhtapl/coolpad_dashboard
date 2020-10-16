@@ -2643,7 +2643,7 @@ color: #000;
   }
   table.dataTable thead .sorting_asc_disabled {
     background-image: url("../images/sort_asc_disabled.png") !important;
-  }
+  }status_contact
   table.dataTable thead .sorting_desc_disabled {
     background-image: url("../images/sort_desc_disabled.png") !important;
   }
@@ -2665,4 +2665,21 @@ input[type=time].form-control {
 .widget-chart-two::-webkit-scrollbar-thumb {
     background-color: gainsboro;
     border-radius: 20px;
+}
+table#status_contact td {
+    background: #ffffff !important;
+    border: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+table#status_contact tr {
+    border-bottom: 1px solid gray;
+}
+table#status_contact th {
+    border: none !important;
+    background: #ffffff !important;
+    color: rgb(0, 0, 0) !important;
+}
+#status_table_head td {
+    font-weight: bold;
+    text-align:center;
 }
