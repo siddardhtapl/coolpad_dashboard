@@ -339,7 +339,7 @@ background-color:#afb3b4 !important;
 .indirect_emps td,
 th {
     /* border: 1px solid #dddddd; */
-    text-align: left;
+    text-align: center;
     padding: 18px;
     background: white;
 }
