@@ -340,7 +340,7 @@ background-color:#afb3b4 !important;
 th {
     /* border: 1px solid #dddddd; */
     text-align: center;
-    padding: 18px;
+    padding: 18px 7px;
     background: white;
 }
 
@@ -2643,7 +2643,7 @@ color: #000;
   }
   table.dataTable thead .sorting_asc_disabled {
     background-image: url("../images/sort_asc_disabled.png") !important;
-  }status_contact
+  }
   table.dataTable thead .sorting_desc_disabled {
     background-image: url("../images/sort_desc_disabled.png") !important;
   }
