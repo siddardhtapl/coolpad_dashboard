@@ -12,9 +12,12 @@ function color() {
     else if (localStorage.getItem("theme") == "dark") {
         co = 'white'
     }
-    // console.log(selectdate, "AHEMM")
-    if (selectdate === undefined) { daily_data(current_date) }
-    else { daily_data(selectdate) }
+    if (selectdate === undefined) {
+    console.log(selectdate)
+    }
+    else {
+    daily_data(selectdate);
+    }
     weekly_data()
 }
 
@@ -973,13 +976,14 @@ function render() {
 var selectdate;
 $(function () {
     var today = new Date();
+    // console.log("fda",today,current_date)
     var lastDay = new Date();
     lastDay.setDate(lastDay.getDate() - 7);
     var minDate = convertDateToReadableDate(today);
     var maxDate = convertDateToReadableDate(lastDay);
     $('#txtDate').attr('min', maxDate);
     $('#txtDate').attr('max', minDate);
-    selectdate = convertDateToReadableDate(today)
+    selectdate = current_date
     daily_data(selectdate)
     exampleFunction(selectdate);
     $('#txtDate').val(selectdate);

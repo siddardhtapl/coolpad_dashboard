@@ -319,16 +319,16 @@ background-color:#527581 !important;
 .indirect_emps {
     /* position: fixed; */
     top: 30%;
-    margin-top: 21px;
-    margin-left: 35px;
-    width: 640px;
+    margin-top: 48px;
+    margin-left: 7px;
+    width: 100%;
     border: 0.1px solid gray;
     background: #1a1c2d;
     padding: 20px;
     border-radius: 5px;
     color: white;
     display: none;
-    height: 500px;
+    height: 416px;
     overflow-y: scroll;
     margin-bottom: 20px;
 }
@@ -361,8 +361,8 @@ background-color:#527581 !important;
 .indirect_emps td,
 th {
     /* border: 1px solid #dddddd; */
-    text-align: left;
-    padding: 18px;
+    text-align: center;
+    padding: 18px 7px;
     /* background: white; */
 }
 
@@ -396,7 +396,7 @@ table#layer3_append td {
     background: #1a1c2d;
     border: none !important;
     color: #fff;
-    text-align:center;
+    text-align: center;
 }
 table#layer3_append tr {
     border-bottom: 1px solid gray;
@@ -1602,7 +1602,7 @@ text-transform:capitalize;
     padding: 10px;
     padding-left:0;
   }
-  .dropbtnss {
+/*  .dropbtnss {
     background: none;
     color: white;
     padding: 10px;
@@ -1610,11 +1610,27 @@ text-transform:capitalize;
     border: none;
   }
   .dropdownss {
-    /*position: relative;*/
-    /*display: inline-block;*/
+    *//*position: relative;*//*
+    *//*display: inline-block;*//*
     cursor:pointer;
     height: 35px;
-  }
+  }*/
+  .dropbtnss {
+    background: none;
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+}
+.dropdownss {
+    /*position: relative;*/
+    /*display: inline-block;*/
+    cursor: pointer;
+    height: 35px;
+    background: rgb(73, 73, 74);
+    padding: 5px;
+    border-radius: 3px;
+}
   .dropdown-contentss {
     display: none;
     position: absolute;
@@ -2109,6 +2125,7 @@ body {
 }
 .navbar .theme-brand li.theme-text {
     margin-right: 47px;
+    margin-left: -8px;
 }
 .navbar .theme-brand li.theme-text a {
     color: #fff;
@@ -2864,4 +2881,12 @@ input[type=time].form-control {
 .widget-chart-two::-webkit-scrollbar-thumb {
     background-color: #718093;
     border-radius: 20px;
+}
+
+#status_contact td {
+    border-bottom: 1px solid #808080;
+}
+
+#status_table_head td {
+    font-weight: bold;
 }

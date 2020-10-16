@@ -293,20 +293,19 @@ background-color:#afb3b4 !important;
     /* position: fixed; */
     display: grid;
 }
-
 .indirect_emps {
     /* position: fixed; */
     top: 30%;
-    margin-top: 21px;
-    margin-left: 35px;
-    width: 640px !important;
+    margin-top: 48px;
+    margin-left: 7px;
+    width: 100%;
     border: 0.1px solid gray;
     background: #1a1c2d;
     padding: 20px;
     border-radius: 5px;
     color: white;
     display: none;
-    height: 500px;
+    height: 416px;
     overflow-y: scroll;
     margin-bottom: 20px;
 }
@@ -339,8 +338,8 @@ background-color:#afb3b4 !important;
 .indirect_emps td,
 th {
     /* border: 1px solid #dddddd; */
-    text-align: left;
-    padding: 18px;
+    text-align: center;
+    padding: 18px 7px;
     background: white;
 }
 
@@ -1357,20 +1356,23 @@ text-transform:capitalize;
     padding: 10px;
     padding-left:0;
   }
-  .dropbtnss {
+.dropbtnss {
     background: none;
     color: #2F3640;
-    padding: 10px;
+    padding: 5px;
     font-size: 16px;
     border: none;
-    font-weight:bold;
-  }
-  .dropdownss {
+    font-weight: bold;
+}
+.dropdownss {
     /*position: relative;*/
     /*display: inline-block;*/
-    cursor:pointer;
+    cursor: pointer;
     height: 35px;
-  }
+    background: #b7bec5;
+    padding: 5px;
+    border-radius: 3px;
+}
   .dropdown-contentss {
     display: none;
     position: absolute;
@@ -2636,7 +2638,7 @@ color: #000;
     background-image: url("../../assets/img/sort_asc.png") !important;
   }
   table.dataTable thead .sorting_desc {
-    background-image: url("../images/sort_desc.png") !important;
+    background-image: url("../../assets/img/sort_desc.png") !important;
   }
   table.dataTable thead .sorting_asc_disabled {
     background-image: url("../images/sort_asc_disabled.png") !important;
@@ -2662,4 +2664,21 @@ input[type=time].form-control {
 .widget-chart-two::-webkit-scrollbar-thumb {
     background-color: gainsboro;
     border-radius: 20px;
+}
+table#status_contact td {
+    background: #ffffff !important;
+    border: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+table#status_contact tr {
+    border-bottom: 1px solid gray;
+}
+table#status_contact th {
+    border: none !important;
+    background: #ffffff !important;
+    color: rgb(0, 0, 0) !important;
+}
+#status_table_head td {
+    font-weight: bold;
+    text-align:center;
 }
