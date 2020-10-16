@@ -293,20 +293,19 @@ background-color:#afb3b4 !important;
     /* position: fixed; */
     display: grid;
 }
-
 .indirect_emps {
     /* position: fixed; */
     top: 30%;
-    margin-top: 21px;
-    margin-left: 35px;
-    width: 640px !important;
+    margin-top: 48px;
+    margin-left: 7px;
+    width: 100%;
     border: 0.1px solid gray;
     background: #1a1c2d;
     padding: 20px;
     border-radius: 5px;
     color: white;
     display: none;
-    height: 500px;
+    height: 416px;
     overflow-y: scroll;
     margin-bottom: 20px;
 }
