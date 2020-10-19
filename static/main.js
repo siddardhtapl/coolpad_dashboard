@@ -587,7 +587,6 @@ function weekly_data() {
         .then(response => response.json())
         .then(
             data => {
-            document.getElementById("weekly_tracker_loader").innerHTML = '';
                 total_no_contact = data['total_no_of_contacts_weekly']
                 week_team_track = data['weekly_team_tracker']
                 contact_frequency_week = data['freqency_matrix_weekly']
