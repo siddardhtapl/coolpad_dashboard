@@ -30,7 +30,26 @@
 
 <!--    <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>-->
-
+<style>
+        .loader {
+            border: 6px solid #888EA8;
+            /* Light grey */
+            border-top: 6px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
        
 </head>
 
@@ -157,10 +176,27 @@
               <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
               <span class="slider1 round1"></span>
             </label>
-            <div class="form-group" style="padding-left:20px;width: 185px;float:left;margin-top: 10px;">
-              <input type="date" id="date_history" name="datee" class="form-control" />
+<!--            <div class="form-group" style="padding-left:20px;width: 185px;float:left;margin-top: 10px;">-->
+<!--              <input type="date" id="date_history" name="datee" class="form-control" />-->
+<!--          </div>-->
+
+            <div class="form-group" style="padding-left:20px; width: 185px; float:left; margin-top: 10px;">
+                            <input type="date" id="date_history" name="datee" class="form-control" />
+                        </div>
+                        <div class="form-group user_time">
+                            <button class="HIStimepicker ripple" onclick="timepicker_his()">Select time</button>
+                        </div>
+                        <div class="form-group user_time">
+                            <button class="HIStimepicker ripple" onclick="Restpicker_his()">Reset time</button>
+                        </div>
+
           </div>
 
+          <div class="timePicker_duration" id="timePicker_his">
+             <h6 class="text-center">Set Time</h6>
+            <div id="from"><p>From</p><p><input type="time" id="from_time"></p></div><div id="to"><p>To</p><p><input type="time" id="to_time" ></p></div>
+            <button id="submit_hisTime" class="submit_hisbtn" onclick="submit_histime()">Submit</button>
+            <button id="cancel_histime" class="cancel_hisbtn" onclick="cancel_histime()">Cancel</button>
           </div>
 
 
@@ -170,10 +206,14 @@
 
                 <div style="display: flex; flex-direction: row;">
                   <div style="flex:6">
+                     <div style="padding-left: 1rem;display: flex; flex-direction: row;" id="user_history_loader">
+                      <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading Data</b>
+                     </div>
                     <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="user_history_select"
                       onchange="getSelectValueUserHistory();load_notes_user()">
                       <option>select</option>
                     </select>
+                    <div id="selected_time_user" style="font-size: 28px;"></div>
                   </div>
 
 
@@ -438,11 +478,16 @@
                                 </select> -->
 
                 <div style="display: flex; flex-direction: row;">
+
                   <div style="flex:6">
+                    <div style="padding-left: 1rem;display: flex; flex-direction: row;" id="team_history_loader">
+                      <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading Data</b>
+                    </div>
                     <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="team_history_select"
                       onchange="getSelectValueTeamHistory();load_notes_team()">
                       <option>select</option>
                     </select>
+                    <div id="selected_time_team" style="font-size: 28px;"></div>
                   </div>
 
                   <div style="margin-top: 10px;">

@@ -40,7 +40,7 @@ function getContactTracingData(e, s_date, e_date) {
   let startDate = s_date;
   let endDate = e_date;
   if (emp && startDate && endDate) {
-    fetch('https://takvaviya.in/coolpad_backend/user/contact_trace/'+emp+'/'+startDate+'/'+endDate+'/'+common4all).then(
+    fetch('https://takvaviya.in/coolpad_backend/user/contact_trace/'+emp+'/'+startDate+" "+default_currnt_param+ "/" + endDate +" "+default_currnt_param +"/" + common4all).then(
       response => {
         if (response.ok) {
           return response.json();

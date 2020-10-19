@@ -2890,3 +2890,164 @@ input[type=time].form-control {
 #status_table_head td {
     font-weight: bold;
 }
+
+/* Dashboard Timepicker */
+.Dashtimepicker {
+   margin-top: 30px;
+    font-size: 14px !important;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #060818 !important;
+    color: #fff !important;
+    padding: 9px;
+    height: calc(1.8em + .75rem + 2px);
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+.timePicker_duration_Dash {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 44%;
+    background-color: white;
+    color: #1b1b1b;
+    z-index: 2000;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+.timePicker_duration_Dash #from,
+#to {
+    float: left;
+    padding: 36px 30px;
+}
+.timePicker_duration_Dash #submit_DashTime {
+    /* padding-left: 20px; */
+}
+.timePicker_duration {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 44%;
+    background-color: white;
+    color: #1b1b1b;
+    z-index: 2000;
+    padding: 20px;
+    border-radius: 5px;
+}
+.timePicker_duration #from,
+#to {
+    float: left;
+    padding: 36px 30px;
+}
+.timePicker_duration #submit_hisTime {
+    /* padding-left: 20px; */
+}
+/* Dashboard Timepicker submit btn*/
+.submit_Dashbtn {
+    float: right;
+    bottom: 10px;
+    position: absolute;
+    right: 40px;
+    background: rgb(52, 168, 83);
+    padding: 7px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    border: none !important;
+}
+/* Dashboard Timepicker close btn*/
+.cancel_Dashbtn {
+    float: left;
+    bottom: 10px;
+    left: 150px;
+    position: absolute;
+    background: rgb(234, 67, 53);
+    padding: 7px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    border: none !important;
+}
+/* Dashboard Timepicker Ends */
+/* userdashboard Timepicker */
+.HIStimepicker {
+    font-size: 14px !important;
+    border: 1px solid #6c757d !important;
+    height: calc(2.0em + .75rem + 2px);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #060818 !important;
+    color: #fff !important;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+.time_picker {
+    padding-left: 20px;
+    width: 185px;
+    float: left;
+    margin-top: 10px;
+}
+.user_time {
+    padding-left: 20px;
+    float: left;
+    margin-top: 8px;
+}
+/* userdashboard Timepicker submit btn */
+.submit_hisbtn {
+    float: right;
+    bottom: 10px;
+    position: absolute;
+    right: 40px;
+    background: rgb(52, 168, 83);
+    padding: 7px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    border: none !important;
+}
+/* userdashboard Timepicker cancel btn */
+.cancel_hisbtn {
+    float: left;
+    bottom: 10px;
+    left: 150px;
+    position: absolute;
+    background: rgb(234, 67, 53);
+    padding: 7px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    border: none !important;
+}
+/* userdashboard Timepicker Ends*/
+/*Button ripple effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+.ripple:before {
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+}
+.ripple:focus:before {
+    transition: all 0.5s ease-out;
+    opacity: 0;
+    width: 160px;
+    height: 160px;
+    margin-top: -80px;
+    margin-left: -80px;
+}
+/*Button ripple effect ends */

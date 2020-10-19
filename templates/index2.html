@@ -406,7 +406,7 @@
         /*            var s_date = "2020-08-03"
                     var e_date = "2020-08-07"*/
         var s_date, e_date;
-
+        var default_currnt_param = "00-00-00";
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
             e_date = document.getElementById("endDate").value;
@@ -422,13 +422,13 @@
             }
             $.ajax({
                 type: "GET",
-                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date + "/" + common4all,
+                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date+" "+default_currnt_param+ "/" + e_date +" "+default_currnt_param +"/" + common4all,
                 dataType: 'json',
                 success: function(response) {
                     document.getElementById('indirect_emps').style.display = "none";
 
                     document.getElementById('indirect_emps_status').style.display = "none";
-                    console.log("https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + "/" + e_date + "/" + common4all);
+                    console.log("https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date+" "+default_currnt_param+ "/" + e_date +" "+default_currnt_param +"/" + common4all);
                     res = response;
                     eve = response[1][e]
                     console.log(response[1][e])
