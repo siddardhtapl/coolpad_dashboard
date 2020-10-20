@@ -8,11 +8,14 @@ var common4all = group + '__' + locationn + '__' + zone + '__' + company
 /*current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
 start_date = moment().startOf('isoWeek').format('YYYY-MM-DD');
 end_date=moment().add(1,'days').tz("America/Chicago").format('YYYY-MM-DD');*/
-
+var try_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
 current_date = moment().tz("America/Chicago").format('YYYY-MM-DD');
 start_date = moment().startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
 end_date=moment().endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
+
+try_date = try_date+" 00:00:00";
+console.log(try_date);
 if (!localStorage.getItem("session")) {
   alert("Please Login to continue");
   window.location.href = "../login";
@@ -31,13 +34,15 @@ function share() {
 
 
 var daily_report,weekly_reoprt;
+var default_st_time = " 00-00-00";
+var default_end_time = " 23-59-59";
 
 function email_share() {
 
 
              $.ajax({
                 type: "GET",
-                url: "https://www.takvaviya.in/coolpad_backend/user/weekly_report/" + start_date + "/" + end_date + "/" + current_date + "/" + common4all,
+                url: 'https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +default_st_time+ '/' + end_date +default_st_time + '/' +current_date+'/' + common4all,
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
@@ -54,7 +59,7 @@ function daily_report_resp(){
 
     $.ajax({
         type: "GET",
-        url: "https://www.takvaviya.in/coolpad_backend/user/daily_report/"  + current_date + "/" + common4all,
+        url: "https://www.takvaviya.in/coolpad_backend/user/daily_report/"  + current_date + default_st_time+ "/" +current_date + default_end_time+ "/" +common4all,
         dataType: 'json',
         success: function (response) {
             console.log(response);

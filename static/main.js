@@ -553,7 +553,7 @@ function switchHeatMapWeekly(team) {
 
 function rp_one_daily() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + selectdate + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' +  selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -567,10 +567,11 @@ function rp_one_daily() {
 function rp_weekly() {
     //Todo not user instance its emp instance
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +" "+default_currnt_param+ '/' + end_date +" "+default_currnt_param + '/' +current_date+'/' + common4all)
         .then(response => response.json())
         .then(data => {
 /*            window.location.href = data.path + ".pdf"*/
+            console.log("ffff",data.path)
             window.open(data.path + ".pdf");
         });
 }

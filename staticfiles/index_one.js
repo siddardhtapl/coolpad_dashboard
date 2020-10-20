@@ -5,6 +5,13 @@ var select_date
 var st_date
 var en_date
 var clk_d;
+var from_HIStime, to_HIStime;
+var default_time_param = " 00-00-00";
+var default_currnt_param = "00-00-00";
+var default_end_param = "23-59-59";
+from_HIStime = default_currnt_param;
+to_HIStime = default_end_param;
+
 if (!localStorage.getItem("session")) {
     window.location.href = "../login";
 }
@@ -13,7 +20,7 @@ var data_user2;
 var dev_id;
 // window.onload = exampleFunction();
 function exampleFunction() {
-    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ common4all)
     .then(response => response.json())
     .then(data_user => {
         data_user2= data_user
@@ -355,6 +362,7 @@ function loadUserHistoy() {
     fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
+         document.getElementById("user_history_loader").innerHTML = '';
             let allUsers = Object.values(data);
             let unDeletedUsers = allUsers.filter(user => user.is_Deleted === 'false');
             let userNames = unDeletedUsers.map(user => user.user);
@@ -399,7 +407,7 @@ function TeamHistoy(option) {
     obj_w = {}
 
 
-    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ st_date+'/'+ en_date + '/' + select_date + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ st_date+'/'+ en_date + '/' +  select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+  common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
@@ -484,6 +492,7 @@ function loadTeamHistory() {
     fetch('https://takvaviya.in/coolpad_backend/user/getTeams/'+ '/' + common4all)
         .then(response => response.json())
         .then(data => {
+        document.getElementById("team_history_loader").innerHTML = '';
             const innerdiv = Object.values(data.teams).map(item => {
                 return `<option value='${item}'>${item}</option>`
             }).join("");
@@ -507,7 +516,7 @@ function getSelectValueTeamHistory() {
 
 function dwnldusrpdf() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
         .then(response => response.json())
         .then(data => {
 //            window.location.href = data.path + ".pdf"
@@ -519,7 +528,7 @@ function dwnldusrpdf() {
 
 function dwnldusrcsv() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
         .then(response => response.json())
         .then(data => {
 //            window.location.href = data.path + ".csv"
@@ -533,7 +542,7 @@ function dwnldusrcsv() {
 function dwnldusrxlsx() {
 
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+  start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
         .then(response => response.json())
         .then(data => {
             window.open(data.path + ".xlsx");
@@ -548,7 +557,7 @@ function dwnldusrxlsx() {
 function dwnldtmpdf() {
 
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
         .then(response => response.json())
         .then(data => {
             window.open(data.path + ".pdf");
@@ -559,7 +568,7 @@ function dwnldtmpdf() {
 
 function dwnldtmcsv() {
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
         .then(response => response.json())
         .then(data => {
 //            window.location.href = data.path + ".csv"
@@ -573,7 +582,7 @@ function dwnldtmcsv() {
 function dwnldtmxlsx() {
 
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
         .then(response => response.json())
         .then(data => {
 /*
@@ -822,18 +831,26 @@ $(function(){
     $('#date_history').attr('max', maxDate);
     select_date = current_date
     $('#date_history').val(select_date);
+    console.log("currnt",select_date,moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD'))
+    st_date = moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+    en_date = moment(select_date).add(1, 'days').endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
-    st_date = moment(select_date).startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
-    en_date = moment(select_date).endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
+    st_date = st_date+default_time_param;
+    en_date = en_date+" "+default_end_param;
+    select_date = select_date;
     exampleFunction()
-    console.log(crnt_date)
+    console.log("check time",select_date,st_date,en_date)
     $("#date_history").on('change', function (event) {
         event.preventDefault();
         select_date = this.value
         // console.log(select_date)
         // console.log("curr", se_date)
-        st_date = moment(select_date).startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
-        en_date = moment(select_date).endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
+        st_date = moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
+        en_date = moment(select_date).add(1, 'days').endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
+
+        st_date = st_date+default_time_param;
+        en_date = en_date+" "+default_end_param;
+        select_date = select_date;
         exampleFunction()
         loadTeamHistory()
 
@@ -854,3 +871,40 @@ function convertDateToReadableDate(date) {
     var readableDate = year + '-' + month + '-' + day;
     return readableDate;
 }
+
+function timepicker_his(){
+document.getElementById("timePicker_his").style.display="block";
+}
+
+
+var from_O_HIStime,to_O_HIStime;
+function submit_histime(){
+from_HIStime = $("#from_time").val()+':00';
+to_HIStime = $("#to_time").val()+':00';
+from_HIStime = from_HIStime.replace(/:/g,"-");
+to_HIStime = to_HIStime.replace(/:/g,"-");
+console.log(from_HIStime)
+exampleFunction()
+loadTeamHistory()
+document.getElementById("timePicker_his").style.display="none";
+
+from_O_HIStime = $("#from_time").val() + ':00';
+to_O_HIStime = $("#to_time").val() + ':00';
+document.getElementById("selected_time_user").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
+document.getElementById("selected_time_team").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
+}
+
+function Restpicker_his(){
+document.getElementById("selected_time_user").innerHTML = ``
+document.getElementById("selected_time_team").innerHTML = ``
+document.getElementById("user_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+document.getElementById("team_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+from_HIStime = default_currnt_param;
+to_HIStime = default_end_param;
+exampleFunction()
+loadTeamHistory()
+}
+
+function cancel_histime() {
+                document.getElementById("timePicker_his").style.display = 'none'
+            }

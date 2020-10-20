@@ -516,7 +516,7 @@ function getSelectValueTeamHistory() {
 
 function dwnldusrpdf() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
         .then(response => response.json())
         .then(data => {
 //            window.location.href = data.path + ".pdf"
@@ -528,7 +528,7 @@ function dwnldusrpdf() {
 
 function dwnldusrcsv() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
         .then(response => response.json())
         .then(data => {
 //            window.location.href = data.path + ".csv"
@@ -542,7 +542,7 @@ function dwnldusrcsv() {
 function dwnldusrxlsx() {
 
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+ start_date+'/'+ end_date + '/' + current_date +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+  start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
         .then(response => response.json())
         .then(data => {
             window.open(data.path + ".xlsx");
@@ -557,7 +557,7 @@ function dwnldusrxlsx() {
 function dwnldtmpdf() {
 
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+'/'+ end_date + '/' + current_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
         .then(response => response.json())
         .then(data => {
             window.open(data.path + ".pdf");
@@ -568,7 +568,7 @@ function dwnldtmpdf() {
 
 function dwnldtmcsv() {
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
         .then(response => response.json())
         .then(data => {
 //            window.location.href = data.path + ".csv"
@@ -582,7 +582,7 @@ function dwnldtmcsv() {
 function dwnldtmxlsx() {
 
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+'/'+ current_date +'/'+ end_date  +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
         .then(response => response.json())
         .then(data => {
 /*

@@ -4,6 +4,16 @@ var contact_f_data_week
 var api 
 
 
+var from_HIStime, to_HIStime;
+var default_time_param = " 00-00-00";
+var default_currnt_param = "00-00-00";
+var default_end_param = "23-59-59";
+from_HIStime = default_currnt_param;
+to_HIStime = default_end_param;
+
+
+
+
 var co;
 function color() {
     if (localStorage.getItem("theme") == "light") {
@@ -22,7 +32,7 @@ function color() {
 }
 
 function exampleFunction(selectdate) {
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
         .then(response => response.json())
         .then(data_user => {
             contact_f_data = data_user
@@ -30,7 +40,7 @@ function exampleFunction(selectdate) {
             daily_tracker_freq()
             getHeapMapData()
         })
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + '/' + end_date + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date+" "+default_currnt_param + '/' + end_date +" "+default_end_param+ '/' + common4all)
         .then(response => response.json())
         .then(data_week => {
             contact_f_data_week = data_week
@@ -543,7 +553,7 @@ function switchHeatMapWeekly(team) {
 
 function rp_one_daily() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + selectdate + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' +  selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
@@ -557,10 +567,11 @@ function rp_one_daily() {
 function rp_weekly() {
     //Todo not user instance its emp instance
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + '/' + end_date + '/' + current_date + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +" "+default_currnt_param+ '/' + end_date +" "+default_currnt_param + '/' +current_date+'/' + common4all)
         .then(response => response.json())
         .then(data => {
 /*            window.location.href = data.path + ".pdf"*/
+            console.log("ffff",data.path)
             window.open(data.path + ".pdf");
         });
 }
@@ -573,7 +584,7 @@ function weekly_data() {
     var contact_history_all_weelk;
     var daily_total_for_week;
 
-    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date + '/' + end_date + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date +" "+default_currnt_param+ '/' + end_date +" "+default_end_param + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -776,10 +787,11 @@ console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + cur
 
 
 function daily_data(selectdate) {
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
+            document.getElementById("daily_tracker_loader").innerHTML = ''
                 var top_contact_history = data['top_pairs_maxmium_contact']
                 var total_no_contact_daily = data['total_no_of_contacts']
                 var clock_data_daily = data['clk_chart']
@@ -1008,3 +1020,55 @@ function convertDateToReadableDate(date) {
     var readableDate = year + '-' + month + '-' + day;
     return readableDate;
 }
+
+
+function openDashTimer(){
+document.getElementById("timePicker_dash").style.display="block";
+}
+
+
+
+//function submit_Dashtime(){
+//from_HIStime = $("#from_time_dash").val()+':00';
+//to_HIStime = $("#to_time_dash").val()+':00';
+//from_HIStime = from_HIStime.replace(/:/g,"-");
+//to_HIStime = to_HIStime.replace(/:/g,"-");
+//daily_data(selectdate);
+//exampleFunction(selectdate);
+//document.getElementById("timePicker_dash").style.display="none";
+//}
+//
+//function reset_Dashtime(){
+//from_HIStime = default_currnt_param;
+//to_HIStime = default_end_param;
+//daily_data(selectdate);
+//exampleFunction(selectdate);
+//}
+
+
+function submit_Dashtime() {
+    from_HIStime = $("#from_time_dash").val() + ':00';
+    to_HIStime = $("#to_time_dash").val() + ':00';
+    from_HIStime = from_HIStime.replace(/:/g, "-");
+    to_HIStime = to_HIStime.replace(/:/g, "-");
+    from_O_HIStime = $("#from_time_dash").val() + ':00';
+    to_O_HIStime = $("#to_time_dash").val() + ':00';
+    daily_data(selectdate);
+    exampleFunction(selectdate);
+    document.getElementById("timePicker_dash").style.display = "none";
+    document.getElementById("selected_time").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
+}
+function reset_Dashtime() {
+    document.getElementById("selected_time").innerHTML = ``
+    document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    from_HIStime = default_currnt_param;
+    to_HIStime = default_end_param;
+    daily_data(selectdate);
+    exampleFunction(selectdate);
+}
+
+
+function cancel_Dashtime() {
+            document.getElementById("timePicker_dash").style.display = 'none'
+        }

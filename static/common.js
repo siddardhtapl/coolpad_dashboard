@@ -34,13 +34,15 @@ function share() {
 
 
 var daily_report,weekly_reoprt;
+var default_st_time = " 00-00-00";
+var default_end_time = " 23-59-59";
 
 function email_share() {
 
 
              $.ajax({
                 type: "GET",
-                url: "https://www.takvaviya.in/coolpad_backend/user/weekly_report/" + start_date + "/" + end_date + "/" + current_date + "/" + common4all,
+                url: 'https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +default_st_time+ '/' + end_date +default_st_time + '/' +current_date+'/' + common4all,
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
@@ -57,7 +59,7 @@ function daily_report_resp(){
 
     $.ajax({
         type: "GET",
-        url: "https://www.takvaviya.in/coolpad_backend/user/daily_report/"  + current_date + "/" + common4all,
+        url: "https://www.takvaviya.in/coolpad_backend/user/daily_report/"  + current_date + default_st_time+ "/" +current_date + default_end_time+ "/" +common4all,
         dataType: 'json',
         success: function (response) {
             console.log(response);
