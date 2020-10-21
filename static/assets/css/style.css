@@ -316,21 +316,18 @@ background-color:#527581 !important;
 
 
 
-.indirect_emps {
-    /* position: fixed; */
-    top: 30%;
-    margin-top: 48px;
+.indirectContacts {
+    margin-top: 40px;
     margin-left: 7px;
     width: 100%;
-    border: 0.1px solid gray;
     background: #1a1c2d;
+    color: #ffff;
     padding: 20px;
     border-radius: 5px;
-    color: white;
-    display: none;
-    height: 416px;
-    overflow-y: scroll;
+    height: 500px;
+    overflow-y: auto;
     margin-bottom: 20px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2); 
 }
 /* width */
 ::-webkit-scrollbar {
@@ -349,34 +346,10 @@ background-color:#527581 !important;
     background: #555;
   }
 
-.indirect_emps table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 5%;
-    border: 1px solid gray;
-    background: white;
-}
-
-.indirect_emps td,
-th {
-    /* border: 1px solid #dddddd; */
-    text-align: center;
-    padding: 18px 7px;
-    /* background: white; */
-}
-
-.in_header h5 {
-    float: left;
-}
-
-.in_header p {
-    float: right;
-    margin-right: 10px;
-    color: red;
-    border-radius: 4px;
-    padding: 3px;
-    border: 1px solid red;
+.in_header {
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .date-show {
