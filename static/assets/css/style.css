@@ -244,7 +244,6 @@ table.dataTable.no-footer {
 .direct_contact_emp {
     /* position: fixed;
     top: 465px; */
-    padding-left: 20px;
 }
 
 .direct_contact_emp_toggle {
@@ -315,22 +314,18 @@ background-color:#527581 !important;
 }
 
 
-
-.indirect_emps {
-    /* position: fixed; */
-    top: 30%;
-    margin-top: 48px;
-    margin-left: 7px;
+.indirectContacts {
+    margin-top: 40px;
+    margin-left: 1px;
     width: 100%;
-    border: 0.1px solid gray;
     background: #1a1c2d;
+    color: #ffff;
     padding: 20px;
     border-radius: 5px;
-    color: white;
-    display: none;
-    height: 416px;
-    overflow-y: scroll;
+    height: 442px;
+    overflow-y: auto;
     margin-bottom: 20px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2); 
 }
 /* width */
 ::-webkit-scrollbar {
@@ -348,35 +343,11 @@ background-color:#527581 !important;
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-
-.indirect_emps table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 5%;
-    border: 1px solid gray;
-    background: white;
-}
-
-.indirect_emps td,
-th {
-    /* border: 1px solid #dddddd; */
-    text-align: center;
-    padding: 18px 7px;
-    /* background: white; */
-}
-
-.in_header h5 {
-    float: left;
-}
-
-.in_header p {
-    float: right;
-    margin-right: 10px;
-    color: red;
-    border-radius: 4px;
-    padding: 3px;
-    border: 1px solid red;
+.in_header {
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid white;
 }
 
 .date-show {
@@ -1616,6 +1587,7 @@ text-transform:capitalize;
     height: 35px;
   }*/
   .dropbtnss {
+    
     background: none;
     color: white;
     padding: 5px;
@@ -1626,19 +1598,23 @@ text-transform:capitalize;
     /*position: relative;*/
     /*display: inline-block;*/
     cursor: pointer;
-    height: 35px;
+    height: 42px;
     background: rgb(73, 73, 74);
-    padding: 5px;
+    padding: 8px;
     border-radius: 3px;
+    margin-left: 20px;
+    /* right: 20px; */
+
+
 }
   .dropdown-contentss {
     display: none;
     position: absolute;
     background-color: #191e3a;
     min-width: 135px;
-    right:150px;
+    right:20px;
     color:#fff;
-    top: 0px;
+    top: 123px;
     /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     border-radius: 3px;
     z-index: 1;
@@ -2890,10 +2866,8 @@ input[type=time].form-control {
 #status_table_head td {
     font-weight: bold;
 }
-
-/* Dashboard Timepicker */
 .Dashtimepicker {
-   margin-top: 30px;
+    margin-top: 30px;
     font-size: 14px !important;
     border: 1px solid #6c757d;
     border-radius: 5px;
@@ -2906,6 +2880,7 @@ input[type=time].form-control {
 }
 .timePicker_duration_Dash {
     display: none;
+    width: 350px;
     position: fixed;
     top: 30%;
     left: 44%;
@@ -2916,16 +2891,43 @@ input[type=time].form-control {
     border-radius: 5px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
 }
-.timePicker_duration_Dash #from,
+/* .timePicker_duration_Dash #from,
 #to {
     float: left;
     padding: 36px 30px;
 }
 .timePicker_duration_Dash #submit_DashTime {
-    /* padding-left: 20px; */
+    padding-left: 20px;
+} */
+/* Dashboard Timepicker Ends */
+/* .timePicker_duration #from,
+#to {
+    float: left;
+    padding: 36px 30px;
+}
+.timePicker_duration #submit_hisTime {
+    padding-left: 20px;
+} */
+/* userdashboard Timepicker */
+.HIStimepicker {
+    font-size: 14px !important;
+    border: 1px solid #6c757d !important;
+    height: calc(2.0em + .75rem + 2px);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #060818 !important;
+    padding: 9px !important;
+    color: #fff !important;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+.user_time {
+    padding-left: 20px;
+    /* float: left;
+    margin-top: 8px; */
 }
 .timePicker_duration {
     display: none;
+    width: 350px;
     position: fixed;
     top: 25%;
     left: 44%;
@@ -2935,98 +2937,98 @@ input[type=time].form-control {
     padding: 20px;
     border-radius: 5px;
 }
-.timePicker_duration #from,
-#to {
-    float: left;
-    padding: 36px 30px;
-}
-.timePicker_duration #submit_hisTime {
-    /* padding-left: 20px; */
-}
-/* Dashboard Timepicker submit btn*/
-.submit_Dashbtn {
-    float: right;
-    bottom: 10px;
-    position: absolute;
-    right: 40px;
-    background: rgb(52, 168, 83);
-    padding: 7px;
-    text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
-    border: none !important;
-}
-/* Dashboard Timepicker close btn*/
-.cancel_Dashbtn {
-    float: left;
-    bottom: 10px;
-    left: 150px;
-    position: absolute;
-    background: rgb(234, 67, 53);
-    padding: 7px;
-    text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 12px;
-    cursor: pointer;
-    border: none !important;
-}
-/* Dashboard Timepicker Ends */
-/* userdashboard Timepicker */
-.HIStimepicker {
-    font-size: 14px !important;
-    border: 1px solid #6c757d !important;
-    height: calc(2.0em + .75rem + 2px);
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #060818 !important;
-    color: #fff !important;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-}
-.time_picker {
+/* .time_picker {
     padding-left: 20px;
     width: 185px;
     float: left;
     margin-top: 10px;
-}
-.user_time {
-    padding-left: 20px;
-    float: left;
-    margin-top: 8px;
-}
-/* userdashboard Timepicker submit btn */
-.submit_hisbtn {
-    float: right;
-    bottom: 10px;
-    position: absolute;
-    right: 40px;
-    background: rgb(52, 168, 83);
+} */
+/* btn */
+.custom_modal_btn {
+    width: 80px;
     padding: 7px;
-    text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 13px;
     cursor: pointer;
-    border: none !important;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    font-size: 14px;
 }
-/* userdashboard Timepicker cancel btn */
-.cancel_hisbtn {
-    float: left;
-    bottom: 10px;
-    left: 150px;
+/*  Timepicker submit btn*/
+.fill {
+    background: #007bff;
+    color: #fff;
+}
+/* Timepicker */
+.timerangepicker-container {
+    display: flex;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .14);
+    margin: 10px 0px;
+}
+.timerangepicker-label {
+    display: block;
+    line-height: 2em;
+    background-color: #c8c8c880;
+    padding-left: 1em;
+    margin-bottom: 1.5em;
+}
+.timerangepicker-from,
+.timerangepicker-to {
+    padding-bottom: 1.5em;
+    border-radius: 5px;
+}
+.timerangepicker-from {
+    border-right: none;
+}
+.timerangepicker-display {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    border: 1px solid grey;
+    line-height: 2.5em;
+    text-align: center;
+    position: relative;
+    margin: 1em 0.175em;
+    border-radius: 3px;
+}
+.timerangepicker-display .increment,
+.timerangepicker-display .decrement {
+    cursor: pointer;
     position: absolute;
-    background: rgb(234, 67, 53);
-    padding: 7px;
+    font-size: 1.3em;
+    width: 1.5em;
     text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 12px;
-    cursor: pointer;
-    border: none !important;
+    left: 0;
 }
-/* userdashboard Timepicker Ends*/
+.timerangepicker-display .increment {
+    margin-top: -0.25em;
+    top: -1em;
+    left: 0.2em;
+}
+.timerangepicker-display .decrement {
+    margin-bottom: -0.25em;
+    bottom: -1em;
+    left: 0.2em;
+}
+.timerangepicker-display.hour {
+    margin-left: 1em;
+}
+.timerangepicker-display.period {
+    margin-right: 0.32em;
+}
+.input-group-addon {
+    right: 5px;
+    position: absolute;
+    top: 9px;
+}
+/*  Timepicker close btn*/
+.outline {
+    background: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+/* btn ends */
 /*Button ripple effect */
 .ripple {
     position: relative;

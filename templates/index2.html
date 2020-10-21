@@ -27,6 +27,10 @@
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+    <script src="../../static/dataTable.js"></script>
+    <link href="../../static/assets/css/paginate.css?version=2" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js"></script>
     <!-- plugin end -->
 
 
@@ -244,33 +248,48 @@
                     <div id="table" class="tabcontent" style="display: block;">
 
                         <div class="common">
-                            <div class="direct_contact_emp" id="all_third_pair">
+                            <div class="direct_contact_emp mr-1 ml-1" id="all_third_pair">
 
                             </div>
 
-                            <div class="row mr-3">
+                            <div class="row mr-1  ml-1">
                                 <div class="col-md-6">
-                                    <div class="indirect_emps" id="indirect_emps_status">
+                                    <div class="indirectContacts" id="indirectInteractions">
                                         <div class="in_header">
                                             <h5 id="interaction_tittle"></h5>
-                                            <p style="cursor:pointer" onclick="close_indirect_status()">Close</p>
+                                            <!-- <button type="button" class="btn btn-danger" onclick="close_indirect_status()"></button> -->
+                                            <i class="fa fa-times" onclick="close_indirect_status()" style="color: red;font-size: 20px;" aria-hidden="true"></i>
                                         </div>
-                                        <table id="status_contact">
-
-                                        </table>
-                                        <!-- <table id="layer3_append"> -->
-
+                                        <table id="indirectInteraction" data-page-length='7'>
+                                            <thead align="center">
+                                            <tr>
+                                                <th>Timestamp</th>
+                                                <th>Duration</th>
+                                                <th>AvgDist</th>
+                                                <th>MinDist</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot></tfoot>
                                         </table>
                                     </div>
                                 </div>
-                                                                <div class="col-md-6">
-                                    <div class="indirect_emps" id="indirect_emps">
+                                <div class="col-md-6">
+                                    <div class="indirectContacts" id="indirectContacts">
                                         <div class="in_header">
                                             <h5>Indirect contacts of Contacted Person</h5>
-                                            <p style="cursor:pointer" onclick="close_indirect()">Close</p>
+                                            <!-- <button type="button" class="btn btn-danger" onclick="close_indirect()"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+                                            <i class="fa fa-times" onclick="close_indirect()" style="color: red;font-size: 20px;"   aria-hidden="true"></i>
                                         </div>
-                                        <table id="layer3_append">
-
+                                        <table id="indirectContactTable"  data-page-length='7'>
+                                            <thead align="center">
+                                                <tr>
+                                                    <th>Indirect Contacts</th>
+                                                    <th>Max duration</th>
+                                                    <th>Interactions</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot></tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -425,9 +444,9 @@
                 url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date+" "+default_currnt_param+ "/" + e_date +" "+default_currnt_param +"/" + common4all,
                 dataType: 'json',
                 success: function(response) {
-                    document.getElementById('indirect_emps').style.display = "none";
+                    document.getElementById('indirectContacts').style.display = "none";
 
-                    document.getElementById('indirect_emps_status').style.display = "none";
+                    document.getElementById('indirectInteractions').style.display = "none";
                     console.log("https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date+" "+default_currnt_param+ "/" + e_date +" "+default_currnt_param +"/" + common4all);
                     res = response;
                     eve = response[1][e]
@@ -454,6 +473,7 @@
 
                     }
                     $('#all_third_pair').append(append_data);
+
                 }
             });
 
@@ -466,6 +486,27 @@
         });
 
         var status_table_render;
+        var indirectContactTable =  $('#indirectContactTable').DataTable({
+                                        "searching": false,
+                                        "info": false,
+                                        "bLengthChange": false,
+                                        "columns": [{ "data": "indirectContact" },{ "data": "max_duration" }, { "data": "count" }, { "data": "Date"}],
+                                        columnDefs: [
+                                            { type: 'natural-nohtml', targets: [0] }
+                                        ],
+                                        columnDefs: [
+                                            { width: '25%', targets: [0,1,2] }
+                                        ],
+                                        fixedColumns: true
+                                    });
+        var interactionTable =  $('#indirectInteraction').DataTable({
+                                    "searching": false,
+                                    "info": false,
+                                    "bLengthChange": false,
+                                    "columns": [{ "data": "timestamp" },{ "data": "duration" }, { "data": "avgDist" }, { "data": "minDist"}],
+                                });
+        document.getElementById('indirectContacts').style.display = 'none';
+        document.getElementById('indirectInteractions').style.display = "none";
 
         function open_indirect(elm) {
 
@@ -486,65 +527,48 @@
             }
 
 
+            document.getElementById('indirectContacts').style.display = "block";
+            document.getElementById('indirectInteractions').style.display = "block";
 
-            var layer_ind;
-            layer_ind = '';
-            console.log(elm.getAttribute('value'));
-            document.getElementById('indirect_emps').style.display = "block";
-            document.getElementById('indirect_emps_status').style.display = "block";
+            indirectContactTable.clear();
+            interactionTable.clear();
 
-
-            $("#layer3_append").empty();
-            layer_ind += '<tr>'
-            layer_ind += ' <th>Indirect Contacts</th>'
-            layer_ind += '<th> Max Duration</th>'
-            layer_ind += '<th>Interaction Count</th>'
-            layer_ind += '<th>Date</th>'
-            layer_ind += ' </tr>';
-            var third_layer;
-
-            for (var k in res[2]) {
-                console.log(res[2][k][elm.getAttribute('value')]);
-                third_layer = res[2][k][elm.getAttribute('value')];
-                for (var i in third_layer) {
-                    var c_date = third_layer[i]["Date"].split("T");
-                    layer_ind += '<tr>'
-                    layer_ind += ' <td>' + i + '</td>'
-                    layer_ind += '<td>' + third_layer[i]["max_duration"] + '</td>'
-                    layer_ind += '<td>' + third_layer[i]["count"] + '</td>'
-                    layer_ind += '<td>' + c_date[0] + '</td>'
-                    layer_ind += ' </tr>';
+            let indirectContactsArray = res[2];
+            let clickedContactName = elm.getAttribute('value')
+            let clickedContactDetails = null;
+            for(let i=0;i<indirectContactsArray.length;i++) {
+                if(indirectContactsArray[i][clickedContactName])
+                {
+                    clickedContactDetails = indirectContactsArray[i][clickedContactName]
+                    break;
                 }
             }
-
-            $("#layer3_append").append(layer_ind);
-            $("#status_contact").empty()
-            console.log(eve[elm.getAttribute('value')]['events'], e, elm.getAttribute('value'))
+            for(const contact in clickedContactDetails)
+            {
+                clickedContactDetails[contact].indirectContact = String(contact);
+                let currentDateFormat = clickedContactDetails[contact].Date
+                clickedContactDetails[contact].Date = moment(currentDateFormat).format("MM-DD-YYYY")
+            }
+            let clickedContactDetailsArray = Object.values(clickedContactDetails)
+            indirectContactTable.rows.add(clickedContactDetailsArray);
+            indirectContactTable.draw();
             document.getElementById('interaction_tittle').innerHTML = e + ' and ' + elm.getAttribute('value') + ' Interactions'
-            status_table_render = '';
-            status_table_render += '<tr id = "status_table_head"><td>Timestamp</td><td>Duration</td><td>AvgDist</td><td>MinDist</td></tr>';
-
+            let interactionData = [];
             for (var n in eve[elm.getAttribute('value')]['events']) {
                 event_data = eve[elm.getAttribute('value')]['events'][n]
-                status_table_render += '<tr><td>' + event_data['timestamp'] + '</td>'
-                status_table_render += '<td>' + event_data['duration'] + '</td>'
-                status_table_render += '<td>' + event_data['avgDist'] + '</td>'
-                status_table_render += '<td>' + event_data['minDist'] + '</td></tr>'
-
-                console.log(event_data)
+                interactionData.push(event_data)
             }
-
-            $("#status_contact").append(status_table_render);
+            interactionTable.rows.add(interactionData);
+            interactionTable.draw();
         }
 
         function close_indirect() {
-            document.getElementById('indirect_emps').style.display = "none";
-
+            document.getElementById('indirectContacts').style.display = "none";
         }
 
         function close_indirect_status() {
 
-            document.getElementById('indirect_emps_status').style.display = "none";
+            document.getElementById('indirectInteractions').style.display = "none";
 
         }
     </script>

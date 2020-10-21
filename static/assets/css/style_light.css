@@ -257,7 +257,7 @@ background-color:#afb3b4 !important;
 .direct_contact_emp {
     /* position: fixed;
     top: 465px; */
-    padding-left: 20px;
+    /* padding-left: 20px; */
 }
 
 .direct_contact_emp_toggle {
@@ -293,21 +293,17 @@ background-color:#afb3b4 !important;
     /* position: fixed; */
     display: grid;
 }
-.indirect_emps {
-    /* position: fixed; */
-    top: 30%;
-    margin-top: 48px;
-    margin-left: 7px;
+.indirectContacts {
+    margin-top: 40px;
+    margin-left: 1px;
     width: 100%;
-    border: 0.1px solid gray;
-    background: #1a1c2d;
+    background: #ffff;
     padding: 20px;
     border-radius: 5px;
-    color: white;
-    display: none;
-    height: 416px;
-    overflow-y: scroll;
+    height: 442px;
+    overflow-y: auto;
     margin-bottom: 20px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2); 
 }
 /* width */
 ::-webkit-scrollbar {
@@ -325,37 +321,12 @@ background-color:#afb3b4 !important;
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-
-.indirect_emps table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 5%;
-    border: 1px solid gray;
-    background: white;
+.in_header {
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom:1px solid black;
 }
-
-.indirect_emps td,
-th {
-    /* border: 1px solid #dddddd; */
-    text-align: center;
-    padding: 18px 7px;
-    background: white;
-}
-
-.in_header h5 {
-    float: left;
-}
-
-.in_header p {
-    float: right;
-    margin-right: 10px;
-    color: red;
-    border-radius: 4px;
-    padding: 3px;
-    border: 1px solid red;
-}
-
 .date-show {
     margin-left: 20px;
 }
@@ -1367,19 +1338,22 @@ text-transform:capitalize;
 .dropdownss {
     /*position: relative;*/
     /*display: inline-block;*/
+    
     cursor: pointer;
-    height: 35px;
+    height: 42px;
     background: #b7bec5;
-    padding: 5px;
+    padding: 8px;
     border-radius: 3px;
+    margin-top: 1px;
+    margin-left: 20px;
 }
   .dropdown-contentss {
     display: none;
     position: absolute;
     min-width: 135px;
-    right:150px;
+    right:22px;
     color: #2F3640;
-    top: 0px;
+    top: 124px;
     border-radius: 3px;
     z-index: 1;
     background-color:white;
@@ -2774,6 +2748,8 @@ table#status_contact th {
     height: calc(2.0em + .75rem + 2px);
     border: 1px solid #ced4da !important;
     border-radius: 5px;
+    padding: 9px !important;
+
     cursor: pointer;
     background-color: #fff !important;
     color: #1b1b1b !important;
@@ -2786,8 +2762,8 @@ table#status_contact th {
 }
 .user_time {
     padding-left: 20px;
-    float: left;
-    margin-top: 8px;
+    /* float: left;
+    margin-top: 8px; */
 }
 /* userdashboard Timepicker submit btn */
 .submit_hisbtn {
