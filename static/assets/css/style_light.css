@@ -293,6 +293,8 @@ background-color:#afb3b4 !important;
     /* position: fixed; */
     display: grid;
 }
+
+/* Indirect Contact Table Starts */
 .indirectContacts {
     margin-top: 40px;
     margin-left: 7px;
@@ -326,9 +328,39 @@ background-color:#afb3b4 !important;
     display:flex;
     justify-content: space-between;
     align-items: flex-start;
+    border-bottom:1px solid #000
 }
-
-
+.in_header i{
+    color:red;
+}
+tr.beyondFifteen{
+    font-weight: bold;
+    color:red
+}
+.indirectContactLegend{
+    text-align: center;
+}
+.indirectContactLegend div {
+    margin-top: 45px;
+    color: black;
+    font-weight: bold;
+}
+.indirectContactLegend div i {
+font-size: 1.1em;
+color: red;
+}
+@media only screen and (max-width: 1300px) {
+    div.common div.row {
+        flex-direction: column;
+        align-items: center;
+    }
+    div.common div.row div.col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 80%;
+    }
+}
+/* Indirect Contact Table Ends */
 .date-show {
     margin-left: 20px;
 }
