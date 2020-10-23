@@ -2306,7 +2306,13 @@ height:340px;
 .widget-chart-one{
 height:490px;
 }
+.coolpadSpinner{
+    width: 3rem;
+    height: 3rem;
+    margin: 0 50px;
 
+    display: none;
+}
 .contactHistoryLegend{
     text-align: center;
 }

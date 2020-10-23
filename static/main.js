@@ -169,6 +169,8 @@ function opentab(evt, tabName) {
     evt.currentTarget.className += " active";
     daily_data(selectdate)
     exampleFunction(selectdate);
+    document.getElementById('weekpicker').value = moment().format('YYYY-[W]WW');
+    document.getElementById('weekpicker').max = moment().format('YYYY-[W]WW');
     weekly_data()
 }
 function loadFreq(option) {
@@ -565,11 +567,20 @@ function rp_one_daily() {
 }
 
 
-
-function rp_weekly() {
+var selectedWeekSunday = null;
+var selectedWeekSaturday = null;
+var ctHistoryAllWeekTable;
+function generateWeeklyReport() {
     //Todo not user instance its emp instance
+    let start_date_week = start_date;
+    let end_date_week = end_date;
+    if(selectedWeekSunday && selectedWeekSaturday)
+    {
+        start_date_week = selectedWeekSunday;
+        end_date_week = selectedWeekSaturday;
+    }
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_currnt_param + '/' + current_date + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_currnt_param + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             /*            window.location.href = data.path + ".pdf"*/
@@ -578,18 +589,27 @@ function rp_weekly() {
         });
 }
 
-function weekly_data() {
+function weekly_data(startSunday="",endSaturday="") {
+
+    document.getElementById('weeklyLoadingSpinner').style.display = "block"
     var total_no_contact;
     var week_team_track;
     var contact_frequency_week;
     var top5_contact_history_week;
     var contact_history_all_weelk;
     var daily_total_for_week;
-
-    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_end_param + '/' + common4all)
+    let start_date_week = start_date;
+    let end_date_week = end_date;
+    if(startSunday && endSaturday)
+    {
+        start_date_week = startSunday;
+        end_date_week = endSaturday;
+    }
+    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_end_param + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
+                document.getElementById('weeklyLoadingSpinner').style.display = "none"
                 document.getElementById("weekly_tracker_loader").innerHTML = ''
                 total_no_contact = data['total_no_of_contacts_weekly']
                 week_team_track = data['weekly_team_tracker']
@@ -658,7 +678,7 @@ function weekly_data() {
                 var chart = new ApexCharts(document.querySelector("#chart7"), options);
                 chart.render();
                 $("#chart5").empty();
-                var options = {
+                var options2 = {
                     series: [{
                         name: 'Contact',
                         data: Object.values(top5_contact_history_week)
@@ -704,7 +724,7 @@ function weekly_data() {
                         }
                     }
                 };
-                var chart2 = new ApexCharts(document.querySelector("#chart5"), options);
+                var chart2 = new ApexCharts(document.querySelector("#chart5"), options2);
                 chart2.render();
                 // end
 
@@ -721,14 +741,24 @@ function weekly_data() {
                     }
                 }
                 dataa_week = Object.values(obj_week)
-                $('#contact_his_week').DataTable({
-                    "retrieve": true,
-                    "paging": true,
-                    "searching": false,
-                    "info": false,
-                    "bLengthChange": false,
-                    data: dataa_week, "columns": [{ "data": "pair" }, { "data": "count" }]
-                });
+                if(!ctHistoryAllWeekTable)
+                {
+                    ctHistoryAllWeekTable = $('#contact_his_week').DataTable({
+                        "retrieve": true,
+                        "paging": true,
+                        "searching": false,
+                        "info": false,
+                        "bLengthChange": false,
+                        data: dataa_week, "columns": [{ "data": "pair" }, { "data": "count" }]
+                    });
+                }
+                else
+                {     
+                    ctHistoryAllWeekTable.clear();
+                    ctHistoryAllWeekTable.rows.add(dataa_week);
+                    ctHistoryAllWeekTable.draw();
+                }
+                
                 $("#chart11").empty();
                 var options = {
                     series: [{
@@ -784,6 +814,20 @@ function weekly_data() {
                 loadFreqWeekly(Object.keys(contact_frequency_week)[0])
             }
         )
+    
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_end_param + '/' + common4all)
+        .then(response => response.json())
+        .then(data_week => {
+            contact_f_data_week = data_week
+            loadFreqWeekly(Object.keys(contact_f_data_week)[0])
+            getHeapMapDataWeekly();
+        })
+    }
+function weekChanged(event) {
+    let selectedWeekStartDate = moment(event.target.valueAsDate);
+    selectedWeekSunday = selectedWeekStartDate.subtract(1,'days').format('YYYY-MM-DD')
+    selectedWeekSaturday = selectedWeekStartDate.add(6,'days').format('YYYY-MM-DD')
+    weekly_data(selectedWeekSunday,selectedWeekSaturday);
 }
 var value = 100
 console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/' + common4all)
