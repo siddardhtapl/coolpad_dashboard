@@ -975,7 +975,7 @@ function daily_data(selectdate) {
 
                 for (var i = 0; i < keys_history.length; i++) {
                     if (values_history[i] != 0) {
-                        obj_history[i] = { "pair": keys_history[i], "count": values_history[i]['count'], "max_duration": values_history[i]['max_duration'], "avgDist": values_history[i]['avgDist'] };
+                        obj_history[i] = { "pair": keys_history[i], "count": values_history[i]['count'], "max_duration": values_history[i]['max_duration'], "avgDist": values_history[i]['avgDist'],'milliseconds': values_history[i]['milliseconds'] };
                     }
                 }
 
@@ -986,7 +986,17 @@ function daily_data(selectdate) {
                     "info": false,
                     "bLengthChange": false,
                     "bDestroy": true,
-                    data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "max_duration" }, { "data": "avgDist" }]
+                    data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "max_duration" }, { "data": "avgDist" }],
+                    "order": [[ 2, "desc" ]],
+                    columnDefs: [
+                        { type: 'natural-nohtml', targets: [2] },
+                    ],
+                    fixedColumns: true,
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    if (aData.milliseconds >= 900000) {
+                        $(nRow).addClass('beyondFifteen');
+                    }
+                }
                 });
 
             }
