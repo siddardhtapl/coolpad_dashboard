@@ -13,12 +13,15 @@ function Get_team_add_edit() {
     });
 }
 Get_team_add_edit();
+
+var start_out_time = " 00-00-00";
+var end_out_time = " 23-59-59";
 function out_csv() {
 
   //Todo not user instance its emp instance
 
   var user_instance = localStorage.getItem('current_user');
-  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/csv/' + start_date + '/' + end_date + '/' + common4all)
+  fetch('https://www.takvaviya.in/coolpad_backend/user/outliers_report/csv/' + start_date + start_out_time+ '/' + end_date+ end_out_time + '/' + common4all)
     .then(response => response.json())
     .then(data => {
       // console.log(data.path+".pdf");
@@ -60,7 +63,7 @@ function out_xls() {
 
 
 function outlier() {
-  fetch('https://takvaviya.in/coolpad_backend/user/outliers/' + start_date + '/' + end_date + '/' + common4all).then(responsive => {
+  fetch('https://takvaviya.in/coolpad_backend/user/outliers/' + start_date + start_out_time+ '/' + end_date+ end_out_time +'/' + common4all).then(responsive => {
     return responsive.json();
   }).then(data => {
 

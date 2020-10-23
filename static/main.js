@@ -628,6 +628,7 @@ function weekly_data(startSunday="",endSaturday="") {
         .then(response => response.json())
         .then(
             data => {
+             document.getElementById('weeklyLoadingSpinner').style.display = "none"
                 document.getElementById("weekly_tracker_loader").innerHTML = ''
                 total_no_contact = data['total_no_of_contacts_weekly']
                 week_team_track = data['weekly_team_tracker']
@@ -1048,7 +1049,6 @@ function daily_data(selectdate) {
                     "bDestroy": true,
                     data: dataa_history,
                     "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "max_duration" }, { "data": "avgDist" }],
-                    "order": [[ 2, "desc" ]],
                     columnDefs: [
                         { type: 'natural-nohtml', targets: [2] },
                     ],

@@ -21,8 +21,8 @@ var data_user2;
 var dev_id;
 // window.onload = exampleFunction();
 function exampleFunction() {
-    document.getElementById("user_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-    console.log("apiiii", from_HIStime, to_HIStime)
+    document.getElementById("user_history_loader").innerHTML = `  <b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
+    // console.log("apiiii", from_HIStime, to_HIStime)
     fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data_user => {
@@ -39,6 +39,24 @@ function exampleFunction() {
         })
 }
 
+function exampleFunction1() {
+    document.getElementById("user_history_loader").innerHTML = `<b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
+    // console.log("apiiii", from_HIStime, to_HIStime)
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
+        .then(response => response.json())
+        .then(data_user => {
+            data_user2 = data_user
+            // loadUserHistoy()
+             UserHistoy(localStorage.getItem('current_user'))
+        })
+
+    fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            dev_id = data
+            load_notes_user();
+        })
+}
 function opentab_history(evt, tabName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -66,6 +84,7 @@ function opentab_history(evt, tabName) {
 // User history
 
 function UserHistoy(option) {
+    document.getElementById('user_history_loader').innerHTML=``
     dataa = data_user2[option];
     dataa_w = data_user2[option];
     keys = []
@@ -413,6 +432,7 @@ function TeamHistoy(option) {
     fetch('https://takvaviya.in/coolpad_backend/user/team_history/' + st_date + '/' + en_date + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data => {
+
             dataa = data[option];
             dataa_ww = data[option];
             if (dataa["Users in Contact"] != null) {
@@ -505,6 +525,23 @@ function loadTeamHistory() {
             load_notes_team();
         });
 }
+
+function loadTeamHistory1() {
+    document.getElementById("team_history_loader").innerHTML = `<b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
+
+    fetch('https://takvaviya.in/coolpad_backend/user/getTeams/' + '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("team_history_loader").innerHTML = '';
+            const innerdiv = Object.values(data.teams).map(item => {
+                return `<option value='${item}'>${item}</option>`
+            }).join("");
+            // document.getElementById("team_history_select").innerHTML = innerdiv
+            TeamHistoy(localStorage.getItem('current_team'))
+            load_notes_team();
+        });
+}
+
 
 loadTeamHistory();
 
@@ -842,7 +879,7 @@ $(function () {
     en_date = en_date + " " + default_end_param;
     select_date = select_date;
     exampleFunction()
-    console.log("check time", select_date, st_date, en_date)
+    // console.log("check time", select_date, st_date, en_date)
     $("#date_history").on('change', function (event) {
         event.preventDefault();
         select_date = this.value
@@ -854,8 +891,10 @@ $(function () {
         st_date = st_date + default_time_param;
         en_date = en_date + " " + default_end_param;
         select_date = select_date;
-        exampleFunction()
-        loadTeamHistory()
+            // console.log("check time", select_date, st_date, en_date)
+
+        exampleFunction1()
+        loadTeamHistory1()
 
     });
 
@@ -970,19 +1009,18 @@ function submit_histime() {
 function Restpicker_his() {
     document.getElementById("selected_time_user").innerHTML = ``
     document.getElementById("selected_time_team").innerHTML = ``
-    document.getElementById("user_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-    document.getElementById("team_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    document.getElementById("user_history_loader").innerHTML = ` <b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
+    document.getElementById("team_history_loader").innerHTML = ` <b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
     from_HIStime = default_currnt_param;
     to_HIStime = default_end_param;
-    select_date = current_date
-    $('#date_history').val(select_date);
+
     difault_name_from = "00:00";
     default_name_to = "00:00";
     document.getElementById("time_change").innerHTML = ` ${difault_name_from} &nbsp;To&nbsp; ${default_name_to}`
 
 
-    exampleFunction()
-    loadTeamHistory()
+    exampleFunction1()
+    loadTeamHistory1()
 }
 
 var times_team = 1
@@ -1082,6 +1120,11 @@ $('.timerange').on('click', function (e) {
           '<span class="decrement fa fa-angle-down"></span>' +
       '</div>' +
       '</div>' +
+      '<div class="float-right mt-2">'+
+      '<button id="cancel_histime" class="custom_modal_btn outline mr-5" onclick="cancel_histime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i></button>'+
+      '<button id="submit_hisTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i></button>'+
+  '</div>'+
+
     '</div>';
         $(html).insertAfter(this);
         $('.timerangepicker-container').on(
@@ -1156,7 +1199,7 @@ $('#editableToMinute').on('click',
 );
 document.getElementById('editableHour').addEventListener("input", function(e) {
     let insertedValue = parseInt(e.target.innerText);
-    if (insertedValue <= 12 ) {
+    if (insertedValue <= 12 && insertedValue > 0) {
         $('.timerangepicker-display.hour.from').css({ 'border': '1px solid black', 'max-width': '100%' });
         let currentValue = insertedValue;
         setTimeout(function() {
@@ -1174,25 +1217,25 @@ document.getElementById('editableHour').addEventListener("input", function(e) {
 }, false);
 document.getElementById('editableToHour').addEventListener("input", function(e) {
     let insertedValue = parseInt(e.target.innerText);
-    if (insertedValue <= 12 ) {
+    if (insertedValue <= 12 && insertedValue > 0) {
         $('.timerangepicker-display.hour.to').css({ 'border': '1px solid black' });
         let currentValue = insertedValue;
         setTimeout(function() {
-            if (currentValue >= 10 ) {
+            if (currentValue >= 10) {
                 $('#editableToHour').text(insertedValue);
             } else {
                 $('#editableToHour').text('0' + insertedValue);
             }
         }, 1000);
     } else {
-        $('#editableHour').text('01');
+        $('#editableToHour').text('01');
         $('.timerangepicker-display.hour.to').css({ 'border': '1px solid red' });
     }
 }, false);
 document.getElementById('editableMinute').addEventListener("input", function(e) {
     let insertedValue = parseInt(e.target.innerText);
     console.log("input event fired", insertedValue);
-    if (insertedValue <= 59 ) {
+    if (insertedValue <= 59) {
         $('.timerangepicker-display.minute.from').css({ 'border': '1px solid black' });
         let currentValue = insertedValue;
         setTimeout(function() {
@@ -1204,7 +1247,7 @@ document.getElementById('editableMinute').addEventListener("input", function(e) 
             }
         }, 1000);
     } else {
-        $('#editableHour').text('00');
+        $('#editableMinute').text('01');
         console.log('else part is working');
         $('.timerangepicker-display.minute.from').css({ 'border': '1px solid red' });
     }
@@ -1212,7 +1255,7 @@ document.getElementById('editableMinute').addEventListener("input", function(e) 
 document.getElementById('editableToMinute').addEventListener("input", function(e) {
     let insertedValue = parseInt(e.target.innerText);
     console.log("input event fired", insertedValue);
-    if (insertedValue <= 59 ) {
+    if (insertedValue <= 59) {
         $('.timerangepicker-display.minute.to').css({ 'border': '1px solid black' });
         let currentValue = insertedValue;
         setTimeout(function() {
@@ -1224,7 +1267,7 @@ document.getElementById('editableToMinute').addEventListener("input", function(e
             }
         }, 1000);
     } else {
-        $('#editableHour').text('00');
+        $('#editableToMinute').text('01');
         console.log('else part is working');
         $('.timerangepicker-display.minute.to').css({ 'border': '1px solid red' });
     }
@@ -1354,26 +1397,33 @@ function setHistoryTime() {
     }
     from_HIStime = hr + dash + mi + dash + '00';
     to_HIStime = to_hr + dash + to_mi + dash + '00';
-    console.log("from",from_HIStime)
-    console.log("to",to_HIStime)
-
-    // to_HIStime = to_hr + dash + to_mi + dash+'00';
 
 
     var name_from_time = hr_user_name + ':' + mi_user_name + pe_user_name
     var name_to_time = to_hr_user_name + ':' + to_mi_user_name +to_pe_user_name
 
-    document.getElementById('time_change').innerHTML = `${name_from_time} &nbsp;To&nbsp; ${name_to_time}`
-    document.getElementById("timePicker_his").style.display = 'none'
+    if(from_HIStime>to_HIStime){
+        alert("Please Enter the Valid Time");
 
-    exampleFunction()
-    loadTeamHistory()
+    }
+    else if(from_HIStime === to_HIStime){
+        alert("Please Enter the Valid Time");
+    }
+    else{
 
-    // from_O_HIStime = from_HIStime;
-    // to_O_HIStime = to_HIStime;
-    // document.getElementById("timePicker_his").style.display = "none";
-    // document.getElementById("selected_time_user").innerHTML = `<b>From - ${from_O_HIStime} &ensp;&ensp; To -  ${to_O_HIStime
-    // }</b>`
+
+        document.getElementById("time_change").innerHTML = `${name_from_time} &nbsp;To&nbsp; ${name_to_time}`
+        document.getElementById("timePicker_his").style.display = 'none'
+
+        // daily_data(selectdate);
+        // exampleFunction(selectdate);
+        exampleFunction1()
+        loadTeamHistory1()
+    }
+
+
+// console.log(localStorage.getItem('current_user'))
+//     UserHistoy(localStorage.getItem('current_user'))
 }
 function set_range(range) {
     time_range = range

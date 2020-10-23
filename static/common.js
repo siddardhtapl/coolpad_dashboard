@@ -86,7 +86,7 @@ function email_share1() {
         if(isValidEmailAddress($("#recip").val())){
              $.ajax({
                 type: "GET",
-                url: 'https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +default_st_time+ '/' + end_date +default_st_time + '/' +current_date+'/' + common4all,
+                url: 'https://www.takvaviya.in/coolpad_backend/user/summary_report/' + current_date  + default_st_time + '/' + current_date  + default_end_time + '/' +start_date + default_st_time + '/' + end_date  + default_end_time + '/' + common4all,
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
@@ -127,7 +127,7 @@ function daily_report_resp(){
                         path : Rdaily_report
                     },
                     {
-                        name : "Weekly.pdf",
+                        name : "Summary.pdf",
                         path : Rweekly_reoprt
                     }
                     ]

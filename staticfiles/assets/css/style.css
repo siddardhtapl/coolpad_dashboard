@@ -322,7 +322,7 @@ background-color:#527581 !important;
     color: #ffff;
     padding: 20px;
     border-radius: 5px;
-    height: 442px;
+    height: 100%;
     overflow-y: auto;
     margin-bottom: 20px;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
@@ -1644,7 +1644,7 @@ text-transform:capitalize;
     min-width: 135px;
     right:20px;
     color:#fff;
-    top: 123px;
+    top: 129px;
     /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     border-radius: 3px;
     z-index: 1;
@@ -2211,7 +2211,7 @@ body {
 }
 
 .side-menu-icon {
-	margin-right: 7px;
+	margin-right:-1px;
 	margin-left:7px;
 }
 .menu a {
@@ -2305,6 +2305,25 @@ height:340px;
 
 .widget-chart-one{
 height:490px;
+}
+.coolpadSpinner{
+    width: 3rem;
+    height: 3rem;
+    margin: 0 50px;
+
+    display: none;
+}
+.contactHistoryLegend{
+    text-align: center;
+}
+.contactHistoryLegend div {
+    margin: 10px 0;
+    color: white;
+    font-weight: bold;
+}
+.contactHistoryLegend div i {
+font-size: 1.1em;
+color: red;
 }
 
 .widget-chart-two {
@@ -2897,7 +2916,7 @@ input[type=time].form-control {
     font-weight: bold;
 }
 .Dashtimepicker {
-    margin-top: 30px;
+    /* margin-top: 30px; */
     font-size: 14px !important;
     border: 1px solid #6c757d;
     border-radius: 5px;
@@ -2908,7 +2927,7 @@ input[type=time].form-control {
     height: calc(1.8em + .75rem + 2px);
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
 }
-.timePicker_duration_Dash {
+/* .timePicker_duration_Dash {
     display: none;
     width: 350px;
     position: fixed;
@@ -2920,7 +2939,7 @@ input[type=time].form-control {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-}
+} */
 
 .HIStimepicker {
     font-size: 14px !important;
@@ -2938,7 +2957,7 @@ input[type=time].form-control {
     /* float: left;
     margin-top: 8px; */
 }
-.timePicker_duration {
+/* .timePicker_duration {
     display: none;
     width: 350px;
     position: fixed;
@@ -2949,7 +2968,7 @@ input[type=time].form-control {
     z-index: 2000;
     padding: 20px;
     border-radius: 5px;
-}
+} */
 /* .time_picker {
     padding-left: 20px;
     width: 185px;
@@ -2958,29 +2977,38 @@ input[type=time].form-control {
 } */
 /* btn */
 .custom_modal_btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 7px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    font-size: 14px;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    padding: 7px !important;
+    cursor: pointer !important;
+    border: 1px solid transparent !important;
+    font-size: 14px !important;
+    position: absolute !important;
+    bottom: 10px !important;
+    right: 14px !important;
 }
 .custom_modal_btn:hover {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
 }
 /*  Timepicker submit btn*/
 .fill {
-    background: #007bff;
-    color: #fff;
+    background: #007bff !important;
+    color: #fff !important;
 }
 /* Timepicker */
 .timerangepicker-container {
+    padding: 20px;
     display: flex;
-    position: relative;
+    position: fixed;
     border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .14);
-    margin: 10px 0px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);    margin: 10px 0px;
+    background: #fff;
+    color: #1b1b1b;
+    top: 35%;
+    left: 44%;
+    z-index: 2000;
+    height: 209px;
 }
 .timerangepicker-label {
     width: 156px;
@@ -3041,10 +3069,17 @@ input[type=time].form-control {
     top: 9px;
 }
 /*  Timepicker close btn*/
+
+.d_time_place{
+    float: left;
+     display:flex;
+     margin-top: 10px;
+     margin-left: 20px;
+}
 .outline {
-    background: #fff;
-    color: #007bff;
-    border: 1px solid #007bff;
+    background: #fff !important;
+    color: #007bff !important;
+    border: 1px solid #007bff !important;
 }
 /* btn ends */
 /*Button ripple effect */
@@ -3086,4 +3121,40 @@ input[type=time].form-control {
 }
 .dataTables_scrollHead {
     right: 10px;
+}
+.contactHistoryLegend{
+    text-align: center;
+}
+.contactHistoryLegend div {
+    margin: 10px 0;
+    color: white;
+    font-weight: bold;
+}
+.contactHistoryLegend div i {
+font-size: 1.1em;
+color: red;
+}
+.coolpadSpinner{
+    width: 3rem;
+    height: 3rem;
+    margin: 0 50px;
+    display: none;
+}
+
+.modal-footer {
+    border: none;
+}
+.modal-header {
+    border: none;
+}
+.hint {
+    font-size: 12px;
+    color: red;
+    display: none;
+    margin-top: 4px;
+  }
+
+
+#weeklyLoadingSpinner{
+margin-right:20% !important;
 }

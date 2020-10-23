@@ -2948,3 +2948,7 @@ color: red;
     display: none;
     margin-top: 4px;
   }
+
+#weeklyLoadingSpinner{
+margin-right:20% !important;
+}
