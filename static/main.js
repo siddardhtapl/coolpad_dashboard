@@ -166,11 +166,22 @@ function opentab(evt, tabName) {
     }
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
+        if(tabName == 'daily'){
+            document.getElementById('date_time').style.display ="flex";
+
+        }
+        else if(tabName == 'weekly'){
+            document.getElementById('date_time').style.display ="none";
+
+        }
     evt.currentTarget.className += " active";
     daily_data(selectdate)
     exampleFunction(selectdate);
+    document.getElementById('weekpicker').value = moment().format('YYYY-[W]WW');
+    document.getElementById('weekpicker').max = moment().format('YYYY-[W]WW');
     weekly_data()
 }
+
 function loadFreq(option) {
     dataa = contact_f_data[option]
     const rowLen = Object.keys(dataa).length;
@@ -563,13 +574,33 @@ function rp_one_daily() {
             window.open(data.path + ".pdf");
         });
 }
-
-
-
-function rp_weekly() {
-    //Todo not user instance its emp instance
+https://takvaviya.in/coolpad_backend/user/summary_report/2020-10-22%2000-00-00/2020-10-22%2023-59-59/2020-10-18%2000-00-00/2020-10-24%2023-59-59/Tyson__America__South__Tyson
+function daily_summary_report() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_currnt_param + '/' + current_date + '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/summary_report/' + selectdate + " " + from_HIStime + '/' + selectdate + " " + to_HIStime + '/' +start_date + " " + default_currnt_param + '/' + end_date + " " + default_end_param + '/' + common4all)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data.path+".pdf");
+            /*            window.location.href = data.path + ".pdf"*/
+            window.open(data.path + ".pdf");
+        });
+}
+
+
+var selectedWeekSunday = null;
+var selectedWeekSaturday = null;
+var ctHistoryAllWeekTable;
+function generateWeeklyReport() {
+    //Todo not user instance its emp instance
+    let start_date_week = start_date;
+    let end_date_week = end_date;
+    if(selectedWeekSunday && selectedWeekSaturday)
+    {
+        start_date_week = selectedWeekSunday;
+        end_date_week = selectedWeekSaturday;
+    }
+    var user_instance = localStorage.getItem('current_user');
+    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_currnt_param + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             /*            window.location.href = data.path + ".pdf"*/
@@ -578,15 +609,22 @@ function rp_weekly() {
         });
 }
 
-function weekly_data() {
+function weekly_data(startSunday="",endSaturday="") {
+    document.getElementById('weeklyLoadingSpinner').style.display = "block"
     var total_no_contact;
     var week_team_track;
     var contact_frequency_week;
     var top5_contact_history_week;
     var contact_history_all_weelk;
     var daily_total_for_week;
-
-    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_end_param + '/' + common4all)
+    let start_date_week = start_date;
+    let end_date_week = end_date;
+    if(startSunday && endSaturday)
+    {
+        start_date_week = startSunday;
+        end_date_week = endSaturday;
+    }
+    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_end_param + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -721,14 +759,23 @@ function weekly_data() {
                     }
                 }
                 dataa_week = Object.values(obj_week)
-                $('#contact_his_week').DataTable({
-                    "retrieve": true,
-                    "paging": true,
-                    "searching": false,
-                    "info": false,
-                    "bLengthChange": false,
-                    data: dataa_week, "columns": [{ "data": "pair" }, { "data": "count" }]
-                });
+                                if(!ctHistoryAllWeekTable)
+                {
+                    ctHistoryAllWeekTable = $('#contact_his_week').DataTable({
+                        "retrieve": true,
+                        "paging": true,
+                        "searching": false,
+                        "info": false,
+                        "bLengthChange": false,
+                        data: dataa_week, "columns": [{ "data": "pair" }, { "data": "count" }]
+                    });
+                }
+                else
+                {
+                    ctHistoryAllWeekTable.clear();
+                    ctHistoryAllWeekTable.rows.add(dataa_week);
+                    ctHistoryAllWeekTable.draw();
+                }
                 $("#chart11").empty();
                 var options = {
                     series: [{
@@ -784,13 +831,27 @@ function weekly_data() {
                 loadFreqWeekly(Object.keys(contact_frequency_week)[0])
             }
         )
+
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_end_param + '/' + common4all)
+        .then(response => response.json())
+        .then(data_week => {
+            contact_f_data_week = data_week
+            loadFreqWeekly(Object.keys(contact_f_data_week)[0])
+            getHeapMapDataWeekly();
+        })
+    }
+function weekChanged(event) {
+    let selectedWeekStartDate = moment(event.target.valueAsDate);
+    selectedWeekSunday = selectedWeekStartDate.subtract(1,'days').format('YYYY-MM-DD')
+    selectedWeekSaturday = selectedWeekStartDate.add(6,'days').format('YYYY-MM-DD')
+    weekly_data(selectedWeekSunday,selectedWeekSaturday);
 }
 var value = 100
 console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/' + common4all)
 
 
 function daily_data(selectdate) {
-    document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    document.getElementById("daily_tracker_loader").innerHTML = `<b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
     fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + " " + from_HIStime + '/' + selectdate + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(
@@ -975,8 +1036,7 @@ function daily_data(selectdate) {
 
                 for (var i = 0; i < keys_history.length; i++) {
                     if (values_history[i] != 0) {
-                        obj_history[i] = { "pair": keys_history[i], "count": values_history[i]['count'], "max_duration": values_history[i]['max_duration'], "avgDist": values_history[i]['avgDist'] };
-                    }
+                obj_history[i] = { "pair": keys_history[i], "count": values_history[i]['count'], "max_duration": values_history[i]['max_duration'], "avgDist": values_history[i]['avgDist'],'milliseconds': values_history[i]['milliseconds'] };                    }
                 }
 
                 dataa_history = Object.values(obj_history)
@@ -986,7 +1046,18 @@ function daily_data(selectdate) {
                     "info": false,
                     "bLengthChange": false,
                     "bDestroy": true,
-                    data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "max_duration" }, { "data": "avgDist" }]
+                    data: dataa_history,
+                    "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "max_duration" }, { "data": "avgDist" }],
+                    "order": [[ 2, "desc" ]],
+                    columnDefs: [
+                        { type: 'natural-nohtml', targets: [2] },
+                    ],
+                    fixedColumns: true,
+                    fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    if (aData.milliseconds >= 900000) {
+                        $(nRow).addClass('beyondFifteen');
+                    }
+                }
                 });
 
             }
@@ -1000,7 +1071,7 @@ $(function () {
     var today = new Date();
     // console.log("fda",today,current_date)
     var lastDay = new Date();
-    lastDay.setDate(lastDay.getDate() - 7);
+    lastDay.setDate(lastDay.getDate() - 14);
     var minDate = convertDateToReadableDate(today);
     var maxDate = convertDateToReadableDate(lastDay);
     $('#txtDate').attr('min', maxDate);
@@ -1093,9 +1164,9 @@ function submit_Dashtime() {
 }
 
 function reset_Dashtime() {
-    document.getElementById("selected_time").innerHTML = ``
-    document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-    document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    // document.getElementById("selected_time").innerHTML = ``
+    document.getElementById("daily_tracker_loader").innerHTML = `  <b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
+    document.getElementById("daily_tracker_loader").innerHTML = ` <b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>`;
     from_HIStime = default_currnt_param;
     to_HIStime = default_end_param;
     difault_name_from = "00:00";
@@ -1103,10 +1174,10 @@ function reset_Dashtime() {
     // console.log("to change",from_HIStime)
     // console.log("to change",to_HIStime)
 
-    selectdate = current_date;
+    // selectdate = current_date;
     document.getElementById("name_change").innerHTML = `${difault_name_from} &nbsp;To&nbsp; ${default_name_to}`
 
-    $('#txtDate').val(selectdate);
+    // $('#txtDate').val(selectdate);
     daily_data(selectdate);
     exampleFunction(selectdate);
 }
@@ -1216,7 +1287,10 @@ console.log(range.from.hour)
         '<span class="value">PM</span>' +
         '<span class="decrement fa fa-angle-down"></span>' +
         '</div>' +
-        '</div>' +
+        '</div>' +'<div class="float-right mt-2">'+
+        '<button id="cancel_DashTime" class="custom_modal_btn outline mr-5" onclick="cancel_Dashtime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i></button>'+
+        '<button id="submit_DashTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i> </button>'+
+        '</div>'+
         '</div>';
     $(html).insertAfter(this);
     $('.timerangepicker-container').on(
@@ -1272,31 +1346,31 @@ console.log(range.from.hour)
     );
     // editable input start
     $('#editableHour').on('click',
-        function (event) {
+        function(event) {
             $('#editableHour').attr('contenteditable', 'true');
         }
     );
     $('#editableToHour').on('click',
-        function (event) {
+        function(event) {
             $('#editableToHour').attr('contenteditable', 'true');
         }
     );
     $('#editableMinute').on('click',
-        function (event) {
+        function(event) {
             $('#editableMinute').attr('contenteditable', 'true');
         }
     );
     $('#editableToMinute').on('click',
-        function (event) {
+        function(event) {
             $('#editableToMinute').attr('contenteditable', 'true');
         }
     );
-    document.getElementById('editableHour').addEventListener("input", function (e) {
+    document.getElementById('editableHour').addEventListener("input", function(e) {
         let insertedValue = parseInt(e.target.innerText);
-        if (insertedValue <= 12) {
-            $('.timerangepicker-display.hour.from').css({});
+        if (insertedValue <= 12 && insertedValue > 0) {
+            $('.timerangepicker-display.hour.from').css({ 'border': '1px solid black', 'max-width': '100%' });
             let currentValue = insertedValue;
-            setTimeout(function () {
+            setTimeout(function() {
                 if (currentValue >= 10) {
                     console.log('e', insertedValue)
                     $('#editableHour').text(insertedValue);
@@ -1304,19 +1378,17 @@ console.log(range.from.hour)
                     $('#editableHour').text('0' + insertedValue);
                 }
             }, 1000);
-        }
-        else {
+        } else {
             $('#editableHour').text('01');
             $('.timerangepicker-display.hour.from').css({ 'border': '1px solid red' });
         }
     }, false);
-
-    document.getElementById('editableToHour').addEventListener("input", function (e) {
+    document.getElementById('editableToHour').addEventListener("input", function(e) {
         let insertedValue = parseInt(e.target.innerText);
-        if (insertedValue <= 12) {
-            $('.timerangepicker-display.hour.to').css({});
+        if (insertedValue <= 12 && insertedValue > 0) {
+            $('.timerangepicker-display.hour.to').css({ 'border': '1px solid black' });
             let currentValue = insertedValue;
-            setTimeout(function () {
+            setTimeout(function() {
                 if (currentValue >= 10) {
                     $('#editableToHour').text(insertedValue);
                 } else {
@@ -1324,18 +1396,17 @@ console.log(range.from.hour)
                 }
             }, 1000);
         } else {
-            $('#editableHour').text('01');
+            $('#editableToHour').text('01');
             $('.timerangepicker-display.hour.to').css({ 'border': '1px solid red' });
         }
     }, false);
-
-    document.getElementById('editableMinute').addEventListener("input", function (e) {
+    document.getElementById('editableMinute').addEventListener("input", function(e) {
         let insertedValue = parseInt(e.target.innerText);
         console.log("input event fired", insertedValue);
         if (insertedValue <= 59) {
-            $('.timerangepicker-display.minute.from').css({});
+            $('.timerangepicker-display.minute.from').css({ 'border': '1px solid black' });
             let currentValue = insertedValue;
-            setTimeout(function () {
+            setTimeout(function() {
                 if (currentValue >= 10) {
                     console.log('e', insertedValue)
                     $('#editableMinute').text(insertedValue);
@@ -1344,19 +1415,18 @@ console.log(range.from.hour)
                 }
             }, 1000);
         } else {
-            $('#editableHour').text('00');
+            $('#editableMinute').text('01');
             console.log('else part is working');
             $('.timerangepicker-display.minute.from').css({ 'border': '1px solid red' });
         }
     }, false);
-
-    document.getElementById('editableToMinute').addEventListener("input", function (e) {
+    document.getElementById('editableToMinute').addEventListener("input", function(e) {
         let insertedValue = parseInt(e.target.innerText);
         console.log("input event fired", insertedValue);
         if (insertedValue <= 59) {
-            $('.timerangepicker-display.minute.to').css({ 'border': '1px solid white' });
+            $('.timerangepicker-display.minute.to').css({ 'border': '1px solid black' });
             let currentValue = insertedValue;
-            setTimeout(function () {
+            setTimeout(function() {
                 if (currentValue >= 10) {
                     console.log('e', insertedValue)
                     $('#editableToMinute').text(insertedValue);
@@ -1365,25 +1435,11 @@ console.log(range.from.hour)
                 }
             }, 1000);
         } else {
-            $('#editableHour').text('00');
+            $('#editableToMinute').text('01');
             console.log('else part is working');
             $('.timerangepicker-display.minute.to').css({ 'border': '1px solid red' });
         }
     }, false);
-
-    // editable input end
-
-
-    // }
-    // else {
-    //     document.getElementById("timePicker_dash").style.display = 'none'
-
-    //     console.log(times)
-    //     times = 0
-    // }
-
-    // times = times + 1
-    // console.log("********************")
 
 });
 $(document).on('click', e => {
@@ -1511,17 +1567,29 @@ function setHistoryTime() {
     to_HIStime = to_hr + dash + to_mi + dash + '00';
 
 
-
-    console.log("final", from_HIStime)
-    console.log("fianal", to_HIStime)
     var name_from_time = hr_name + ':' + mi_name + pe_name
     var name_to_time = to_hr_name + ':' + to_mi_name + to_pe_name
 
-    document.getElementById("name_change").innerHTML = `${name_from_time} &nbsp;To&nbsp; ${name_to_time}`
-    document.getElementById("timePicker_dash").style.display = 'none'
+    if(from_HIStime>to_HIStime){
+        alert("Please Enter the Valid Time");
 
-    daily_data(selectdate);
-    exampleFunction(selectdate);
+    }
+    else if(from_HIStime === to_HIStime){
+        alert("Please Enter the Valid Time");
+    }
+    else{
+
+
+        document.getElementById("name_change").innerHTML = `${name_from_time} &nbsp;To&nbsp; ${name_to_time}`
+        document.getElementById("timePicker_dash").style.display = 'none'
+
+        daily_data(selectdate);
+        exampleFunction(selectdate);
+    }
+
+    // console.log("final", from_HIStime)
+    // console.log("fianal", to_HIStime)
+
 
     // document.getElementById("timePicker_dash").style.display = "none";
     // document.getElementById("selected_time").innerHTML = `<b>From - ${from_O_HIStime} &ensp;&ensp; To -  ${to_O_HIStime}</b>`

@@ -158,9 +158,9 @@
                                 </span>Share</a>
                         </li>
                         <li class="menu">
-                            <a class="menuu" href="#" onclick="email_share()"><span class="side-menu-icon"><i
-                                        class="fa fa-envelope" aria-hidden="true"></i>
-                                </span>Email</a>
+                            <a class="menuu" href="#" onclick="email_share()" data-toggle="modal" data-target="#myModal"><span class="side-menu-icon"><i class="fa fa-envelope"
+                                            aria-hidden="true"></i>
+                                        </span>Email</a>
                         </li>
                         <li class="menu">
                             <a class="menuu" href="../adduser"><span class="side-menu-icon"><i class="fa fa-user"
@@ -188,10 +188,35 @@
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab(event, 'daily')"><b>Daily Tracker</b></button>
                         <button class="tablinks " onclick="opentab(event, 'weekly')"><b>Weekly Tracker</b></button>
+
+
+                        <div id="date_time" class = "d_time_place" >
+                        <div class="form-group" style="width:172px;" >
+                            <input type="date" id="txtDate" name="datee" class="form-control" />
+                        </div>
+
+                        <div class="form-group" style="margin-left: 10px;">
+                            <button class="Dashtimepicker ripple " type="button"style="width: 166px;border: 1px solid;padding: 0px 9.5px;text-align: left;" id="name_change"onclick="openDashTimer()">00:00 &nbsp;To&nbsp; 00:00</button>
+                        </div>
+
+                        <div class="form-group" style="margin-left: 10px;">
+                            <button class="Dashtimepicker ripple" style="border: 1px solid;padding: 11px;" onclick="reset_Dashtime()" data-toggle="tooltip"
+                                title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                        </div>
+
+                        <div class="timePicker_duration_Dash" id="timePicker_dash">
+
+                            <div class="timerange">
+
+                            </div>
+
+                        </div>
+                    </div>
                         <label class="switch1">
                             <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
                             <span class="slider1 round1"></span>
                         </label>
+
 
                     </div>
 
@@ -232,58 +257,23 @@
                                     Daily tracker denotes todays contact events starting from 00:00hrs
                                     <div style="padding-left: 2rem;display: flex; flex-direction: row;"
                                         id="daily_tracker_loader">
-                                        <div class="loader"></div> <b
-                                            style="padding-left: 2rem;font-size: larger;">Loading Data</b>
+                                        <b style="padding-left: 2rem;font-size: larger;">Loading Data . . .</b>
                                     </div>
                                 </div>
-                                <div id="selected_time" style="font-size: 28px;"></div>
-                            </div>
-                            <div class="form-group" style="margin-top: -17px; margin-right: 10px;">
-                                <label>Select Date</label>
-                                <input type="date" id="txtDate" name="datee" class="form-control" />
+                                <!-- <div id="selected_time" style="font-size: 28px;"></div> -->
                             </div>
 
-                            <div class="form-group" style="margin-top: -19px; margin-right: 11px;">
-
-                                <label style="margin-top: 1px;position: absolute;">Select Time</label>
-
-
-                                <button class="Dashtimepicker ripple "type="button" style="width: 166px;text-align: left;"
-                                    id="name_change" onclick="openDashTimer()">00:00 &nbsp;To&nbsp; 00:00</button>
-
-                            </div>
-
-                            <div class="form-group" style="margin-top: -19px; margin-right: -10px;">
-                                <button class="Dashtimepicker ripple" onclick="reset_Dashtime()" data-toggle="tooltip" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i></button></div>
-
-                            <div class="timePicker_duration_Dash"  id="timePicker_dash">
-
-                                <div  class="timerange">
-
-                                </div>
-
-                                <div class="float-right mt-2">
-                                    <button id="cancel_DashTime" class="custom_modal_btn outline mr-2" onclick="cancel_Dashtime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i>
-                                    </button>
-                                    <button id="submit_DashTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
 
 
                             <div style="margin-top: 10px;">
-                                <div class="dropdownss" onclick="rp_one_daily();">
+                                <div class="dropdownss">
                                     <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i></span>
                                     <span class="dropbtnss">Report</span>
-                                    <!-- <div class="dropdown-contentss">
-                                  <div style="padding:1rem; cursor: pointer;" onclick="dwnldusrpdf();"><span
-                                      class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>PDF</div>
-                                  <div style="padding:1rem;  cursor: pointer;" onclick="dwnldusrxlsx();"><span
-                                      class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>XLSX</div>
-                                  <div style="padding:1rem;  cursor: pointer;" onclick="dwnldusrcsv();"><span
-                                      class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>CSV</div>
-          
-                                </div> -->
+
+                                    <div class="dropdown-contentss">
+                                        <div style="padding:0.5rem 1rem; cursor: pointer;"onclick="rp_one_daily();"><span class="report-icon"><i class="fa fa-file-pdf-o"  aria-hidden="true"></i></span>DAILY</div>
+                                        <div style="padding:0.5rem 1rem;  cursor: pointer;"onclick="daily_summary_report();"><span class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>SUMMARY</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -565,6 +555,12 @@
                                                     </thead>
                                                     <tfoot></tfoot>
                                                 </table>
+                                                <div class="contactHistoryLegend">
+                                                    <div>
+                                                         <i class="fa fa-square" aria-hidden="true"></i> Contact Duration > 15 Minutes
+                                                     </div>
+                                                </div>
+
                                             </div>
                                             <!-- <div class="contact_history_container">
                                                 <div class="contact_history_header">
@@ -602,9 +598,15 @@
                                         </div>
                                     </div>
 
-
+                                    <div id="weeklyLoadingSpinner" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="form-group" style="margin-top: -17px; margin-right: 10px;">
+                                        <label>Select Week</label>
+                                        <input type="week" id="weekpicker" onchange="weekChanged(event)" name="weekpicker" class="form-control">
+                                    </div>
                                     <div style="margin-top: 10px;">
-                                        <div class="dropdownss" onclick="rp_weekly();">
+                                        <div class="dropdownss" onclick="generateWeeklyReport();">
                                             <span class="side-menu-icon"><i class="fa fa-file"
                                                     aria-hidden="true"></i></span>
                                             <span class="dropbtnss">Report</span>

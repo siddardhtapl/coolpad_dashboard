@@ -144,10 +144,10 @@
                 </span>Share</a>
             </li>
             <li class="menu">
-              <a class="menuu" href="#" onclick="email_share()"><span class="side-menu-icon"><i class="fa fa-envelope"
-                    aria-hidden="true"></i>
-                </span>Email</a>
-            </li>
+                            <a class="menuu" href="#" onclick="email_share()" data-toggle="modal" data-target="#myModal"><span class="side-menu-icon"><i class="fa fa-envelope"
+                                            aria-hidden="true"></i>
+                                        </span>Email</a>
+                        </li>
             <li class="menu">
               <a class="menuu" href="../adduser"><span class="side-menu-icon"><i class="fa fa-user"
                     aria-hidden="true"></i>
@@ -176,13 +176,30 @@
             <button class="tablinks " onclick="opentab_history(event, 'team_history'); loadTeamHistory()"><b>Team
                 History</b></button>
 
+                <div style="display: flex;margin-top: 10px;">
+                <div class="form-group" style="padding-left:20px; margin-right: -11px;">
+                  <input type="date" id="date_history" style="height: 42px;" name="datee" class="form-control" />
+                </div>
+                <div class="form-group user_time" style="margin-right: -10px;">
+
+                  <button class="HIStimepicker ripple" style="width: 166px;text-align: left;" id="time_change"
+                    onclick="timepicker_his()">00:00 &nbsp;To&nbsp; 00:00</button>
+                </div>
+                <div class="form-group user_time" style="margin-right: -10px;">
+                  <button class="HIStimepicker ripple" onclick="Restpicker_his()" data-toggle="tooltip" title="Reset">
+                    <i class="fa fa-repeat" aria-hidden="true"></i></button></div>
+
+                <div class="timePicker_duration" id="timePicker_his">
+                  <div id="datetimepickerDate" class="timerange">
+                  </div>
+                </div>
+
+
             <label class="switch1">
               <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
               <span class="slider1 round1"></span>
             </label>
-            <!--            <div class="form-group" style="padding-left:20px;width: 185px;float:left;margin-top: 10px;">-->
-            <!--              <input type="date" id="date_history" name="datee" class="form-control" />-->
-            <!--          </div>-->
+          </div>
 
 
 
@@ -201,10 +218,10 @@
 
                 <div style="display: flex; flex-direction: row;">
                   <div style="flex:6">
-                    <div style="padding-left: 1rem; padding-bottom:  1rem;display: flex; flex-direction: row;" id="user_history_loader">
-                      <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading
-                        Data</b>
+                    <div style="padding-left: 30rem; padding-bottom:  1rem;display: flex; flex-direction: row;" id="user_history_loader">
+                       <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading Data . . .</b>
                     </div>
+                    <!-- <div class="loader" ></div> -->
                     <select class="emp_dp" style=" margin-bottom: 20px;margin-top: -12px;" id="user_history_select"
                       onchange="getSelectValueUserHistory();load_notes_user()">
                       <option>select</option>
@@ -216,32 +233,7 @@
 
                   <div style="margin-bottom: 20px; display: flex;">
 
-                    <div class="form-group" style="padding-left:20px; margin-top: -28px; margin-right: -11px;">
-                      <label>Select Date</label>
-                      <input type="date" id="date_history" style="height: 42px;" name="datee" class="form-control" />
-                    </div>
-                    <div class="form-group user_time" style="margin-right: -10px;">
-                      <label style="position: absolute; margin-top: -30px; ">Select Time</label>
 
-                      <button class="HIStimepicker ripple" style="width: 166px;text-align: left;" id="time_change"
-                        onclick="timepicker_his()">00:00 &nbsp;To&nbsp; 00:00</button>
-                    </div>
-                    <div class="form-group user_time" style="margin-right: -10px;">
-                      <button class="HIStimepicker ripple" onclick="Restpicker_his()" data-toggle="tooltip" title="Reset">
-                        <i class="fa fa-repeat" aria-hidden="true"></i></button></div>
-                    <div class="timePicker_duration" id="timePicker_his">
-                      <!-- <h6 class="text-center">Set Time</h6> -->
-                      <div id="datetimepickerDate" class="timerange">
-                        <!-- <input class="form-control" type="text" placeholder="Select time"> -->
-
-                      </div>
-
-                      <div class="float-right mt-2">
-                          <button id="cancel_histime" class="custom_modal_btn outline mr-2" onclick="cancel_histime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i></button>
-                          <button id="submit_hisTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
-                      </div>
-
-                    </div>
 
 
                     <div class="dropdownss">
@@ -512,9 +504,8 @@
                 <div style="display: flex; flex-direction: row;">
 
                   <div style="flex:6">
-                    <div style="padding-left: 1rem;display: flex; flex-direction: row;" id="team_history_loader">
-                      <div class="loader"></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading
-                        Data</b>
+                    <div style="padding-left: 30rem;display: flex; flex-direction: row;" id="team_history_loader">
+                      <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading Data . . .</b>
                     </div>
                     <select class="emp_dp" style="margin-bottom: 20px;" id="team_history_select"
                       onchange="getSelectValueTeamHistory();load_notes_team()">
@@ -553,7 +544,7 @@
 
                     <div class="dropdownss">
                       <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
-                        <span class="dropbtnss">Report</span>
+                        <span class="dropbtnss"> Report</span>
                         <div class="dropdown-contentss">
                           <div style="padding:1rem; cursor: pointer;" onclick="dwnldtmpdf();"><span
                               class="report-icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>PDF</div>

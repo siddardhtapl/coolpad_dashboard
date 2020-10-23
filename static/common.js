@@ -37,9 +37,53 @@ var daily_report,weekly_reoprt;
 var default_st_time = " 00-00-00";
 var default_end_time = " 23-59-59";
 
-function email_share() {
-
-
+var render_email;
+function email_share(){
+$('head').append('<script src="https://smtpjs.com/v3/smtp.js">');
+//    render_email ='';
+//    render_email +='<div class="email_div" style="position:fixed;top:20%;left:20%">';
+//    render_email +='<input type="email" id="recip" >';
+//    render_email +='<button onclick="email_share1()">Send</button>';
+//    render_email +='</div>';
+//    $('body').append(render_email);
+render_email ='';
+render_email +=' <div class="modal fade" id="myModal">'
+render_email +='        <div class="modal-dialog modal-dialog-centered">'
+render_email +='            <div class="modal-content">'
+render_email +='                <div class="modal-header">'
+render_email +='                    <h4 class="modal-title">Email</h4>'
+render_email +='                    <button type="button" class="close" data-dismiss="modal">&times;</button>'
+render_email +='                </div>'
+render_email +='                <div class="modal-body">'
+render_email +='                    <div class="mb-2">'
+render_email +='                        <div class="form-group">'
+render_email +='                            <label for="usr">Email ID</label>'
+render_email +='                            <input type="text" class="form-control" id="recip">'
+//render_email +='                            <p class="hint">Invalid Email id</p>'
+render_email +='                        </div>'
+render_email +='                    </div>'
+render_email +='                </div>'
+render_email +='                <div class="modal-footer">'
+render_email +='                    <button type="button" class="btn btn-primary" onclick="email_share1()" data-dismiss="modal">Send</button>'
+render_email +='                </div>'
+render_email +='            </div>'
+render_email +='        </div>'
+render_email +='    </div>'
+$('body').append(render_email);
+}
+$('#emailID').keyup(function(e) {
+    let email = e.target.value;
+    if (email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/)) {
+        $('#emailID').css({ 'border': '1px solid black' });
+        $('.hint').css({ 'display': 'none' });
+    } else {
+        $('#emailID').css({ 'border': '1px solid red' });
+        $('.hint').css({ 'display': 'block' });
+    }
+});
+function email_share1() {
+//var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+        if(isValidEmailAddress($("#recip").val())){
              $.ajax({
                 type: "GET",
                 url: 'https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +default_st_time+ '/' + end_date +default_st_time + '/' +current_date+'/' + common4all,
@@ -50,13 +94,16 @@ function email_share() {
                     daily_report_resp();
                     }
                     });
-
-
+                    }
+         else{
+         alert("invalid email format");
+         }
 }
-
-
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    return pattern.test(emailAddress);
+}
 function daily_report_resp(){
-
     $.ajax({
         type: "GET",
         url: "https://www.takvaviya.in/coolpad_backend/user/daily_report/"  + current_date + default_st_time+ "/" +current_date + default_end_time+ "/" +common4all,
@@ -66,14 +113,33 @@ function daily_report_resp(){
             daily_report = response;
             var Rdaily_report = daily_report['path']+'.pdf';
             var Rweekly_reoprt = weekly_reoprt['path']+'.pdf';
-            var msgbody = "https://takvaviya.in/coolpad/project/login/";
-
-            var url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Coolpad Dashboard&body= login link: '+msgbody+'%0D%0A daily report link : ' + Rdaily_report +',%0D%0A weekly report link : '+Rweekly_reoprt+' &ui=2&tf=1&pli=1';
-            window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
-
+            Email.send({
+            Host: "smtp.gmail.com",
+            Username: "noreply@takvaviya.com",
+            Password: "Takvav!yaemail",
+            From: "noreply@takvaviya.com",
+                    To : $("#recip").val(),
+                        Subject : "Report",
+                        Body : "Report for the day! ",
+                    Attachments : [
+                    {
+                        name : "Daily.pdf",
+                        path : Rdaily_report
+                    },
+                    {
+                        name : "Weekly.pdf",
+                        path : Rweekly_reoprt
+                    }
+                    ]
+            }).then(message =>{
+              alert("sent");
+//              $('body').empty(render_email);
+              }
+            );
             }
             });
-}
+        }
+
 
 
 
