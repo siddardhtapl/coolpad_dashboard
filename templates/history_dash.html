@@ -16,41 +16,44 @@
 
   <link href="../../static/assets/css/style_light.css?version=2" rel="stylesheet" type="text/css" id="theme" />
   <script data-require="moment.js@2.10.2" data-semver="2.10.2"
-  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"  crossorigin="anonymous"></script>
- <script src="../../static/common.js?version=2"></script>
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"
+    crossorigin="anonymous"></script>
+  <script src="../../static/common.js?version=2"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.10.1/umd/popper.min.js'></script>
   <link rel="shortcut icon" href="../../static/coolpad_favicon.ico?version=2" type="image/x-icon">
-<!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">-->
-  <link href="../../static/assets/css/paginate.css?version=2" rel="stylesheet" type="text/css"  />
-        <script src="../../static/dataTable.js"></script>
+  <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">-->
+  <link href="../../static/assets/css/paginate.css?version=2" rel="stylesheet" type="text/css" />
+  <script src="../../static/dataTable.js"></script>
 
-<!--    <script type="text/javascript" charset="utf8"
+  <!--    <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>-->
-<style>
-        .loader {
-            border: 6px solid #888EA8;
-            /* Light grey */
-            border-top: 6px solid #3498db;
-            /* Blue */
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-       
+  <style>
+    .loader {
+      border: 6px solid #888EA8;
+      /* Light grey */
+      border-top: 6px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
 </head>
 
 <body class="body">
@@ -141,7 +144,8 @@
                 </span>Share</a>
             </li>
             <li class="menu">
-              <a class="menuu" href="#" onclick="email_share()"><span class="side-menu-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
+              <a class="menuu" href="#" onclick="email_share()"><span class="side-menu-icon"><i class="fa fa-envelope"
+                    aria-hidden="true"></i>
                 </span>Email</a>
             </li>
             <li class="menu">
@@ -176,29 +180,20 @@
               <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
               <span class="slider1 round1"></span>
             </label>
-<!--            <div class="form-group" style="padding-left:20px;width: 185px;float:left;margin-top: 10px;">-->
-<!--              <input type="date" id="date_history" name="datee" class="form-control" />-->
-<!--          </div>-->
+            <!--            <div class="form-group" style="padding-left:20px;width: 185px;float:left;margin-top: 10px;">-->
+            <!--              <input type="date" id="date_history" name="datee" class="form-control" />-->
+            <!--          </div>-->
 
-            <div class="form-group" style="padding-left:20px; width: 185px; float:left; margin-top: 10px;">
-                            <input type="date" id="date_history" name="datee" class="form-control" />
-                        </div>
-                        <div class="form-group user_time">
-                            <button class="HIStimepicker ripple" onclick="timepicker_his()">Select time</button>
-                        </div>
-                        <div class="form-group user_time">
-                            <button class="HIStimepicker ripple" onclick="Restpicker_his()">Reset time</button>
-                        </div>
+
 
           </div>
 
-          <div class="timePicker_duration" id="timePicker_his">
+          <!-- <div class="timePicker_duration" id="timePicker_his">
              <h6 class="text-center">Set Time</h6>
             <div id="from"><p>From</p><p><input type="time" id="from_time"></p></div><div id="to"><p>To</p><p><input type="time" id="to_time" ></p></div>
             <button id="submit_hisTime" class="submit_hisbtn" onclick="submit_histime()">Submit</button>
             <button id="cancel_histime" class="cancel_hisbtn" onclick="cancel_histime()">Cancel</button>
-          </div>
-
+          </div> -->
 
           <div id="user_history" class="tabcontent" style="display: block;">
             <section class="service-categories text-xs-center">
@@ -206,10 +201,11 @@
 
                 <div style="display: flex; flex-direction: row;">
                   <div style="flex:6">
-                     <div style="padding-left: 1rem;display: flex; flex-direction: row;" id="user_history_loader">
-                      <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading Data</b>
-                     </div>
-                    <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="user_history_select"
+                    <div style="padding-left: 1rem; padding-bottom:  1rem;display: flex; flex-direction: row;" id="user_history_loader">
+                      <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading
+                        Data</b>
+                    </div>
+                    <select class="emp_dp" style=" margin-bottom: 20px;margin-top: -12px;" id="user_history_select"
                       onchange="getSelectValueUserHistory();load_notes_user()">
                       <option>select</option>
                     </select>
@@ -218,7 +214,36 @@
 
 
 
-                  <div style="margin-top: 10px; ">
+                  <div style="margin-bottom: 20px; display: flex;">
+
+                    <div class="form-group" style="padding-left:20px; margin-top: -28px; margin-right: -11px;">
+                      <label>Select Date</label>
+                      <input type="date" id="date_history" style="height: 42px;" name="datee" class="form-control" />
+                    </div>
+                    <div class="form-group user_time" style="margin-right: -10px;">
+                      <label style="position: absolute; margin-top: -30px; ">Select Time</label>
+
+                      <button class="HIStimepicker ripple" style="width: 166px;text-align: left;" id="time_change"
+                        onclick="timepicker_his()">00:00 &nbsp;To&nbsp; 00:00</button>
+                    </div>
+                    <div class="form-group user_time" style="margin-right: -10px;">
+                      <button class="HIStimepicker ripple" onclick="Restpicker_his()" data-toggle="tooltip" title="Reset">
+                        <i class="fa fa-repeat" aria-hidden="true"></i></button></div>
+                    <div class="timePicker_duration" id="timePicker_his">
+                      <!-- <h6 class="text-center">Set Time</h6> -->
+                      <div id="datetimepickerDate" class="timerange">
+                        <!-- <input class="form-control" type="text" placeholder="Select time"> -->
+
+                      </div>
+
+                      <div class="float-right mt-2">
+                          <button id="cancel_histime" class="custom_modal_btn outline mr-2" onclick="cancel_histime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i></button>
+                          <button id="submit_hisTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
+                      </div>
+
+                    </div>
+
+
                     <div class="dropdownss">
                       <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i></span>
                       <span class="dropbtnss">Report</span>
@@ -249,62 +274,63 @@
                 <div class="row">
 
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"
-                            ></span>
-                          <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Current Device ID</h4>
-                          <div id="cdid"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"></span>
+                        <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Current Device ID</h4>
+                        <div id="cdid"></div>
                       </div>
+                    </div>
                   </div>
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"
-                            style=""></span>
-                          <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Number of Users In Contact Today</h4>
-                          <div id="nouinc"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true" style=""></span>
+                        <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Number of Users In
+                          Contact Today</h4>
+                        <div id="nouinc"></div>
                       </div>
+                    </div>
                   </div>
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"
-                            style=""></span>
-                          <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Number of Users In Contact This Week</h4>
-                          <div id="nouinw"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true" style=""></span>
+                        <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Number of Users In
+                          Contact This Week</h4>
+                        <div id="nouinw"></div>
                       </div>
+                    </div>
                   </div>
 
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse" style="height: 107px;">
-                        <div class="card-block">
-                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"
-                            style=""></span>
-                          <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Maximum Contact Duration This Day</h4>
-                          <div id="hcdd"></div>
-                        </div>
+                    <div class="card service-card card-inverse" style="height: 107px;">
+                      <div class="card-block">
+                        <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true" style=""></span>
+                        <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Maximum Contact
+                          Duration This Day</h4>
+                        <div id="hcdd"></div>
                       </div>
+                    </div>
 
-                      <div class="card service-card card-inverse mt-4" style="height: 107px;">
-                        <div class="card-block">
-                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"
-                            style=""></span>
-                          <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Maximum Contact Duration This Week</h4>
-                          <div id="hcdw"></div>
-                        </div>
+                    <div class="card service-card card-inverse mt-4" style="height: 107px;">
+                      <div class="card-block">
+                        <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true" style=""></span>
+                        <h4 class="card-title" style="border-bottom: 1px solid #ccc;width: 100%;">Maximum Contact
+                          Duration This Week</h4>
+                        <div id="hcdw"></div>
                       </div>
+                    </div>
                   </div>
 
                   <div class="col-md-8">
                     <div class="widget widget-chart-one-userhistory">
                       <div style="display:flex;flex-direction: row;">
-                        <p class="para" style="padding-left:0;margin-bottom:0px;border-bottom: 1px solid #ccc;width: 100%;flex:5; color:#fff;font-weight: bold;font-size: 14px;">Hourly Tracker
+                        <p class="para"
+                          style="padding-left:0;margin-bottom:0px;border-bottom: 1px solid #ccc;width: 100%;flex:5; color:#fff;font-weight: bold;font-size: 14px;">
+                          Hourly Tracker
                         </p>
                         <div>
                           <label class="switch">
@@ -316,7 +342,7 @@
                           </label>
                         </div>
                       </div>
-                      <div id="chart20" > </div>
+                      <div id="chart20"> </div>
 
 
                       <div id="chart21" style="visibility: hidden; "></div>
@@ -345,7 +371,7 @@
                       <!-- <p>No of user on</p> -->
                       <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Contact History (Day)</p>
                       <div id="ctd">
-                      <!-- <table id="contact_trace_day" class=" " data-page-length='8'>
+                        <!-- <table id="contact_trace_day" class=" " data-page-length='8'>
                         <thead align="center">
                           <tr>
                             <th>S.No</th>
@@ -356,7 +382,7 @@
                         </thead>
                         <tfoot></tfoot>
                       </table> -->
-                    </div>
+                      </div>
                       <!-- <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header row_user_status">
@@ -375,7 +401,7 @@
                     <div class="widget widget-chart-one">
                       <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;">Contact History (Week)</p>
                       <div id="ctw">
-                      <!-- <table id="contact_trace_wee" class=" " data-page-length='8'>
+                        <!-- <table id="contact_trace_wee" class=" " data-page-length='8'>
                         <thead align="center">
                           <tr>
                             <th>S.No</th>
@@ -386,7 +412,7 @@
                         </thead>
                         <tfoot></tfoot>
                       </table> -->
-                    </div>
+                      </div>
                       <!-- <div>
                         <div class="contact_history_container">
                           <div class="contact_history_header row_user_status">
@@ -408,32 +434,37 @@
                   <div class="col-md-6">
                     <div class="emp_notes">
                       <div id="E_name"></div>
-                      <p class="para"  style="border-bottom: 1px solid #ccc;width:97%; ">Contact Event </p>
-                        <div id="cea"> </div>
+                      <p class="para" style="border-bottom: 1px solid #ccc;width:97%; ">Contact Event </p>
+                      <div id="cea"> </div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="emp_notes">
                       <p class="para" style="border-bottom: 1px solid #ccc;width:97%; ">Device ID History</p>
-                       <div id="device_id_history" style="height:80%; width: 100%; display: flex; flex-direction: column; align-items: center; font-size: large;"></div>
+                      <div id="device_id_history"
+                        style="height:80%; width: 100%; display: flex; flex-direction: column; align-items: center; font-size: large;">
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                <div class="col-md-6">
+                  <div class="col-md-6">
 
                     <div class="emp_notes">
                       <p class="para">Notes</p>
 
-                      <div style="display: flex; flex-direction: row; justify-content: flex-end; float:right;display: inline-block;">
+                      <div
+                        style="display: flex; flex-direction: row; justify-content: flex-end; float:right;display: inline-block;">
 
-                        <button style="margin:1rem"  id="open-modal-btn"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
-                        <a href="#notess" class="all-nt" button style="margin:1rem;" onclick="notess()">All Notes</a></button><br>
+                        <button style="margin:1rem" id="open-modal-btn"><span class="all-notes-plus-icon"><i
+                              class="fa fa-plus-circle" aria-hidden="true"></i></span>Add </button>
+                        <a href="#notess" class="all-nt" button style="margin:1rem;" onclick="notess()">All
+                          Notes</a></button><br>
 
                       </div>
 
                       <div id="load_notes1" style="margin-top: -25px;">
-                        <div class="note1" >
+                        <div class="note1">
                           <div class="ndate1"><b>12-08-2020</b></div>
                           <div class="nnote1" id="nnote1">
                             <p style="padding-right: 40px;"></p>
@@ -442,14 +473,15 @@
                       </div>
                     </div>
                   </div>
-                  </div>
+                </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing " style="display: none;"
                   id="notess">
                   <div class="widget widget-chart-one-notes">
                     <P class="para"> All notes</P>
                     <span class="fa fa-times" style="float: right; margin-top:-39px; cursor: pointer;"
                       onclick="notes()"></span>
-                    <div id="load_notes"style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
+                    <div id="load_notes"
+                      style="display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));grid-gap: 10px; grid-template-rows: repeat(max-content );">
                       <div class="note1">
                         <div class="ndate"><b>12-08-2020</b></div>
                         <div class="nnote" id="nnote">
@@ -481,16 +513,44 @@
 
                   <div style="flex:6">
                     <div style="padding-left: 1rem;display: flex; flex-direction: row;" id="team_history_loader">
-                      <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading Data</b>
+                      <div class="loader"></div> <b style="padding-left: 2rem;font-size: larger;color: #888ea8;">Loading
+                        Data</b>
                     </div>
-                    <select class="emp_dp" style="margin-top: 20px; margin-bottom: 20px;" id="team_history_select"
+                    <select class="emp_dp" style="margin-bottom: 20px;" id="team_history_select"
                       onchange="getSelectValueTeamHistory();load_notes_team()">
                       <option>select</option>
                     </select>
                     <div id="selected_time_team" style="font-size: 28px;"></div>
                   </div>
 
-                  <div style="margin-top: 10px;">
+                  <div style="margin-bottom: 20px; display: flex; ">
+
+                    <!-- <div class="form-group" style="padding-left:20px;">
+                      <input type="date" id="date_history_team" style="height: 42px;" name="datee" class="form-control" />
+                    </div>
+                    <div class="form-group user_time">
+                      <button class="HIStimepicker ripple" style="width: 213px;text-align: left;" id="time_change"
+                        onclick="timepicker_his()">From- 00:00:00 To- 23:59:59</button>
+                    </div>
+                    <div class="form-group user_time">
+                      <button class="HIStimepicker ripple" onclick="Restpicker_his()">Reset time</button>
+                    </div>
+                    <div class="timePicker_duration" id="timePicker_his">
+                      <div id="datetimepickerDate" class="input-group timerange">
+                        <input class="form-control" type="text" placeholder="Select time">
+                        <span class="input-group-addon">
+                          <i aria-hidden="true" class="fa fa-clock-o"></i>
+                        </span>
+                      </div>
+
+                      <div class="float-right mt-2">
+                        <button id="cancel_histime" class="custom_modal_btn outline mr-2"
+                          onclick="cancel_histime()">Cancel</button>
+                        <button id="submit_hisTime" class="custom_modal_btn fill "
+                          onclick="setHistoryTime()">Submit</button>
+                      </div>
+                    </div> -->
+
                     <div class="dropdownss">
                       <span class="side-menu-icon"><i class="fa fa-file" aria-hidden="true"></i>
                         <span class="dropbtnss">Report</span>
@@ -512,64 +572,64 @@
                   <p><textarea style="height: 300px; width:300px; font-size: 15px;" id="note_textt1"></textarea></p>
                   <div class="actions">
                     <button onclick="Submit2()" class='ph-button ph-btn-green'>Submit</button>
-                    <button onclick="close_team_notes()" id="close-modal-btn1" class='ph-button ph-btn-red'>Close</button>
+                    <button onclick="close_team_notes()" id="close-modal-btn1"
+                      class='ph-button ph-btn-red'>Close</button>
                   </div>
                 </dialog>
 
 
                 <div class="row">
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"
-                            style="margin-top:35px;"></span>
-                          <h4 class="card-title">Users In Contact</h4>
-                          <div id="tuic"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-mobile-alt user-his-cnt fa-3x" aria-hidden="true"
+                          style="margin-top:35px;"></span>
+                        <h4 class="card-title">Users In Contact</h4>
+                        <div id="tuic"></div>
                       </div>
+                    </div>
                   </div>
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"
-                            style="margin-top:35px"></span>
-                          <h4 class="card-title">Contacts In a Day</h4>
-                          <div id="tcid"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-user-friends user-his-cnt fa-3x" aria-hidden="true"
+                          style="margin-top:35px"></span>
+                        <h4 class="card-title">Contacts In a Day</h4>
+                        <div id="tcid"></div>
                       </div>
+                    </div>
                   </div>
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true"
-                            style="margin-top:35px"></span>
-                          <h4 class="card-title">Contacts In a Week</h4>
-                          <div id="tciw"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-users user-his-cnt fa-3x" aria-hidden="true" style="margin-top:35px"></span>
+                        <h4 class="card-title">Contacts In a Week</h4>
+                        <div id="tciw"></div>
                       </div>
+                    </div>
                   </div>
 
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse" style="height: 107px;">
-                        <div class="card-block">
-                          <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"
-                            style="margin-top:35px"></span>
-                          <h4 class="card-title">Top User Pair by Number of Contacts in a Day</h4>
-                          <div id="tmcup" ></div>
-                        </div>
+                    <div class="card service-card card-inverse" style="height: 107px;">
+                      <div class="card-block">
+                        <span class="fa fa-history user-his-cnt fa-3x" aria-hidden="true"
+                          style="margin-top:35px"></span>
+                        <h4 class="card-title">Top User Pair by Number of Contacts in a Day</h4>
+                        <div id="tmcup"></div>
                       </div>
+                    </div>
                   </div>
                   <div class="col-md-4">
-                      <div class="card service-card card-inverse">
-                        <div class="card-block">
-                          <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"
-                            style="margin-top:35px"></span>
-                          <h4 class="card-title">Top User Pair by Number of Contacts This Week</h4>
-                          <div id="tmcupw"></div>
-                        </div>
+                    <div class="card service-card card-inverse">
+                      <div class="card-block">
+                        <span class="fa fa-id-badge user-his-cnt fa-3x" aria-hidden="true"
+                          style="margin-top:35px"></span>
+                        <h4 class="card-title">Top User Pair by Number of Contacts This Week</h4>
+                        <div id="tmcupw"></div>
                       </div>
+                    </div>
                   </div>
 
                   <!-- <div class="col-md-4">
@@ -589,7 +649,9 @@
                   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one-team">
                       <!-- <p>No of user on</p> -->
-                      <p class="para" style="border-bottom: 1px solid #ccc;width: 100%;font-size: 15px;font-weight:bold;">Top 5 Users by Number of Contacts in a Day</p>
+                      <p class="para"
+                        style="border-bottom: 1px solid #ccc;width: 100%;font-size: 15px;font-weight:bold;">Top 5 Users
+                        by Number of Contacts in a Day</p>
 
                       <table id="user_contact" class=" " data-page-length='5'>
                         <thead align="left">
@@ -617,7 +679,9 @@
                   </div>
                   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one-team">
-                      <p class="para" style="border-bottom: 1px solid #ccc;width: 100%; font-size: 15px;font-weight:bold;">Top 5 Users by Number of Contacts This Week</p>
+                      <p class="para"
+                        style="border-bottom: 1px solid #ccc;width: 100%; font-size: 15px;font-weight:bold;">Top 5 Users
+                        by Number of Contacts This Week</p>
                       <table id="user_contact_weekss" class=" " data-page-length='5'>
                         <thead align="left">
                           <tr>
@@ -646,26 +710,29 @@
                       <p class="para" style="color: rgb(255, 255, 255);">Notes</p>
                       <div style="float:right; ">
 
-                        <button style="margin:1rem" onclick="team_notes_show()" id="open-modal-btn1"><span class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                        <button style="margin:1rem" onclick="team_notes_show()" id="open-modal-btn1"><span
+                            class="all-notes-plus-icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
                           Add </button>
-                        <a href="#notess1" class="all-nt" button="" style="margin:1rem ;" onclick="notess1()">All Notes</a><br>
+                        <a href="#notess1" class="all-nt" button="" style="margin:1rem ;" onclick="notess1()">All
+                          Notes</a><br>
                       </div>
                       <!-- <div class="teamm_notess"> -->
 
-                        <div id="load_notes2" style="margin-top: -15px;">
-                          <div class="note_c">
-                            <div class="ndate2"><b>12-08-2020</b></div>
-                            <div class="nnote2" id="nnote2">
-                              <p style="padding-right: 40px;"></p>
-                            </div>
+                      <div id="load_notes2" style="margin-top: -15px;">
+                        <div class="note_c">
+                          <div class="ndate2"><b>12-08-2020</b></div>
+                          <div class="nnote2" id="nnote2">
+                            <p style="padding-right: 40px;"></p>
                           </div>
                         </div>
+                      </div>
                       <!-- </div> -->
                     </div>
                   </div>
                 </div>
                 <!--row layout-top-spacing-->
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" style="display: none;" id="notess1">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" style="display: none;"
+                  id="notess1">
                   <div class="widget widget-chart-one-notes">
                     <P class="para"> All notes</P>
                     <span class="fa fa-times" style="float: right; margin-top:-39px; cursor: pointer;"
@@ -763,7 +830,7 @@
     </script>
 
     <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js"></script>
+      src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js"></script>
     <script src="../../static/index_one.js?version=2"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
     <script src='https://superal.github.io/canvas2image/canvas2image.js'></script>

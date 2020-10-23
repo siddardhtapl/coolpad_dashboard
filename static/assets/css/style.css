@@ -244,7 +244,6 @@ table.dataTable.no-footer {
 .direct_contact_emp {
     /* position: fixed;
     top: 465px; */
-    padding-left: 20px;
 }
 
 .direct_contact_emp_toggle {
@@ -315,19 +314,18 @@ background-color:#527581 !important;
 }
 
 
-/* Indirect Contact Table Starts */
 .indirectContacts {
     margin-top: 40px;
-    margin-left: 7px;
+    margin-left: 1px;
     width: 100%;
     background: #1a1c2d;
     color: #ffff;
     padding: 20px;
     border-radius: 5px;
-    height: 500px;
+    height: 442px;
     overflow-y: auto;
     margin-bottom: 20px;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2); 
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
 }
 /* width */
 ::-webkit-scrollbar {
@@ -345,7 +343,6 @@ background-color:#527581 !important;
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-
 .in_header {
     display:flex;
     justify-content: space-between;
@@ -386,6 +383,7 @@ color: red;
 .date-show {
     margin-left: 20px;
 }
+
 #emp_name,
 #cd_title {
     text-transform: capitalize;
@@ -419,7 +417,7 @@ background:#060818
 }
 
 #contact-label {
-background:#2c2929; 
+background:#2c2929;
 color: white;
 border: 2px solid white;
 border-radius: 5px;
@@ -754,7 +752,7 @@ a.paginate_button.current {
     padding-right: 5px;
 }
 #open-modal-btn {
-    background: none;    
+    background: none;
     color: #fff;
     border-width: 0 !important;
 }
@@ -765,10 +763,10 @@ a.paginate_button.current {
     /* font-weight: 500; */
 }
 .TFtable{
-    width:100%; 
-    border-collapse:collapse; 
+    width:100%;
+    border-collapse:collapse;
 }
-.TFtable tr{ 
+.TFtable tr{
     padding:7px; border:#4e95f4 solid 0px;
 }
 /* provide some minimal visual accomodation for IE8 and below */
@@ -776,7 +774,7 @@ a.paginate_button.current {
     background: #b8d1f3;
 } */
 /*  Define the background color for all the ODD background rows  */
-.TFtable td:nth-child(odd){ 
+.TFtable td:nth-child(odd){
     background: #5a6472;
 }
 /*  Define the background color for all the EVEN background rows  */
@@ -805,7 +803,7 @@ td{
     overflow: hidden;
     box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
 }
-.profile { 
+.profile {
     float: left;
     width: 200px;
     height: 320px;
@@ -884,17 +882,17 @@ td{
 .stats .value {
     font-size: 18px;
     font-weight: 600;
-    color: white; 
+    color: white;
     /*color: #718093;*/
 }
 .stats .parameter {
     font-size: 17px;
-     color: white; 
+     color: white;
     /*color: #718093;*/
 }
 
 
-      
+
 
 
 /* dark theme toggle */
@@ -907,12 +905,12 @@ td{
     margin-top: 25px;
     right:60px;
   }
-  .switch1 input { 
+  .switch1 input {
     opacity: 0;
     width: 0;
     height: 0;
   }
-  
+
   .slider1 {
     position: absolute;
     cursor: pointer;
@@ -924,7 +922,7 @@ td{
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider1:before {
     position: absolute;
     content: "";
@@ -936,30 +934,30 @@ td{
     -webkit-transition: .4s;
     transition: .4s;
   }
- 
+
   input:checked + .slider1:before {
     background-color: rgb(26, 28, 45);
   }
-  
+
   input:checked + .slider1 {
     background-color: rgb(26, 28, 45);
   }
-  
+
   input:focus + .slider1 {
     box-shadow: 0 0 1px rgb(26, 28, 45);
   }
-  
+
   input:checked + .slider1:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
-  
+
   /* Rounded sliders */
   .slider1.round1 {
-    border-radius: 50px; 
+    border-radius: 50px;
   }
-  
+
   .slider1.round1:before {
     border-radius: 50%;
     height: 18px;
@@ -978,9 +976,9 @@ td{
     width: 50px;
     height: 20px;
   }
-  
+
   .switch input {display:none;}
-  
+
   .slider {
     position: absolute;
     cursor: pointer;
@@ -992,7 +990,7 @@ td{
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -1004,13 +1002,13 @@ td{
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
-  
-  
+
+
+
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
-  
+
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
@@ -1069,7 +1067,7 @@ input:checked + .slider .off
  }
  /* note 1 */
 
- .note1 
+ .note1
  {
     border: 0.5px solid !important;
 
@@ -1092,10 +1090,10 @@ input:checked + .slider .off
  .all-nt{
  color:#fff;
  }
- 
+
  .nnote1
  {
-     
+
      margin: 1rem;
      height: 70%;
      width: 90%;
@@ -1142,7 +1140,7 @@ input:checked + .slider .off
      font-size: smaller;
      color: #fff;
  }
- 
+
  .nnote
  {
      margin: 1rem;
@@ -1346,7 +1344,7 @@ text-transform:capitalize;
     font-size: 14px;
     color: #fff;
     font-weight:bold;
-    
+
 }
 .service-categories a:hover {
     text-decoration: none;
@@ -1374,7 +1372,7 @@ text-transform:capitalize;
     padding-top: 0.5em;
     font-size: 15px;
     color: #888ea8;
-    
+
 } */
 .service-categories a:hover {
     text-decoration: none;
@@ -1401,19 +1399,19 @@ text-transform:capitalize;
 .row_user_status{
     display: flex; flex-direction: row; align-items: center; justify-content: flex-start; margin-bottom: 1rem;
 }
-.table_body{  
-    height: 90%; 
-    width: 103%; 
-    overflow-y: hidden; 
-    overflow-x: hidden; 
+.table_body{
+    height: 90%;
+    width: 103%;
+    overflow-y: hidden;
+    overflow-x: hidden;
     padding-right: 10px;
 }
 
-.table_body_his{  
-    height: 300px; 
-    width: 103%; 
-    overflow-y: hidden; 
-    overflow-x: hidden; 
+.table_body_his{
+    height: 300px;
+    width: 103%;
+    overflow-y: hidden;
+    overflow-x: hidden;
     padding-right: 10px;
 }
 
@@ -1429,7 +1427,7 @@ text-transform:capitalize;
 }
 #user_status::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1441,7 +1439,7 @@ text-transform:capitalize;
 #user_status::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 .contact_history_container
@@ -1453,17 +1451,17 @@ text-transform:capitalize;
     height: 90%;
 }
 .contact_history_header{
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
-    justify-content: flex-start; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
     margin-bottom: 1rem;
     color: #dedede;
     font-size: 14px;
 }
 #contact_history::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1475,13 +1473,13 @@ text-transform:capitalize;
 #contact_history::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
 #live_contact::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1493,13 +1491,13 @@ text-transform:capitalize;
 #live_contact::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
 #contact_history_weekly::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1511,7 +1509,7 @@ text-transform:capitalize;
 #contact_history_weekly::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
@@ -1519,7 +1517,7 @@ text-transform:capitalize;
 
 #contact_history_tweek::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1531,14 +1529,14 @@ text-transform:capitalize;
 #contact_history_tweek::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
 
 #contact_history_tday::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1550,7 +1548,7 @@ text-transform:capitalize;
 #contact_history_tday::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
@@ -1560,7 +1558,7 @@ text-transform:capitalize;
 
 #contact_history_day::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1572,13 +1570,13 @@ text-transform:capitalize;
 #contact_history_day::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
 #contact_history_week::-webkit-scrollbar-track
 {
-	
+
 	border-radius: 50px;
 	background-color: #0E172A;
 }
@@ -1590,7 +1588,7 @@ text-transform:capitalize;
 #contact_history_week::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	
+
 	background-color: #009688;
 }
 
@@ -1619,6 +1617,7 @@ text-transform:capitalize;
     height: 35px;
   }*/
   .dropbtnss {
+
     background: none;
     color: white;
     padding: 5px;
@@ -1629,19 +1628,23 @@ text-transform:capitalize;
     /*position: relative;*/
     /*display: inline-block;*/
     cursor: pointer;
-    height: 35px;
+    height: 39px;
     background: rgb(73, 73, 74);
-    padding: 5px;
+    padding: 8px;
     border-radius: 3px;
+    margin-left: 20px;
+    /* right: 20px; */
+
+
 }
   .dropdown-contentss {
     display: none;
     position: absolute;
     background-color: #191e3a;
     min-width: 135px;
-    right:150px;
+    right:20px;
     color:#fff;
-    top: 0px;
+    top: 123px;
     /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     border-radius: 3px;
     z-index: 1;
@@ -1728,7 +1731,7 @@ text-transform:capitalize;
 .tabcontent {
     /* display: block; */
     padding: 6px 12px;
-    
+
     border-top: none;
 }
 
@@ -1753,7 +1756,7 @@ text-transform:capitalize;
     top:26px;
     margin-left: 24px;
 
-    
+
   }
 .dot1 {
     z-index: 1;
@@ -1765,7 +1768,7 @@ text-transform:capitalize;
     top:26px;
     margin-left: 24px;
 
-    
+
   }
   .circle1 {
     /* z-index: -1; */
@@ -1796,19 +1799,19 @@ text-transform:capitalize;
 	position: absolute;
 	top: 0; right: 0;
 	width: 50%; height: 50%;
-	transform-origin: 0% 100%;      
-} 
+	transform-origin: 0% 100%;
+}
 .circle1 li {
 	overflow: hidden;
 	position: absolute;
 	top: 0; right: 0;
 	width: 50%; height: 50%;
-	transform-origin: 0% 100%;      
+	transform-origin: 0% 100%;
 }
  .text {
 	position: absolute;
 	left: -100%;
-    width: 212%; 
+    width: 212%;
     height: 172%;
 	text-align: center;
     -webkit-transform: skewY(60deg) rotate(15deg);
@@ -1819,7 +1822,7 @@ text-transform:capitalize;
 .text1 {
 	position: absolute;
 	left: -100%;
-    width: 212%; 
+    width: 212%;
     height: 28%;
 	text-align: center;
     -webkit-transform: skewY(60deg) rotate(15deg);
@@ -1831,98 +1834,98 @@ text-transform:capitalize;
 .circle1 li:first-child {
     -webkit-transform: rotate(0deg) skewY(-60deg);
     -ms-transform: rotate(0deg) skewY(-60deg);
-	transform: rotate(0deg) skewY(-60deg);     
+	transform: rotate(0deg) skewY(-60deg);
 }
 .circle1 li:nth-child(2) {
     -webkit-transform: rotate(30deg) skewY(-60deg);
     -ms-transform: rotate(30deg) skewY(-60deg);
-	transform: rotate(30deg) skewY(-60deg);     
+	transform: rotate(30deg) skewY(-60deg);
 }
 .circle1 li:nth-child(3) {
     -webkit-transform: rotate(60deg) skewY(-60deg);
     -ms-transform: rotate(60deg) skewY(-60deg);
-	transform: rotate(60deg) skewY(-60deg);    
+	transform: rotate(60deg) skewY(-60deg);
 }
 .circle1 li:nth-child(4) {
     -webkit-transform: rotate(90deg) skewY(-60deg);
     -ms-transform: rotate(90deg) skewY(-60deg);
-	transform: rotate(90deg) skewY(-60deg);    
+	transform: rotate(90deg) skewY(-60deg);
 }
 .circle1 li:nth-child(5) {
     -webkit-transform: rotate(120deg) skewY(-60deg);
     -ms-transform: rotate(120deg) skewY(-60deg);
-	transform: rotate(120deg) skewY(-60deg);    
+	transform: rotate(120deg) skewY(-60deg);
 }
 .circle1 li:nth-child(6) {
     -webkit-transform: rotate(150deg) skewY(-60deg);
     -ms-transform: rotate(150deg) skewY(-60deg);
-	transform: rotate(150deg) skewY(-60deg);    
+	transform: rotate(150deg) skewY(-60deg);
 }
 .circle1 li:nth-child(7) {
     -webkit-transform: rotate(180deg) skewY(-60deg);
     -ms-transform: rotate(180deg) skewY(-60deg);
-	transform: rotate(180deg) skewY(-60deg);    
+	transform: rotate(180deg) skewY(-60deg);
 }
 .circle1 li:nth-child(8) {
     -webkit-transform: rotate(210deg) skewY(-60deg);
     -ms-transform: rotate(210deg) skewY(-60deg);
-	transform: rotate(210deg) skewY(-60deg);    
+	transform: rotate(210deg) skewY(-60deg);
 }
 .circle1 li:nth-child(9) {
     -webkit-transform: rotate(240deg) skewY(-60deg);
     -ms-transform: rotate(240deg) skewY(-60deg);
-	transform: rotate(240deg) skewY(-60deg);    
+	transform: rotate(240deg) skewY(-60deg);
 }
 .circle1 li:nth-child(10) {
     -webkit-transform: rotate(270deg) skewY(-60deg);
     -ms-transform: rotate(270deg) skewY(-60deg);
-	transform: rotate(270deg) skewY(-60deg);    
+	transform: rotate(270deg) skewY(-60deg);
 }
 .circle1 li:nth-child(11) {
     -webkit-transform: rotate(300deg) skewY(-60deg);
     -ms-transform: rotate(300deg) skewY(-60deg);
-	transform: rotate(300deg) skewY(-60deg);    
+	transform: rotate(300deg) skewY(-60deg);
 }
 .circle1 li:nth-child(12) {
     -webkit-transform: rotate(330deg) skewY(-60deg);
     -ms-transform: rotate(330deg) skewY(-60deg);
-	transform: rotate(330deg) skewY(-60deg);    
+	transform: rotate(330deg) skewY(-60deg);
 }
 /* .circle1 li:first-child .text1 {
-    background: rgb(117, 3, 3); 
+    background: rgb(117, 3, 3);
 }
 .circle1 li:nth-child(2) .text1 {
-	background: rgb(117, 3, 3); 
+	background: rgb(117, 3, 3);
 }
 .circle1 li:nth-child(3) .text1 {
-	background: rgb(255, 183, 0);  
+	background: rgb(255, 183, 0);
 }
 .circle1 li:nth-child(4) .text1 {
-	background: rgb(255, 183, 0);  
+	background: rgb(255, 183, 0);
 }
 .circle1 li:nth-child(5) .text1 {
-	background: rgb(8, 65, 46);   
+	background: rgb(8, 65, 46);
 }
 .circle1 li:nth-child(6) .text1 {
-	background: rgb(8, 65, 46);  
+	background: rgb(8, 65, 46);
 }
 .circle1 li:nth-child(7) .text1 {
-	background: rgb(8, 65, 46);  
+	background: rgb(8, 65, 46);
 }
 .circle1 li:nth-child(8) .text1 {
-	background: rgb(255, 183, 0);  
+	background: rgb(255, 183, 0);
 }
 .circle1 li:nth-child(9) .text1 {
-	background: rgb(117, 3, 3);  
+	background: rgb(117, 3, 3);
 }
 .circle1 li:nth-child(10) .text1 {
-	background: rgb(117, 3, 3);  
+	background: rgb(117, 3, 3);
 }
 .circle1 li:nth-child(11) .text1 {
-	background: rgb(117, 3, 3);  
+	background: rgb(117, 3, 3);
 }
 .circle1 li:nth-child(12) .text1 {
-	background: rgb(8, 65, 46);  
+	background: rgb(8, 65, 46);
 } */
 
 
@@ -1930,98 +1933,98 @@ text-transform:capitalize;
 .circle li:first-child {
     -webkit-transform: rotate(0deg) skewY(-60deg);
     -ms-transform: rotate(0deg) skewY(-60deg);
-	transform: rotate(0deg) skewY(-60deg);     
+	transform: rotate(0deg) skewY(-60deg);
 }
 .circle li:nth-child(2) {
     -webkit-transform: rotate(30deg) skewY(-60deg);
     -ms-transform: rotate(30deg) skewY(-60deg);
-	transform: rotate(30deg) skewY(-60deg);     
+	transform: rotate(30deg) skewY(-60deg);
 }
 .circle li:nth-child(3) {
     -webkit-transform: rotate(60deg) skewY(-60deg);
     -ms-transform: rotate(60deg) skewY(-60deg);
-	transform: rotate(60deg) skewY(-60deg);    
+	transform: rotate(60deg) skewY(-60deg);
 }
 .circle li:nth-child(4) {
     -webkit-transform: rotate(90deg) skewY(-60deg);
     -ms-transform: rotate(90deg) skewY(-60deg);
-	transform: rotate(90deg) skewY(-60deg);    
+	transform: rotate(90deg) skewY(-60deg);
 }
 .circle li:nth-child(5) {
     -webkit-transform: rotate(120deg) skewY(-60deg);
     -ms-transform: rotate(120deg) skewY(-60deg);
-	transform: rotate(120deg) skewY(-60deg);    
+	transform: rotate(120deg) skewY(-60deg);
 }
 .circle li:nth-child(6) {
     -webkit-transform: rotate(150deg) skewY(-60deg);
     -ms-transform: rotate(150deg) skewY(-60deg);
-	transform: rotate(150deg) skewY(-60deg);    
+	transform: rotate(150deg) skewY(-60deg);
 }
 .circle li:nth-child(7) {
     -webkit-transform: rotate(180deg) skewY(-60deg);
     -ms-transform: rotate(180deg) skewY(-60deg);
-	transform: rotate(180deg) skewY(-60deg);    
+	transform: rotate(180deg) skewY(-60deg);
 }
 .circle li:nth-child(8) {
     -webkit-transform: rotate(210deg) skewY(-60deg);
     -ms-transform: rotate(210deg) skewY(-60deg);
-	transform: rotate(210deg) skewY(-60deg);    
+	transform: rotate(210deg) skewY(-60deg);
 }
 .circle li:nth-child(9) {
     -webkit-transform: rotate(240deg) skewY(-60deg);
     -ms-transform: rotate(240deg) skewY(-60deg);
-	transform: rotate(240deg) skewY(-60deg);    
+	transform: rotate(240deg) skewY(-60deg);
 }
 .circle li:nth-child(10) {
     -webkit-transform: rotate(270deg) skewY(-60deg);
     -ms-transform: rotate(270deg) skewY(-60deg);
-	transform: rotate(270deg) skewY(-60deg);    
+	transform: rotate(270deg) skewY(-60deg);
 }
 .circle li:nth-child(11) {
     -webkit-transform: rotate(300deg) skewY(-60deg);
     -ms-transform: rotate(300deg) skewY(-60deg);
-	transform: rotate(300deg) skewY(-60deg);    
+	transform: rotate(300deg) skewY(-60deg);
 }
 .circle li:nth-child(12) {
     -webkit-transform: rotate(330deg) skewY(-60deg);
     -ms-transform: rotate(330deg) skewY(-60deg);
-	transform: rotate(330deg) skewY(-60deg);    
+	transform: rotate(330deg) skewY(-60deg);
 }
 /* .circle li:first-child .text {
-    background: rgb(230, 66, 66); 
+    background: rgb(230, 66, 66);
 }
 .circle li:nth-child(2) .text {
-	background: rgb(230, 66, 66); 
+	background: rgb(230, 66, 66);
 }
 .circle li:nth-child(3) .text {
-	background: rgb(218, 165, 32); 
+	background: rgb(218, 165, 32);
 }
 .circle li:nth-child(4) .text {
-	background: rgba(218, 165, 32, 32);  
+	background: rgba(218, 165, 32, 32);
 }
 .circle li:nth-child(5) .text {
-	background: mediumaquamarine;  
+	background: mediumaquamarine;
 }
 .circle li:nth-child(6) .text {
-	background: mediumaquamarine;  
+	background: mediumaquamarine;
 }
 .circle li:nth-child(7) .text {
-	background: mediumaquamarine;  
+	background: mediumaquamarine;
 }
 .circle li:nth-child(8) .text {
-	background: rgba(218, 165, 32,32);  
+	background: rgba(218, 165, 32,32);
 }
 .circle li:nth-child(9) .text {
-	background: rgb(230, 66, 66);  
+	background: rgb(230, 66, 66);
 }
 .circle li:nth-child(10) .text {
-	background: rgb(230, 66, 66);  
+	background: rgb(230, 66, 66);
 }
 .circle li:nth-child(11) .text {
-	background: rgb(230, 66, 66);  
+	background: rgb(230, 66, 66);
 }
 .circle li:nth-child(12) .text {
-	background: mediumaquamarine;  
+	background: mediumaquamarine;
 } */
 
 
@@ -2348,8 +2351,8 @@ text-transform:capitalize
   top: 50%;
   right: 15px;
   transform: translateY(-50%);
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid #fff;
@@ -2373,11 +2376,11 @@ text-transform:capitalize
 
 .dd-input + .dd-menu {
   display: none;
-} 
+}
 
 .dd-input:checked + .dd-menu {
   display: block;
-} 
+}
 
 .dd-menu li {
   padding: 10px 20px;
@@ -2893,10 +2896,8 @@ input[type=time].form-control {
 #status_table_head td {
     font-weight: bold;
 }
-
-/* Dashboard Timepicker */
 .Dashtimepicker {
-   margin-top: 30px;
+    margin-top: 30px;
     font-size: 14px !important;
     border: 1px solid #6c757d;
     border-radius: 5px;
@@ -2909,6 +2910,7 @@ input[type=time].form-control {
 }
 .timePicker_duration_Dash {
     display: none;
+    width: 350px;
     position: fixed;
     top: 30%;
     left: 44%;
@@ -2919,16 +2921,26 @@ input[type=time].form-control {
     border-radius: 5px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
 }
-.timePicker_duration_Dash #from,
-#to {
-    float: left;
-    padding: 36px 30px;
+
+.HIStimepicker {
+    font-size: 14px !important;
+    border: 1px solid #6c757d !important;
+    height: calc(2.0em + .75rem + 2px);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #060818 !important;
+    padding: 9px !important;
+    color: #fff !important;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
 }
-.timePicker_duration_Dash #submit_DashTime {
-    /* padding-left: 20px; */
+.user_time {
+    padding-left: 20px;
+    /* float: left;
+    margin-top: 8px; */
 }
 .timePicker_duration {
     display: none;
+    width: 350px;
     position: fixed;
     top: 25%;
     left: 44%;
@@ -2938,98 +2950,103 @@ input[type=time].form-control {
     padding: 20px;
     border-radius: 5px;
 }
-.timePicker_duration #from,
-#to {
-    float: left;
-    padding: 36px 30px;
-}
-.timePicker_duration #submit_hisTime {
-    /* padding-left: 20px; */
-}
-/* Dashboard Timepicker submit btn*/
-.submit_Dashbtn {
-    float: right;
-    bottom: 10px;
-    position: absolute;
-    right: 40px;
-    background: rgb(52, 168, 83);
-    padding: 7px;
-    text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
-    border: none !important;
-}
-/* Dashboard Timepicker close btn*/
-.cancel_Dashbtn {
-    float: left;
-    bottom: 10px;
-    left: 150px;
-    position: absolute;
-    background: rgb(234, 67, 53);
-    padding: 7px;
-    text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 12px;
-    cursor: pointer;
-    border: none !important;
-}
-/* Dashboard Timepicker Ends */
-/* userdashboard Timepicker */
-.HIStimepicker {
-    font-size: 14px !important;
-    border: 1px solid #6c757d !important;
-    height: calc(2.0em + .75rem + 2px);
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #060818 !important;
-    color: #fff !important;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-}
-.time_picker {
+/* .time_picker {
     padding-left: 20px;
     width: 185px;
     float: left;
     margin-top: 10px;
-}
-.user_time {
-    padding-left: 20px;
-    float: left;
-    margin-top: 8px;
-}
-/* userdashboard Timepicker submit btn */
-.submit_hisbtn {
-    float: right;
-    bottom: 10px;
-    position: absolute;
-    right: 40px;
-    background: rgb(52, 168, 83);
+} */
+/* btn */
+.custom_modal_btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     padding: 7px;
-    text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 13px;
     cursor: pointer;
-    border: none !important;
+    border: 1px solid transparent;
+    font-size: 14px;
 }
-/* userdashboard Timepicker cancel btn */
-.cancel_hisbtn {
-    float: left;
-    bottom: 10px;
-    left: 150px;
+.custom_modal_btn:hover {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+/*  Timepicker submit btn*/
+.fill {
+    background: #007bff;
+    color: #fff;
+}
+/* Timepicker */
+.timerangepicker-container {
+    display: flex;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .14);
+    margin: 10px 0px;
+}
+.timerangepicker-label {
+    width: 156px;
+    display: block;
+    line-height: 2em;
+    background-color: #c8c8c880;
+    padding-left: 1em;
+    margin-bottom: 1.5em;
+}
+.timerangepicker-from,
+.timerangepicker-to {
+    padding-bottom: 1.5em;
+    border-radius: 5px;
+}
+.timerangepicker-from {
+    border-right: none;
+}
+.timerangepicker-display {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    border: 1px solid grey;
+    line-height: 2.5em;
+    text-align: center;
+    position: relative;
+    margin: 1em 0.175em;
+    border-radius: 3px;
+}
+.timerangepicker-display .increment,
+.timerangepicker-display .decrement {
+    cursor: pointer;
     position: absolute;
-    background: rgb(234, 67, 53);
-    padding: 7px;
+    font-size: 1.3em;
+    width: 1.5em;
     text-align: center;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 12px;
-    cursor: pointer;
-    border: none !important;
+    left: 0;
 }
-/* userdashboard Timepicker Ends*/
+.timerangepicker-display .increment {
+    margin-top: -0.25em;
+    top: -1em;
+    left: 0.2em;
+}
+.timerangepicker-display .decrement {
+    margin-bottom: -0.25em;
+    bottom: -1em;
+    left: 0.2em;
+}
+.timerangepicker-display.hour {
+    margin-left: 1em;
+}
+.timerangepicker-display.period {
+    margin-right: 0.32em;
+}
+.input-group-addon {
+    right: 5px;
+    position: absolute;
+    top: 9px;
+}
+/*  Timepicker close btn*/
+.outline {
+    background: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+/* btn ends */
 /*Button ripple effect */
 .ripple {
     position: relative;
@@ -3054,3 +3071,19 @@ input[type=time].form-control {
     margin-left: -80px;
 }
 /*Button ripple effect ends */
+
+#editableToHour:focus {
+    outline: none !important;
+}
+#editableHour:focus {
+    outline: none !important;
+}
+#editableMinute:focus {
+    outline: none !important;
+}
+#editableToMinute:focus {
+    outline: none !important;
+}
+.dataTables_scrollHead {
+    right: 10px;
+}

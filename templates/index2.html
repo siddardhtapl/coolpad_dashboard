@@ -250,7 +250,7 @@
                     <div id="table" class="tabcontent" style="display: block;">
 
                         <div class="common">
-                            <div class="direct_contact_emp" id="all_third_pair">
+                            <div class="direct_contact_emp mr-1 ml-1" id="all_third_pair">
 
                             </div>
 
@@ -496,8 +496,6 @@
         });
 
         var status_table_render;
-
-
         var indirectContactTable =  $('#indirectContactTable').DataTable({
                                         "searching": false,
                                         "info": false,
@@ -512,7 +510,7 @@
                                     fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                                         if (aData.milliseconds >= 900000) {
                                             $(nRow).addClass('beyondFifteen');
-                                        }     
+                                        }
                                     }
                                     });
         var interactionTable =  $('#indirectInteraction').DataTable({
@@ -527,7 +525,7 @@
                                     fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                                     if (aData.milliseconds >= 900000) {
                                             $(nRow).addClass('beyondFifteen');
-                                        }   
+                                        }
                                     }
                                 });
         document.getElementById('indirectContacts').style.display = 'none';
