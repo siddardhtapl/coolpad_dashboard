@@ -216,34 +216,31 @@
 
                   <div style="margin-bottom: 20px; display: flex;">
 
-                    <div class="form-group" style="padding-left:20px; margin-top: -28px;">
+                    <div class="form-group" style="padding-left:20px; margin-top: -28px; margin-right: -11px;">
                       <label>Select Date</label>
                       <input type="date" id="date_history" style="height: 42px;" name="datee" class="form-control" />
                     </div>
-                    <div class="form-group user_time">
+                    <div class="form-group user_time" style="margin-right: -10px;">
                       <label style="position: absolute; margin-top: -30px; ">Select Time</label>
 
-                      <button class="HIStimepicker ripple" style="width: 213px;text-align: left;" id="time_change"
-                        onclick="timepicker_his()">From- 00:00:00 To- 23:59:59</button>
+                      <button class="HIStimepicker ripple" style="width: 166px;text-align: left;" id="time_change"
+                        onclick="timepicker_his()">00:00 &nbsp;To&nbsp; 00:00</button>
                     </div>
-                    <div class="form-group user_time">
-                      <button class="HIStimepicker ripple" onclick="Restpicker_his()">Reset time</button>
-                    </div>
+                    <div class="form-group user_time" style="margin-right: -10px;">
+                      <button class="HIStimepicker ripple" onclick="Restpicker_his()" data-toggle="tooltip" title="Reset">
+                        <i class="fa fa-repeat" aria-hidden="true"></i></button></div>
                     <div class="timePicker_duration" id="timePicker_his">
                       <!-- <h6 class="text-center">Set Time</h6> -->
-                      <div id="datetimepickerDate" class="input-group timerange">
-                        <input class="form-control" type="text" placeholder="Select time">
-                        <span class="input-group-addon">
-                          <i aria-hidden="true" class="fa fa-clock-o"></i>
-                        </span>
+                      <div id="datetimepickerDate" class="timerange">
+                        <!-- <input class="form-control" type="text" placeholder="Select time"> -->
+
                       </div>
 
                       <div class="float-right mt-2">
-                        <button id="cancel_histime" class="custom_modal_btn outline mr-2"
-                          onclick="cancel_histime()">Cancel</button>
-                        <button id="submit_hisTime" class="custom_modal_btn fill "
-                          onclick="setHistoryTime()">Submit</button>
+                          <button id="cancel_histime" class="custom_modal_btn outline mr-2" onclick="cancel_histime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i></button>
+                          <button id="submit_hisTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
                       </div>
+
                     </div>
 
 

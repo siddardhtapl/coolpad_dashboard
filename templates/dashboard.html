@@ -238,56 +238,35 @@
                                 </div>
                                 <div id="selected_time" style="font-size: 28px;"></div>
                             </div>
-                            <div class="form-group" style="margin-top: -19px; margin-right: 20px;">
+                            <div class="form-group" style="margin-top: -17px; margin-right: 10px;">
                                 <label>Select Date</label>
                                 <input type="date" id="txtDate" name="datee" class="form-control" />
                             </div>
 
-                            <div class="form-group" style="margin-top: -19px; margin-right: 20px;">
+                            <div class="form-group" style="margin-top: -19px; margin-right: 11px;">
+
                                 <label style="margin-top: 1px;position: absolute;">Select Time</label>
-                                <button class="Dashtimepicker ripple" style="width: 199px;text-align: left;"
-                                    id="name_change" onclick="openDashTimer()">From- 00:00:00 To- 23:59:59</button>
+
+
+                                <button class="Dashtimepicker ripple "type="button" style="width: 166px;text-align: left;"
+                                    id="name_change" onclick="openDashTimer()">00:00 &nbsp;To&nbsp; 00:00</button>
+
                             </div>
-                            <!-- <div>
-                                <input type="text"  class="form-control" id="timepicker_new" placeholder="00:00" />
-                            </div> -->
-                            <div class="form-group" style="margin-top: -19px; margin-right: 20px;">
-                                <button class="Dashtimepicker ripple" onclick="reset_Dashtime()">Reset Time</button>
-                            </div>
-                            <!-- <div class="timePicker_duration_Dash" id="timePicker_dash">
-                                <h6 class="text-center">Set Time</h6>
-                                <div id="from">
-                                    <p>From</p>
-                                    <p><input type="time" id="from_time_dash"></p>
+
+                            <div class="form-group" style="margin-top: -19px; margin-right: -10px;">
+                                <button class="Dashtimepicker ripple" onclick="reset_Dashtime()" data-toggle="tooltip" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i></button></div>
+
+                            <div class="timePicker_duration_Dash"  id="timePicker_dash">
+
+                                <div  class="timerange">
+
                                 </div>
-                                <div id="to">
-                                    <p>To</p>
-                                    <p><input type="time" id="to_time_dash"></p>
-                                </div>
-                                <button id="submit_DashTime" class="submit_Dashbtn" onclick="submit_Dashtime()">Submit</button>
-                                <button id="cancel_DashTime" class="cancel_Dashbtn" onclick="cancel_Dashtime()">Cancel</button>
-                            </div> -->
-                            <div class="timePicker_duration_Dash" id="timePicker_dash">
-                                <!-- <h6 class="text-center">Set Time</h6> -->
-                                <!-- <div id="from">
-                                    <p>From</p>
-                                    <p><input type="time" id="from_time_dash"></p>
-                                </div>
-                                <div id="to">
-                                    <p>To</p>
-                                    <p><input type="time" id="to_time_dash"></p>
-                                </div> -->
-                                <div id="datetimepickerDate" class="input-group timerange">
-                                    <input class="form-control" type="text" placeholder="Select time">
-                                    <span class="input-group-addon">
-                                        <i aria-hidden="true" class="fa fa-clock-o"></i>
-                                    </span>
-                                </div>
+
                                 <div class="float-right mt-2">
-                                    <button id="cancel_DashTime" class="custom_modal_btn outline mr-2"
-                                        onclick="cancel_Dashtime()">Cancel</button>
-                                    <button id="submit_DashTime" class="custom_modal_btn fill "
-                                        onclick="setHistoryTime()">Submit</button>
+                                    <button id="cancel_DashTime" class="custom_modal_btn outline mr-2" onclick="cancel_Dashtime()" data-toggle="tooltip" title="cancel"><i class="fa fa-close" aria-hidden="true"></i>
+                                    </button>
+                                    <button id="submit_DashTime" class="custom_modal_btn fill " onclick="setHistoryTime()" data-toggle="tooltip" title="submit"><i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
 
@@ -580,6 +559,8 @@
                                                             <!-- <th>S.No</th> -->
                                                             <th>User-Pair</th>
                                                             <th>Number of Contacts</th>
+                                                            <th>Max Duration</th>
+                                                            <th>Average Distance</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot></tfoot>
@@ -606,7 +587,6 @@
 
 
                     <div id="weekly" class="tabcontent" style="display: none;">
-
                         <div class="tab-content">
                             <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="daily-tab">
 

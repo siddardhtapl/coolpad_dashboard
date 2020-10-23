@@ -31,6 +31,8 @@
     <link href="../../static/assets/css/paginate.css?version=2" rel="stylesheet" type="text/css" />
     <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js"></script>
+
+    <script src='https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js'></script>
     <!-- plugin end -->
 
 
@@ -252,13 +254,12 @@
 
                             </div>
 
-                            <div class="row mr-1  ml-1">
+                            <div class="row mr-3 ml-1">
                                 <div class="col-md-6">
                                     <div class="indirectContacts" id="indirectInteractions">
                                         <div class="in_header">
                                             <h5 id="interaction_tittle"></h5>
-                                            <!-- <button type="button" class="btn btn-danger" onclick="close_indirect_status()"></button> -->
-                                            <i class="fa fa-times" onclick="close_indirect_status()" style="color: red;font-size: 20px;" aria-hidden="true"></i>
+                                            <i class="fa fa-times" aria-hidden="true" onclick="close_indirect_status()"></i>
                                         </div>
                                         <table id="indirectInteraction" data-page-length='7'>
                                             <thead align="center">
@@ -271,14 +272,18 @@
                                         </thead>
                                         <tfoot></tfoot>
                                         </table>
+                                        <div class="indirectContactLegend">
+                                            <div>
+                                                <i class="fa fa-square" aria-hidden="true"></i> Contact Duration > 15 Minutes
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="indirectContacts" id="indirectContacts">
                                         <div class="in_header">
                                             <h5>Indirect contacts of Contacted Person</h5>
-                                            <!-- <button type="button" class="btn btn-danger" onclick="close_indirect()"><i class="fa fa-times" aria-hidden="true"></i></button> -->
-                                            <i class="fa fa-times" onclick="close_indirect()" style="color: red;font-size: 20px;"   aria-hidden="true"></i>
+                                            <i class="fa fa-times" aria-hidden="true" onclick="close_indirect()"></i>
                                         </div>
                                         <table id="indirectContactTable"  data-page-length='7'>
                                             <thead align="center">
@@ -291,6 +296,11 @@
                                             </thead>
                                             <tfoot></tfoot>
                                         </table>
+                                        <div class="indirectContactLegend">
+                                            <div>
+                                                <i class="fa fa-square" aria-hidden="true"></i> Contact Duration > 15 Minutes
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -491,19 +501,32 @@
                                         "info": false,
                                         "bLengthChange": false,
                                         "columns": [{ "data": "indirectContact" },{ "data": "max_duration" }, { "data": "count" }, { "data": "Date"}],
+                                        "order": [[ 1, "desc" ]],
                                         columnDefs: [
-                                            { type: 'natural-nohtml', targets: [0] }
-                                        ],
-                                        columnDefs: [
+                                            { type: 'natural-nohtml', targets: [0,1] },
                                             { width: '25%', targets: [0,1,2] }
                                         ],
-                                        fixedColumns: true
+                                        fixedColumns: true,
+                                    fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                                        if (aData.milliseconds >= 900000) {
+                                            $(nRow).addClass('beyondFifteen');
+                                        }
+                                    }
                                     });
         var interactionTable =  $('#indirectInteraction').DataTable({
                                     "searching": false,
                                     "info": false,
                                     "bLengthChange": false,
                                     "columns": [{ "data": "timestamp" },{ "data": "duration" }, { "data": "avgDist" }, { "data": "minDist"}],
+                                    "order": [[ 1, "desc" ]],
+                                    columnDefs: [
+                                            { type: 'natural-nohtml', targets: [0,1] }
+                                        ],
+                                    fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                                    if (aData.milliseconds >= 900000) {
+                                            $(nRow).addClass('beyondFifteen');
+                                        }
+                                    }
                                 });
         document.getElementById('indirectContacts').style.display = 'none';
         document.getElementById('indirectInteractions').style.display = "none";

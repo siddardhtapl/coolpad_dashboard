@@ -22,21 +22,21 @@ var dev_id;
 // window.onload = exampleFunction();
 function exampleFunction() {
     document.getElementById("user_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-    console.log("apiiii",from_HIStime,to_HIStime)
-    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ common4all)
-    .then(response => response.json())
-    .then(data_user => {
-        data_user2= data_user
-        loadUserHistoy()
-/*        UserHistoy(Object.keys(data_user2)[0])*/
-    })
+    console.log("apiiii", from_HIStime, to_HIStime)
+    fetch('https://takvaviya.in/coolpad_backend/user/User_history_data/' + st_date + '/' + en_date + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
+        .then(response => response.json())
+        .then(data_user => {
+            data_user2 = data_user
+            loadUserHistoy()
+            /*        UserHistoy(Object.keys(data_user2)[0])*/
+        })
 
     fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
-    .then(response => response.json())
-    .then(data => {
-        dev_id = data
-        load_notes_user();
-    })
+        .then(response => response.json())
+        .then(data => {
+            dev_id = data
+            load_notes_user();
+        })
 }
 
 function opentab_history(evt, tabName) {
@@ -66,75 +66,75 @@ function opentab_history(evt, tabName) {
 // User history
 
 function UserHistoy(option) {
-            dataa = data_user2[option];
-            dataa_w = data_user2[option];
-            keys = []
-            values = []
-            duration = []
-            obj = {}
-            m = 1
-            keys_w = []
-            values_w = []
-            duration_w = []
-            obj_w = {}
-            m_w = 1
-            clk_d = dataa['24_hr_clock']
-            const innerdiv0 = `   <p class="count-id">${clk_d}</p>`
-            // document.getElementById("abc").innerHTML = innerdiv0
-            if (clk_d != null) {
-                history_clk(clk_d);
-                history_clk_12hr(clk_d);
-            } else {
-                document.getElementById("chart21").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available<a></div>'
-                document.getElementById("chart20").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available<a></div>'
-            }
+    dataa = data_user2[option];
+    dataa_w = data_user2[option];
+    keys = []
+    values = []
+    duration = []
+    obj = {}
+    m = 1
+    keys_w = []
+    values_w = []
+    duration_w = []
+    obj_w = {}
+    m_w = 1
+    clk_d = dataa['24_hr_clock']
+    const innerdiv0 = `   <p class="count-id">${clk_d}</p>`
+    // document.getElementById("abc").innerHTML = innerdiv0
+    if (clk_d != null) {
+        history_clk(clk_d);
+        history_clk_12hr(clk_d);
+    } else {
+        document.getElementById("chart21").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available<a></div>'
+        document.getElementById("chart20").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available<a></div>'
+    }
 
 
-            if (dataa["Current Device ID"] != null) {
-                const innerdiv = `   <p class="count-id">${dataa["Current Device ID"]}</p>`
-                document.getElementById("cdid").innerHTML = innerdiv
+    if (dataa["Current Device ID"] != null) {
+        const innerdiv = `   <p class="count-id">${dataa["Current Device ID"]}</p>`
+        document.getElementById("cdid").innerHTML = innerdiv
 
-            } else {
-                document.getElementById("cdid").innerHTML = '<div>No data available</div>'
-            }
+    } else {
+        document.getElementById("cdid").innerHTML = '<div>No data available</div>'
+    }
 
 
-            if (dataa["Users in Contact Day"] != null) {
-                const innerdiv1 = `   <p class="count-id">${dataa["Users in Contact Day"]}</p>`
-                document.getElementById("nouinc").innerHTML = innerdiv1
-            } else {
-                document.getElementById("nouinc").innerHTML = '<div>No data available</div>'
-            }
+    if (dataa["Users in Contact Day"] != null) {
+        const innerdiv1 = `   <p class="count-id">${dataa["Users in Contact Day"]}</p>`
+        document.getElementById("nouinc").innerHTML = innerdiv1
+    } else {
+        document.getElementById("nouinc").innerHTML = '<div>No data available</div>'
+    }
 
-            if (dataa["Users in Contact Week"] != null) {
-                const innerdiv2 = `   <p class="count-id">${dataa["Users in Contact Week"]}</p>`
-                document.getElementById("nouinw").innerHTML = innerdiv2
-            } else {
-                document.getElementById("nouinw").innerHTML = '<div>No data available</div>'
-            }
+    if (dataa["Users in Contact Week"] != null) {
+        const innerdiv2 = `   <p class="count-id">${dataa["Users in Contact Week"]}</p>`
+        document.getElementById("nouinw").innerHTML = innerdiv2
+    } else {
+        document.getElementById("nouinw").innerHTML = '<div>No data available</div>'
+    }
 
-            if (dataa["Max Contact Duration Day"] != null) {
-                const innerdiv3 = `   <p class="count-id">${dataa["Max Contact Duration Day"]}</p>`
-                document.getElementById("hcdd").innerHTML = innerdiv3
-            } else {
-                document.getElementById("hcdd").innerHTML = '<div>No data available</div>'
-            }
-            if (dataa["Device History"] != null) {
-                const innerdiv4 = Object.values(dataa["Device History"]).map(item => { return `<div style="padding-bottom:1rem">${item}</div>`}).join(" ")
-                document.getElementById("device_id_history").innerHTML = innerdiv4
-            }
-            else {
-                document.getElementById("device_id_history").innerHTML = '<div>No data available</div>'
-            }
-            if (dataa["Max Contact Duration Week"] != null) {
-                const innerdiv4 = `   <p class="count-id">${dataa["Max Contact Duration Week"]}</p>`
-                document.getElementById("hcdw").innerHTML = innerdiv4
-            }
-            else {
-                document.getElementById("hcdw").innerHTML = '<div>No data available</div>'
-            }
-            if (dataa["Contact History Week"] != null) {
-                document.getElementById('ctw').innerHTML = `<table id="contact_trace_wee" class=" " data-page-length='8'>
+    if (dataa["Max Contact Duration Day"] != null) {
+        const innerdiv3 = `   <p class="count-id">${dataa["Max Contact Duration Day"]}</p>`
+        document.getElementById("hcdd").innerHTML = innerdiv3
+    } else {
+        document.getElementById("hcdd").innerHTML = '<div>No data available</div>'
+    }
+    if (dataa["Device History"] != null) {
+        const innerdiv4 = Object.values(dataa["Device History"]).map(item => { return `<div style="padding-bottom:1rem">${item}</div>` }).join(" ")
+        document.getElementById("device_id_history").innerHTML = innerdiv4
+    }
+    else {
+        document.getElementById("device_id_history").innerHTML = '<div>No data available</div>'
+    }
+    if (dataa["Max Contact Duration Week"] != null) {
+        const innerdiv4 = `   <p class="count-id">${dataa["Max Contact Duration Week"]}</p>`
+        document.getElementById("hcdw").innerHTML = innerdiv4
+    }
+    else {
+        document.getElementById("hcdw").innerHTML = '<div>No data available</div>'
+    }
+    if (dataa["Contact History Week"] != null) {
+        document.getElementById('ctw').innerHTML = `<table id="contact_trace_wee" class=" " data-page-length='8'>
                 <thead align="center">
                   <tr>
                     <th>User</th>
@@ -144,34 +144,34 @@ function UserHistoy(option) {
                 </thead>
                 <tfoot></tfoot>
               </table>`
-                Object.keys(dataa_w["Contact History Week"]).map(item => { keys_w.push(item) })
-                //  Object.values(data["emp 1"]["Contact History Week"]["count"]).map(item => { values.push(item) })
-                Object.keys(dataa_w["Contact History Week"]).map(item => {
-                    values_w.push(dataa_w["Contact History Week"][item]["count"]);
-                })
-                Object.keys(dataa_w["Contact History Week"]).map(item => {
-                    duration_w.push(dataa_w["Contact History Week"][item]["max_duration"]);
-                })
-                for (var i = 0; i < keys_w.length; i++) {
-                    obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
-                }
-                dataa2 = Object.values(obj_w )
-                $('#contact_trace_wee').DataTable({
-                columnDefs: [
-                    { type: 'natural-nohtml', targets: 0 }
-                  ],
-                    "searching": false,
-                    "info": false,
-                    "bLengthChange": false,
-                    "bDestroy": true,
-                    data: dataa2, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
-                });
-            }
-            else {
-                document.getElementById("ctw").innerHTML = '<div style="color:#007bff; padding:1rem"><a>No data available</a></div>'
-            }
-            if (dataa["Contact History Day"] != null) {
-                document.getElementById('ctd').innerHTML = `<table id="contact_trace_day" class=" " data-page-length='8'>
+        Object.keys(dataa_w["Contact History Week"]).map(item => { keys_w.push(item) })
+        //  Object.values(data["emp 1"]["Contact History Week"]["count"]).map(item => { values.push(item) })
+        Object.keys(dataa_w["Contact History Week"]).map(item => {
+            values_w.push(dataa_w["Contact History Week"][item]["count"]);
+        })
+        Object.keys(dataa_w["Contact History Week"]).map(item => {
+            duration_w.push(dataa_w["Contact History Week"][item]["max_duration"]);
+        })
+        for (var i = 0; i < keys_w.length; i++) {
+            obj_w[i] = { "sno": i + 1, "pair": keys_w[i], "count": values_w[i], "duration": duration_w[i] };
+        }
+        dataa2 = Object.values(obj_w)
+        $('#contact_trace_wee').DataTable({
+            columnDefs: [
+                { type: 'natural-nohtml', targets: 0 }
+            ],
+            "searching": false,
+            "info": false,
+            "bLengthChange": false,
+            "bDestroy": true,
+            data: dataa2, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+        });
+    }
+    else {
+        document.getElementById("ctw").innerHTML = '<div style="color:#007bff; padding:1rem"><a>No data available</a></div>'
+    }
+    if (dataa["Contact History Day"] != null) {
+        document.getElementById('ctd').innerHTML = `<table id="contact_trace_day" class=" " data-page-length='8'>
                 <thead align="center">
                   <tr>
                     <th>User</th>
@@ -182,35 +182,35 @@ function UserHistoy(option) {
                 <tfoot></tfoot>
               </table>`
 
-                Object.keys(dataa["Contact History Day"]).map(item => { keys.push(item) })
-                //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
-                Object.keys(dataa["Contact History Day"]).map(item => {
-                    values.push(dataa["Contact History Day"][item]["count"]);
-                })
-                Object.keys(dataa["Contact History Day"]).map(item => {
-                    duration.push(dataa["Contact History Day"][item]["max_duration"]);
-                })
-                for (var i = 0; i < keys.length; i++) {
-                    obj[i] = { "sno": i + 1, "pair": keys[i], "count": values[i], "duration": duration[i]};
-                }
-                dataa_c = Object.values(obj)
-                $('#contact_trace_day').DataTable({
-                columnDefs: [
-                    { type: 'natural-nohtml', targets: 0 }
-                  ],
-                    "searching": false,
-                    "info": false,
-                    "bLengthChange": false,
-                    "bDestroy": true,
-                    data: dataa_c, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
+        Object.keys(dataa["Contact History Day"]).map(item => { keys.push(item) })
+        //  Object.values(data["emp 1"]["Contact History Day"]["count"]).map(item => { values.push(item) })
+        Object.keys(dataa["Contact History Day"]).map(item => {
+            values.push(dataa["Contact History Day"][item]["count"]);
+        })
+        Object.keys(dataa["Contact History Day"]).map(item => {
+            duration.push(dataa["Contact History Day"][item]["max_duration"]);
+        })
+        for (var i = 0; i < keys.length; i++) {
+            obj[i] = { "sno": i + 1, "pair": keys[i], "count": values[i], "duration": duration[i] };
+        }
+        dataa_c = Object.values(obj)
+        $('#contact_trace_day').DataTable({
+            columnDefs: [
+                { type: 'natural-nohtml', targets: 0 }
+            ],
+            "searching": false,
+            "info": false,
+            "bLengthChange": false,
+            "bDestroy": true,
+            data: dataa_c, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "duration" }]
 
-                });
-            }
-            else {
-                document.getElementById("ctd").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available</a></div>'
+        });
+    }
+    else {
+        document.getElementById("ctd").innerHTML = '<div style="color:#007bff;padding:1rem"><a>No data available</a></div>'
 
-            }
-            document.getElementById('cea').innerHTML = `<table id="contact_event_all" class=" " data-page-length='8'>
+    }
+    document.getElementById('cea').innerHTML = `<table id="contact_event_all" class=" " data-page-length='8'>
                 <thead align="center">
                   <tr>
                     <th>User</th>
@@ -222,27 +222,27 @@ function UserHistoy(option) {
                 </thead>
                 <tfoot></tfoot>
               </table>`
-            var ceh = []
-            var na = []
-            Object.values(dataa["contact_event_all"]).map(item => {
-                ceh.push(Object.values(item)[0])
-                na.push(Object.keys(item)[0])
-            })
-            for(var i =0 ;i<ceh.length;i++){
-                Object.assign(ceh[i], {user: na[i]});
-            }
-            // ceh.push(na)
-            $('#contact_event_all').DataTable({
-                "scrollY": "200px",
-                "retrieve": true,
-                "scrollCollapse": true,
-                "paging": false,
-                "searching": false,
-                "info": false,
-                "bLengthChange": false,
-                "bDestroy": true,
-                data: ceh, "columns": [{ "data": "user" },{ "data": "minDist" }, { "data": "avgDist" }, { "data": "duration" }, { "data": "timestamp" }]
-            });
+    var ceh = []
+    var na = []
+    Object.values(dataa["contact_event_all"]).map(item => {
+        ceh.push(Object.values(item)[0])
+        na.push(Object.keys(item)[0])
+    })
+    for (var i = 0; i < ceh.length; i++) {
+        Object.assign(ceh[i], { user: na[i] });
+    }
+    // ceh.push(na)
+    $('#contact_event_all').DataTable({
+        "scrollY": "200px",
+        "retrieve": true,
+        "scrollCollapse": true,
+        "paging": false,
+        "searching": false,
+        "info": false,
+        "bLengthChange": false,
+        "bDestroy": true,
+        data: ceh, "columns": [{ "data": "user" }, { "data": "minDist" }, { "data": "avgDist" }, { "data": "duration" }, { "data": "timestamp" }]
+    });
 
 
 }
@@ -365,7 +365,7 @@ function loadUserHistoy() {
     fetch('https://takvaviya.in/coolpad_backend/user/userDeviceStatus' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-         document.getElementById("user_history_loader").innerHTML = '';
+            document.getElementById("user_history_loader").innerHTML = '';
             let allUsers = Object.values(data);
             let unDeletedUsers = allUsers.filter(user => user.is_Deleted === 'false');
             let userNames = unDeletedUsers.map(user => user.user);
@@ -410,7 +410,7 @@ function TeamHistoy(option) {
     obj_w = {}
 
 
-    fetch('https://takvaviya.in/coolpad_backend/user/team_history/'+ st_date+'/'+ en_date + '/' +  select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+  common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_history/' + st_date + '/' + en_date + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             dataa = data[option];
@@ -434,11 +434,11 @@ function TeamHistoy(option) {
             }
             else { document.getElementById("tciw").innerHTML = `<div style="color:blue">No data available</div>` }
             if (dataa["Contacts in a Week"] != null) {
-                if(Object.values(dataa["Most contact user pair Day"])!=0){
+                if (Object.values(dataa["Most contact user pair Day"]) != 0) {
                     const innerdiv2 = `   <p class="count-id">${Object.keys(dataa["Most contact user pair Day"])}&ensp;&ensp;&ensp;&ensp;Count:&ensp;${Object.values(dataa["Most contact user pair Day"])}</p>`
                     document.getElementById("tmcup").innerHTML = innerdiv2
                 }
-                else{
+                else {
                     document.getElementById("tmcup").innerHTML = `<div style="">No data available</div>`
                 }
             } else { document.getElementById("tmcup").innerHTML = `<div style="">No data available</div>` }
@@ -453,21 +453,21 @@ function TeamHistoy(option) {
             Object.keys(dataa["top 5 users in contact Day"]).map(item => { keys_team.push(item) })
             Object.values(dataa["top 5 users in contact Day"]).map(item => { values_team.push(item) })
             for (var i = 0; i < keys_team.length; i++) {
-                if(values_team[i] !=0 ){
-                obj[i] = { "sno": i + 1, "pair": keys_team[i], "contact": values_team[i] };
-            }
+                if (values_team[i] != 0) {
+                    obj[i] = { "sno": i + 1, "pair": keys_team[i], "contact": values_team[i] };
+                }
             }
             dataa_top_5_team = Object.values(obj)
             $('#user_contact').DataTable({
-            columnDefs: [
+                columnDefs: [
                     { type: 'natural-nohtml', targets: 0 }
-                  ],
+                ],
                 "searching": false,
                 "info": false,
-                "paging":false,
+                "paging": false,
                 "bLengthChange": false,
                 "bDestroy": true,
-                data: dataa_top_5_team, "columns": [ { "data": "pair" }, { "data": "contact" }]
+                data: dataa_top_5_team, "columns": [{ "data": "pair" }, { "data": "contact" }]
             });
             Object.keys(dataa_ww["top 5 users in contact Week"]).map(item => { keys_w_team.push(item) })
             Object.values(dataa_ww["top 5 users in contact Week"]).map(item => { values_w_team.push(item) })
@@ -476,11 +476,11 @@ function TeamHistoy(option) {
             }
             dataa_weak = Object.values(obj_w)
             $('#user_contact_weekss').DataTable({
-            columnDefs: [
+                columnDefs: [
                     { type: 'natural-nohtml', targets: 0 }
-                  ],
+                ],
                 "searching": false,
-                "paging":false,
+                "paging": false,
                 "info": false,
                 "bLengthChange": false,
                 "bDestroy": true,
@@ -492,10 +492,10 @@ function TeamHistoy(option) {
 
 
 function loadTeamHistory() {
-    fetch('https://takvaviya.in/coolpad_backend/user/getTeams/'+ '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/getTeams/' + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-        document.getElementById("team_history_loader").innerHTML = '';
+            document.getElementById("team_history_loader").innerHTML = '';
             const innerdiv = Object.values(data.teams).map(item => {
                 return `<option value='${item}'>${item}</option>`
             }).join("");
@@ -519,10 +519,10 @@ function getSelectValueTeamHistory() {
 
 function dwnldusrpdf() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/'+ start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen/' + user_instance + '/' + start_date + default_time_param + '/' + end_date + default_time_param + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-//            window.location.href = data.path + ".pdf"
+            //            window.location.href = data.path + ".pdf"
             window.open(data.path + ".pdf");
         });
 }
@@ -531,10 +531,10 @@ function dwnldusrpdf() {
 
 function dwnldusrcsv() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/csv/' + start_date + default_time_param + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + end_date + default_time_param + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-//            window.location.href = data.path + ".csv"
+            //            window.location.href = data.path + ".csv"
             window.open(data.path + ".csv");
 
         });
@@ -545,7 +545,7 @@ function dwnldusrcsv() {
 function dwnldusrxlsx() {
 
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/'+  start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/report/' + user_instance + '/xl/' + start_date + default_time_param + '/' + end_date + default_time_param + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             window.open(data.path + ".xlsx");
@@ -560,7 +560,7 @@ function dwnldusrxlsx() {
 function dwnldtmpdf() {
 
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/'+ start_date+default_time_param+'/'+ end_date +default_time_param  + '/' + select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/pdf_gen_team/' + user_instance + '/' + start_date + default_time_param + '/' + end_date + default_time_param + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             window.open(data.path + ".pdf");
@@ -571,11 +571,11 @@ function dwnldtmpdf() {
 
 function dwnldtmcsv() {
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/csv/' + start_date + default_time_param + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + end_date + default_time_param + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-//            window.location.href = data.path + ".csv"
-              window.open(data.path + ".csv");
+            //            window.location.href = data.path + ".csv"
+            window.open(data.path + ".csv");
 
         });
 }
@@ -585,12 +585,12 @@ function dwnldtmcsv() {
 function dwnldtmxlsx() {
 
     var user_instance = localStorage.getItem('current_team');
-    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/'+ start_date+default_time_param+'/'+ select_date +" "+from_HIStime+ '/' + select_date +" "+to_HIStime+ '/'+ end_date +default_time_param +'/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_report/' + user_instance + '/xl/' + start_date + default_time_param + '/' + select_date + " " + from_HIStime + '/' + select_date + " " + to_HIStime + '/' + end_date + default_time_param + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-/*
-            window.location.href = data.path + ".xlsx"
-*/
+            /*
+                        window.location.href = data.path + ".xlsx"
+            */
             window.open(data.path + ".xlsx");
         });
 }
@@ -616,7 +616,7 @@ function Submit1() {
     var note = document.getElementById("note_textt").value
     //TODO dynamci location
     const data = {
-       "user": dev_id[localStorage.getItem("current_user")]['device_id'],
+        "user": dev_id[localStorage.getItem("current_user")]['device_id'],
         "date_time": String(newdate),
         "location": common4all,
         "notes": note
@@ -640,7 +640,7 @@ function Submit1() {
         });
 }
 function load_notes_user() {
-    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + dev_id[localStorage.getItem("current_user")]['device_id']  + '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/empallnotes/' + dev_id[localStorage.getItem("current_user")]['device_id'] + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             Object.keys(data).map(item => {
@@ -663,11 +663,11 @@ function load_notes_user() {
                     da = data[item][nitem].date_time
 
                 }).join(" ");
-                 if(da == undefined){
-                    da ='N/A'
+                if (da == undefined) {
+                    da = 'N/A'
                 }
-                if(stick_data.length == 0){
-                    stick_data ='-'
+                if (stick_data.length == 0) {
+                    stick_data = '-'
                 }
 
                 const innerdiv1 = `
@@ -707,10 +707,10 @@ function Note_delete(id) {
 }
 // end user sticky notes
 
-function team_notes_show(){
- document.getElementById("my-modal1").showModal();
+function team_notes_show() {
+    document.getElementById("my-modal1").showModal();
 }
-function close_team_notes(){
+function close_team_notes() {
     document.getElementById("my-modal1").close();
     document.getElementById("note_textt1").value = '';
 }
@@ -749,7 +749,7 @@ function Submit2() {
 }
 function load_notes_team() {
     var a = String(localStorage.getItem("current_team").toLowerCase())
-    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/'+common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/teamallnotes/' + a + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             Object.keys(data).map(item => {
@@ -770,11 +770,11 @@ function load_notes_team() {
                     stick_data.push(data[item][nitem].notes)
                     da = data[item][nitem].date_time
                 }).join(" ");
-                if(da == undefined){
-                    da ='N/A'
+                if (da == undefined) {
+                    da = 'N/A'
                 }
-                if(stick_data.length == 0){
-                    stick_data ='-'
+                if (stick_data.length == 0) {
+                    stick_data = '-'
                 }
                 const innerdiv1 = `
                     <div class="note_card1">
@@ -812,37 +812,37 @@ function Note_delete_team(id) {
 }
 
 
-setInterval(function(){
-exampleFunction();
-loadTeamHistory();
+setInterval(function () {
+    exampleFunction();
+    loadTeamHistory();
 }, 300000);
 
 
-$(function(){
+$(function () {
 
     var today = new Date();
     var dtToday = new Date();
     var month = dtToday.getMonth() + 1;
     var day = dtToday.getDate();
     var year = dtToday.getFullYear();
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
     var maxDate = year + '-' + month + '-' + day;
     $('#date_history').attr('max', maxDate);
     $('#date_history').attr('max', maxDate);
     select_date = current_date
     $('#date_history').val(select_date);
-    console.log("currnt",select_date,moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD'))
+    console.log("currnt", select_date, moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD'))
     st_date = moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
     en_date = moment(select_date).add(1, 'days').endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
-    st_date = st_date+default_time_param;
-    en_date = en_date+" "+default_end_param;
+    st_date = st_date + default_time_param;
+    en_date = en_date + " " + default_end_param;
     select_date = select_date;
     exampleFunction()
-    console.log("check time",select_date,st_date,en_date)
+    console.log("check time", select_date, st_date, en_date)
     $("#date_history").on('change', function (event) {
         event.preventDefault();
         select_date = this.value
@@ -851,8 +851,8 @@ $(function(){
         st_date = moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
         en_date = moment(select_date).add(1, 'days').endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
-        st_date = st_date+default_time_param;
-        en_date = en_date+" "+default_end_param;
+        st_date = st_date + default_time_param;
+        en_date = en_date + " " + default_end_param;
         select_date = select_date;
         exampleFunction()
         loadTeamHistory()
@@ -876,31 +876,31 @@ function convertDateToReadableDate(date) {
 }
 
 
-$(function(){
+$(function () {
 
     var today = new Date();
     var dtToday = new Date();
     var month = dtToday.getMonth() + 1;
     var day = dtToday.getDate();
     var year = dtToday.getFullYear();
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
     var maxDate = year + '-' + month + '-' + day;
     $('#date_history_team').attr('max', maxDate);
     $('#date_history_team').attr('max', maxDate);
     select_date = current_date
     $('#date_history_team').val(select_date);
-    console.log("currnt",select_date,moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD'))
+    console.log("currnt", select_date, moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD'))
     st_date = moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
     en_date = moment(select_date).add(1, 'days').endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
-    st_date = st_date+default_time_param;
-    en_date = en_date+" "+default_end_param;
+    st_date = st_date + default_time_param;
+    en_date = en_date + " " + default_end_param;
     select_date = select_date;
     exampleFunction()
-    console.log("check time",select_date,st_date,en_date)
+    console.log("check time", select_date, st_date, en_date)
     $("#date_history_team").on('change', function (event) {
         event.preventDefault();
         select_date = this.value
@@ -909,8 +909,8 @@ $(function(){
         st_date = moment(select_date).add(1, 'days').startOf('isoWeek').tz("America/Chicago").format('YYYY-MM-DD');
         en_date = moment(select_date).add(1, 'days').endOf('isoWeek').subtract(1, 'days').tz("America/Chicago").format('YYYY-MM-DD');
 
-        st_date = st_date+default_time_param;
-        en_date = en_date+" "+default_end_param;
+        st_date = st_date + default_time_param;
+        en_date = en_date + " " + default_end_param;
         select_date = select_date;
         exampleFunction()
         loadTeamHistory()
@@ -933,307 +933,451 @@ function convertDateToReadableDate(date) {
     return readableDate;
 }
 
-function timepicker_his(){
-document.getElementById("timePicker_his").style.display="block";
+function timepicker_his() {
+    document.getElementById("timePicker_his").style.display = "block";
+    setTimeout(function() {  $('.timerange').click();  },10);
+
+
+}
+$(document).mouseup(function (e)
+                    {
+  var container = $("#timePicker_his"); // YOUR CONTAINER SELECTOR
+
+  if (!container.is(e.target) // if the target of the click isn't the container...
+      && container.has(e.target).length === 0) // ... nor a descendant of the container
+  {
+    container.hide();
+  }
+});
+
+var from_O_HIStime, to_O_HIStime;
+function submit_histime() {
+    from_HIStime = $("#from_time").val() + ':00';
+    to_HIStime = $("#to_time").val() + ':00';
+    from_HIStime = from_HIStime.replace(/:/g, "-");
+    to_HIStime = to_HIStime.replace(/:/g, "-");
+    console.log(from_HIStime)
+    exampleFunction()
+    loadTeamHistory()
+    document.getElementById("timePicker_his").style.display = "none";
+
+    from_O_HIStime = $("#from_time").val() + ':00';
+    to_O_HIStime = $("#to_time").val() + ':00';
+    document.getElementById("selected_time_user").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
+    document.getElementById("selected_time_team").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
 }
 
+function Restpicker_his() {
+    document.getElementById("selected_time_user").innerHTML = ``
+    document.getElementById("selected_time_team").innerHTML = ``
+    document.getElementById("user_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    document.getElementById("team_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
+    from_HIStime = default_currnt_param;
+    to_HIStime = default_end_param;
+    select_date = current_date
+    $('#date_history').val(select_date);
+    difault_name_from = "00:00";
+    default_name_to = "00:00";
+    document.getElementById("time_change").innerHTML = ` ${difault_name_from} &nbsp;To&nbsp; ${default_name_to}`
 
-var from_O_HIStime,to_O_HIStime;
-function submit_histime(){
-from_HIStime = $("#from_time").val()+':00';
-to_HIStime = $("#to_time").val()+':00';
-from_HIStime = from_HIStime.replace(/:/g,"-");
-to_HIStime = to_HIStime.replace(/:/g,"-");
-console.log(from_HIStime)
-exampleFunction()
-loadTeamHistory()
-document.getElementById("timePicker_his").style.display="none";
 
-from_O_HIStime = $("#from_time").val() + ':00';
-to_O_HIStime = $("#to_time").val() + ':00';
-document.getElementById("selected_time_user").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
-document.getElementById("selected_time_team").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
+    exampleFunction()
+    loadTeamHistory()
 }
 
-function Restpicker_his(){
-document.getElementById("selected_time_user").innerHTML = ``
-document.getElementById("selected_time_team").innerHTML = ``
-document.getElementById("user_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-document.getElementById("team_history_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-from_HIStime = default_currnt_param;
-to_HIStime = default_end_param;
-select_date = current_date
-$('#date_history').val(select_date);
-difault_name_from = "00:00:00";
-default_name_to = "23:59:59";
-document.getElementById("time_change").innerHTML=`From- ${difault_name_from} To- ${default_name_to}`
-
-
-exampleFunction()
-loadTeamHistory()
-}
-
-var times_team =1
+var times_team = 1
 function cancel_histime() {
-                document.getElementById("timePicker_his").style.display = 'none'
-                times_team =1
+    document.getElementById("timePicker_his").style.display = 'none'
+    times_team = 1
+}
+
+
+
+$('.timerange').on('click', function (e) {
+    // if (times_team == 1) {
+        e.stopPropagation();
+        var input = $(this).find('input');
+        var now = new Date();
+        var hours = now.getHours();
+        var period = "PM";
+        if (hours < 12) {
+            period = "AM";
+        } else {
+            hours = hours - 11;
+        }
+        var minutes = now.getMinutes();
+        var range = {
+            from: {
+                hour: hours,
+                minute: minutes,
+                period: period
+            },
+            to: {
+                hour: hours,
+                minute: minutes,
+                period: period
             }
-            
-
-
-            $('.timerange').on('click', function(e) {
-                if(times_team==1){
-                    e.stopPropagation();
-                    var input = $(this).find('input');
-                    var now = new Date();
-                    var hours = now.getHours();
-                    var period = "PM";
-                    if (hours < 12) {
-                        period = "AM";
-                    } else {
-                        hours = hours - 11;
-                    }
-                    var minutes = now.getMinutes();
-                    var range = {
-                        from: {
-                            hour: hours,
-                            minute: minutes,
-                            period: period
-                        },
-                        to: {
-                            hour: hours,
-                            minute: minutes,
-                            period: period
-                        }
-                    };
-                    if (input.val() !== "") {
-                        var timerange = input.val();
-                        var matches = timerange.match(/([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)-([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)/);
-                        if (matches.length === 7) {
-                            range = {
-                                from: {
-                                    hour: matches[1],
-                                    minute: matches[2],
-                                    period: matches[3]
-                                },
-                                to: {
-                                    hour: matches[4],
-                                    minute: matches[5],
-                                    period: matches[6]
-                                }
-                            }
-                        }
-                    };
-                    set_range(range);
-                    var html = '<div class="timerangepicker-container">' +
-                        '<div class="timerangepicker-from">' +
-                        '<label class="timerangepicker-label">From:</label>' +
-                        '<div class="timerangepicker-display hour">' +
-                        '<span class="increment fa fa-angle-up"></span>' +
-                        '<span class="value">' + ('0' + range.from.hour).substr(-2) + '</span>' +
-                        '<span class="decrement fa fa-angle-down"></span>' +
-                        '</div>' +
-                        ':' +
-                        '<div class="timerangepicker-display minute">' +
-                        '<span class="increment fa fa-angle-up"></span>' +
-                        '<span class="value">' + ('0' + range.from.minute).substr(-2) + '</span>' +
-                        '<span class="decrement fa fa-angle-down"></span>' +
-                        '</div>' +
-                        ':' +
-                        '<div class="timerangepicker-display period">' +
-                        '<span class="increment fa fa-angle-up"></span>' +
-                        '<span class="value">PM</span>' +
-                        '<span class="decrement fa fa-angle-down"></span>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="timerangepicker-to">' +
-                        '<label class="timerangepicker-label">To:</label>' +
-                        '<div class="timerangepicker-display hour">' +
-                        '<span class="increment fa fa-angle-up"></span>' +
-                        '<span class="value">' + ('0' + range.to.hour).substr(-2) + '</span>' +
-                        '<span class="decrement fa fa-angle-down"></span>' +
-                        '</div>' +
-                        ':' +
-                        '<div class="timerangepicker-display minute">' +
-                        '<span class="increment fa fa-angle-up"></span>' +
-                        '<span class="value">' + ('0' + range.to.minute).substr(-2) + '</span>' +
-                        '<span class="decrement fa fa-angle-down"></span>' +
-                        '</div>' +
-                        ':' +
-                        '<div class="timerangepicker-display period">' +
-                        '<span class="increment fa fa-angle-up"></span>' +
-                        '<span class="value">PM</span>' +
-                        '<span class="decrement fa fa-angle-down"></span>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
-                    $(html).insertAfter(this);
-                    $('.timerangepicker-container').on(
-                        'click',
-                        '.timerangepicker-display.hour .increment',
-                        function() {
-                            var value = $(this).siblings('.value');
-                            value.text(
-                                increment(value.text(), 12, 1, 2)
-                            );
-                        }
-                    );
-                    $('.timerangepicker-container').on(
-                        'click',
-                        '.timerangepicker-display.hour .decrement',
-                        function() {
-                            var value = $(this).siblings('.value');
-                            value.text(
-                                decrement(value.text(), 12, 1, 2)
-                            );
-                        }
-                    );
-                    $('.timerangepicker-container').on(
-                        'click',
-                        '.timerangepicker-display.minute .increment',
-                        function() {
-                            var value = $(this).siblings('.value');
-                            value.text(
-                                increment(value.text(), 59, 0, 2)
-                            );
-                        }
-                    );
-                    $('.timerangepicker-container').on(
-                        'click',
-                        '.timerangepicker-display.minute .decrement',
-                        function() {
-                            var value = $(this).siblings('.value');
-                            value.text(
-                                decrement(value.text(), 12, 1, 2)
-                            );
-                        }
-                    );
-                    $('.timerangepicker-container').on(
-                        'click',
-                        '.timerangepicker-display.period .increment, .timerangepicker-display.period .decrement',
-                        function() {
-                            var value = $(this).siblings('.value');
-                            var next = value.text() == "PM" ? "AM" : "PM";
-                            value.text(next);
-                        }
-                    );
-                }
-                else{
-                    times_team=0
-                }
-                times_team=times_team+1
-                
-            });
-            $(document).on('click', e => {
-                if (!$(e.target).closest('.timerangepicker-container').length) {
-                    if ($('.timerangepicker-container').is(":visible")) {
-                        var timerangeContainer = $('.timerangepicker-container');
-                        if (timerangeContainer.length > 0) {
-                            var timeRange = {
-                                from: {
-                                    hour: timerangeContainer.find('.value')[0].innerText,
-                                    minute: timerangeContainer.find('.value')[1].innerText,
-                                    period: timerangeContainer.find('.value')[2].innerText
-                                },
-                                to: {
-                                    hour: timerangeContainer.find('.value')[3].innerText,
-                                    minute: timerangeContainer.find('.value')[4].innerText,
-                                    period: timerangeContainer.find('.value')[5].innerText
-                                },
-                            };
-                            set_range(timeRange);
-                            timerangeContainer.parent().find('input').val(
-                                timeRange.from.hour + ":" +
-                                timeRange.from.minute + " " +
-                                timeRange.from.period + "-" +
-                                timeRange.to.hour + ":" +
-                                timeRange.to.minute + " " +
-                                timeRange.to.period
-                            );
-                            timerangeContainer.remove();
-                        }
+        };
+        if (input.val() == "") {
+            var timerange = input.val();
+            var matches = timerange.match(/([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)-([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)/);
+            if (matches.length === 7) {
+                range = {
+                    from: {
+                        hour: matches[1],
+                        minute: matches[2],
+                        period: matches[3]
+                    },
+                    to: {
+                        hour: matches[4],
+                        minute: matches[5],
+                        period: matches[6]
                     }
                 }
-            });
-            function increment(value, max, min, size) {
-                var intValue = parseInt(value);
-                if (intValue == max) {
-                    return ('0' + min).substr(-size);
-                } else {
-                    var next = intValue + 1;
-                    return ('0' + next).substr(-size);
-                }
             }
-            function decrement(value, max, min, size) {
-                var intValue = parseInt(value);
-                if (intValue == min) {
-                    return ('0' + max).substr(-size);
-                } else {
-                    var next = intValue - 1;
-                    return ('0' + next).substr(-size);
-                }
+        };
+        if(range.from.hour ==0 &&  range.to.hour==0){
+            range.from.hour=12
+            range.to.hour =12
+        }
+        set_range(range);
+        var html = '<div class="timerangepicker-container">'+
+      '<div class="timerangepicker-from">'+
+      '<label class="timerangepicker-label">From:</label>' +
+      '<div class="timerangepicker-display hour from">' +
+          '<span class="increment fa fa-angle-up"></span>' +
+          '<span class="value" id="editableHour">'+('0' + range.from.hour).substr(-2)+'</span>' +
+          '<span class="decrement fa fa-angle-down"></span>' +
+      '</div>' +
+      ':' +
+      '<div class="timerangepicker-display minute from">' +
+          '<span class="increment fa fa-angle-up"></span>' +
+          '<span class="value" id="editableMinute">'+('0' + range.from.minute).substr(-2)+'</span>' +
+          '<span class="decrement fa fa-angle-down"></span>' +
+      '</div>' +
+      ':' +
+      '<div class="timerangepicker-display period">' +
+          '<span class="increment fa fa-angle-up"></span>' +
+          '<span class="value">AM</span>' +
+          '<span class="decrement fa fa-angle-down"></span>' +
+      '</div>' +
+      '</div>' +
+      '<div class="timerangepicker-to">' +
+      '<label class="timerangepicker-label">To:</label>' +
+      '<div class="timerangepicker-display hour to">' +
+          '<span class="increment fa fa-angle-up"></span>' +
+          '<span class="value" id="editableToHour">'+('0' + range.to.hour).substr(-2)+'</span>' +
+          '<span class="decrement fa fa-angle-down"></span>' +
+      '</div>' +
+      ':' +
+      '<div class="timerangepicker-display minute to">' +
+          '<span class="increment fa fa-angle-up"></span>' +
+          '<span class="value" id="editableToMinute">'+('0' + range.to.minute).substr(-2)+'</span>' +
+          '<span class="decrement fa fa-angle-down"></span>' +
+      '</div>' +
+      ':' +
+      '<div class="timerangepicker-display period">' +
+          '<span class="increment fa fa-angle-up"></span>' +
+          '<span class="value">PM</span>' +
+          '<span class="decrement fa fa-angle-down"></span>' +
+      '</div>' +
+      '</div>' +
+    '</div>';
+        $(html).insertAfter(this);
+        $('.timerangepicker-container').on(
+            'click',
+            '.timerangepicker-display.hour .increment',
+            function () {
+                var value = $(this).siblings('.value');
+                value.text(
+                    increment(value.text(), 12, 1, 2)
+                );
             }
-            function setHistoryTime() {
-                times_team=1
-                if ($('.timerangepicker-container').is(":visible")) {
-                    var timerangeContainer = $('.timerangepicker-container');
-                    if (timerangeContainer.length > 0) {
-                        var timeRange = {
-                            from: {
-                                hour: timerangeContainer.find('.value')[0].innerText,
-                                minute: timerangeContainer.find('.value')[1].innerText,
-                                period: timerangeContainer.find('.value')[2].innerText
-                            },
-                            to: {
-                                hour: timerangeContainer.find('.value')[3].innerText,
-                                minute: timerangeContainer.find('.value')[4].innerText,
-                                period: timerangeContainer.find('.value')[5].innerText
-                            },
-                        };
-                        set_range(timeRange);
-                        timerangeContainer.parent().find('input').val(
-                            timeRange.from.hour + ":" +
-                            timeRange.from.minute + " " +
-                            timeRange.from.period + "-" +
-                            timeRange.to.hour + ":" +
-                            timeRange.to.minute + " " +
-                            timeRange.to.period
-                        );
-                        timerangeContainer.remove();
-                    }
-                }
-                var histimerange = get_range();
-                var hr = histimerange.from.hour;
-                var mi = histimerange.from.minute;
-                var pe = histimerange.from.period;
-                var dash = '-';
-                var HIStime = hr + dash + mi +dash+ '00';
-                from_HIStime = HIStime;
-                var to_hr = histimerange.to.hour;
-                var to_mi = histimerange.to.minute;
-                var to_pe = histimerange.to.period;
-                to_HIStime = to_hr + dash + to_mi + dash+'00';
+        );
+        $('.timerangepicker-container').on(
+            'click',
+            '.timerangepicker-display.hour .decrement',
+            function () {
+                var value = $(this).siblings('.value');
+                value.text(
+                    decrement(value.text(), 12, 1, 2)
+                );
+            }
+        );
+        $('.timerangepicker-container').on(
+            'click',
+            '.timerangepicker-display.minute .increment',
+            function () {
+                var value = $(this).siblings('.value');
+                value.text(
+                    increment(value.text(), 59, 0, 2)
+                );
+            }
+        );
+        $('.timerangepicker-container').on(
+            'click',
+            '.timerangepicker-display.minute .decrement',
+            function () {
+                var value = $(this).siblings('.value');
+                value.text(
+                    decrement(value.text(), 59, 0, 2)
+                );
+            }
+        );
+        $('.timerangepicker-container').on(
+            'click',
+            '.timerangepicker-display.period .increment, .timerangepicker-display.period .decrement',
+            function () {
+                var value = $(this).siblings('.value');
+                var next = value.text() == "PM" ? "AM" : "PM";
+                value.text(next);
+            }
+        );
+        // editable input start
+    $('#editableHour').on('click',
+    function(event) {
+        $('#editableHour').attr('contenteditable', 'true');
+    }
+);
+$('#editableToHour').on('click',
+    function(event) {
+        $('#editableToHour').attr('contenteditable', 'true');
+    }
+);
+$('#editableMinute').on('click',
+    function(event) {
+        $('#editableMinute').attr('contenteditable', 'true');
+    }
+);
+$('#editableToMinute').on('click',
+    function(event) {
+        $('#editableToMinute').attr('contenteditable', 'true');
+    }
+);
+document.getElementById('editableHour').addEventListener("input", function(e) {
+    let insertedValue = parseInt(e.target.innerText);
+    if (insertedValue <= 12 ) {
+        $('.timerangepicker-display.hour.from').css({ 'border': '1px solid black', 'max-width': '100%' });
+        let currentValue = insertedValue;
+        setTimeout(function() {
+            if (currentValue >= 10) {
+                console.log('e', insertedValue)
+                $('#editableHour').text(insertedValue);
+            } else {
+                $('#editableHour').text('0' + insertedValue);
+            }
+        }, 1000);
+    } else {
+        $('#editableHour').text('01');
+        $('.timerangepicker-display.hour.from').css({ 'border': '1px solid red' });
+    }
+}, false);
+document.getElementById('editableToHour').addEventListener("input", function(e) {
+    let insertedValue = parseInt(e.target.innerText);
+    if (insertedValue <= 12 ) {
+        $('.timerangepicker-display.hour.to').css({ 'border': '1px solid black' });
+        let currentValue = insertedValue;
+        setTimeout(function() {
+            if (currentValue >= 10 ) {
+                $('#editableToHour').text(insertedValue);
+            } else {
+                $('#editableToHour').text('0' + insertedValue);
+            }
+        }, 1000);
+    } else {
+        $('#editableHour').text('01');
+        $('.timerangepicker-display.hour.to').css({ 'border': '1px solid red' });
+    }
+}, false);
+document.getElementById('editableMinute').addEventListener("input", function(e) {
+    let insertedValue = parseInt(e.target.innerText);
+    console.log("input event fired", insertedValue);
+    if (insertedValue <= 59 ) {
+        $('.timerangepicker-display.minute.from').css({ 'border': '1px solid black' });
+        let currentValue = insertedValue;
+        setTimeout(function() {
+            if (currentValue >= 10) {
+                console.log('e', insertedValue)
+                $('#editableMinute').text(insertedValue);
+            } else {
+                $('#editableMinute').text('0' + insertedValue);
+            }
+        }, 1000);
+    } else {
+        $('#editableHour').text('00');
+        console.log('else part is working');
+        $('.timerangepicker-display.minute.from').css({ 'border': '1px solid red' });
+    }
+}, false);
+document.getElementById('editableToMinute').addEventListener("input", function(e) {
+    let insertedValue = parseInt(e.target.innerText);
+    console.log("input event fired", insertedValue);
+    if (insertedValue <= 59 ) {
+        $('.timerangepicker-display.minute.to').css({ 'border': '1px solid black' });
+        let currentValue = insertedValue;
+        setTimeout(function() {
+            if (currentValue >= 10) {
+                console.log('e', insertedValue)
+                $('#editableToMinute').text(insertedValue);
+            } else {
+                $('#editableToMinute').text('0' + insertedValue);
+            }
+        }, 1000);
+    } else {
+        $('#editableHour').text('00');
+        console.log('else part is working');
+        $('.timerangepicker-display.minute.to').css({ 'border': '1px solid red' });
+    }
+}, false);
+// editable input end
+    // }
+    // else {
+    //     times_team = 0
+    // }
+    // times_team = times_team + 1
+
+});
+$(document).on('click', e => {
+    if (!$(e.target).closest('.timerangepicker-container').length) {
+        if ($('.timerangepicker-container').is(":visible")) {
+            var timerangeContainer = $('.timerangepicker-container');
+            if (timerangeContainer.length > 0) {
+                var timeRange = {
+                    from: {
+                        hour: timerangeContainer.find('.value')[0].innerText,
+                        minute: timerangeContainer.find('.value')[1].innerText,
+                        period: timerangeContainer.find('.value')[2].innerText
+                    },
+                    to: {
+                        hour: timerangeContainer.find('.value')[3].innerText,
+                        minute: timerangeContainer.find('.value')[4].innerText,
+                        period: timerangeContainer.find('.value')[5].innerText
+                    },
+                };
+                set_range(timeRange);
+                timerangeContainer.parent().find('input').val(
+                    timeRange.from.hour + ":" +
+                    timeRange.from.minute + " " +
+                    timeRange.from.period + "-" +
+                    timeRange.to.hour + ":" +
+                    timeRange.to.minute + " " +
+                    timeRange.to.period
+                );
+                timerangeContainer.remove();
+            }
+        }
+    }
+});
+function increment(value, max, min, size) {
+    var intValue = parseInt(value);
+    if (intValue == max) {
+        return ('0' + min).substr(-size);
+    } else {
+        var next = intValue + 1;
+        return ('0' + next).substr(-size);
+    }
+}
+function decrement(value, max, min, size) {
+    var intValue = parseInt(value);
+    if (intValue == min) {
+        return ('0' + max).substr(-size);
+    } else {
+        var next = intValue - 1;
+        return ('0' + next).substr(-size);
+    }
+}
+function setHistoryTime() {
+    times_team = 1
+    if ($('.timerangepicker-container').is(":visible")) {
+        var timerangeContainer = $('.timerangepicker-container');
+        if (timerangeContainer.length > 0) {
+            var timeRange = {
+                from: {
+                    hour: timerangeContainer.find('.value')[0].innerText,
+                    minute: timerangeContainer.find('.value')[1].innerText,
+                    period: timerangeContainer.find('.value')[2].innerText
+                },
+                to: {
+                    hour: timerangeContainer.find('.value')[3].innerText,
+                    minute: timerangeContainer.find('.value')[4].innerText,
+                    period: timerangeContainer.find('.value')[5].innerText
+                },
+            };
+            set_range(timeRange);
+            timerangeContainer.parent().find('input').val(
+                timeRange.from.hour + ":" +
+                timeRange.from.minute + " " +
+                timeRange.from.period + "-" +
+                timeRange.to.hour + ":" +
+                timeRange.to.minute + " " +
+                timeRange.to.period
+            );
+            timerangeContainer.remove();
+        }
+    }
+    var histimerange = get_range();
+
+    var hr_user_name = histimerange.from.hour;
+    var mi_user_name = histimerange.from.minute;
+    var pe_user_name = histimerange.from.period;
 
 
-                time_change_name_from = hr + ':' + mi +':'+ '00';
-                time_change_name_to = to_hr + ':' + to_mi + ':'+'00'
-                console.log(from_HIStime)
-                console.log(to_HIStime)
-                document.getElementById('time_change').innerHTML=`From- ${time_change_name_from} To- ${time_change_name_to}`
-                document.getElementById("timePicker_his").style.display = 'none'
+    var hr = histimerange.from.hour;
+    var mi = histimerange.from.minute;
+    var pe = histimerange.from.period;
+    var dash = '-';
 
-                exampleFunction()
-                loadTeamHistory()
+    // var HIStime = hr + dash + mi +dash+ '00';
+    // from_HIStime = HIStime;
+    var to_hr = histimerange.to.hour;
+    var to_mi = histimerange.to.minute;
+    var to_pe = histimerange.to.period;
 
-                // from_O_HIStime = from_HIStime;
-                // to_O_HIStime = to_HIStime;
-                // document.getElementById("timePicker_his").style.display = "none";
-                // document.getElementById("selected_time_user").innerHTML = `<b>From - ${from_O_HIStime} &ensp;&ensp; To -  ${to_O_HIStime
-                            // }</b>`
-            }
-            function set_range(range) {
-                time_range = range
-            }
-            function get_range() {
-                return time_range;
-            }
+    var to_hr_user_name = histimerange.to.hour;
+    var to_mi_user_name = histimerange.to.minute;
+    var to_pe_user_name = histimerange.to.period;
+
+    if (hr === '12') {
+        hr = '00';
+    }
+
+    if (pe === 'PM') {
+        hr = parseInt(hr, 10) + 12;
+    }
+
+    if (to_hr === '12') {
+        to_hr = '00';
+    }
+
+    if (to_pe === 'PM') {
+        to_hr = parseInt(to_hr, 10) + 12;
+    }
+    from_HIStime = hr + dash + mi + dash + '00';
+    to_HIStime = to_hr + dash + to_mi + dash + '00';
+    console.log("from",from_HIStime)
+    console.log("to",to_HIStime)
+
+    // to_HIStime = to_hr + dash + to_mi + dash+'00';
+
+
+    var name_from_time = hr_user_name + ':' + mi_user_name + pe_user_name
+    var name_to_time = to_hr_user_name + ':' + to_mi_user_name +to_pe_user_name
+
+    document.getElementById('time_change').innerHTML = `${name_from_time} &nbsp;To&nbsp; ${name_to_time}`
+    document.getElementById("timePicker_his").style.display = 'none'
+
+    exampleFunction()
+    loadTeamHistory()
+
+    // from_O_HIStime = from_HIStime;
+    // to_O_HIStime = to_HIStime;
+    // document.getElementById("timePicker_his").style.display = "none";
+    // document.getElementById("selected_time_user").innerHTML = `<b>From - ${from_O_HIStime} &ensp;&ensp; To -  ${to_O_HIStime
+    // }</b>`
+}
+function set_range(range) {
+    time_range = range
+}
+function get_range() {
+    return time_range;
+}

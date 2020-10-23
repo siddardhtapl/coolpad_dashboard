@@ -1,7 +1,7 @@
 // Global decleration
 var contact_f_data
 var contact_f_data_week
-var api 
+var api
 
 
 var from_HIStime, to_HIStime;
@@ -11,6 +11,7 @@ var default_end_param = "23-59-59";
 from_HIStime = default_currnt_param;
 to_HIStime = default_end_param;
 
+var times
 
 
 
@@ -23,17 +24,17 @@ function color() {
         co = 'white'
     }
     if (selectdate === undefined) {
-    console.log(selectdate)
+        console.log(selectdate)
     }
     else {
-    daily_data(selectdate);
+        daily_data(selectdate);
     }
     weekly_data()
 }
 
 function exampleFunction(selectdate) {
-    console.log("api",from_HIStime,to_HIStime)
-    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
+    console.log("api", from_HIStime, to_HIStime)
+    fetch('https://takvaviya.in/coolpad_backend/user/team_freq/' + selectdate + " " + from_HIStime + '/' + selectdate + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data_user => {
             contact_f_data = data_user
@@ -41,7 +42,7 @@ function exampleFunction(selectdate) {
             daily_tracker_freq()
             getHeapMapData()
         })
-    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date+" "+default_currnt_param + '/' + end_date +" "+default_end_param+ '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/frequency_weekly/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_end_param + '/' + common4all)
         .then(response => response.json())
         .then(data_week => {
             contact_f_data_week = data_week
@@ -88,7 +89,7 @@ function userid() {
         .then(response => response.json())
         .then(data => {
             dataa = Object.values(data)
-            console.log(dataa,"uuuuuidddd")
+            console.log(dataa, "uuuuuidddd")
             Object.values(data).map(item => {
                 var bat = item['recent_heartbeat_event']['battery']
                 bat = Math.round(bat / 10)
@@ -100,7 +101,7 @@ function userid() {
                     batery.push(bat)
                 }
                 var uuid = item["user_id"]
-                uuID.push(uuid.slice(0,5))
+                uuID.push(uuid.slice(0, 5))
             })
             for (var i = 0; i < dataa.length; i++) {
                 dataa[i]["battery"] = batery[i]
@@ -109,8 +110,8 @@ function userid() {
             let undeletedUsers = dataa.filter(user => user.is_Deleted === "false");
             $('#user_status_table').DataTable({
                 columnDefs: [
-                    { type: 'natural-nohtml', targets: [0,1] }
-                  ],
+                    { type: 'natural-nohtml', targets: [0, 1] }
+                ],
                 "searching": false,
                 "info": false,
                 "bLengthChange": false,
@@ -554,11 +555,11 @@ function switchHeatMapWeekly(team) {
 
 function rp_one_daily() {
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' +  selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/daily_report/' + selectdate + " " + from_HIStime + '/' + selectdate + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(data => {
             // console.log(data.path+".pdf");
-    /*            window.location.href = data.path + ".pdf"*/
+            /*            window.location.href = data.path + ".pdf"*/
             window.open(data.path + ".pdf");
         });
 }
@@ -568,11 +569,11 @@ function rp_one_daily() {
 function rp_weekly() {
     //Todo not user instance its emp instance
     var user_instance = localStorage.getItem('current_user');
-    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' +  start_date +" "+default_currnt_param+ '/' + end_date +" "+default_currnt_param + '/' +current_date+'/' + common4all)
+    fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_currnt_param + '/' + current_date + '/' + common4all)
         .then(response => response.json())
         .then(data => {
-/*            window.location.href = data.path + ".pdf"*/
-            console.log("ffff",data.path)
+            /*            window.location.href = data.path + ".pdf"*/
+            console.log("ffff", data.path)
             window.open(data.path + ".pdf");
         });
 }
@@ -585,7 +586,7 @@ function weekly_data() {
     var contact_history_all_weelk;
     var daily_total_for_week;
 
-    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date +" "+default_currnt_param+ '/' + end_date +" "+default_end_param + '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/weekly_tracker_get/' + start_date + " " + default_currnt_param + '/' + end_date + " " + default_end_param + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
@@ -790,12 +791,13 @@ console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + cur
 
 function daily_data(selectdate) {
     document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
-    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate +" "+from_HIStime+ '/' + selectdate +" "+to_HIStime+ '/' + common4all)
+    fetch('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + " " + from_HIStime + '/' + selectdate + " " + to_HIStime + '/' + common4all)
         .then(response => response.json())
         .then(
             data => {
+                console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + selectdate + " " + from_HIStime + '/' + selectdate + " " + to_HIStime + '/' + common4all)
 
-            document.getElementById("daily_tracker_loader").innerHTML = ''
+                document.getElementById("daily_tracker_loader").innerHTML = ''
                 var top_contact_history = data['top_pairs_maxmium_contact']
                 var total_no_contact_daily = data['total_no_of_contacts']
                 var clock_data_daily = data['clk_chart']
@@ -969,18 +971,22 @@ function daily_data(selectdate) {
                 obj_history = {}
                 Object.keys(contact_frequency_daily).map(item => { keys_history.push(item) })
                 Object.values(contact_frequency_daily).map(item => { values_history.push(item) })
+                // console.log(keys_history)
+
                 for (var i = 0; i < keys_history.length; i++) {
                     if (values_history[i] != 0) {
-                        obj_history[i] = { "pair": keys_history[i], "count": values_history[i] };
+                        obj_history[i] = { "pair": keys_history[i], "count": values_history[i]['count'], "max_duration": values_history[i]['max_duration'], "avgDist": values_history[i]['avgDist'] };
                     }
                 }
+
                 dataa_history = Object.values(obj_history)
+                console.log(dataa_history)
                 $('#contact_his').DataTable({
                     "searching": false,
                     "info": false,
                     "bLengthChange": false,
                     "bDestroy": true,
-                    data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }]
+                    data: dataa_history, "columns": [{ "data": "pair" }, { "data": "count" }, { "data": "max_duration" }, { "data": "avgDist" }]
                 });
 
             }
@@ -1025,12 +1031,32 @@ function convertDateToReadableDate(date) {
     return readableDate;
 }
 
-
-function openDashTimer(){
-document.getElementById("timePicker_dash").style.display="block";
+var hid = 1
+function openDashTimer() {
+    // console.log(hid)
+    document.getElementById("timePicker_dash").style.display = "block";
+    setTimeout(function () { $('.timerange').click(); }, 20);
 }
 
+$(document).mouseup(function (e)
+                    {
+  var container = $("#timePicker_dash"); // YOUR CONTAINER SELECTOR
 
+  if (!container.is(e.target) // if the target of the click isn't the container...
+      && container.has(e.target).length === 0) // ... nor a descendant of the container
+  {
+    container.hide();
+  }
+});
+
+
+// window.addEventListener('mouseup',function(event){
+//     var pol = document.getElementById('timePicker_dash');
+//     if(event.target != pol && event.target.parentNode != pol){
+//         pol.style.display = 'none';
+//     }
+//     times = 1
+// });
 
 //function submit_Dashtime(){
 //from_HIStime = $("#from_time_dash").val()+':00';
@@ -1056,7 +1082,7 @@ function submit_Dashtime() {
 
     from_HIStime = from_HIStime.replace(/:/g, "-");
     to_HIStime = to_HIStime.replace(/:/g, "-");
-    
+
 
     from_O_HIStime = $("#from_time_dash").val() + ':00';
     to_O_HIStime = $("#to_time_dash").val() + ':00';
@@ -1065,288 +1091,444 @@ function submit_Dashtime() {
     document.getElementById("timePicker_dash").style.display = "none";
     document.getElementById("selected_time").innerHTML = `<b>From = ${from_O_HIStime} &ensp;&ensp; To =  ${to_O_HIStime}</b>`
 }
+
 function reset_Dashtime() {
     document.getElementById("selected_time").innerHTML = ``
     document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
     document.getElementById("daily_tracker_loader").innerHTML = ` <div class="loader" ></div> <b style="padding-left: 2rem;font-size: larger;">Loading Data</b>`;
     from_HIStime = default_currnt_param;
     to_HIStime = default_end_param;
-    difault_name_from = "00:00:00";
-    default_name_to = "23:59:59";
+    difault_name_from = "00:00";
+    default_name_to = "00:00";
     // console.log("to change",from_HIStime)
     // console.log("to change",to_HIStime)
 
     selectdate = current_date;
-    document.getElementById("name_change").innerHTML=`From- ${difault_name_from} To- ${default_name_to}`
+    document.getElementById("name_change").innerHTML = `${difault_name_from} &nbsp;To&nbsp; ${default_name_to}`
 
     $('#txtDate').val(selectdate);
     daily_data(selectdate);
     exampleFunction(selectdate);
 }
-var times
 
 function cancel_Dashtime() {
-            document.getElementById("timePicker_dash").style.display = 'none'
-            times=1
+    document.getElementById("timePicker_dash").style.display = 'none'
+    times = 1
+}
+
+
+
+
+
+
+// times = 1
+$('.timerange').on('click', function (e) {
+
+    console.log("times")
+
+    // if (times == 1) {
+    e.stopPropagation();
+    var input = $(this).find('input');
+    // console.log(input.val())
+    var now = new Date();
+    var hours = now.getHours();
+    var period = "PM";
+    if (hours < 12) {
+        period = "AM";
+    } else {
+        hours = hours - 11;
+    }
+    var minutes = now.getMinutes();
+    var range = {
+        from: {
+            hour: hours,
+            minute: minutes,
+            period: period
+        },
+        to: {
+            hour: hours,
+            minute: minutes,
+            period: period
         }
-         times =1
-        $('.timerange').on('click', function(e) {
-            console.log(times)
-            
-           if(times ==1){
-            e.stopPropagation();
-            var input = $(this).find('input');
-            var now = new Date();
-            var hours = now.getHours();
-            var period = "PM";
-            if (hours < 12) {
-                period = "AM";
-            } else {
-                hours = hours - 11;
-            }
-            var minutes = now.getMinutes();
-            var range = {
+    };
+    if (input.val() == "") {
+        // console.log("checkisad", input.val())
+        var timerange = input.val();
+        var matches = timerange.match(/([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)-([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)/);
+        if (matches.length === 7) {
+            range = {
                 from: {
-                    hour: hours,
-                    minute: minutes,
-                    period: period
+                    hour: matches[1],
+                    minute: matches[2],
+                    period: matches[3]
                 },
                 to: {
-                    hour: hours,
-                    minute: minutes,
-                    period: period
+                    hour: matches[4],
+                    minute: matches[5],
+                    period: matches[6]
                 }
+            }
+        }
+    };
+    if(range.from.hour ==0 &&  range.to.hour==0){
+        range.from.hour=12
+        range.to.hour =12
+    }
+console.log(range.from.hour)
+    set_range(range);
+    var html = '<div class="timerangepicker-container">' +
+        '<div class="timerangepicker-from">' +
+        '<label class="timerangepicker-label">From:</label>' +
+        '<div class="timerangepicker-display hour from">' +
+        '<span class="increment fa fa-angle-up"></span>' +
+        '<span class="value" id="editableHour">' + ('0' + range.from.hour).substr(-2) + '</span>' +
+        '<span class="decrement fa fa-angle-down"></span>' +
+        '</div>' +
+        ':' +
+        '<div class="timerangepicker-display minute from">' +
+        '<span class="increment fa fa-angle-up"></span>' +
+        '<span class="value" id="editableMinute">' + ('0' + range.from.minute).substr(-2) + '</span>' +
+        '<span class="decrement fa fa-angle-down"></span>' +
+        '</div>' +
+        ':' +
+        '<div class="timerangepicker-display period">' +
+        '<span class="increment fa fa-angle-up"></span>' +
+        '<span class="value">AM</span>' +
+        '<span class="decrement fa fa-angle-down"></span>' +
+        '</div>' +
+        '</div>' +
+        '<div class="timerangepicker-to">' +
+        '<label class="timerangepicker-label">To:</label>' +
+        '<div class="timerangepicker-display hour to">' +
+        '<span class="increment fa fa-angle-up"></span>' +
+        '<span class="value" id="editableToHour">' + ('0' + range.to.hour).substr(-2) + '</span>' +
+        '<span class="decrement fa fa-angle-down"></span>' +
+        '</div>' +
+        ':' +
+        '<div class="timerangepicker-display minute to">' +
+        '<span class="increment fa fa-angle-up"></span>' +
+        '<span class="value" id="editableToMinute">' + ('0' + range.to.minute).substr(-2) + '</span>' +
+        '<span class="decrement fa fa-angle-down"></span>' +
+        '</div>' +
+        ':' +
+        '<div class="timerangepicker-display period">' +
+        '<span class="increment fa fa-angle-up"></span>' +
+        '<span class="value">PM</span>' +
+        '<span class="decrement fa fa-angle-down"></span>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    $(html).insertAfter(this);
+    $('.timerangepicker-container').on(
+        'click',
+        '.timerangepicker-display.hour .increment',
+        function () {
+            var value = $(this).siblings('.value');
+            value.text(
+                increment(value.text(), 12, 1, 2)
+            );
+        }
+    );
+    $('.timerangepicker-container').on(
+        'click',
+        '.timerangepicker-display.hour .decrement',
+        function () {
+            var value = $(this).siblings('.value');
+            value.text(
+                decrement(value.text(), 12, 1, 2)
+            );
+        }
+    );
+    $('.timerangepicker-container').on(
+        'click',
+        '.timerangepicker-display.minute .increment',
+        function () {
+            var value = $(this).siblings('.value');
+            value.text(
+                increment(value.text(), 59, 0, 2)
+            );
+        }
+    );
+    $('.timerangepicker-container').on(
+        'click',
+        '.timerangepicker-display.minute .decrement',
+        function () {
+            var value = $(this).siblings('.value');
+            value.text(
+                decrement(value.text(), 59, 0, 2)
+            );
+        }
+    );
+    $('.timerangepicker-container').on(
+        'click',
+        '.timerangepicker-display.period .increment, .timerangepicker-display.period .decrement',
+        function () {
+            var value = $(this).siblings('.value');
+            var next = value.text() == "PM" ? "AM" : "PM";
+            value.text(next);
+
+        }
+
+    );
+    // editable input start
+    $('#editableHour').on('click',
+        function (event) {
+            $('#editableHour').attr('contenteditable', 'true');
+        }
+    );
+    $('#editableToHour').on('click',
+        function (event) {
+            $('#editableToHour').attr('contenteditable', 'true');
+        }
+    );
+    $('#editableMinute').on('click',
+        function (event) {
+            $('#editableMinute').attr('contenteditable', 'true');
+        }
+    );
+    $('#editableToMinute').on('click',
+        function (event) {
+            $('#editableToMinute').attr('contenteditable', 'true');
+        }
+    );
+    document.getElementById('editableHour').addEventListener("input", function (e) {
+        let insertedValue = parseInt(e.target.innerText);
+        if (insertedValue <= 12) {
+            $('.timerangepicker-display.hour.from').css({});
+            let currentValue = insertedValue;
+            setTimeout(function () {
+                if (currentValue >= 10) {
+                    console.log('e', insertedValue)
+                    $('#editableHour').text(insertedValue);
+                } else {
+                    $('#editableHour').text('0' + insertedValue);
+                }
+            }, 1000);
+        }
+        else {
+            $('#editableHour').text('01');
+            $('.timerangepicker-display.hour.from').css({ 'border': '1px solid red' });
+        }
+    }, false);
+
+    document.getElementById('editableToHour').addEventListener("input", function (e) {
+        let insertedValue = parseInt(e.target.innerText);
+        if (insertedValue <= 12) {
+            $('.timerangepicker-display.hour.to').css({});
+            let currentValue = insertedValue;
+            setTimeout(function () {
+                if (currentValue >= 10) {
+                    $('#editableToHour').text(insertedValue);
+                } else {
+                    $('#editableToHour').text('0' + insertedValue);
+                }
+            }, 1000);
+        } else {
+            $('#editableHour').text('01');
+            $('.timerangepicker-display.hour.to').css({ 'border': '1px solid red' });
+        }
+    }, false);
+
+    document.getElementById('editableMinute').addEventListener("input", function (e) {
+        let insertedValue = parseInt(e.target.innerText);
+        console.log("input event fired", insertedValue);
+        if (insertedValue <= 59) {
+            $('.timerangepicker-display.minute.from').css({});
+            let currentValue = insertedValue;
+            setTimeout(function () {
+                if (currentValue >= 10) {
+                    console.log('e', insertedValue)
+                    $('#editableMinute').text(insertedValue);
+                } else {
+                    $('#editableMinute').text('0' + insertedValue);
+                }
+            }, 1000);
+        } else {
+            $('#editableHour').text('00');
+            console.log('else part is working');
+            $('.timerangepicker-display.minute.from').css({ 'border': '1px solid red' });
+        }
+    }, false);
+
+    document.getElementById('editableToMinute').addEventListener("input", function (e) {
+        let insertedValue = parseInt(e.target.innerText);
+        console.log("input event fired", insertedValue);
+        if (insertedValue <= 59) {
+            $('.timerangepicker-display.minute.to').css({ 'border': '1px solid white' });
+            let currentValue = insertedValue;
+            setTimeout(function () {
+                if (currentValue >= 10) {
+                    console.log('e', insertedValue)
+                    $('#editableToMinute').text(insertedValue);
+                } else {
+                    $('#editableToMinute').text('0' + insertedValue);
+                }
+            }, 1000);
+        } else {
+            $('#editableHour').text('00');
+            console.log('else part is working');
+            $('.timerangepicker-display.minute.to').css({ 'border': '1px solid red' });
+        }
+    }, false);
+
+    // editable input end
+
+
+    // }
+    // else {
+    //     document.getElementById("timePicker_dash").style.display = 'none'
+
+    //     console.log(times)
+    //     times = 0
+    // }
+
+    // times = times + 1
+    // console.log("********************")
+
+});
+$(document).on('click', e => {
+    if (!$(e.target).closest('.timerangepicker-container').length) {
+        if ($('.timerangepicker-container').is(":visible")) {
+            var timerangeContainer = $('.timerangepicker-container');
+            if (timerangeContainer.length > 0) {
+                var timeRange = {
+                    from: {
+                        hour: timerangeContainer.find('.value')[0].innerText,
+                        minute: timerangeContainer.find('.value')[1].innerText,
+                        period: timerangeContainer.find('.value')[2].innerText
+                    },
+                    to: {
+                        hour: timerangeContainer.find('.value')[3].innerText,
+                        minute: timerangeContainer.find('.value')[4].innerText,
+                        period: timerangeContainer.find('.value')[5].innerText
+                    },
+                };
+                set_range(timeRange);
+                timerangeContainer.parent().find('input').val(
+                    timeRange.from.hour + ":" +
+                    timeRange.from.minute + " " +
+                    timeRange.from.period + "-" +
+                    timeRange.to.hour + ":" +
+                    timeRange.to.minute + " " +
+                    timeRange.to.period
+                );
+                timerangeContainer.remove();
+            }
+        }
+    }
+});
+function increment(value, max, min, size) {
+    var intValue = parseInt(value);
+    if (intValue == max) {
+        return ('0' + min).substr(-size);
+    } else {
+        var next = intValue + 1;
+        return ('0' + next).substr(-size);
+    }
+}
+function decrement(value, max, min, size) {
+    var intValue = parseInt(value);
+    if (intValue == min) {
+        return ('0' + max).substr(-size);
+    } else {
+        var next = intValue - 1;
+        return ('0' + next).substr(-size);
+    }
+}
+function setHistoryTime() {
+    times = 1
+    if ($('.timerangepicker-container').is(":visible")) {
+        var timerangeContainer = $('.timerangepicker-container');
+        if (timerangeContainer.length > 0) {
+            var timeRange = {
+                from: {
+                    hour: timerangeContainer.find('.value')[0].innerText,
+                    minute: timerangeContainer.find('.value')[1].innerText,
+                    period: timerangeContainer.find('.value')[2].innerText
+                },
+                to: {
+                    hour: timerangeContainer.find('.value')[3].innerText,
+                    minute: timerangeContainer.find('.value')[4].innerText,
+                    period: timerangeContainer.find('.value')[5].innerText
+                },
             };
-            if (input.val() !== "") {
-                var timerange = input.val();
-                var matches = timerange.match(/([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)-([0-9]{2}):([0-9]{2}) (\bAM\b|\bPM\b)/);
-                if (matches.length === 7) {
-                    range = {
-                        from: {
-                            hour: matches[1],
-                            minute: matches[2],
-                            period: matches[3]
-                        },
-                        to: {
-                            hour: matches[4],
-                            minute: matches[5],
-                            period: matches[6]
-                        }
-                    }
-                }
-            };
-            set_range(range);
-            var html = '<div class="timerangepicker-container">' +
-                '<div class="timerangepicker-from">' +
-                '<label class="timerangepicker-label">From:</label>' +
-                '<div class="timerangepicker-display hour">' +
-                '<span class="increment fa fa-angle-up"></span>' +
-                '<span class="value">' + ('0' + range.from.hour).substr(-2) + '</span>' +
-                '<span class="decrement fa fa-angle-down"></span>' +
-                '</div>' +
-                ':' +
-                '<div class="timerangepicker-display minute">' +
-                '<span class="increment fa fa-angle-up"></span>' +
-                '<span class="value">' + ('0' + range.from.minute).substr(-2) + '</span>' +
-                '<span class="decrement fa fa-angle-down"></span>' +
-                '</div>' +
-                ':' +
-                '<div class="timerangepicker-display period">' +
-                '<span class="increment fa fa-angle-up"></span>' +
-                '<span class="value">PM</span>' +
-                '<span class="decrement fa fa-angle-down"></span>' +
-                '</div>' +
-                '</div>' +
-                '<div class="timerangepicker-to">' +
-                '<label class="timerangepicker-label">To:</label>' +
-                '<div class="timerangepicker-display hour">' +
-                '<span class="increment fa fa-angle-up"></span>' +
-                '<span class="value">' + ('0' + range.to.hour).substr(-2) + '</span>' +
-                '<span class="decrement fa fa-angle-down"></span>' +
-                '</div>' +
-                ':' +
-                '<div class="timerangepicker-display minute">' +
-                '<span class="increment fa fa-angle-up"></span>' +
-                '<span class="value">' + ('0' + range.to.minute).substr(-2) + '</span>' +
-                '<span class="decrement fa fa-angle-down"></span>' +
-                '</div>' +
-                ':' +
-                '<div class="timerangepicker-display period">' +
-                '<span class="increment fa fa-angle-up"></span>' +
-                '<span class="value">PM</span>' +
-                '<span class="decrement fa fa-angle-down"></span>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-            $(html).insertAfter(this);
-            $('.timerangepicker-container').on(
-                'click',
-                '.timerangepicker-display.hour .increment',
-                function() {
-                    var value = $(this).siblings('.value');
-                    value.text(
-                        increment(value.text(), 12, 1, 2)
-                    );
-                }
+            set_range(timeRange);
+            timerangeContainer.parent().find('input').val(
+                timeRange.from.hour + ":" +
+                timeRange.from.minute + " " +
+                timeRange.from.period + "-" +
+                timeRange.to.hour + ":" +
+                timeRange.to.minute + " " +
+                timeRange.to.period
             );
-            $('.timerangepicker-container').on(
-                'click',
-                '.timerangepicker-display.hour .decrement',
-                function() {
-                    var value = $(this).siblings('.value');
-                    value.text(
-                        decrement(value.text(), 12, 1, 2)
-                    );
-                }
-            );
-            $('.timerangepicker-container').on(
-                'click',
-                '.timerangepicker-display.minute .increment',
-                function() {
-                    var value = $(this).siblings('.value');
-                    value.text(
-                        increment(value.text(), 59, 0, 2)
-                    );
-                }
-            );
-            $('.timerangepicker-container').on(
-                'click',
-                '.timerangepicker-display.minute .decrement',
-                function() {
-                    var value = $(this).siblings('.value');
-                    value.text(
-                        decrement(value.text(), 12, 1, 2)
-                    );
-                }
-            );
-            $('.timerangepicker-container').on(
-                'click',
-                '.timerangepicker-display.period .increment, .timerangepicker-display.period .decrement',
-                function() {
-                    var value = $(this).siblings('.value');
-                    var next = value.text() == "PM" ? "AM" : "PM";
-                    value.text(next);
-                }
-            );
-            
-           }
-           else{
-               times=0
-           }
-            
-            times = times+1
-
-        });
-        $(document).on('click', e => {
-            if (!$(e.target).closest('.timerangepicker-container').length) {
-                if ($('.timerangepicker-container').is(":visible")) {
-                    var timerangeContainer = $('.timerangepicker-container');
-                    if (timerangeContainer.length > 0) {
-                        var timeRange = {
-                            from: {
-                                hour: timerangeContainer.find('.value')[0].innerText,
-                                minute: timerangeContainer.find('.value')[1].innerText,
-                                period: timerangeContainer.find('.value')[2].innerText
-                            },
-                            to: {
-                                hour: timerangeContainer.find('.value')[3].innerText,
-                                minute: timerangeContainer.find('.value')[4].innerText,
-                                period: timerangeContainer.find('.value')[5].innerText
-                            },
-                        };
-                        set_range(timeRange);
-                        timerangeContainer.parent().find('input').val(
-                            timeRange.from.hour + ":" +
-                            timeRange.from.minute + " " +
-                            timeRange.from.period + "-" +
-                            timeRange.to.hour + ":" +
-                            timeRange.to.minute + " " +
-                            timeRange.to.period
-                        );
-                        timerangeContainer.remove();
-                    }
-                }
-            }
-        });
-        function increment(value, max, min, size) {
-            var intValue = parseInt(value);
-            if (intValue == max) {
-                return ('0' + min).substr(-size);
-            } else {
-                var next = intValue + 1;
-                return ('0' + next).substr(-size);
-            }
+            timerangeContainer.remove();
         }
-        function decrement(value, max, min, size) {
-            var intValue = parseInt(value);
-            if (intValue == min) {
-                return ('0' + max).substr(-size);
-            } else {
-                var next = intValue - 1;
-                return ('0' + next).substr(-size);
-            }
-        }
-        function setHistoryTime() {
-            times=1
-            if ($('.timerangepicker-container').is(":visible")) {
-                var timerangeContainer = $('.timerangepicker-container');
-                if (timerangeContainer.length > 0) {
-                    var timeRange = {
-                        from: {
-                            hour: timerangeContainer.find('.value')[0].innerText,
-                            minute: timerangeContainer.find('.value')[1].innerText,
-                            period: timerangeContainer.find('.value')[2].innerText
-                        },
-                        to: {
-                            hour: timerangeContainer.find('.value')[3].innerText,
-                            minute: timerangeContainer.find('.value')[4].innerText,
-                            period: timerangeContainer.find('.value')[5].innerText
-                        },
-                    };
-                    set_range(timeRange);
-                    timerangeContainer.parent().find('input').val(
-                        timeRange.from.hour + ":" +
-                        timeRange.from.minute + " " +
-                        timeRange.from.period + "-" +
-                        timeRange.to.hour + ":" +
-                        timeRange.to.minute + " " +
-                        timeRange.to.period
-                    );
-                    timerangeContainer.remove();
-                }
-            }
+    }
 
 
 
-            var histimerange = get_range();
-            var hr = histimerange.from.hour;
-            var mi = histimerange.from.minute;
-            var pe = histimerange.from.period;
-            var dash = '-';
-            var HIStime = hr + dash + mi + dash + '00';
-            from_HIStime = HIStime;
-            var to_hr = histimerange.to.hour;
-            var to_mi = histimerange.to.minute;
-            var to_pe = histimerange.to.period;
-            to_HIStime = to_hr + dash + to_mi + dash+ '00';
-            // from_O_HIStime = from_HIStime; 
-            // to_O_HIStime = to_HIStime;
-            var name_from_time = hr + ':' + mi + ':' + '00'
-            var name_to_time = to_hr + ':' + to_mi + ':'+ '00'
-            // console.log("final",from_HIStime)
-            // console.log("fianal",to_HIStime)
-            document.getElementById("name_change").innerHTML=`${name_from_time} to ${name_to_time}`
-            document.getElementById("timePicker_dash").style.display = 'none'
+    var histimerange = get_range();
 
-            daily_data(selectdate);
-            exampleFunction(selectdate);
+    var hr_name = histimerange.from.hour;
+    var mi_name = histimerange.from.minute;
+    var pe_name = histimerange.from.period;
 
-            // document.getElementById("timePicker_dash").style.display = "none";
-            // document.getElementById("selected_time").innerHTML = `<b>From - ${from_O_HIStime} &ensp;&ensp; To -  ${to_O_HIStime}</b>`
-        }
-        function set_range(range) {
-            time_range = range
-        }
-        function get_range() {
-            return time_range;
-        }
+    var hr = histimerange.from.hour;
+    var mi = histimerange.from.minute;
+    var pe = histimerange.from.period;
+
+    var dash = '-';
+
+
+    // from_HIStime = hr + dash + mi + dash + '00';
+    var to_hr = histimerange.to.hour;
+    var to_mi = histimerange.to.minute;
+    var to_pe = histimerange.to.period;
+
+    var to_hr_name = histimerange.to.hour;
+    var to_mi_name = histimerange.to.minute;
+    var to_pe_name = histimerange.to.period;
+    // to_HIStime = to_hr + dash + to_mi + dash + '00';
+
+    if (hr === '12') {
+        hr = '00';
+    }
+
+    if (pe === 'PM') {
+        hr = parseInt(hr, 10) + 12;
+    }
+
+    if (to_hr === '12') {
+        to_hr = '00';
+    }
+
+    if (to_pe === 'PM') {
+        to_hr = parseInt(to_hr, 10) + 12;
+    }
+
+
+    from_HIStime = hr + dash + mi + dash + '00';
+    to_HIStime = to_hr + dash + to_mi + dash + '00';
+
+
+
+    console.log("final", from_HIStime)
+    console.log("fianal", to_HIStime)
+    var name_from_time = hr_name + ':' + mi_name + pe_name
+    var name_to_time = to_hr_name + ':' + to_mi_name + to_pe_name
+
+    document.getElementById("name_change").innerHTML = `${name_from_time} &nbsp;To&nbsp; ${name_to_time}`
+    document.getElementById("timePicker_dash").style.display = 'none'
+
+    daily_data(selectdate);
+    exampleFunction(selectdate);
+
+    // document.getElementById("timePicker_dash").style.display = "none";
+    // document.getElementById("selected_time").innerHTML = `<b>From - ${from_O_HIStime} &ensp;&ensp; To -  ${to_O_HIStime}</b>`
+}
+function set_range(range) {
+    time_range = range
+}
+function get_range() {
+    return time_range;
+}
