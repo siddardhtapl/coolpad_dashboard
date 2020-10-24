@@ -1085,8 +1085,21 @@ $(function () {
         selectdate = this.value
         // console.log(selectdate)
         // console.log("curr", current_date)
+
+        let today = moment().format('YYYY-MM-DD')
+        //hide/display "Live Data Table" by date selected
+        if(today !== selectdate)
+        {
+            document.getElementById("liveDataTable").style.display = "none";
+        }
+        else if (today === selectdate)
+        {
+            document.getElementById("liveDataTable").style.display = "block";
+        }
+
         daily_data(selectdate)
         exampleFunction(selectdate);
+
 
     });
 });
@@ -1178,8 +1191,11 @@ function reset_Dashtime() {
     document.getElementById("name_change").innerHTML = `${difault_name_from} &nbsp;To&nbsp; ${default_name_to}`
 
     // $('#txtDate').val(selectdate);
+
     daily_data(selectdate);
     exampleFunction(selectdate);
+
+
 }
 
 function cancel_Dashtime() {
