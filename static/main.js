@@ -743,8 +743,21 @@ function weekly_data(startSunday="",endSaturday="") {
                         }
                     }
                 };
-                var chart2 = new ApexCharts(document.querySelector("#chart5"), options);
-                chart2.render();
+
+                if( Object.values(top5_contact_history_week).length !== 0 )
+                {
+                    $('#no_data').hide();
+                    $('#chart5').show();
+                    var chart2 = new ApexCharts(document.querySelector("#chart5"), options);
+                    chart2.render();
+                }else
+                {
+                    console.log("hit");
+                    $('#no_data').show();
+                    $('#chart5').hide();
+                }
+
+
                 // end
 
                 keys_week = []
@@ -823,8 +836,26 @@ function weekly_data(startSunday="",endSaturday="") {
                         }
                     },
                 };
+
+               if(Object.values(daily_total_for_week).length !== 0)
+               {
+
                 var chart = new ApexCharts(document.querySelector("#chart11"), options);
                 chart.render();
+
+               }else
+               {
+
+                $('#chart11').hide();
+                console.log("hhit");
+               }
+
+
+
+
+
+
+
                 const innerdiv = Object.keys(contact_frequency_week).map(item => {
                     return `<option value='${item}'>${item.charAt(0).toUpperCase() + item.slice(1)}</option>`
                 }).join("");
