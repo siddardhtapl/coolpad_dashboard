@@ -24,14 +24,13 @@
     <script src="../../static/build/plugins/sigma.plugins.dragNodes.min.js?version=2"></script>
     <script type="text/javascript" src="../../static/build/plugins/sigma.layout.forceAtlas2/worker.js?version=2"></script>
     <script type="text/javascript" src="../../static/build/plugins/sigma.layout.forceAtlas2/supervisor.js?version=2"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <script src="../../static/dataTable.js"></script>
     <link href="../../static/assets/css/paginate.css?version=2" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js"></script>
 
     <script src='https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js'></script>
     <!-- plugin end -->
@@ -123,7 +122,7 @@
                                 </span>Share</a>
                         </li>
                         <li class="menu">
-                             <a class="menuu" href="#" onclick="email_share()" data-toggle="modal" data-target="#emailModal"><span class="side-menu-icon"><i class="fa fa-envelope"
+                            <a class="menuu" href="#" onclick="email_share()" data-toggle="modal" data-target="#emailModal"><span class="side-menu-icon"><i class="fa fa-envelope"
                                             aria-hidden="true"></i>
                                         </span>Email</a>
                         </li>
@@ -255,9 +254,40 @@
                             <div class="direct_contact_emp mr-1 ml-1" id="all_third_pair">
 
                             </div>
-
                             <div class="row mr-3 ml-1">
+
                                 <div class="col-md-6">
+                                    <div class="indirectContacts" id="at_risk">
+                                        <div class="in_header">
+                                            <h5>At Risk Users (As per the latest CDC guidlines)</h5>
+
+                                            <i class="fa fa-times" aria-hidden="true" onclick="atrisk()" style="position: relative;top: 6px;"></i>
+                                        </div>
+                                        <table id="at_risks" data-page-length='7'>
+                                            <thead align="center">
+                                                <tr>
+                                                    <th>User</th>
+                                                    <th>Total Duration</th>
+                                                    <th>Interactions</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot></tfoot>
+                                        </table>
+                                        <div class="at_risk">
+                                            <div style="text-align: justify;">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> CDC Guidelines Definition: Close Contact - Someone who was within 6 feet of an infected person for a cumulative total of 15 minutes or more over
+                                                a 24-hour period* starting from 2 days before illness onset (or, for asymptomatic patients, 2 days prior to test specimen collection) until the time the patient is isolated.
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mr-3 ml-1 mt-5">
+                                <div class="col-md-6">
+
                                     <div class="indirectContacts" id="indirectInteractions">
                                         <div class="in_header">
                                             <h5 id="interaction_tittle"></h5>
@@ -265,14 +295,14 @@
                                         </div>
                                         <table id="indirectInteraction" data-page-length='7'>
                                             <thead align="center">
-                                            <tr>
-                                                <th>Timestamp</th>
-                                                <th>Duration</th>
-                                                <th>AvgDist</th>
-                                                <th>MinDist</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot></tfoot>
+                                                <tr>
+                                                    <th>Timestamp</th>
+                                                    <th>Duration</th>
+                                                    <th>AvgDist</th>
+                                                    <th>MinDist</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot></tfoot>
                                         </table>
                                         <div class="indirectContactLegend">
                                             <div>
@@ -287,7 +317,7 @@
                                             <h5>Indirect contacts of Contacted Person</h5>
                                             <i class="fa fa-times" aria-hidden="true" onclick="close_indirect()"></i>
                                         </div>
-                                        <table id="indirectContactTable"  data-page-length='7'>
+                                        <table id="indirectContactTable" data-page-length='7'>
                                             <thead align="center">
                                                 <tr>
                                                     <th>Indirect Contacts</th>
@@ -438,6 +468,7 @@
                     var e_date = "2020-08-07"*/
         var s_date, e_date;
         var default_currnt_param = "00-00-00";
+
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
             e_date = document.getElementById("endDate").value;
@@ -453,13 +484,14 @@
             }
             $.ajax({
                 type: "GET",
-                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date+" "+default_currnt_param+ "/" + e_date +" "+default_currnt_param +"/" + common4all,
+                url: "https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + " " + default_currnt_param + "/" + e_date + " " + default_currnt_param + "/" + common4all,
                 dataType: 'json',
                 success: function(response) {
                     document.getElementById('indirectContacts').style.display = "none";
 
                     document.getElementById('indirectInteractions').style.display = "none";
-                    console.log("https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date+" "+default_currnt_param+ "/" + e_date +" "+default_currnt_param +"/" + common4all);
+                    document.getElementById('at_risk').style.display = "block";
+                    console.log("https://takvaviya.in/coolpad_backend/user/contact_trace/" + e + "/" + s_date + " " + default_currnt_param + "/" + e_date + " " + default_currnt_param + "/" + common4all);
                     res = response;
                     eve = response[1][e]
                     console.log(response[1][e])
@@ -484,7 +516,43 @@
                         console.log(i)
 
                     }
+                    last_data = {}
+                    at_risk_user = []
+                    t_duration = []
+                    at_risk_count = []
                     $('#all_third_pair').append(append_data);
+                    var at_risk1 = Object.values(response[3])
+                        // console.log(Object.values(response[3]))
+                        // at_risk_user.append(Object.keys(response[3]))
+                        // t_duration.append(Object.values(response[3])['total_duration'])
+                        // at_risk_count.append(Object.values(response[3])['count'])
+                        // for(var n = 0;n<Object.values(response[3]).length;n++)
+                        // {
+                        //     last_data={"user":at_risk_user[n],"total_duration":t_duration,"data":at_risk_count}
+                        // }
+
+                    // console.log(last_data)
+
+
+                    var at_risk = $('#at_risks').DataTable({
+                        "searching": false,
+                        "info": false,
+                        "bLengthChange": false,
+                        data: at_risk1,
+                        "columns": [{
+                            "data": "user"
+                        }, {
+                            "data": "total_duration"
+                        }, {
+                            "data": "count"
+                        }],
+                        // columnDefs: [
+                        //     { type: 'natural-nohtml', targets: [0,1] },
+                        //     { width: '25%', targets: [0,1,2] }
+                        // ],
+                        fixedColumns: true,
+
+                    });
 
                 }
             });
@@ -498,38 +566,59 @@
         });
 
         var status_table_render;
-        var indirectContactTable =  $('#indirectContactTable').DataTable({
-                                        "searching": false,
-                                        "info": false,
-                                        "bLengthChange": false,
-                                        "columns": [{ "data": "indirectContact" },{ "data": "max_duration" }, { "data": "count" }, { "data": "Date"}],
-                                        columnDefs: [
-                                            { type: 'natural-nohtml', targets: [0,1] },
-                                            { width: '25%', targets: [0,1,2] }
-                                        ],
-                                        fixedColumns: true,
-                                    fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                                        if (aData.milliseconds >= 900000) {
-                                            $(nRow).addClass('beyondFifteen');
-                                        }
-                                    }
-                                    });
-        var interactionTable =  $('#indirectInteraction').DataTable({
-                                    "searching": false,
-                                    "info": false,
-                                    "bLengthChange": false,
-                                    "columns": [{ "data": "timestamp" },{ "data": "duration" }, { "data": "avgDist" }, { "data": "minDist"}],
-                                    columnDefs: [
-                                            { type: 'natural-nohtml', targets: [0,1] }
-                                        ],
-                                    fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                                    if (aData.milliseconds >= 900000) {
-                                            $(nRow).addClass('beyondFifteen');
-                                        }
-                                    }
-                                });
+        var indirectContactTable = $('#indirectContactTable').DataTable({
+            "searching": false,
+            "info": false,
+            "bLengthChange": false,
+            "columns": [{
+                "data": "indirectContact"
+            }, {
+                "data": "max_duration"
+            }, {
+                "data": "count"
+            }, {
+                "data": "Date"
+            }],
+            columnDefs: [{
+                type: 'natural-nohtml',
+                targets: [0, 1]
+            }, {
+                width: '25%',
+                targets: [0, 1, 2]
+            }],
+            fixedColumns: true,
+            fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                if (aData.milliseconds >= 900000) {
+                    $(nRow).addClass('beyondFifteen');
+                }
+            }
+        });
+        var interactionTable = $('#indirectInteraction').DataTable({
+            "searching": false,
+            "info": false,
+            "bLengthChange": false,
+            "columns": [{
+                "data": "timestamp"
+            }, {
+                "data": "duration"
+            }, {
+                "data": "avgDist"
+            }, {
+                "data": "minDist"
+            }],
+            columnDefs: [{
+                type: 'natural-nohtml',
+                targets: [0, 1]
+            }],
+            fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                if (aData.milliseconds >= 900000) {
+                    $(nRow).addClass('beyondFifteen');
+                }
+            }
+        });
         document.getElementById('indirectContacts').style.display = 'none';
         document.getElementById('indirectInteractions').style.display = "none";
+        document.getElementById('at_risk').style.display = "none";
 
         function open_indirect(elm) {
 
@@ -552,6 +641,7 @@
 
             document.getElementById('indirectContacts').style.display = "block";
             document.getElementById('indirectInteractions').style.display = "block";
+            document.getElementById('at_risk').style.display = "block";
 
             indirectContactTable.clear();
             interactionTable.clear();
@@ -559,15 +649,13 @@
             let indirectContactsArray = res[2];
             let clickedContactName = elm.getAttribute('value')
             let clickedContactDetails = null;
-            for(let i=0;i<indirectContactsArray.length;i++) {
-                if(indirectContactsArray[i][clickedContactName])
-                {
+            for (let i = 0; i < indirectContactsArray.length; i++) {
+                if (indirectContactsArray[i][clickedContactName]) {
                     clickedContactDetails = indirectContactsArray[i][clickedContactName]
                     break;
                 }
             }
-            for(const contact in clickedContactDetails)
-            {
+            for (const contact in clickedContactDetails) {
                 clickedContactDetails[contact].indirectContact = String(contact);
                 let currentDateFormat = clickedContactDetails[contact].Date
                 clickedContactDetails[contact].Date = moment(currentDateFormat).format("MM-DD-YYYY")
@@ -589,6 +677,10 @@
             document.getElementById('indirectContacts').style.display = "none";
         }
 
+        function atrisk() {
+            document.getElementById('at_risk').style.display = "none";
+        }
+
         function close_indirect_status() {
 
             document.getElementById('indirectInteractions').style.display = "none";
@@ -602,10 +694,6 @@
                 $(this).addClass("actives");
             });
         });
-
-
-
-
     </script>
     <script type="text/javascript" src="../../static/contact.tracing.js?version=2"></script>
 
