@@ -47,7 +47,7 @@ $('head').append('<script src="https://smtpjs.com/v3/smtp.js">');
 //    render_email +='</div>';
 //    $('body').append(render_email);
 render_email ='';
-render_email +=' <div class="modal fade" id="myModal">'
+render_email +=' <div class="modal fade" id="emailModal">'
 render_email +='        <div class="modal-dialog modal-dialog-centered">'
 render_email +='            <div class="modal-content">'
 render_email +='                <div class="modal-header">'

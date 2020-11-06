@@ -587,17 +587,17 @@ function daily_summary_report() {
 }
 
 
-var selectedWeekSunday = null;
-var selectedWeekSaturday = null;
+var selectedWeekStart = null;
+var selectedWeekEnd = null;
 var ctHistoryAllWeekTable;
 function generateWeeklyReport() {
     //Todo not user instance its emp instance
     let start_date_week = start_date;
     let end_date_week = end_date;
-    if(selectedWeekSunday && selectedWeekSaturday)
+    if(selectedWeekStart && selectedWeekEnd)
     {
-        start_date_week = selectedWeekSunday;
-        end_date_week = selectedWeekSaturday;
+        start_date_week = selectedWeekStart;
+        end_date_week = selectedWeekEnd;
     }
     var user_instance = localStorage.getItem('current_user');
     fetch('https://www.takvaviya.in/coolpad_backend/user/weekly_report/' + start_date_week + " " + default_currnt_param + '/' + end_date_week + " " + default_currnt_param + '/' + current_date + '/' + common4all)
@@ -873,10 +873,10 @@ function weekly_data(startSunday="",endSaturday="") {
         })
     }
 function weekChanged(event) {
-    let selectedWeekStartDate = moment(event.target.valueAsDate);
-    selectedWeekSunday = selectedWeekStartDate.subtract(1,'days').format('YYYY-MM-DD')
-    selectedWeekSaturday = selectedWeekStartDate.add(6,'days').format('YYYY-MM-DD')
-    weekly_data(selectedWeekSunday,selectedWeekSaturday);
+    let selectedWeekStartDate = moment(event.target.value);
+    selectedWeekStart = selectedWeekStartDate.day('sunday').format('YYYY-MM-DD')
+    selectedWeekEnd = selectedWeekStartDate.day('saturday').format('YYYY-MM-DD')
+    weekly_data(selectedWeekStart,selectedWeekEnd);
 }
 var value = 100
 console.log('https://takvaviya.in/coolpad_backend/user/daily_tracker_get/' + current_date + '/' + common4all)
