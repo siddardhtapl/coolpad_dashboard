@@ -71,6 +71,8 @@
     border: 1px solid #303131 !important;
     color: white;
 }
+
+
 /*
 .date-show .form-control {
     background: none;
@@ -193,14 +195,20 @@
 }
 
 .main_emp_div {
-    border-left: 1px solid;
-    padding-left: 57px;
+    /* border-left: 1px solid;
+    padding-left: 57px; */
 }
 
 .date_n_emp .main_emp_div {
-    float: left;
+    /* float: left;
     margin-left: 10%;
-    margin-top: 3%;
+    margin-top: 3%; */
+    width: max-content;
+    height: fit-content;
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .14);
 }
 
 .date_n_emp .select_emp_div {
@@ -220,9 +228,9 @@
 }
 
 .aff_card .aff_detail {
-    float: left;
+    /* float: left;
     padding-left: 72px;
-    padding-top: 15px;
+    padding-top: 15px; */
 }
 
 .aff_icon i {
@@ -234,7 +242,7 @@
 }
 
 .add_date div {
-    float: left;
+    /* float: left; */
 }
 
 .aff_detail p {
@@ -257,10 +265,11 @@
 
 .direct_contact_emp_toggle {
     position: absolute;
-    top: 375px;
+    /* top: 375px; */
     padding-left: 20px;
     height: 100%;
     width: 100%;
+    margin-top: 60px;
 }
 
 .dir_title {
@@ -287,7 +296,15 @@
 }
 
 .indirectContacts {
-    margin-top: 40px;
+    /* margin-top: 40px; */
+    /* margin-left: 1px;
+    width: 700px;
+    height: 504px;
+    background: #ffff;
+    padding: 20px;
+    border-radius: 5px;
+    overflow-y: auto; */
+    /* margin-bottom: 20px; */
     margin-left: 1px;
     width: 100%;
     background: #ffff;
@@ -296,6 +313,7 @@
     height: 100%;
     overflow-y: auto;
     margin-bottom: 20px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
 }
 
@@ -453,7 +471,7 @@ table#layer3_append th {
 .layer1_card {
     background-color: #ffffff;
     float: left;
-    width: 260px;
+    width: 345px;
     padding: 15px 50px 15px 15px;
     /* border: 1px solid #4f5153; */
     color: #000 !important;
@@ -470,6 +488,7 @@ table#layer3_append th {
 .layer1_card:hover {
     background-color: #afb3b4 !important;
 }
+
 
 /* .date-show input[type="date"]:before {
     color: #000 !important;
@@ -2129,6 +2148,8 @@ body {
 
 .layout-spacing {
     padding-bottom: 25px;
+    /* width: 186px; */
+    /* width: max-content; */
 }
 
 .widget {
@@ -3256,7 +3277,27 @@ table#status_contact th {
 #weeklyLoadingSpinner {
     margin-right: 20% !important;
 }
+
 .at_risk {
     margin-top: 45px;
     /* color: white; */
+}
+
+.aff_detail .date-title {
+    width: 40%;
+}
+
+.aff_detail .date-value {
+    width: 60%;
+    float: right;
+    margin-top: -40px;
+    padding-left: 10px;
+}
+
+.tdc_title {
+    float: right;
+    font-size: 16px;
+    margin-right: 20px;
+    margin-top: -32px;
+    color: #888ea8;
 }

@@ -166,11 +166,14 @@
                 <div class="layout-p-spacing">
 
                     <div class="date_n_emp">
-                        <div class="select_emp_div" style="width: 20%;margin-top: 3%;">
-                            <div class=" layout-spacing">
-                                <div class="date-value">
-                                    <label>Report Contacted Person</label>
-                                    <select id="render_emp_list" onchange="trigger_emp(this)">
+                        <div class="row mt-5">
+                            <div class="col-md-5">
+                                <div class="select_emp_div" style="margin-top: 3%;">
+                                    <div class=" layout-spacing">
+                                        <div class="date-value">
+                                            <label>Report Contacted Person</label>
+                                            <br>
+                                            <select id="render_emp_list" onchange="trigger_emp(this)">
                                         <!-- <option>Select</option> -->
                                         <!--<script>
                                             var i;
@@ -185,63 +188,95 @@
                                         <!--                                    <option selected>Select</option>//onchange="trigger_contact(this)"
                                     <option>This is another Option</option>-->
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="layout-spacing">
-                                <div class="date-show">
-                                    <div class="form-group">
-                                        <label>Start Date</label>
-                                        <input type="date" id="startDate" name="bday" min="1000-01-01" class="form-control">
+                                        </div>
                                     </div>
 
-                                </div>
-                            </div>
+                                    <div class="layout-spacing">
+                                        <div class="date-show">
+                                            <div class="form-group" style="margin-bottom: -10px">
+                                                <label>Start Date</label>
+                                                <input type="date" id="startDate" name="bday" min="1000-01-01" class="form-control">
+                                            </div>
 
-                            <div class="layout-spacing">
-                                <div class="date-show">
-                                    <div class="form-group" id="sub">
-                                        <label>End Date</label>
-                                        <span><input type="date" id="endDate" name="bday" min="1000-01-01"
+                                        </div>
+                                    </div>
+
+                                    <div class="layout-spacing">
+                                        <div class="date-show">
+                                            <div class="form-group" id="sub">
+                                                <label>End Date</label>
+                                                <span><input type="date" id="endDate" name="bday" min="1000-01-01"
                                                 max="3000-12-31" class="form-control">
                                             <button class="sub" onclick="trigger_contact()"
                                                 style="margin-top: 20px;">Submit</button></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="main_emp_div mt-1 ml-2">
+                                            <div class="aff_hd">Contacted Person</div>
+                                            <div class="aff_card">
+                                                <!-- <div class="aff_icon"><i class="fa fa-user"></i></div> -->
+                                                <div class="aff_detail">
+                                                    <p class="date-title ">Name</p>
+                                                    <h4 id="emp_name" class="date-value">No Data</h4>
+                                                    <div class="add_date">
+                                                        <div>
+                                                            <p class="date-title ">Start Date</p>
+                                                            <h6 id="st_val" class="date-value" style="margin-top: -37px;">No Data</h6>
+                                                        </div>
+                                                        <div style="">
+                                                            <p class="date-title ">End Date</p>
+                                                            <h6 id="end_val" class="date-value" style="margin-top: -37px;">No Data</h6>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
+
                                 </div>
-
                             </div>
+                            <div class="col-md-7">
 
-                        </div>
+                                <div class="indirectContacts" id="at_risk" style="height: 555px; margin-left: 29px;">
+                                    <div class="in_header">
+                                        <h5>At Risk Users (As per the latest CDC guidlines)</h5>
+
+                                        <i class="fa fa-times" aria-hidden="true" onclick="atrisk()" style="position: relative;top: 6px;"></i>
+                                    </div>
+                                    <table id="at_risks" data-page-length='7' style="margin-top: 10px; margin-bottom: 15px;">
+                                        <thead align="center">
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Total Duration</th>
+                                                <th>Interactions</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot></tfoot>
+                                    </table>
+                                    <div class="at_risk">
+                                        <div style="text-align: justify; position: absolute; bottom: 85px;">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> CDC Guidelines Definition: Close Contact - Someone who was within 6 feet of an infected person for a cumulative total of 15 minutes or more over a
+                                            24-hour period* starting from 2 days before illness onset (or, for asymptomatic patients, 2 days prior to test specimen collection) until the time the patient is isolated.
 
 
-
-                        <div class="main_emp_div">
-                            <div class="aff_hd">Contacted Person</div>
-                            <div class="aff_card">
-                                <div class="aff_icon"><i class="fa fa-user"></i></div>
-                                <div class="aff_detail">
-                                    <p>Name</p>
-                                    <h4 id="emp_name">No Data</h4>
-                                    <div class="add_date">
-                                        <div>
-                                            <p>Start Date</p>
-                                            <h6 id="st_val">No Data</h6>
-                                        </div>
-                                        <div style="padding-left: 15px;">
-                                            <p>End Date</p>
-                                            <h6 id="end_val">No Data</h6>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 
-                        </div>
 
+
+
+                        </div>
                     </div>
                 </div>
-                <div class="direct_contact_emp_toggle">
+
+
+                <div class="direct_contact_emp_toggle mt-2">
                     <div class="tab">
                         <button class="tablinks active" onclick="opentab_cf(event, 'table')"><b>Table Model</b></button>
                         <button class="tablinks " onclick="opentab_cf(event, 'network');  netWorkGraphSwitch('netWorkSwitch')"><b>Network
@@ -254,36 +289,7 @@
                             <div class="direct_contact_emp mr-1 ml-1" id="all_third_pair">
 
                             </div>
-                            <div class="row mr-3 ml-1">
 
-                                <div class="col-md-6">
-                                    <div class="indirectContacts" id="at_risk">
-                                        <div class="in_header">
-                                            <h5>At Risk Users (As per the latest CDC guidlines)</h5>
-
-                                            <i class="fa fa-times" aria-hidden="true" onclick="atrisk()" style="position: relative;top: 6px;"></i>
-                                        </div>
-                                        <table id="at_risks" data-page-length='7'>
-                                            <thead align="center">
-                                                <tr>
-                                                    <th>User</th>
-                                                    <th>Total Duration</th>
-                                                    <th>Interactions</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot></tfoot>
-                                        </table>
-                                        <div class="at_risk">
-                                            <div style="text-align: justify;">
-                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> CDC Guidelines Definition: Close Contact - Someone who was within 6 feet of an infected person for a cumulative total of 15 minutes or more over
-                                                a 24-hour period* starting from 2 days before illness onset (or, for asymptomatic patients, 2 days prior to test specimen collection) until the time the patient is isolated.
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="row mr-3 ml-1 mt-5">
                                 <div class="col-md-6">
@@ -503,15 +509,23 @@
 
                     $("#first_trace").empty();
                     $('#all_third_pair').empty();
-                    append_data += '<h4 class="dir_title mt-4">Direct Contacts of Contacted Person</h4>'
+                    append_data += '<div class="dir_title mt-4"><h4>Direct Contacts of Contacted Person</h4><div class="tdc_title"><i class="fa fa-square" aria-hidden="true"></i>&nbsp;TDC-Total Contact Duration</div></div>'
                     for (var i in response[1][e]) {
                         var c_date = response[1][e][i]['Date'].split("T");
-                        let c_date1 = moment(c_date[0]).format("MM-DD-YYYY")
+                        let c_date1 = moment(c_date[0]).format("MM-DD-YYYY");
+                        if (response[1][e][i]['tcd_last_24_hours'] === undefined) {
+                            response[1][e][i]['tcd_last_24_hours'] = '0h 0m 0s'
+                            response[1][e][i]['milliseconds'] = 0
+                        }
                         append_data += '<div class="layer1_card act" onclick="open_indirect(this)" id="cd_title" value = "' + i + '" style="cursor:pointer">';
                         append_data += '<p><i class="fa fa-calendar-o"></i> ' + c_date1 + '</p>';
                         append_data += '<h4 >' + i + '</h4><br>';
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[1][e][i]['count'] + '</span></div>'
-                        append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> Max Duration ' + response[1][e][i]['max_duration'] + '</span></div>'
+                        if (response[1][e][i]['milliseconds'] >= 900000) {
+                            append_data += '<div class="in_content mt-2" style="color:red;"><span><i class="fa fa-clock-o"></i> TCD ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
+                        } else {
+                            append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> TCD ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
+                        }
                         append_data += '</div>';
                         console.log(i)
 
@@ -538,6 +552,7 @@
                         "searching": false,
                         "info": false,
                         "bLengthChange": false,
+                        "bDestroy": true,
                         data: at_risk1,
                         "columns": [{
                             "data": "user"

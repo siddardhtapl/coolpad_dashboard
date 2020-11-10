@@ -186,14 +186,20 @@ table.dataTable.no-footer {
 }
 
 .main_emp_div {
-    border-left: 1px solid;
-    padding-left: 57px;
+    /* border-left: 1px solid;
+    padding-left: 57px; */
 }
 
 .date_n_emp .main_emp_div {
-    float: left;
+    /* float: left;
     margin-left: 10%;
-    margin-top: 3%;
+    margin-top: 3%; */
+    width: max-content;
+    height: fit-content;
+    background: #1a1c2d;
+    border-radius: 3px;
+    padding: 10px 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .14);
 }
 
 .date_n_emp .select_emp_div {
@@ -213,9 +219,9 @@ table.dataTable.no-footer {
 }
 
 .aff_card .aff_detail {
-    float: left;
+    /* float: left;
     padding-left: 72px;
-    padding-top: 15px;
+    padding-top: 15px; */
 }
 
 .aff_icon i {
@@ -227,7 +233,7 @@ table.dataTable.no-footer {
 }
 
 .add_date div {
-    float: left;
+    /* float: left; */
 }
 
 .aff_detail p {
@@ -249,7 +255,7 @@ table.dataTable.no-footer {
 
 .direct_contact_emp_toggle {
     position: absolute;
-    top: 375px;
+    /* top: 375px; */
     padding-left: 20px;
     height: 100%;
     width: 100%;
@@ -271,7 +277,7 @@ table.dataTable.no-footer {
 .layer1_card {
     background-color: #1a1c2d;
     float: left;
-    width: 260px;
+    width: 345px;
     padding: 15px 50px 15px 15px;
     /* border: 1px solid #3f4858; */
     color: antiquewhite;
@@ -311,7 +317,7 @@ table.dataTable.no-footer {
 }
 
 .indirectContacts {
-    margin-top: 40px;
+    /* margin-top: 40px; */
     margin-left: 1px;
     width: 100%;
     background: #1a1c2d;
@@ -2500,6 +2506,7 @@ body {
 
 .layout-spacing {
     padding-bottom: 25px;
+    /* width: 186px; */
 }
 
 .widget {
@@ -3500,4 +3507,23 @@ input[type=time].form-control {
 
 #weeklyLoadingSpinner {
     margin-right: 20% !important;
+}
+
+.aff_detail .date-title {
+    width: 40%;
+}
+
+.aff_detail .date-value {
+    width: 60%;
+    float: right;
+    margin-top: -40px;
+    padding-left: 10px;
+}
+
+.tdc_title {
+    float: right;
+    font-size: 16px;
+    margin-right: 20px;
+    margin-top: -32px;
+    color: #f1f1f1;
 }
