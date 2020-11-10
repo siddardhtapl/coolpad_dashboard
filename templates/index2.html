@@ -521,7 +521,7 @@
 
                     $("#first_trace").empty();
                     $('#all_third_pair').empty();
-                    append_data += '<div class="dir_title mt-4"><h4>Direct Contacts of Contacted Person</h4><div class="tdc_title"><i class="fa fa-square" aria-hidden="true"></i>&nbsp;TDC-Total Contact Duration</div></div>'
+                    append_data += '<div class="dir_title mt-4"><h4>Direct Contacts of Contacted Person</h4><div class="tdc_title"><i class="fa fa-square" aria-hidden="true"></i>&nbsp;TCD-Total Contact Duration</div></div>'
                     for (var i in response[1][e]) {
                         var c_date = response[1][e][i]['Date'].split("T");
                         let c_date1 = moment(c_date[0]).format("MM-DD-YYYY");
@@ -536,7 +536,7 @@
                         if (response[1][e][i]['milliseconds'] >= 900000) {
                             append_data += '<div class="in_content mt-2" style="color:red;"><span><i class="fa fa-clock-o"></i> TCD in the last 24 hrs ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
                         } else {
-                            append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> TCD in the last 24 hrs' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
+                            append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> TCD in the last 24 hrs ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
                         }
                         append_data += '</div>';
                         console.log(i)
