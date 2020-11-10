@@ -1105,7 +1105,7 @@ $(function () {
     lastDay.setDate(lastDay.getDate() - 14);
     var minDate = convertDateToReadableDate(today);
     var maxDate = convertDateToReadableDate(lastDay);
-    $('#txtDate').attr('min', maxDate);
+//    $('#txtDate').attr('min', maxDate);
     $('#txtDate').attr('max', minDate);
     selectdate = current_date
     daily_data(selectdate)

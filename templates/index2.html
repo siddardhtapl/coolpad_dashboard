@@ -475,6 +475,17 @@
         var s_date, e_date;
         var default_currnt_param = "00-00-00";
 
+        function changeDateFormat(inputDate){  // expects Y-m-d
+            var splitDate = inputDate.split('-');
+            if(splitDate.count == 0){
+                return null;
+            }
+            var year = splitDate[0];
+            var month = splitDate[1];
+            var day = splitDate[2];
+            return month + '-' + day + '-' + year;
+        }
+
         function trigger_contact() {
             s_date = document.getElementById("startDate").value;
             e_date = document.getElementById("endDate").value;
@@ -502,8 +513,9 @@
                     eve = response[1][e]
                     console.log(response[1][e])
                     document.getElementById("emp_name").innerHTML = e
-                    document.getElementById("st_val").innerHTML = $("#startDate").val();
-                    document.getElementById("end_val").innerHTML = $("#endDate").val();
+
+                    document.getElementById("st_val").innerHTML = changeDateFormat($("#startDate").val());
+                    document.getElementById("end_val").innerHTML = changeDateFormat($("#endDate").val());
                     var append_data;
                     append_data = "";
 
@@ -522,9 +534,9 @@
                         append_data += '<h4 >' + i + '</h4><br>';
                         append_data += '<div class="in_content mt-2"><span><i class="fa fa-users"></i> Interaction ' + response[1][e][i]['count'] + '</span></div>'
                         if (response[1][e][i]['milliseconds'] >= 900000) {
-                            append_data += '<div class="in_content mt-2" style="color:red;"><span><i class="fa fa-clock-o"></i> TCD ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
+                            append_data += '<div class="in_content mt-2" style="color:red;"><span><i class="fa fa-clock-o"></i> TCD in the last 24 hrs ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
                         } else {
-                            append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> TCD ' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
+                            append_data += '<div class="in_content mt-2"><span><i class="fa fa-clock-o"></i> TCD in the last 24 hrs' + response[1][e][i]['tcd_last_24_hours'] + '</span></div>'
                         }
                         append_data += '</div>';
                         console.log(i)
