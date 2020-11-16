@@ -1,206 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coolpad Login</title>
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Coolpad Login </title>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="../../static/assets/bootstrap/css/bootstrap.min.css?version=2" rel="stylesheet" type="text/css" />
-    <link href="../../static/assets/css/plugins.css?version=2" rel="stylesheet" type="text/css" />
-    <link href="../../static/assets/css/authentication/form-1.css?version=2" rel="stylesheet" type="text/css" />
-        <link href="../../static/assets/css/style.css?version=2" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <!-- END GLOBAL MANDATORY STYLES -->
-    <link rel="stylesheet" type="text/css" href="../../static/assets/css/forms/theme-checkbox-radio.css?version=2">
-    <link rel="stylesheet" type="text/css" href="../../static/assets/css/forms/switches.css?version=2">
-        <link rel="shortcut icon" href="../../static/coolpad_favicon.ico?version=2" type="image/x-icon">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
+        body {
+            background-color: #060818 !important;
+            font-family: sans-serif !important;
+        }
+        /* Logo */
 
+        .logo-item {
+            width: 60%;
+        }
+        /* Login Form */
+        /* Login Card */
 
-    #username , #password{
-    background: #060818 !important;
-    border-bottom : 1px solid white;
-    }
-        input 				{
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  width:300px;
-  border:none;
-  border-bottom:1px solid #757575;
-}
-input:focus 		{ outline:none; }
-/* LABEL ======================================= */
-label 				 {
-  color:#999;
-  font-size:18px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all;
-  -moz-transition:0.2s ease all;
-  -webkit-transition:0.2s ease all;
-}
-/* active state */
-input:focus ~ label, input:valid ~ label 		{
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
-}
-/* BOTTOM BARS ================================= */
-.bar 	{ position:relative; display:block; width:300px; }
-.bar:before, .bar:after 	{
-  content:'';
-  height:2px;
-  width:0;
-  bottom:1px;
-  position:absolute;
-  background:#5264AE;
-  transition:0.2s ease all;
-  -moz-transition:0.2s ease all;
-  -webkit-transition:0.2s ease all;
-}
-.bar:before {
-  left:50%;
-}
-.bar:after {
-  right:50%;
-}
-/* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
-}
-/* HIGHLIGHTER ================================== */
-.highlight {
-  position:absolute;
-  height:60%;
-  width:100px;
-  top:25%;
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
-/* active state */
-input:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
+        .login-content {
+            width: 75%;
+            height: 500px;
+            background-color: #262735;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 3px 6px black;
+            padding: 30px 25px;
+            position: relative;
+            left: 20px;
+        }
+        /* Login Title */
+
+        .login-title {
+            font-weight: 700;
+        }
+
+        .login-form {
+            position: relative;
+            top: 30px;
+        }
+
+        label {
+            font-weight: 100 !important;
+            font-size: 15px !important;
+            margin-bottom: 10px !important;
+        }
+        /* .form-group {
+        margin-bottom: 0 !important;
+    } */
+
+        .login-field {
+            height: 45px !important;
+            padding: 10px 12px !important;
+        }
+
+        .p-t {
+            position: relative;
+            top: -15px;
+        }
+
+        .action-container {
+            position: relative;
+            top: 5px;
+        }
+
+        .forgot {
+            float: right;
+            color: #eee !important;
+            position: relative;
+            top: 3px;
+        }
+        /* Login button */
+
+        .btn-content {
+            position: relative;
+            top: 60px;
+            float: right;
+        }
+
+        .login-btn {
+            width: 155px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #0060FE;
+            color: #fff;
+            border: none !important;
+            font-size: 18px;
+            box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px 0;
+            display: inline-block;
+            text-decoration: none !important;
+            overflow: hidden;
+            transition: all .5s;
+            text-align: center;
+        }
+
+        .login-btn:hover {
+            background: lighten(#0060FE, 10%);
+            box-shadow: rgba(0, 0, 0, 0.5) 0 5px 10px 0;
+            transition: all .5s;
+            color: #fff;
+        }
+
+        .login-btn:active {
+            background: lighten(#0060FE, 5%);
+            box-shadow: rgba(0, 0, 0, 0.5) 0 3px 10px 0;
+            transition: all .5s;
+            color: #fff;
+        }
+
+        .ripple {
+            position: relative;
+        }
+
+        .ripple:after {
+            content: "";
+            background: rgba(255, 255, 255, 0.3);
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 450px;
+            height: 450px;
+            margin: auto;
+            opacity: 0;
+            transition: all 1s;
+        }
+
+        .ripple:active:after {
+            height: 10px;
+            width: 10px;
+            opacity: 1;
+            transition: 0s;
+        }
+        /* Login ends */
+        /* Info panel */
+
+        .info-title {
+            color: #fff;
+            font-family: 'Segoe UI';
+            font-size: 28px;
+            position: relative;
+            top: -10px
+        }
+
+        .info-img {
+            position: relative;
+            top: 35px;
+        }
+        /* Media query */
+
+        @media screen and (max-width: 720px) {
+            .form-content {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .login-content {
+                width: 100% !important;
+                left: 0 !important;
+                top: 20px;
+            }
+            .info-title {
+                display: none;
+            }
+            .info-img {
+                display: none;
+            }
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.js"  crossorigin="anonymous"></script>
 </head>
 
-<body class="form">
-    
-
-    <div class="form-container">
-        <div class="form-form">
-            <div class="form-form-wrap">
-                <div class="form-container">
-                    <div class="form-content">
-                        <h1 class="mb-5 text-center" >Log In </h1>
-                        <!--<div class="login-logo">
-                            <a href="index.html" class="nav-link" style="position: absolute; left: 5px;  top: 2%;">
-                                <img src="../../static/assets/img/1000px-Tyson_Foods_logo.png" alt="login-logo"></a>
-                        </div>-->
-<!--                        <form class="text-left">-->
-                            <div class="">
-                                <div id="username-field" class="field-wrapper input">
-                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username">
-                                </div>
-                                <br>
-                                <div id="password-field" class="field-wrapper input mb-2">
-                                    <input id="password" name="password" type="password" class="form-control" onkeypress="submitEnter(event)" placeholder="Password">
-                                </div>
-                                <div class="d-sm-flex justify-content-center">
-                                    <div class="field-wrapper"><br>
-                                        <button class="btn btn-primary login-bttn" onclick="login()" >Log In</button>
-                                    </div>
-                                </div>
-                            </div>
-<!--                        </form>                        -->
-                        <!-- <p class="terms-conditions">© 2020 All Rights Reserved.</p> -->
-
-                    </div>                    
-                </div>
+<body>
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="../../static/assets/coolpad-logo.png" alt="logo" class="logo-item">
+                </a>
             </div>
         </div>
-<div class="form-image ">
-            <div class="l-image ">
-                <div class="login-logo1">
-                    <a href="index.html" class="nav-link" style="position: absolute; right: 0px;  top: 2%;">
-                        <img src="../../static/assets/img/coolpad-logo.png?version=1" alt="login-logo" style=" height: 45px;"></a>
+    </nav>
+    <div class="container-fluid" style=" position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: fit-content;
+    left: 0;
+    right: 0;
+    width: 100%;">
+        <div class="row">
+            <!-- Login form -->
+            <div class="col-md-6">
+                <div class="login-content">
+
+                    <div class="title-content">
+                        <h1 class="login-title">Login</h1>
+                    </div>
+
+                    <!-- Form fields -->
+                    <form class="login-form">
+
+                        <div class="form-group">
+                            <label for="usr">Username</label>
+                            <input type="text" class="form-control login-field" id="username" placeholder="Enter your username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pwd">Password</label>
+                            <input type="password" class="form-control login-field" onkeypress="submitEnter(event)" id="password" placeholder="Enter your password">
+                        </div>
+
+                        <div class="action-container" style="display:none">
+                            <label class="float-left">
+                                <input type="checkbox" checked="checked" name="remember">
+                                <span style="color: #eee;">  &nbsp;Remember me</span>
+                            </label>
+                            <span class="forgot"><a href="#" style="color: #eee;">Forgot password?</a></span>
+                        </div>
+
+                        <div class="btn-content">
+                            <a class="login-btn ripple" onclick="login()" title="Login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="info-title">
+                    Let's Help Recover<br> The Earth Starts From Us!
+                </div>
+                <div class="info-img">
+                    <img src="../../static/assets/covid.svg" style="width: 89%;height: 386px;">
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-
-        function submitEnter(e){
-          if(e.keyCode === 13){
-              e.preventDefault();
-              login();
-          }
-      }
-
-
-        function login(){
-            var data = {"username":$("#username").val(),"password":$("#password").val()}
-            $.ajax({
-                          type: "POST",
-                          url: "https://takvaviya.in/coolpad_backend/auth/login/",
-                          dataType: 'json',
-                          data: data,
-                          success: function (res){
-                            var resp = res;
-                            console.log("success34",res);
-                            if(resp["status"]=="success")
-                            {
-                                localStorage.setItem("session","1")
-                               
-                                localStorage.setItem("priv", res.priv)
-                                localStorage.setItem("zone", res.zone)
-                                localStorage.setItem("location", res.location)
-                                localStorage.setItem("company", res.company)
-                                localStorage.setItem("group", res.group)
-                                localStorage.setItem("session_user", $("#username").val())
-                              
-                                window.location.href="../dashboard";
-
-                            }
-                            else
-                            {
-                              alert("Provide valid User Credentials");
-                            }
-
-                          },
-                        });
-
-        }
-        
-    </script>
-
 </body>
+<script>
+    function submitEnter(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            login();
+        }
+    }
+
+
+    function login() {
+        var data = {
+            "username": $("#username").val(),
+            "password": $("#password").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "https://takvaviya.in/coolpad_backend/auth/login/",
+            dataType: 'json',
+            data: data,
+            success: function(res) {
+                var resp = res;
+                console.log("success34", res);
+                if (resp["status"] == "success") {
+                    localStorage.setItem("session", "1")
+
+                    localStorage.setItem("priv", res.priv)
+                    localStorage.setItem("zone", res.zone)
+                    localStorage.setItem("location", res.location)
+                    localStorage.setItem("company", res.company)
+                    localStorage.setItem("group", res.group)
+                    localStorage.setItem("session_user", $("#username").val())
+
+                    window.location.href = "../dashboard";
+
+                } else {
+                    alert("Provide valid User Credentials");
+                }
+
+            },
+        });
+
+    }
+</script>
 
 </html>
